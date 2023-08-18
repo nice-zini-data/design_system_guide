@@ -1,0 +1,72 @@
+.print_on #flowpup_chart01, .print_on #flowpup_chart05, .print_on #incom_chart01, .print_on #incom_chart06, .print_on #loan_chart01, .print_on #eco_chart01, .print_on #eco_chart06{width:60%}
+.print_on #real_chart01_01, .print_on #real_chart02_01{width:70%}
+.print_on #flowpup_chart02, .print_on #flowpup_chart06{width:30%;margin-right:20%}
+.print_on #loan_chart02, .print_on #loan_chart03{width:45%;}
+.print_on #eco_chart02, .print_on #eco_chart02_01{width:100%}
+.print_on #eco_chart03, .print_on #eco_chart03_01, .print_on #eco_chart03_02{width:60%;}
+.print_on #flowpup_chart03, .print_on #flowpup_chart04, .print_on #flowpup_chart07, .print_on #flowpup_chart08, .print_on #incom_chart04 {width:55%}
+.print_on #incom_chart02, .print_on #incom_chart03 {width:50%}
+.print_on #incom_chart05,  .print_on #incom_chart05_02{width:60%}
+.print_on #eco_chart04, .print_on #eco_chart05, .print_on #stat_chart01, .print_on #stat_chart02_01, .print_on #stat_chart01_01, .print_on #stat_chart02_02 {width:57%}
+
+/*요약*/
+.print_on #simpleFlowpop_chart, .print_on #simpleFlowpop_chart02, .print_on #simpleFlowpop_chart03, .print_on #simpleFlowpop_chart04{width:60%}
+.print_on #simpleIncom_chart, .print_on #simpleIncom_chart02, .print_on #simpleIncom_chart03, .print_on #simpleIncom_chart04 {width:60%}
+.print_on #simpleLoan_chart, .print_on #simpleLoan_chart02, .print_on #simpleLoan_chart03{width:60%;}
+.print_on #simpleEconomy_chart {width:65%}
+.print_on #simpleEconomy_chart01, .print_on #simpleEconomy_chart02, .print_on #simpleEconomy_chart03{width:60%}
+.print_on #simpleRealestate_chart {width:65%}
+.print_on #simpleInfra_chart, .print_on #simpleInfra_chart01, .print_on #simpleInfra_chart02, .print_on #simpleInfra_chart03, .print_on #simpleInfra_chart04, .print_on #simpleInfra_chart05, .print_on #simpleInfra_chart06, .print_on #simpleInfra_chart07, .print_on #simpleInfra_chart08, .print_on #simpleInfra_chart09, .print_on #simpleInfra_chart10 {width:55%}
+
+/*프린트*/
+@media print {
+    @page { size: A4 portrait; margin:0; }   /*A4 세로 출력*/
+
+    /*@page { size: A4 landscape; margin:0; }   /*A4 가로 출력*/
+
+    body{margin:20px;-webkit-print-color-adjust:exact;width:calc(100% - 40px)}
+    .side_logo {padding:0 20px 20px 20px;}
+    .side_logo img{width:148px}
+    .com_gridBox {width:100%;margin-left:0}
+    .com_gridInner{width:100%;padding:20px 0 0 0}
+    .side_listBox {display:none;}
+    .side_tab {width:100%;position:unset;height:auto;border-bottom:1px solid var(--mono_g2);border-right:none;padding:0}
+    .topHeader {display:none;}
+    .sub_menuTab li{display:none;}
+    .sub_menuTab li.active {display:inline-block;position:relative;color:var(--mono_b);font-size:24px;font-weight:600;}
+    .sub_menuTab li.active:before {content:'[';display:inline-block;font-size:24px;font-weight:600;line-height:140%;color:var(--mono_b)}
+    .sub_menuTab li.active:after {content:']';display:inline-block;font-size:24px;font-weight:600;line-height:140%;color:var(--mono_b);position:unset;height:auto;background:transparent;width:auto;}
+    .sub_menuTab{display:inline-flex}
+    .com_gridInner .hd1.comTit.subTit {font-size:24px;display:inline-block;}
+    .sub_menuTab .pri_defaultBtn {display:none;}
+    .searchBox {display:none;}
+    section {margin-bottom:40px;}
+    .chartChangeTab {display:none;}
+
+
+
+    .topBtn.active, .topBtn {display:none;}
+    .footer{display:none;}
+
+    .print_on .txt_l_sb.loan_change_txt3 {display:none;}
+    .print_on .print_btn {display:none;}
+    .print_on .chart05_02_table td {font-size:13px}
+    .print_on .chart05_txt {left:42%}
+    .print_on .realChartBox {display:block;}
+    .print_on .realTab {position:absolute;top:10px;left:12vw}
+    .print_on .realTab li {display:none;}
+    .print_on .realTab li.active {display:inline-block;background:#fff;}
+    .print_on .realTab li.active .loanList_icon {display:none;}
+
+    /*요약*/
+    .simpleTopBtn {display:none;}
+    .simpleEconomyBox .simple_flowCont p.txt_l_sb{height:40px;}
+    .simpleEconomyBox .flowpop_chart_txtCont {top:73px}
+    .simpleEconomyBox .simple_flowCont {width:calc(100% / 3)}
+    .simpleLoanBox .simple_flowCont {width:calc(100% / 3)}
+    .simpleInd_center p.chart05_txt {margin-right:0 !important;margin-left:10px;display:block;width:100%;text-align:center;left:0;transform:translate(0,-50%)}
+    .comSTit.changeTxt {display:none;}
+    .comSTit.changeTxt.on_tab{display:block;}
+
+    .simple .card_topBox {display:none}
+}

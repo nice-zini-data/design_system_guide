@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zinidata.common.mapper.ComAdminMapper">
+
+
+    <select id="getBatchLog" resultType="com.zinidata.common.vo.BizBatchLogVO">
+        select * from  tb_batch_log
+    </select>
+
+    <select id="getMemberSeq" resultType="com.zinidata.common.vo.ComLoginVO">
+        select nextval('tb_member_seq') as memNo
+    </select>
+
+    <insert id="setMember" parameterType="com.zinidata.common.vo.ComLoginVO">
+        insert into  tb_eatout_member(mem_no, login_id, pwd, mem_stat, mem_nm,vno, mobile_no, email_addr, mem_type, sms_yn ,email_yn ,alarm_yn ,subs_dt ,start_dt
+                        ,end_dt,temp_pwd_yn,interest_areacd1,interest_areacd2,interest_areacd3,interest_upjong1,interest_upjong2,interest_upjong3
+                        ,crt_dt,crt_id,joinsite_corp_cd,svc_yn)
+            values(#{memNo}, #{loginId},#{pwd}, #{memStat}, #{memNm}, #{vno}, #{mobileNo}, #{emailAddr}, #{memType}, #{smsYn}, #{emailYn}, #{alarmYn}, to_char(now(),'yyyymmdd'), to_char(now(),'yyyymmddHH24MISS')
+                    , '99991231','N',  #{interestAreacd1}, #{interestAreacd2}, #{interestAreacd3}, #{interestUpjong1}, #{interestUpjong2}, #{interestUpjong3}
+                    , now(), #{loginId}, #{joinsiteCorpCd}, 'N')
+    </insert>
+
+    <insert id="setAuth" parameterType="com.zinidata.common.vo.ComLoginVO">
+        insert into cj_member values (#{memNo}, #{department}, #{reqAuthCd}, #{resAuthCd}, 'N', now(), now(), #{cjCode}, 0, 'N', null)
+    </insert>
+
+    <insert id="setElectionMemberInfo" parameterType="com.zinidata.common.vo.ComLoginVO">
+        insert into tb_eatout_member_info values (#{memNo}, #{eatoutArea}, (select eatout_gubun_cd from tb_eatout_info), #{gabeulGb}, #{authGubun})
+    </insert>
+
+    <select id="loginIdDuplicated" resultType="integer">
+        select count(*) from tb_eatout_member where login_id = #{loginId}
+    </select>
+
+    <select id="memNoInfo" resultType="com.zinidata.common.vo.ComLoginVO">
+        select a.*,b.*
+             , c.eatout_area , auth_gubun
+             , case when d.eatout_gubun_cd = '0' then '0'
+                    else c.gabeul_gb end gabeul_gb
+             , d.eatout_gubun_cd, d.eatout_th
+        from tb_eatout_member a, cj_member b, tb_eatout_member_info c, tb_eatout_info d
+        where b.cj_code='ELEC'
+          and a.mem_no = #{memNo}
+          and a.mem_no = b.mem_no
+          and a.mem_no = c.mem_no
+    </select>
+
+    <select id="getMember" resultType="com.zinidata.common.vo.ComLoginVO">
+        select *
+        from  tb_eatout_member a
+   left join cj_member b on a.mem_no = b.mem_no and b.cj_code=#{cjCode}
+   left join tb_eatout_member_info c on a.mem_no = c.mem_no
+        where login_id = #{loginId}
+        and pwd = #{pwd}
+    </select>
+
+    <select id="getArea" resultType="com.zinidata.common.vo.ComAreaVO">
+        <if test="megaCd == null and ctyCd == null">
+            select 'mega' as gubun, mega_cd
+                , mega_nm
+                , mega_cd as cd
+                , mega_nm as nm
+                , minx
+                , maxx
+                , miny
+                , maxy
+                , centerx
+                , centery
+--                 , ST_AsGeoJSON(geom)::jsonb as geometry
+            from  tbshp_mega_features
+            order by mega_cd
+        </if>
+        <if test='megaCd != null and ctyCd == null'>
+            select 'cty' as gubun, a.mega_cd
+                , a.cty_cd
+                , a.cty_nm
+                , a.cty_cd as cd
+                , a.cty_nm as nm
+                , minx
+                , maxx
+                , miny
+                , maxy
+                , centerx
+                , centery
+                , ST_AsGeoJSON(geom)::jsonb as geometry
+            from  tbshp_cty_features a
+            where mega_cd = #{megaCd}
+            order by cty_nm
+        </if>
+        <if test='megaCd != null and ctyCd != null'>
+            select 'admi' as gubun, a.admi_cd
+                , a.admi_nm
+                , a.cty_cd
+                , a.admi_cd as cd
+                , a.admi_nm as nm
+                , minx
+                , maxx
+                , miny
+                , maxy
+                , centerx
+                , centery
+                , ST_AsGeoJSON(geom)::jsonb as geometry
+                , b.mega_cd
+                , b.mega_nm
+            from  tbshp_admi_features a, vwadm_admi b
+            where 1=1
+            and a.cty_cd =#{ctyCd}
+            and a.cty_cd = b.cty_cd
+            and a.admi_cd = b.admi_cd
+            order by admi_nm
+        </if>
+    </select>
+
+    <select id="getAreaGeom" resultType="com.zinidata.common.vo.ComAreaVO">
+        select mega_cd
+            , mega_nm
+            , mega_cd as cd
+            , mega_nm as nm
+            , minx
+            , maxx
+            , miny
+            , maxy
+            , centerx
+            , centery
+            , ST_AsGeoJSON(geom)::jsonb as geometry
+        from  tbshp_mega_features
+        where mega_cd=#{megaCd}
+        order by mega_cd
+    </select>
+
+    <select id="getUpjong" resultType="com.zinidata.common.vo.ComUpjongVO">
+        <if test='gubun == "upjong1"'>
+            select *
+            from  tb_upjong1
+        </if>
+
+        <if test='gubun == "upjong2"'>
+            select *
+            from  tb_upjong2
+            where upjong1_cd = #{upjong1Cd}
+        </if>
+
+        <if test='gubun == "upjong3"'>
+            select *
+            from  tb_upjong3
+            where upjong2_cd like concat(#{upjong1Cd}, '%')
+        </if>
+    </select>
+
+    <select id="getLoginId" resultType="com.zinidata.common.vo.ComLoginVO">
+        select *
+        from tb_eatout_member a
+           , cj_member b
+        where a.mem_no = b.mem_no
+          and b.cj_code ='ELEC'
+          and a.mem_nm = #{memNm}
+          and a.email_addr = #{emailAddr}
+    </select>
+
+    <select id="getPasswordReset" resultType="com.zinidata.common.vo.ComLoginVO">
+        select *
+        from tb_eatout_member a
+           , cj_member b
+        where a.mem_no = b.mem_no
+          and b.cj_code ='ELEC'
+          and a.mem_nm = #{memNm}
+          and a.email_addr = #{emailAddr}
+          and a.login_id = #{loginId}
+        limit 1
+    </select>
+
+    <select id="passwordCheck" resultType="integer">
+        select count(*)
+        from tb_eatout_member
+        where mem_no=#{memNo}
+          and pwd = #{pwdBefore}
+    </select>
+
+    <update id="updatePassword" parameterType="com.zinidata.common.vo.ComLoginVO">
+        update tb_eatout_member
+        set pwd = #{pwd}
+        , temp_pwd_yn = #{tempPwdYn}
+        where mem_no = #{memNo}
+    </update>
+
+    <update id="setMemberInfoUpdate" parameterType="com.zinidata.common.vo.ComLoginVO">
+        update tb_eatout_member
+        set mem_nm =#{memNm}
+          , email_addr =#{emailAddr}
+          , upd_dt = now()
+        where mem_no = #{memNo}
+    </update>
+
+    <update id="setMemberInfoUpdate2" parameterType="com.zinidata.common.vo.ComLoginVO">
+        update cj_member
+        set department = #{department}
+          <if test='resFlagYn != null'>
+            , res_flag_yn = #{resFlagYn}
+          </if>
+        where mem_no = #{memNo}
+          and cj_code = #{cjCode}
+    </update>
+
+    <!-- 선거구 정보 -->
+    <update id="setMemberInfoUpdate3" parameterType="com.zinidata.common.vo.ComLoginVO">
+        update tb_eatout_member_info
+        set eatout_area = #{eatoutArea}
+          , gabeul_gb = #{gabeulGb}
+          , auth_gubun = #{authGubun}
+        where mem_no = #{memNo}
+    </update>
+
+    <update id="setMemberToken">
+        update tb_eatout_member
+        set token = #{token}
+        where mem_no = #{memNo}
+    </update>
+
+    <select id="getMemNotice" resultType="com.zinidata.common.vo.ComLoginVO">
+        -- getMemNotice
+        select a.eatout_gubun as eatout_gubun, a.eatout_dday
+            , b.title, b.d_day, b.d_day_time, b.id, to_char(start_dt, 'YYYY-MM-DD') as start_dt
+        from (
+            select eatout_gubun, eatout_gubun_cd
+                        , to_date(eatout_date, 'yyyymmdd') as eatout_date
+                        , to_char(to_date(eatout_date, 'yyyymmdd') - now(), 'dd') as eatout_dday
+                from (
+                         select eatout_gubun
+                              , eatout_gubun_cd
+                              , min(eatout_date) as eatout_date
+                         from tb_eatout_data
+                         where eatout_gubun_cd = '0'
+                           and to_date(eatout_date, 'yyyymmdd') > now()
+                         group by 1,2
+                         union all
+                         select eatout_gubun
+                              , eatout_gubun_cd
+                              , min(eatout_date) as eatout_date
+                         from tb_eatout_data
+                         where eatout_gubun_cd = '1'
+                           and to_date(eatout_date, 'yyyymmdd') > now()
+                         group by 1,2
+                         union all
+                         select eatout_gubun
+                              , eatout_gubun_cd
+                              , min(eatout_date) as eatout_date
+                         from tb_eatout_data
+                         where eatout_gubun_cd = '2'
+                           and to_date(eatout_date, 'yyyymmdd') > now()
+                         group by 1,2
+                     ) a
+                order by eatout_dday desc
+                limit 1
+        ) a, (
+            select *
+                 , to_char(start_dt - CURRENT_DATE,'DD')::numeric as d_day
+                 , to_char(start_dt - now(), 'HH24:MI:SS') as d_day_time
+                 , (select distinct eatout_gubun from tb_eatout_data where eatout_gubun_cd = eatout_target) as eatout_target_nm
+            from tb_eatout_schedule
+            where mem_no = #{memNo}::varchar
+              and start_dt >= CURRENT_DATE
+              and end_dt <![CDATA[<]]>  now() + interval '15 days'
+            order by start_dt
+            limit 3
+        ) b
+    </select>
+
+</mapper>

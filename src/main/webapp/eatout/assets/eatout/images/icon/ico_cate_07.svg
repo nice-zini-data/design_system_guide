@@ -1,0 +1,26 @@
+<svg width="81" height="80" viewBox="0 0 81 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M28.2125 47.2332H33.0347V52.0554H28.2125V47.2332Z" fill="black"/>
+<rect x="28.2957" y="16.0552" width="33.9218" height="47.8896" rx="2" fill="url(#paint0_linear_658_19640)"/>
+<rect x="42.65" y="28.8" width="4.8" height="4.8" rx="1" fill="#D7E3F9"/>
+<rect x="50.65" y="28.8" width="4.8" height="4.8" rx="1" fill="#D7E3F9"/>
+<rect x="50.65" y="36.8" width="4.8" height="4.8" rx="1" fill="#D7E3F9"/>
+<rect x="34.65" y="28.8" width="4.8" height="4.8" rx="1" fill="#D7E3F9"/>
+<rect x="42.65" y="20.8" width="4.8" height="4.8" rx="1" fill="#D7E3F9"/>
+<rect x="34.65" y="20.8" width="4.8" height="4.8" rx="1" fill="#D7E3F9"/>
+<rect x="50.65" y="20.8" width="4.8" height="4.8" rx="1" fill="#D7E3F9"/>
+<rect x="18.25" y="36.8" width="24.8" height="27.2" rx="2" fill="url(#paint1_linear_658_19640)"/>
+<rect x="32.25" y="50.4" width="4.8" height="4.8" rx="1" fill="#0661E8"/>
+<rect x="24.25" y="50.4" width="4.8" height="4.8" rx="1" fill="#0661E8"/>
+<rect x="24.25" y="42.4" width="4.8" height="4.8" rx="1" fill="#0661E8"/>
+<rect x="32.25" y="42.4" width="4.8" height="4.8" rx="1" fill="#0661E8"/>
+<defs>
+<linearGradient id="paint0_linear_658_19640" x1="45.2566" y1="16.0552" x2="45.2566" y2="63.9447" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0561E8"/>
+<stop offset="1" stop-color="#7EA6FB"/>
+</linearGradient>
+<linearGradient id="paint1_linear_658_19640" x1="30.65" y1="36.8" x2="30.65" y2="64" gradientUnits="userSpaceOnUse">
+<stop stop-color="#D7E3F9"/>
+<stop offset="1" stop-color="#D7E3F9"/>
+</linearGradient>
+</defs>
+</svg>

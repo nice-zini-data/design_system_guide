@@ -1,0 +1,10 @@
+
+/* cta - buttonGroup */
+button.pri_defaultBtn{border-radius:4px;padding:12px 14px;background:var(--pri_5);color:var(--mono_wh)}
+button.pri_defaultBtn:hover, button.pri_defaultBtn.pressed {background:var(--pri_8);}
+button.pri_defaultBtn.disabled{background:var(--pri_1);pointer-events: none;}
+
+/*secondary*/
+button.sec_defaultBtn{border-radius:4px;padding:12px 14px;background:var(--mono_wh);color:var(--pri_5);border:1px solid var(--pri_3)}
+button.sec_defaultBtn:hover, button.sec_defaultBtn.pressed {background:var(--mono_bg);border:1px solid var(--pri_3);color:var(--pri_8)}
+button.sec_defaultBtn.disabled{background:var(--mono_wh);border:1px solid var(--pri_3);pointer-events: none;color:var(--pri_3)}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zinidata.common.mapper.ComLogMapper">
+
+    <!-- -->
+
+    <insert id="setServiceLog">
+        insert into tb_service_logs(st_time,mem_no,log_type,prj_type,detail, ip)
+        values(now(),#{memNo},'',#{prjType},#{detail}, #{ip})
+    </insert>
+</mapper>

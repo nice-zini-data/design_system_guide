@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  eatout:
+    container_name: eatout
+    build: .
+    restart: always
+    extra_hosts:
+      - "cmap-was-dev:10.175.7.100"
+      - "zini-was-01:10.175.1.16"
+      - "zini-was-02:10.175.1.17"
+    volumes:
+       - ../target/:/app
+       - ../logs/:/logs
+       - ../file/:/home
+    network_mode: host
+    environment:
+      - TZ=Asia/Seoul
