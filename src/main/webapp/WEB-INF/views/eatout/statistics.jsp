@@ -778,28 +778,26 @@ class = "login_none" 제거 및 추가
         console.log(upjongCd);
 
         searchType = 0;
-        console.log(upjongCd);
-        console.log(upjongCd.substring(0,3));
-        // $('#upjong1').val('').trigger("change");
-        setTimeout(function(){
-            $('#upjong2').val(upjongCd.substring(0,3)).trigger("change");
-        },100);
-        setTimeout(function(){
-            $('#upjong3').val(upjongCd).trigger("change")
-        },200);
+        var param = {};
+        // if($("#colType"+dataTypeNum+"_2 option:selected").val() == 0){
+        //     alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
+        //     return;
+        // }
+        $('#dataType').val('1').trigger("change");
+        $('#colType1').val('saleAmt').trigger("change");
 
-        $("#upjong1_2").val($('#upjong1').val()).trigger("change");
-
-        if($('#upjong2').val() != 0){
-            setTimeout(function(){
-                $("#upjong2_2").val($('#upjong2').val()).trigger("change");
-            },100);
-        }
-        if($('#upjong3').val() != 0){
-            setTimeout(function(){
-                $("#upjong3_2").val($('#upjong3').val()).trigger("change");
-            },200);
-        }
+        // param.admGb = 1;
+        // param.upjongType = 3;
+        // param.dateType = 1;
+        // if(!(admiCd == '' || admiCd == 0 || admiCd == null)) param.areaCd = admiCd;
+        // if(!(upjongCd == '' || upjongCd == 0 || upjongCd == null)) param.upjongCd = upjongCd;
+        // if(!(startDate == '' || startDate == 0 || startDate == null)) param.dateStart = startDate;
+        // if(!(endDate == '' || endDate == 0 || endDate == null)) param.dateEnd = endDate;
+        //
+        // console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum_sub+')');
+        // console.log(param);
+        // searchBtnNum = 1;
+        // main_search(dataTypeNum_sub,param);
 
     }
     // 전지역 업종 증감률 리스트
