@@ -93,6 +93,7 @@
                             ,(select max(yyyymm) from tbss_sum_sales_mega_his)
                         )
                         and b.upjong3_cd like 'Q%'
+                        and b.svc_yn = 'Y'
                     group by
                         1,2,3,4, yyyymm
                     order by this_sale_amt desc
@@ -145,6 +146,7 @@
                             ,(select max(yyyymm) from tbss_sum_sales_mega_his)
                         )
                         and b.upjong3_cd like 'Q%'
+                        and b.svc_yn = 'Y'
                     group by
                         1,2,yyyymm
                     order by this_sale_amt desc
@@ -160,7 +162,7 @@
     <select id="getUpjongDetail" resultType="com.zinidata.eatout.vo.output.AgileMarketMainOutVO">
         select
             a.yyyymm, sum(a.sale_amt) as e_sale_amt, sum(b.sale_amt)  as d_sale_amt, sum(a.store_cnt) as store_cnt, ROUND(((sum(a.sale_amt) + sum(b.sale_amt))/sum(a.store_cnt)),0) as store_amt
-        from tbss_sum_sales_mega_his a, tbkb_sum_sales_mega_his b
+        from tbss_sum_sales_mega_his a, tbkb_sum_sales_mega_his b, tb_upjong3 c
         where 1=1
             and a.yyyymm = b.yyyymm
             and a.upjong3_cd = b.upjong3_cd
@@ -171,6 +173,7 @@
                 and (select max(yyyymm) from tbss_sum_sales_mega_his
             )
             and a.upjong3_cd = #{upjong3Cd}
+            and c.svc_yn = 'Y'
         group by
             1
     </select>

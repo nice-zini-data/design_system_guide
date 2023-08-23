@@ -19,8 +19,8 @@ public class AgileMarketMainOutVO {
     private int     rnk;
 
     private String  yyyymm;
-    private int     eSaleAmt;
-    private int     dSaleAmt;
+    private long     eSaleAmt;
+    private long     dSaleAmt;
     private int     storeCnt;
     private int     storeAmt;
 

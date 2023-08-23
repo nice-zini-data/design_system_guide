@@ -53,7 +53,7 @@
         <if test='dateType == "4"'>
             b.yyyymm
         </if>
-            , ROUND((sum(sale_amt)/100000000),0) as sale_amt, sum(store_cnt) as store_cnt, sum(use_cnt) as use_cnt, sum(cust_cnt) as cust_cnt
+            , ROUND((sum(sale_amt)/10000),0) as sale_amt, sum(store_cnt) as store_cnt, sum(use_cnt) as use_cnt, sum(cust_cnt) as cust_cnt
             , ROUND(sum(sale_amt) / sum(store_cnt),0) as store_amt, ROUND(sum(sale_amt) / sum(use_cnt),0) as use_amt
             ,sum(cnt_m_10under + cnt_w_10under + cnt_m_1014 + cnt_w_1014 + cnt_m_1519 + cnt_w_1519 + cnt_m_2024 + cnt_w_2024 + cnt_m_2529 + cnt_w_2529) as cnt_20under
             ,sum(cnt_m_3034 + cnt_w_3034 + cnt_m_3539 + cnt_w_3539) as cnt_30
@@ -65,16 +65,17 @@
             ,sum(cnt_mon) as mon , sum(cnt_tue) as tue, sum(cnt_wed) as wed, sum(cnt_thu) as thu, sum(cnt_fri) as fri, sum(cnt_sat) as sat, sum(cnt_sun) as sun
         from
         <if test='admGb == "1"'>
-            tbss_sum_sales_mega_his a, tmp_date b
+            tbss_sum_sales_mega_his a, tmp_date b, tb_upjong3 c
         </if>
         <if test='admGb == "2"'>
-            tbss_sum_sales_cty_his a, tmp_date b
+            tbss_sum_sales_cty_his a, tmp_date b, tb_upjong3 c
         </if>
         <if test='admGb == "3"'>
-            tbss_sum_sales_admi_his a, tmp_date b
+            tbss_sum_sales_admi_his a, tmp_date b, tb_upjong3 c
         </if>
         where 1=1
             and a.yyyymm = b.yyyymm
+            and a.upjong3_cd = c.upjong3_cd
         <if test='admGb == "1"'>
             <if test='areaCd != null'>
                 and mega_cd like #{areaCd}||'%'
@@ -87,14 +88,15 @@
             and admi_cd like #{areaCd}||'%'
         </if>
         <if test='upjongType == "1"'>
-            and upjong3_cd like 'Q%'
+            and a.upjong3_cd like 'Q%'
         </if>
         <if test='upjongType == "2"'>
-            and upjong3_cd like #{upjongCd}||'%'
+            and a.upjong3_cd like #{upjongCd}||'%'
         </if>
         <if test='upjongType == "3"'>
-            and upjong3_cd like #{upjongCd}||'%'
+            and a.upjong3_cd like #{upjongCd}||'%'
         </if>
+            and c.svc_yn = 'Y'
         group by
             1
         order by
@@ -164,13 +166,14 @@
             ,sum(cnt_mon) as mon , sum(cnt_tue) as tue, sum(cnt_wed) as wed, sum(cnt_thu) as thu, sum(cnt_fri) as fri, sum(cnt_sat) as sat, sum(cnt_sun) as sun
         from
         <if test='admGb == "1"'>
-            tbkb_sum_sales_mega_his a, tmp_date b
+            tbkb_sum_sales_mega_his a, tmp_date b, tb_upjong3 c
         </if>
         <if test='admGb == "2"'>
-            tbkb_sum_sales_cty_his a, tmp_date b
+            tbkb_sum_sales_cty_his a, tmp_date b, tb_upjong3 c
         </if>
         where 1=1
-        and a.yyyymm = b.yyyymm
+            and a.yyyymm = b.yyyymm
+            and a.upjong3_cd = c.upjong3_cd
         <if test='admGb == "1"'>
             and mega_cd like #{areaCd}||'%'
         </if>
@@ -178,14 +181,15 @@
             and cty_cd like #{areaCd}||'%'
         </if>
         <if test='upjongType == "1"'>
-            and upjong3_cd like 'Q%'
+            and a.upjong3_cd like 'Q%'
         </if>
         <if test='upjongType == "2"'>
-            and upjong3_cd like #{upjongCd}||'%'
+            and a.upjong3_cd like #{upjongCd}||'%'
         </if>
         <if test='upjongType == "3"'>
-            and upjong3_cd like #{upjongCd}||'%'
+            and a.upjong3_cd like #{upjongCd}||'%'
         </if>
+            and svc_yn = 'Y'
         group by
             1
         order by
@@ -260,7 +264,7 @@
             tbpop_livi_admi_his a, tmp_date b
         </if>
         where 1=1
-        and a.yyyymm = b.yyyymm
+            and a.yyyymm = b.yyyymm
         <if test='admGb == "1"'>
             and mega_cd like #{areaCd}||'%'
         </if>
@@ -371,9 +375,10 @@
                         from
                             tbss_sum_sales_mega_his a, tb_upjong3 b
                         where 1=1
-                          and a.upjong3_cd = b.upjong3_cd
-                          and yyyymm = to_char(to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM') + interval '-1 month','YYYYMM')
-                          and a.upjong3_cd like 'Q%'
+                            and a.upjong3_cd = b.upjong3_cd
+                            and yyyymm = to_char(to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM') + interval '-1 month','YYYYMM')
+                            and a.upjong3_cd like 'Q%'
+                            and b.svc_yn = 'Y'
                         group by
                             yyyymm,b.upjong3_nm, a.upjong3_cd
                     ) a,(
@@ -382,9 +387,10 @@
                         from
                             tbss_sum_sales_mega_his a, tb_upjong3 b
                         where 1=1
-                          and a.upjong3_cd = b.upjong3_cd
-                          and yyyymm = (select max(yyyymm) from tbss_sum_sales_mega_his)
-                          and a.upjong3_cd like 'Q%'
+                            and a.upjong3_cd = b.upjong3_cd
+                            and yyyymm = (select max(yyyymm) from tbss_sum_sales_mega_his)
+                            and a.upjong3_cd like 'Q%'
+                            and b.svc_yn = 'Y'
                         group by
                             yyyymm,b.upjong3_nm, a.upjong3_cd
                     ) b

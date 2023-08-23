@@ -111,14 +111,15 @@
         from
         tb_upjong1 a, tb_upjong2 b, tb_upjong3 c
         where 1=1
-        and a.upjong1_cd = b.upjong1_cd
-        and b.upjong2_cd = c.upjong2_cd
+            and a.upjong1_cd = b.upjong1_cd
+            and b.upjong2_cd = c.upjong2_cd
         <if test='upjongType == "2"'>
             and b.upjong1_cd = 'Q'
         </if>
         <if test='upjongType == "3"'>
             and c.upjong2_cd = #{upjongCd}
         </if>
+            and c.svc_yn = 'Y'
         group by
         1,2
         order by

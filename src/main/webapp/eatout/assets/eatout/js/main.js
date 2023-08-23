@@ -380,12 +380,14 @@ function fn_makechart(id, response, param){
                 }
             });
         });
-        console.log(maxYyyymm + ' : ' +maxVal);
-        $('#maxYyyymm').text(maxYyyymm);
-        $('#maxVal').text(maxVal);
-        console.log(minYyyymm + ' : ' +minVal);
-        $('#minYyyymm').text(minYyyymm);
-        $('#minVal').text(minVal);
+        if(searchType == 0){
+            console.log(maxYyyymm + ' : ' +maxVal);
+            $('#maxYyyymm').text(maxYyyymm);
+            $('#maxVal').text(common.addComma(maxVal));
+            console.log(minYyyymm + ' : ' +minVal);
+            $('#minYyyymm').text(minYyyymm);
+            $('#minVal').text(common.addComma(minVal));
+        }
     }
     // rpt_chart1
     var chartDom = null;
