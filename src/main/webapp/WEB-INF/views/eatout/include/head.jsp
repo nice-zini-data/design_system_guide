@@ -52,11 +52,11 @@
 
 <body id="top">
 
-<a href="#top">
-    <div class="topBtn" >
-        <img src="/eatout/assets/eatout/images/icon/arrow_upward_b.svg" alt="top 이동 아이콘"/>
-        <p class="txt_s_m pri_5_col">TOP</p>
-    </div>
-</a>
+<%--<a href="#top">--%>
+<%--    <div class="topBtn" >--%>
+<%--        <img src="/eatout/assets/eatout/images/icon/arrow_upward_b.svg" alt="top 이동 아이콘"/>--%>
+<%--        <p class="txt_s_m pri_5_col">TOP</p>--%>
+<%--    </div>--%>
+<%--</a>--%>
 
 

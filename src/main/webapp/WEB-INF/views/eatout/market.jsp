@@ -110,7 +110,23 @@
 			</div>
 			<p>외식상권분석 보고서</p>
 			<div style="height:30%;">
-				<div id="fileListInfo">
+				<div class="col-12 center">
+					<table class="board_tb">
+						<thead>
+						<tr>
+							<th>NO</th>
+							<th>파일명</th>
+							<th>정보</th>
+							<th>등록일자</th>
+						</tr>
+						</thead>
+						<tbody id="tfileList">
+
+						</tbody>
+					</table>
+				</div>
+				<div class="col-12">
+					<div id="paginate_filelist"></div>
 				</div>
 			</div>
 		</div>
@@ -122,6 +138,14 @@
 <%@ include file="/WEB-INF/views/eatout/include/footer.jsp" %>
 
 <script type="text/javascript">
+
+	var pagingInfo = {
+		totalCnt : 0,
+		pageNo : 1,
+		pageCnt : 5
+	};
+
+	var fileInfo = {};
 
 	$(function() {
 		var param ={};
@@ -212,7 +236,7 @@
 			param.outeatDateType = $(this).val();
 			getAjax("getUpjongGrowth", "/agile/market/getUpjongGrowth",param, fn_upjongGrowth, fn_error);
 		});
-
+		list();
 	});
 
 	// 전지역 업종 증감률 리스트
@@ -295,6 +319,60 @@
 		getAjax("getUpjongDetail", "/agile/market/getUpjongDetail",param, fn_UpjongDetail, fn_error);
 	}
 
+	function list() {
+		if (pagingInfo.pageNo < 1) {
+			return;
+		}
+		if (Math.ceil(pagingInfo.totalCnt / pagingInfo.pageCnt) != 0
+				&& Math.ceil(pagingInfo.totalCnt / pagingInfo.pageCnt) < pagingInfo.pageNo) {
+			return;
+		}
+		var data = {
+			pageNo : (((pagingInfo.pageNo == 0) ? 1 : pagingInfo.pageNo - 1) * pagingInfo.pageCnt),
+			pageCnt : pagingInfo.pageCnt
+		};
+
+		if (!common.isEmpty($('#searchText').val())) {
+			data.searchText = $('#searchText').val();
+		}
+		// data.cjCode = strCjCode;
+
+		// console.log(data);
+		getAjax("getFileList", "/getFileList", data, fn_list,fn_error);
+
+	}
+
+	function fn_list(id, response, param) {
+		var template = $('#tmp_tfileList').html();
+		var templateScript = Handlebars.compile(template);
+		var context = response.data;
+		var html = templateScript(context);
+		$('#tfileList').html(html);
+
+		if (!common.isEmpty(response.data)) {
+			pagingInfo.totalCnt = response.data[0].totalCnt;
+			util.renderPagingNavigation('paginate_filelist', pagingInfo);
+			pagingInfo.pageNo = 1;
+		} else {
+			pagingInfo.totalCnt = 0;
+		}
+		(pagingInfo.totalCnt < 1) ? $("#paginate_filelist").hide() : $("#paginate_filelist").show();
+
+	}
+
+	function handlebarsPaging(targetId, pagingInfo) {
+		pagingInfo = pagingInfo;
+		list();
+	}
+	function fileDownload(filePath,fileName){
+		var param = {};
+		console.log(fileName);
+		param.filePath = filePath;
+		param.fileName = fileName;
+		param.orgFileNm = fileName;
+		// getAjax("fileDownLoad", "/common/fileDownLoad", param, fn_fileDownload,fn_error);
+		common.fileDownload("/common/fileDownLoad",param)
+	}
 </script>
 
 
@@ -367,4 +445,15 @@
 		{{/each}}
 		</tbody>
 	</table>
+</script>
+
+<script type="text/x-handlebars_template" id="tmp_tfileList">
+	{{#each this}}
+	<tr>
+		<td>{{fileNo}}</td>
+		<td><a onclick="fileDownload('{{filePath}}','{{fileNm}}','{{fileOriNm}}')">{{fileOriNm}}</a></td>
+		<td>{{fileInfo}}</td>
+		<td>{{regDate}}</td>
+	</tr>
+	{{/each}}
 </script>

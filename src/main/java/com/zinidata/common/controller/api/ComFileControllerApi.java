@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,6 +54,7 @@ class ComFileControllerApi {
 
     @ResponseBody
     @PostMapping(value="upload")
+    @GetMapping(value="upload")
     @ApiOperation(value="파일업로드")
     @ApiResponses(value = {
             @ApiResponse(code=200, message = "파일업로드")
@@ -89,15 +91,15 @@ class ComFileControllerApi {
         multi = new MultipartRequest(request, saveFolder, maxSize, encType, new DefaultFileRenamePolicy());
         String url = multi.getParameter("url");
 
-        String mem_no = multi.getParameter("mem_no");
-        String idx = multi.getParameter("idx");
+//        String mem_no = multi.getParameter("mem_no");
+//        String idx = multi.getParameter("idx");
 
         String fileName = multi.getFilesystemName("uploadFile");
         String original = multi.getOriginalFileName("uploadFile");
         String type = multi.getContentType("uploadFile");
 
-        log.info("mem_no : " + mem_no);
-        log.info("idx : " + idx);
+//        log.info("mem_no : " + mem_no);
+//        log.info("idx : " + idx);
         log.info("저장된 파일 이름 : " + fileName);
         log.info("실제 파일 이름 : " + original);
 
@@ -114,4 +116,6 @@ class ComFileControllerApi {
         String result = gsonUtil.toJson(new JsonOutputVo(Status.성공, comFileVO));
         return result;
     }
+
+
 }

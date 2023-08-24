@@ -18,7 +18,7 @@
 <script>
     $(function() {
         $("#statistics").on('click', function () {
-            location.href="./statistics";
+            location.href="./";
         });
         $("#market").on('click', function () {
             location.href="./market";

@@ -19,7 +19,7 @@ public class AgileMainController {
 
     private final ComLogService comLogService;
 
-    @GetMapping("/statistics")
+    @GetMapping("/")
     public String main(HttpServletRequest request, HttpServletResponse response){
 //        comLogService.setServiceLog(request, response, 0);
         return "eatout/statistics";

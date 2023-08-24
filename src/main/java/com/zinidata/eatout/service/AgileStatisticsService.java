@@ -1,6 +1,5 @@
 package com.zinidata.eatout.service;
 
-import com.zinidata.eatout.mapper.AgileAnalysisMapper;
 import com.zinidata.eatout.mapper.AgileStatisticsMapper;
 import com.zinidata.eatout.vo.AgileStatisticsVO;
 import com.zinidata.eatout.vo.output.*;
@@ -13,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 @Slf4j
@@ -25,9 +23,6 @@ public class AgileStatisticsService {
     GsonUtil gsonUtil;
 
     private final AgileStatisticsMapper agileStatisticsMapper;
-
-//    @Value("${bizmap.reports.dataset}")
-//    private String repotsDir;
 
     public String getOuteatList(AgileStatisticsVO agileStatisticsVO){
         String result = "";

@@ -6,10 +6,14 @@ import lombok.Data;
 public class AgileFileVO {
 
     //input
-    private String  fileOriName;
-    private String  fileName;
+    private int     fileNo;
+    private String  fileOriNm;
+    private String  fileNm;
+    private String  filePath;
     private String  fileInfo;
+    private String  regDate;
 
-    private int     startNum;
-
+    private int     totalCnt;
+    private int     pageNo;
+    private int     pageCnt;
 }

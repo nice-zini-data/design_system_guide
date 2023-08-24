@@ -1,15 +1,12 @@
 package com.zinidata.eatout.controller.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.zinidata.eatout.service.AgileAnalysisService;
 import com.zinidata.eatout.service.AgileStatisticsService;
 import com.zinidata.eatout.vo.AgileStatisticsVO;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 
 @RequiredArgsConstructor
 @Controller

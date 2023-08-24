@@ -32,12 +32,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()	// csrf 토큰을 비활성화
                 .authorizeRequests() // 요청 URL에 따라 접근 권한을 설정
                 .antMatchers(HttpMethod.GET, "/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/agile/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/common/**").permitAll()
+//                .antMatchers(HttpMethod.POST, "/").permitAll()
 //                .antMatchers(HttpMethod.POST, "/main/**").permitAll()
                 .anyRequest().authenticated()
             .and()
                 .addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
-//                .logout().logoutUrl("/");
+//                .logout().logoutUrl("/file/");
 //                .logout()
 //                .logoutUrl("/logout")
 //                .logoutSuccessUrl("/")

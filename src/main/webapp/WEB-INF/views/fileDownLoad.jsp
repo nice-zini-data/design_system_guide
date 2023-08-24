@@ -61,7 +61,9 @@
 
             }else{
                 // 한글 파일명 처리
-                orgFileNm = new String(orgFileNm.getBytes("utf-8"),"iso-8859-1");
+//                orgFileNm = new String(orgFileNm.getBytes("utf-8"),"ISO-8859-1");
+                orgFileNm = URLEncoder.encode(orgFileNm, "UTF-8");
+//                System.err.println(orgFileNm);
 
                 response.setHeader("Content-Disposition", "attachment; filename=\"" + orgFileNm + "\"");
                 response.setHeader("Content-Type", "application/octet-stream; charset=utf-8");
@@ -80,7 +82,6 @@
             }
             in.close();
             os.close();
-
         }else{
             response.setContentType("text/html;charset=UTF-8");
             out.println("<script language='javascript'>alert('파일을 찾을 수 없습니다');history.back();</script>");

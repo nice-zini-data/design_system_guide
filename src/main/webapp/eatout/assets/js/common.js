@@ -529,3 +529,56 @@ common.checkDateAfter = function(sdate,edate){
         alert('종료일을 시작일보다 이후로 선택하셔야됩니다.');
     }
 }
+
+common.fileDownload = function(url,param){
+
+
+    $.ajax({
+        url: url,
+        data: param,
+        type: 'POST',
+        cache: false,
+        xhrFields: {
+            responseType: "blob",
+        },
+    }).done(function (blob, status, xhr) {
+        console.log(status);
+        if(status == 'success'){    // check for a filename
+            var fileName = "";
+            var disposition = xhr.getResponseHeader("Content-Disposition");
+
+            if (disposition && disposition.indexOf("attachment") !== -1) {
+                var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                var matches = filenameRegex.exec(disposition);
+
+                if (matches != null && matches[1]) {
+                    fileName = decodeURI(matches[1].replace(/['"]/g, ""));
+                }
+            }
+            // for IE
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(blob, fileName);
+            } else {
+                var URL = window.URL || window.webkitURL;
+                var downloadUrl = URL.createObjectURL(blob);
+
+                if (fileName) {
+                    var a = document.createElement("a");
+
+                    // for safari
+                    if (a.download === undefined) {
+                        window.location.href = downloadUrl;
+                    } else {
+                        a.href = downloadUrl;
+                        a.download = fileName;
+                        document.body.appendChild(a);
+                        a.click();
+                    }
+                } else {
+                    window.location.href = downloadUrl;
+                }
+            }
+        }
+    });
+
+}

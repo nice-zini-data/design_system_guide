@@ -7,8 +7,13 @@ public class AgileFileOutVO {
 
     //input
     private int     fileNo;
-    private String  fileOriName;
-    private String  fileName;
+    private String  fileOriNm;
+    private String  fileNm;
+    private String  filePath;
     private String  fileInfo;
     private String  regDate;
+
+    private int     totalCnt;
+    private int     pageNo;
+    private int     pageCnt;
 }
