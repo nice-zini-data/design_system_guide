@@ -20,7 +20,7 @@
                     ]]>
                 from
                     generate_series(to_date(((select min(yyyymm) from tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
-            )
+            ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
                 <if test='dateType == "1"'>
@@ -121,7 +121,7 @@
                     ]]>
                 from
                     generate_series(to_date(((select min(yyyymm) from tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
-            )
+            ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
                 <if test='dateType == "1"'>
@@ -214,7 +214,7 @@
                         ]]>
             from
             generate_series(to_date(((select min(yyyymm) from tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
-            )
+            ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
                 <if test='dateType == "1"'>
@@ -298,7 +298,7 @@
                     ]]>
                 from
                     generate_series(to_date(((select min(yyyymm) from tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
-            )
+            ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
                 <if test='dateType == "1"'>
@@ -397,7 +397,7 @@
                 where 1=1
                   and a.upjong3_cd = b.upjong3_cd
                   and a.upjong3_nm = b.upjong3_nm
-            )
+            ) tmp
         order by sale_amt desc
     </select>
 </mapper>

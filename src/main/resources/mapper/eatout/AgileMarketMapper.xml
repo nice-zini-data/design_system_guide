@@ -18,7 +18,7 @@
                   and b.upjong3_cd like 'Q%'
                 group by
                     1,2,3
-            )
+        ) tmp
         group by
             1,2
     </select>
@@ -97,14 +97,14 @@
                     group by
                         1,2,3,4, yyyymm
                     order by this_sale_amt desc
-                )
+                ) tmp
                 where  1=1
                 group by
                     1,2,3,4
-            )
+            ) tmp
             where 1=1
                 and (before_sale_amt is not null and this_sale_amt is not null)
-        )
+        ) tmp
         where 1=1
             and
             <![CDATA[
@@ -150,11 +150,11 @@
                     group by
                         1,2,yyyymm
                     order by this_sale_amt desc
-                )
+                ) tmp
             where  1=1
             group by
                 1,2
-        )
+        ) tmp
         where 1=1
           and (before_sale_amt is not null and this_sale_amt is not null)
             limit 10
