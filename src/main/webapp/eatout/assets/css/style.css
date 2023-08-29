@@ -166,6 +166,8 @@ select{height:36px;border:1px solid var(--gray_20);border-radius:4px;min-width:1
 select:focus {border:1px solid var(--pr_120);background:var(--mono_wh)}
 select:hover {background:var(--gray_5)}
 select:disabled{background:var(--gray_5);pointer-events: none;}
+
+
 .redText {padding:4px 8px;border-radius:17px;font-size:14px;font-weight:600;display:flex;align-items: center;}
 .redText span {display:inline-block;margin:0 2px 0 4px;}
 .redText.up {background:var(--red_bg);color:var(--red);}
@@ -204,7 +206,7 @@ select:disabled{background:var(--gray_5);pointer-events: none;}
 .topRightTextBox .txt_n_sb img {margin-right:4px;}
 .topRightTextBox .txt_n_sb.tr_up {color:var(--red)}
 .topRightTextBox .txt_n_sb.tr_dw {color:var(--blue_100)}
-.topRightTextBox span {margin-right:8px;font-weight:600;color:var(--gray_100)}
+.topRightTextBox span {margin-right:8px;font-weight:500;color:var(--gray_100)}
 .topRightTextBox span.trt_txt {color:var(--gray_60);}
 .topRightTextBox span:last-child {margin-right:0}
 .topRightTextBox .col-12:first-child {margin-right:16px;border-right:1px solid var(--gray_10);padding-right:16px;}

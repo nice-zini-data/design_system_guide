@@ -395,17 +395,52 @@ function fn_makechart(id, response, param){
         chartDom = document.getElementById("main_chart1");
     }else{
         chartDom = document.getElementById("main_chart2");
+
     }
     var rpt_chart1 = echarts.init(chartDom);
 
     var option = {
+        grid:{
+          top:'10%',right:'5%',bottom:'15%'
+        },
         xAxis: {
             type: 'category',
-            data: resultName
+            data: resultName,
+            axisLine: {
+                show:true,
+                lineStyle: {
+                    color: '#ededed', // 분할선 색상 변경
+                },
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#8f8f8f',
+                    fontSize: 14,
+                    fontWeight:'500',
+                    fontFamily: 'Pretendard'
+                }
+            },
         },
+
         yAxis: {
-            type: 'value'
+            type: 'value',
+            splitLine: {
+                show: true,   // splitLine 활성화
+                lineStyle: {
+                    color: 'transparent' // 나머지 라인 색상을 투명하게 설정
+                }
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#8f8f8f',
+                    fontSize: 14,
+                    fontWeight:'500',
+                    fontFamily: 'Pretendard'
+                }
+            },
         },
+
         series: [
             {
                 data:resultData,
@@ -422,9 +457,17 @@ function fn_makechart(id, response, param){
                 label: {
                     show: true,
                     position: 'top',
+                    color:'#04a6b5',
+                    fontSize: '14',
+                    textBorderWidth:'2',
+                    textBorderColor:'#fff',
+                    fontFamily: 'Pretendard',
                     formatter: function(c){
                         return  common.addComma(c.data);
                     }
+                },
+                itemStyle:{
+                    color:'#17c7d0'
                 }
             }
         ],
