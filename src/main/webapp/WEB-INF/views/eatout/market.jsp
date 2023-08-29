@@ -10,7 +10,13 @@
 </script>
 
 <%@ include file="/WEB-INF/views/eatout/include/navbar.jsp" %>
-<div class="container">
+<script>
+	$(function(){
+		$('.navList li:last-child').addClass('active');
+	});
+</script>
+
+<div class="container com_gridInner">
 <%--	<%@ include file="/WEB-INF/views/eatout/include/side.jsp" %>--%>
 	<div class="row">
 		<div class="col-8">

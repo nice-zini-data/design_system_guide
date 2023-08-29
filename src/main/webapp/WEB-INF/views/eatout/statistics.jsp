@@ -8,6 +8,11 @@
 <div class="wrap main">
 <%--    <%@ include file="/WEB-INF/views/eatout/include/side.jsp" %>--%>
     <%@ include file="/WEB-INF/views/eatout/include/navbar.jsp" %>
+    <script>
+        $(function(){
+            $('.navList li:first-child').addClass('active');
+        });
+    </script>
 <!--
 *공통*
 로그인 전 / 후 구분
