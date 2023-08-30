@@ -949,7 +949,7 @@ class = "login_none" 제거 및 추가
         {{#each this}}
         <tr>
             <td><span onclick="upjongNmClick('{{upjong3Cd}}')" value="{{upjong3Cd}}">{{upjong3Nm}}</span></td>
-            <td class="{{checkUpDown clacPer}}"><!--{{checkUpDown calcPer}}--> {{chgAbs calcPer}} %</td>
+            <td class="{{checkUpDown calcPer}}">{{checkUpDown clacPer}} {{chgAbs calcPer}} %</td>
             <td>{{addComma saleAmt}}</td>
         </tr>
         {{/each}}

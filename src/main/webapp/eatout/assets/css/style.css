@@ -225,8 +225,19 @@ table {border-collapse : collapse;margin:0 !important;width:100%}
 .cpTable th span {color:var(--gray_60);font-size:12px;font-weight:500}
 .cpTable tr {cursor:pointer;}
 .cpTable td {padding:12px 10px;border-bottom:1px dashed var(--gray_10);font-size:14px;font-weight:500;color:var(--gray_80)}
+.cpTable td.up_p {color:var(--red)}
+.cpTable td.down_p {color:var(--blue_100)}
 .cpTable tr.active {background:var(--gray_5)}
 .cpTable tr.active td:first-child{color:var(--pr_140);text-decoration: underline; text-underline-position : under;}
 .cpTable tr.active td:first-child span{position:relative;}
 .cpTable tr.active td:first-child span:after {content:'';display:inline-block;width:16px;height:16px;position:absolute;top:50%;right:-20px;transform:translateY(-50%);background:url('/eatout/assets/eatout/images/icon/search_mt.svg') no-repeat center center / 16px 16px;}
 .cpTable tr:last-child td{border-bottom:0}
+
+
+
+@media screen and (max-width:1919px){
+    .left_top_box {display:block;}
+    .left_top_box .col-8.flex{margin-bottom:20px}
+    .row.left_g_box > .flex {display:block;}
+    .left_g_box .flex > div.col-2{width:100%}
+}
