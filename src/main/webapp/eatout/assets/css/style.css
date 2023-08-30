@@ -162,10 +162,10 @@ header p.logo_title {font-size:16px;display:inline-block;font-weight:700}
 .left_top_box div#setDateInfo{font-size:14px;font-weight:600;color:var(--gray_60);margin-right:8px;}
 .left_top_box div#setDateInfo2{font-size:14px;font-weight:400;color:var(--gray_60)}
 
-select{height:36px;border:1px solid var(--gray_20);border-radius:4px;min-width:120px;color:var(--gray_100);font-weight:500;cursor:pointer;}
-select:focus {border:1px solid var(--pr_120);background:var(--mono_wh)}
-select:hover {background:var(--gray_5)}
-select:disabled{background:var(--gray_5);pointer-events: none;}
+select{height:36px;border:1px solid var(--gray_20);border-radius:4px;min-width:120px;color:var(--gray_100);font-weight:500;cursor:pointer;position:relative;background:url('/eatout/assets/eatout/images/icon/g_arrow_line.svg') no-repeat center right 8px / 16px 16px;-webkit-appearance:none; /* 크롬 화살표 없애기 */-moz-appearance:none; /* 파이어폭스 화살표 없애기 */appearance:none /* 화살표 없애기 */}
+select:focus {border:1px solid var(--pr_120);background:var(--mono_wh) url('/eatout/assets/eatout/images/icon/bk_arrow_line.svg') no-repeat center right 8px / 16px 16px;}
+select:hover {background:var(--gray_5) url('/eatout/assets/eatout/images/icon/bk_arrow_line.svg') no-repeat center right 8px / 16px 16px}
+select:disabled{background:var(--gray_5)  url('/eatout/assets/eatout/images/icon/g_arrow_line.svg') no-repeat center right 8px / 16px 16px;;pointer-events: none;}
 
 
 .redText {padding:4px 8px;border-radius:17px;font-size:14px;font-weight:600;display:flex;align-items: center;}
@@ -177,8 +177,9 @@ select:disabled{background:var(--gray_5);pointer-events: none;}
 .redText.down .img{background:url('/eatout/assets/eatout/images/icon/bu_arrow.svg') no-repeat center center / 16px 16px}
 
 .left_g_box {background:var(--mono_wh);border-top:1px solid var(--gray_10);}
-.left_g_box .flex > div.col-2 {padding:14px 24px;border-bottom:1px dashed var(--gray_10);border-right:1px dashed var(--gray_10)}
-.left_g_box .flex > div.col-2.st_box03, .left_g_box .flex > div.col-2.st_box05{border-right:0}
+.left_g_box .flex > div.col-2 {padding:14px 24px;border-bottom:1px dashed var(--gray_10);border-right:1px dashed var(--gray_10);display:flex;align-items: center;}
+.left_g_box .flex > div.col-2.st_box03{border-right:0}
+.bd_r0{border-right:0 !important}
 .left_g_box select{padding:6px 8px;}
 .left_g_box select option{}
 .selectText {font-size:14px;font-weight:600;color:var(--gray_60);display:inline-block;width:64px;}
@@ -186,19 +187,22 @@ select:disabled{background:var(--gray_5);pointer-events: none;}
 .st_box02{width:510px}
 .st_box03{width:calc(100% - 790px)}
 .st_box04{border-bottom:0 !important;width:600px}
-.st_box04 select{}
-.st_box05 {display:flex;align-items: center;width:calc(100% - 600px);border-bottom:0 !important;}
-.st_box05 select {width:100%}
+.st_box05 {display:flex;align-items: center;border-bottom:0 !important;}
+.st_box05_wi {width:calc(100% - 600px);}
 .st_box06{}
 .st_box06 button {width:100px;height:36px;border:0;background:var(--gray_100);border-radius: 8px;color:var(--mono_wh);font-weight:600;font-size:16px;padding-right:20px;position:relative;cursor:pointer;margin-left:16px}
 .st_box06 button:hover{background:var(--gray_80)}
 .st_box06 button:after {content:'';display:inline-block;width:16px;height:16px;position:absolute;top:50%;right:calc(50% - 36px);transform:translate(-50%,-50%);background:url('/eatout/assets/eatout/images/icon/search_wh.svg') no-repeat center center / 16px 16px;}
+.selectWrap{width:calc(100% - 64px)}
+.st_box01 select{width:100%}
+.st_box02 select, .st_box03 select, .st_box04 select{width:calc(100% / 3 - 3px)}
+.st_box05 select{width:calc(100% - 116px)}
 
 .chart {width:100%;height:320px;}
 .chart_box {background:var(--mono_wh);border-top:1px solid var(--gray_10)}
 .chart_text {font-size:12px;font-weight:400;color:var(--mono_g6);padding:8px 24px;text-align:right;display:block;}
 .bt0 {border-top:0 !important}
-.clickBtn {width:100%;padding:19px 0;text-align:center;border:1px solid var(--gray_20);margin-top:24px;border-radius:8px;font-size:16px;font-weight:600;color:var(--gray_80);display:flex;justify-content: center;align-items: center;cursor:pointer;}
+.clickBtn {width:100%;padding:20px 0;text-align:center;border:1px solid var(--gray_20);margin-top:110px;border-radius:8px;font-size:16px;font-weight:600;color:var(--gray_80);display:flex;justify-content: center;align-items: center;cursor:pointer;}
 .clickBtn button{width:18px;height:18px;border:0;background:transparent;margin-left:8px;background:url('/eatout/assets/eatout/images/icon/bk_arrow.svg') no-repeat;}
 .clickBtn:hover {border:1px solid var(--pr_80);color:var(--pr_120)}
 .clickBtn:hover button {background:url('/eatout/assets/eatout/images/icon/mt_arrow.svg') no-repeat;}
@@ -208,13 +212,15 @@ select:disabled{background:var(--gray_5);pointer-events: none;}
 .topRightTextBox .txt_n_sb.tr_dw {color:var(--blue_100)}
 .topRightTextBox span {margin-right:8px;font-weight:500;color:var(--gray_100)}
 .topRightTextBox span.trt_txt {color:var(--gray_60);}
+.topRightTextBox span:nth-child(2){margin-right:16px;}
 .topRightTextBox span:last-child {margin-right:0}
 .topRightTextBox .col-12:first-child {margin-right:16px;border-right:1px solid var(--gray_10);padding-right:16px;}
+
 
 .rightTit {padding:0 10px 20px 10px;display:flex;align-items: center;font-size:18px;font-weight:600;color:var(--gray_100);}
 .rightTit img {margin-right:8px;}
 table {border-collapse : collapse;margin:0 !important;width:100%}
-.cpTable th {font-size:14px;font-weight:600;line-height:140%;text-align:left;border-bottom:1px solid var(--gray_10);border-right:1px solid var(--gray_10);padding:8px 10px}
+.cpTable th {font-size:14px;font-weight:600;line-height:140%;text-align:left;border-bottom:1px solid var(--gray_10);border-right:1px solid var(--gray_10);padding:8px 10px;pointer-events: none;}
 .cpTable th:last-child {border-right:0}
 .cpTable th span {color:var(--gray_60);font-size:12px;font-weight:500}
 .cpTable tr {cursor:pointer;}
@@ -223,3 +229,4 @@ table {border-collapse : collapse;margin:0 !important;width:100%}
 .cpTable tr.active td:first-child{color:var(--pr_140);text-decoration: underline; text-underline-position : under;}
 .cpTable tr.active td:first-child span{position:relative;}
 .cpTable tr.active td:first-child span:after {content:'';display:inline-block;width:16px;height:16px;position:absolute;top:50%;right:-20px;transform:translateY(-50%);background:url('/eatout/assets/eatout/images/icon/search_mt.svg') no-repeat center center / 16px 16px;}
+.cpTable tr:last-child td{border-bottom:0}

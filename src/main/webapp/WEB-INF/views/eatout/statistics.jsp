@@ -11,6 +11,7 @@
     <script>
         $(function(){
             $('.navList li:first-child').addClass('active');
+            $('.navList li:first-child img').attr({src:'/eatout/assets/eatout/images/icon/menu_icon_mt.svg'})
         });
     </script>
 <!--
@@ -25,7 +26,7 @@ class = "login_none" 제거 및 추가
                     <div class="row flex left_top_box">
                         <div class="col-8 flex">
                             <div class="type_nmImg">
-                                <img src="/eatout/assets/eatout/images/icon/title_icon01.svg" alt=""/>
+                                <img src="/eatout/assets/eatout/images/icon/title_icon03.svg" alt=""/>
                             </div>
                             <div>
                                 <div class="leftTopInner">
@@ -76,165 +77,175 @@ class = "login_none" 제거 및 추가
                         <div class="flex">
                             <div class="col-2 st_box01">
                                 <p class="selectText">주제</p>
-                                <select id="dataType">
-                                    <option name="1" value="1">외식 데이터(카드)</option>
-                                    <option name="2" value="2">배달 데이터(카드)</option>
-                                    <option name="3" value="3">메뉴 데이터(POS)</option>
-                                    <option name="4" value="4">생활 인구 데이터(통신)</option>
-                                    <option name="5" value="5">주거 인구 데이터(공공)</option>
-                                </select>
+                                <div class="selectWrap">
+                                    <select id="dataType">
+                                        <option name="1" value="1">외식 데이터(카드)</option>
+                                        <option name="2" value="2">배달 데이터(카드)</option>
+                                        <option name="3" value="3">메뉴 데이터(POS)</option>
+                                        <option name="4" value="4">생활 인구 데이터(통신)</option>
+                                        <option name="5" value="5">주거 인구 데이터(공공)</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-2 st_box02">
                                 <p class="selectText">지역</p>
-                                <select id="area_mega">
-                                    <option name="0" value="0">시/도</option>
-                                </select>
-                                <select id="area_cty">
-                                    <option name="0" value="0">시/군/구</option>
-                                </select>
-                                <select id="area_admi">
-                                    <option name="0" value="0">읍면동</option>
-                                </select>
+                                <div class="selectWrap">
+                                    <select id="area_mega">
+                                        <option name="0" value="0">시/도</option>
+                                    </select>
+                                    <select id="area_cty">
+                                        <option name="0" value="0">시/군/구</option>
+                                    </select>
+                                    <select id="area_admi">
+                                        <option name="0" value="0">읍면동</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-2 st_box03">
                                 <p class="selectText">업종</p>
-                                <select id="upjong1">
-                                    <option name="0" value="0">외식업</option>
-                                </select>
-                                <select id="upjong2">
-                                    <option name="0" value="0">중분류</option>
-                                </select>
-                                <select id="upjong3">
-                                    <option name="0" value="0">소분류</option>
-                                </select>
+                                <div class="selectWrap">
+                                    <select id="upjong1">
+                                        <option name="0" value="0">외식업</option>
+                                    </select>
+                                    <select id="upjong2">
+                                        <option name="0" value="0">중분류</option>
+                                    </select>
+                                    <select id="upjong3">
+                                        <option name="0" value="0">소분류</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="flex ">
                             <div class="col-2 st_box04">
                                 <p class="selectText">기간</p>
-                                <select id="dateType">
-                                    <option name="1" value="1">년도 데이터</option>
-                                    <option name="2" value="2">반기 데이터</option>
-                                    <option name="3" value="3">분기 데이터</option>
-                                    <option name="4" value="4">월별 데이터</option>
-                                    <option name="5" value="5">주간 데이터</option>
-                                </select>
-                                <select id="startDate">
-                                    <option name="0" value="0">시작일</option>
-                                </select>
-                                <select id="endDate">
-                                    <option name="0" value="0">종료일</option>
-                                </select>
+                                <div class="selectWrap">
+                                    <select id="dateType">
+                                        <option name="1" value="1">년도 데이터</option>
+                                        <option name="2" value="2">반기 데이터</option>
+                                        <option name="3" value="3">분기 데이터</option>
+                                        <option name="4" value="4">월별 데이터</option>
+                                        <option name="5" value="5">주간 데이터</option>
+                                    </select>
+                                    <select id="startDate">
+                                        <option name="0" value="0">시작일</option>
+                                    </select>
+                                    <select id="endDate">
+                                        <option name="0" value="0">종료일</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-2 st_box05">
+                            <div class="col-2 bd_r0 st_box05_wi">
                                 <p class="selectText">항목</p>
-                                <select id="colType1" style="display:block;">
-                                    <option value="0">항목</option>
-                                    <option value="saleAmt">총 매출</option>
-                                    <option value="storeCnt">점포 수</option>
-                                    <option value="storeAmt">점포당 매출</option>
-                                    <option value="useCnt">결제 건수</option>
-                                    <option value="useAmt">결제 단가</option>
-                                    <option value="cnt20under">20대 이하 고객수</option>
-                                    <option value="cnt30">30대 고객수</option>
-                                    <option value="cnt40">40대 고객수</option>
-                                    <option value="cnt50">50대 고객수</option>
-                                    <option value="cnt60over">60대 이상 고객 수 </option>
-                                    <option value="time2406">00~06시 고객수</option>
-                                    <option value="time0609">06~09시 고객수</option>
-                                    <option value="time0912">09~12시 고객수</option>
-                                    <option value="time1215">12~15시 고객수</option>
-                                    <option value="time1518">15~18시 고객수</option>
-                                    <option value="time1821">18~21시 고객수</option>
-                                    <option value="time2124">21~24시 고객수</option>
-                                    <option value="mon">월요일 고객수</option>
-                                    <option value="tue">화요일 고객수</option>
-                                    <option value="wed">수요일 고객수</option>
-                                    <option value="thu">목요일 고객수</option>
-                                    <option value="fri">금요일 고객수</option>
-                                    <option value="sat">토요일 고객수</option>
-                                    <option value="sun">일요일 고객수</option>
-                                </select>
-                                <select id="colType2" style="display:none;">
-                                    <option value="0">항목</option>
-                                    <option value="saleAmt">총 매출</option>
-                                    <option value="storeCnt">점포 수</option>
-                                    <option value="storeAmt">점포당 매출</option>
-                                    <option value="useCnt">결제 건수</option>
-                                    <option value="useAmt">결제 단가</option>
-                                    <option value="cnt20under">20대 이하 고객수</option>
-                                    <option value="cnt30">30대 고객수</option>
-                                    <option value="cnt40">40대 고객수</option>
-                                    <option value="cnt50">50대 고객수</option>
-                                    <option value="cnt60over">60대 이상 고객 수 </option>
-                                    <option value="time2406">00~06시 고객수</option>
-                                    <option value="time0609">06~09시 고객수</option>
-                                    <option value="time0912">09~12시 고객수</option>
-                                    <option value="time1215">12~15시 고객수</option>
-                                    <option value="time1518">15~18시 고객수</option>
-                                    <option value="time1821">18~21시 고객수</option>
-                                    <option value="time2124">21~24시 고객수</option>
-                                    <option value="mon">월요일 고객수</option>
-                                    <option value="tue">화요일 고객수</option>
-                                    <option value="wed">수요일 고객수</option>
-                                    <option value="thu">목요일 고객수</option>
-                                    <option value="fri">금요일 고객수</option>
-                                    <option value="sat">토요일 고객수</option>
-                                    <option value="sun">일요일 고객수</option>
-                                </select>
-                                <select id="colType3" style="display:none;">
-                                    <option value="">항목</option>
-                                    <option value="">총 매출</option>
-                                    <option value="">표본점포 수</option>
-                                    <option value="">판매건수</option>
-                                    <option value="">판매단가</option>
-                                </select>
-                                <select id="colType4" style="display:none;">
-                                    <option value="0">항목</option>
-                                    <option value="pop">전체 생활인구 수</option>
-                                    <option value="m20Under">남성 20대 이하</option>
-                                    <option value="m30">남성 30대</option>
-                                    <option value="m40">남성 40대</option>
-                                    <option value="m50">남성 50대</option>
-                                    <option value="m60Over">남성 60대 이상</option>
-                                    <option value="w20Under">여성 20대 이하</option>
-                                    <option value="w30">여성 30대</option>
-                                    <option value="w40">여성 40대</option>
-                                    <option value="w50">여성 50대</option>
-                                    <option value="w60Over">여성 60대 이상</option>
-                                    <option value="time2406">00~06시</option>
-                                    <option value="time0609">06~09시</option>
-                                    <option value="time0912">09~12시</option>
-                                    <option value="time1215">12~15시</option>
-                                    <option value="time1518">15~18시</option>
-                                    <option value="time1821">18~21시</option>
-                                    <option value="time2124">21~24시</option>
-                                    <option value="popMon">월요일</option>
-                                    <option value="popTue">화요일</option>
-                                    <option value="popWed">수요일</option>
-                                    <option value="popThu">목요일</option>
-                                    <option value="popFri">금요일</option>
-                                    <option value="popSat">토요일</option>
-                                    <option value="popSun">일요일</option>
-                                </select>
-                                <select id="colType5" style="display:none;">
-                                    <option value="0">항목</option>
-                                    <option value="pop">전체 주거인구 수</option>
-                                    <option value="m20Under">남성 10대 이하</option>
-                                    <option value="m20">남성 20대</option>
-                                    <option value="m30">남성 30대</option>
-                                    <option value="m40">남성 40대</option>
-                                    <option value="m50">남성 50대</option>
-                                    <option value="m60Over">남성 60대 이상</option>
-                                    <option value="w20Under">여성 10대 이하</option>
-                                    <option value="w20">여성 20대</option>
-                                    <option value="w30">여성 30대</option>
-                                    <option value="w40">여성 40대</option>
-                                    <option value="w50">여성 50대</option>
-                                    <option value="w60Over">여성 60대 이상</option>
-                                </select>
-                                <div class="col-1 st_box06">
-                                    <button id="search">조회</button>
+                                <div class="selectWrap st_box05">
+                                    <select id="colType1" style="display:block;">
+                                        <option value="0">항목</option>
+                                        <option value="saleAmt">총 매출</option>
+                                        <option value="storeCnt">점포 수</option>
+                                        <option value="storeAmt">점포당 매출</option>
+                                        <option value="useCnt">결제 건수</option>
+                                        <option value="useAmt">결제 단가</option>
+                                        <option value="cnt20under">20대 이하 고객수</option>
+                                        <option value="cnt30">30대 고객수</option>
+                                        <option value="cnt40">40대 고객수</option>
+                                        <option value="cnt50">50대 고객수</option>
+                                        <option value="cnt60over">60대 이상 고객 수 </option>
+                                        <option value="time2406">00~06시 고객수</option>
+                                        <option value="time0609">06~09시 고객수</option>
+                                        <option value="time0912">09~12시 고객수</option>
+                                        <option value="time1215">12~15시 고객수</option>
+                                        <option value="time1518">15~18시 고객수</option>
+                                        <option value="time1821">18~21시 고객수</option>
+                                        <option value="time2124">21~24시 고객수</option>
+                                        <option value="mon">월요일 고객수</option>
+                                        <option value="tue">화요일 고객수</option>
+                                        <option value="wed">수요일 고객수</option>
+                                        <option value="thu">목요일 고객수</option>
+                                        <option value="fri">금요일 고객수</option>
+                                        <option value="sat">토요일 고객수</option>
+                                        <option value="sun">일요일 고객수</option>
+                                    </select>
+                                    <select id="colType2" style="display:none;">
+                                        <option value="0">항목</option>
+                                        <option value="saleAmt">총 매출</option>
+                                        <option value="storeCnt">점포 수</option>
+                                        <option value="storeAmt">점포당 매출</option>
+                                        <option value="useCnt">결제 건수</option>
+                                        <option value="useAmt">결제 단가</option>
+                                        <option value="cnt20under">20대 이하 고객수</option>
+                                        <option value="cnt30">30대 고객수</option>
+                                        <option value="cnt40">40대 고객수</option>
+                                        <option value="cnt50">50대 고객수</option>
+                                        <option value="cnt60over">60대 이상 고객 수 </option>
+                                        <option value="time2406">00~06시 고객수</option>
+                                        <option value="time0609">06~09시 고객수</option>
+                                        <option value="time0912">09~12시 고객수</option>
+                                        <option value="time1215">12~15시 고객수</option>
+                                        <option value="time1518">15~18시 고객수</option>
+                                        <option value="time1821">18~21시 고객수</option>
+                                        <option value="time2124">21~24시 고객수</option>
+                                        <option value="mon">월요일 고객수</option>
+                                        <option value="tue">화요일 고객수</option>
+                                        <option value="wed">수요일 고객수</option>
+                                        <option value="thu">목요일 고객수</option>
+                                        <option value="fri">금요일 고객수</option>
+                                        <option value="sat">토요일 고객수</option>
+                                        <option value="sun">일요일 고객수</option>
+                                    </select>
+                                    <select id="colType3" style="display:none;">
+                                        <option value="">항목</option>
+                                        <option value="">총 매출</option>
+                                        <option value="">표본점포 수</option>
+                                        <option value="">판매건수</option>
+                                        <option value="">판매단가</option>
+                                    </select>
+                                    <select id="colType4" style="display:none;">
+                                        <option value="0">항목</option>
+                                        <option value="pop">전체 생활인구 수</option>
+                                        <option value="m20Under">남성 20대 이하</option>
+                                        <option value="m30">남성 30대</option>
+                                        <option value="m40">남성 40대</option>
+                                        <option value="m50">남성 50대</option>
+                                        <option value="m60Over">남성 60대 이상</option>
+                                        <option value="w20Under">여성 20대 이하</option>
+                                        <option value="w30">여성 30대</option>
+                                        <option value="w40">여성 40대</option>
+                                        <option value="w50">여성 50대</option>
+                                        <option value="w60Over">여성 60대 이상</option>
+                                        <option value="time2406">00~06시</option>
+                                        <option value="time0609">06~09시</option>
+                                        <option value="time0912">09~12시</option>
+                                        <option value="time1215">12~15시</option>
+                                        <option value="time1518">15~18시</option>
+                                        <option value="time1821">18~21시</option>
+                                        <option value="time2124">21~24시</option>
+                                        <option value="popMon">월요일</option>
+                                        <option value="popTue">화요일</option>
+                                        <option value="popWed">수요일</option>
+                                        <option value="popThu">목요일</option>
+                                        <option value="popFri">금요일</option>
+                                        <option value="popSat">토요일</option>
+                                        <option value="popSun">일요일</option>
+                                    </select>
+                                    <select id="colType5" style="display:none;">
+                                        <option value="0">항목</option>
+                                        <option value="pop">전체 주거인구 수</option>
+                                        <option value="m20Under">남성 10대 이하</option>
+                                        <option value="m20">남성 20대</option>
+                                        <option value="m30">남성 30대</option>
+                                        <option value="m40">남성 40대</option>
+                                        <option value="m50">남성 50대</option>
+                                        <option value="m60Over">남성 60대 이상</option>
+                                        <option value="w20Under">여성 10대 이하</option>
+                                        <option value="w20">여성 20대</option>
+                                        <option value="w30">여성 30대</option>
+                                        <option value="w40">여성 40대</option>
+                                        <option value="w50">여성 50대</option>
+                                        <option value="w60Over">여성 60대 이상</option>
+                                    </select>
+                                    <div class="col-1 st_box06">
+                                        <button id="search">조회</button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -255,58 +266,67 @@ class = "login_none" 제거 및 추가
                         <div class="flex">
                             <div class="col-2 st_box01">
                                 <p class="selectText">주제</p>
-                                <select id="dataType_2">
-                                    <option name="1" value="1">외식 데이터(카드)</option>
-                                    <option name="2" value="2">배달 데이터(카드)</option>
-                                    <option name="3" value="3">메뉴 데이터(POS)</option>
-                                    <option name="4" value="4">생활 인구 데이터(통신)</option>
-                                    <option name="5" value="5">주거 인구 데이터(공공)</option>
-                                </select>
+                                <div class="selectWrap">
+                                    <select id="dataType_2">
+                                        <option name="1" value="1">외식 데이터(카드)</option>
+                                        <option name="2" value="2">배달 데이터(카드)</option>
+                                        <option name="3" value="3">메뉴 데이터(POS)</option>
+                                        <option name="4" value="4">생활 인구 데이터(통신)</option>
+                                        <option name="5" value="5">주거 인구 데이터(공공)</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-2 st_box02">
                                 <p class="selectText">지역</p>
-                                <select id="area_mega_2">
-                                    <option name="0" value="0">시/도</option>
-                                </select>
-                                <select id="area_cty_2">
-                                    <option name="0" value="0">시/군/구</option>
-                                </select>
-                                <select id="area_admi_2">
-                                    <option name="0" value="0">읍면동</option>
-                                </select>
+                                <div class="selectWrap">
+                                    <select id="area_mega_2">
+                                        <option name="0" value="0">시/도</option>
+                                    </select>
+                                    <select id="area_cty_2">
+                                        <option name="0" value="0">시/군/구</option>
+                                    </select>
+                                    <select id="area_admi_2">
+                                        <option name="0" value="0">읍면동</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="col-2 st_box03">
                                 <p class="selectText">업종</p>
-                                <select id="upjong1_2">
-                                    <option name="0" value="0">외식업</option>
-                                </select>
-                                <select id="upjong2_2">
-                                    <option name="0" value="0">중분류</option>
-                                </select>
-                                <select id="upjong3_2">
-                                    <option name="0" value="0">소분류</option>
-                                </select>
+                                <div class="selectWrap">
+                                    <select id="upjong1_2">
+                                        <option name="0" value="0">외식업</option>
+                                    </select>
+                                    <select id="upjong2_2">
+                                        <option name="0" value="0">중분류</option>
+                                    </select>
+                                    <select id="upjong3_2">
+                                        <option name="0" value="0">소분류</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="flex">
                             <div class="col-2 st_box04">
                                 <p class="selectText">기간</p>
-                                <select id="dateType_2">
-                                    <option name="1" value="1">년도 데이터</option>
-                                    <option name="2" value="2">반기 데이터</option>
-                                    <option name="3" value="3">분기 데이터</option>
-                                    <option name="4" value="4">월별 데이터</option>
-                                    <option name="5" value="5">주간 데이터</option>
-                                </select>
-                                <select id="startDate_2">
-                                    <option name="0" value="0">시작일</option>
-                                </select>
-                                <select id="endDate_2">
-                                    <option name="0" value="0">종료일</option>
-                                </select>
+                                <div class="selectWrap">
+                                    <select id="dateType_2">
+                                        <option name="1" value="1">년도 데이터</option>
+                                        <option name="2" value="2">반기 데이터</option>
+                                        <option name="3" value="3">분기 데이터</option>
+                                        <option name="4" value="4">월별 데이터</option>
+                                        <option name="5" value="5">주간 데이터</option>
+                                    </select>
+                                    <select id="startDate_2">
+                                        <option name="0" value="0">시작일</option>
+                                    </select>
+                                    <select id="endDate_2">
+                                        <option name="0" value="0">종료일</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-2 st_box05">
+                            <div class="col-2 bd_r0 st_box05_wi">
                                 <p class="selectText">항목</p>
+                                <div class="selectWrap st_box05">
                                     <select id="colType1_2" style="display:block;">
                                     <option value="0">항목</option>
                                     <option value="saleAmt">총 매출</option>
@@ -334,86 +354,87 @@ class = "login_none" 제거 및 추가
                                     <option value="sat">토요일 고객수</option>
                                     <option value="sun">일요일 고객수</option>
                                 </select>
-                                <select id="colType2_2" style="display:none;">
-                                    <option value="0">항목</option>
-                                    <option value="saleAmt">총 매출</option>
-                                    <option value="storeCnt">점포 수</option>
-                                    <option value="storeAmt">점포당 매출</option>
-                                    <option value="useCnt">결제 건수</option>
-                                    <option value="useAmt">결제 단가</option>
-                                    <option value="cnt20under">20대 이하 고객수</option>
-                                    <option value="cnt30">30대 고객수</option>
-                                    <option value="cnt40">40대 고객수</option>
-                                    <option value="cnt50">50대 고객수</option>
-                                    <option value="cnt60over">60대 이상 고객 수 </option>
-                                    <option value="time2406">00~06시 고객수</option>
-                                    <option value="time0609">06~09시 고객수</option>
-                                    <option value="time0912">09~12시 고객수</option>
-                                    <option value="time1215">12~15시 고객수</option>
-                                    <option value="time1518">15~18시 고객수</option>
-                                    <option value="time1821">18~21시 고객수</option>
-                                    <option value="time2124">21~24시 고객수</option>
-                                    <option value="mon">월요일 고객수</option>
-                                    <option value="tue">화요일 고객수</option>
-                                    <option value="wed">수요일 고객수</option>
-                                    <option value="thu">목요일 고객수</option>
-                                    <option value="fri">금요일 고객수</option>
-                                    <option value="sat">토요일 고객수</option>
-                                    <option value="sun">일요일 고객수</option>
-                                </select>
-                                <select id="colType3_2" style="display:none;">
-                                    <option value="">항목</option>
-                                    <option value="">총 매출</option>
-                                    <option value="">표본점포 수</option>
-                                    <option value="">판매건수</option>
-                                    <option value="">판매단가</option>
-                                </select>
-                                <select id="colType4_2" style="display:none;">
-                                    <option value="0">항목</option>
-                                    <option value="pop">전체 생활인구 수</option>
-                                    <option value="m20Under">남성 20대 이하</option>
-                                    <option value="m30">남성 30대</option>
-                                    <option value="m40">남성 40대</option>
-                                    <option value="m50">남성 50대</option>
-                                    <option value="m60Over">남성 60대 이상</option>
-                                    <option value="w20Under">여성 20대 이하</option>
-                                    <option value="w30">여성 30대</option>
-                                    <option value="w40">여성 40대</option>
-                                    <option value="w50">여성 50대</option>
-                                    <option value="w60Over">여성 60대 이상</option>
-                                    <option value="time2406">00~06시</option>
-                                    <option value="time0609">06~09시</option>
-                                    <option value="time0912">09~12시</option>
-                                    <option value="time1215">12~15시</option>
-                                    <option value="time1518">15~18시</option>
-                                    <option value="time1821">18~21시</option>
-                                    <option value="time2124">21~24시</option>
-                                    <option value="popMon">월요일</option>
-                                    <option value="popTue">화요일</option>
-                                    <option value="popWed">수요일</option>
-                                    <option value="popThu">목요일</option>
-                                    <option value="popFri">금요일</option>
-                                    <option value="popSat">토요일</option>
-                                    <option value="popSun">일요일</option>
-                                </select>
-                                <select id="colType5_2" style="display:none;">
-                                    <option value="0">항목</option>
-                                    <option value="pop">전체 주거인구 수</option>
-                                    <option value="m20Under">남성 10대 이하</option>
-                                    <option value="m20">남성 20대</option>
-                                    <option value="m30">남성 30대</option>
-                                    <option value="m40">남성 40대</option>
-                                    <option value="m50">남성 50대</option>
-                                    <option value="m60Over">남성 60대 이상</option>
-                                    <option value="w20Under">여성 10대 이하</option>
-                                    <option value="w20">여성 20대</option>
-                                    <option value="w30">여성 30대</option>
-                                    <option value="w40">여성 40대</option>
-                                    <option value="w50">여성 50대</option>
-                                    <option value="w60Over">여성 60대 이상</option>
-                                </select>
-                                <div class="col-1 st_box06">
-                                    <button id="search_2">조회</button>
+                                    <select id="colType2_2" style="display:none;">
+                                        <option value="0">항목</option>
+                                        <option value="saleAmt">총 매출</option>
+                                        <option value="storeCnt">점포 수</option>
+                                        <option value="storeAmt">점포당 매출</option>
+                                        <option value="useCnt">결제 건수</option>
+                                        <option value="useAmt">결제 단가</option>
+                                        <option value="cnt20under">20대 이하 고객수</option>
+                                        <option value="cnt30">30대 고객수</option>
+                                        <option value="cnt40">40대 고객수</option>
+                                        <option value="cnt50">50대 고객수</option>
+                                        <option value="cnt60over">60대 이상 고객 수 </option>
+                                        <option value="time2406">00~06시 고객수</option>
+                                        <option value="time0609">06~09시 고객수</option>
+                                        <option value="time0912">09~12시 고객수</option>
+                                        <option value="time1215">12~15시 고객수</option>
+                                        <option value="time1518">15~18시 고객수</option>
+                                        <option value="time1821">18~21시 고객수</option>
+                                        <option value="time2124">21~24시 고객수</option>
+                                        <option value="mon">월요일 고객수</option>
+                                        <option value="tue">화요일 고객수</option>
+                                        <option value="wed">수요일 고객수</option>
+                                        <option value="thu">목요일 고객수</option>
+                                        <option value="fri">금요일 고객수</option>
+                                        <option value="sat">토요일 고객수</option>
+                                        <option value="sun">일요일 고객수</option>
+                                    </select>
+                                    <select id="colType3_2" style="display:none;">
+                                        <option value="">항목</option>
+                                        <option value="">총 매출</option>
+                                        <option value="">표본점포 수</option>
+                                        <option value="">판매건수</option>
+                                        <option value="">판매단가</option>
+                                    </select>
+                                    <select id="colType4_2" style="display:none;">
+                                        <option value="0">항목</option>
+                                        <option value="pop">전체 생활인구 수</option>
+                                        <option value="m20Under">남성 20대 이하</option>
+                                        <option value="m30">남성 30대</option>
+                                        <option value="m40">남성 40대</option>
+                                        <option value="m50">남성 50대</option>
+                                        <option value="m60Over">남성 60대 이상</option>
+                                        <option value="w20Under">여성 20대 이하</option>
+                                        <option value="w30">여성 30대</option>
+                                        <option value="w40">여성 40대</option>
+                                        <option value="w50">여성 50대</option>
+                                        <option value="w60Over">여성 60대 이상</option>
+                                        <option value="time2406">00~06시</option>
+                                        <option value="time0609">06~09시</option>
+                                        <option value="time0912">09~12시</option>
+                                        <option value="time1215">12~15시</option>
+                                        <option value="time1518">15~18시</option>
+                                        <option value="time1821">18~21시</option>
+                                        <option value="time2124">21~24시</option>
+                                        <option value="popMon">월요일</option>
+                                        <option value="popTue">화요일</option>
+                                        <option value="popWed">수요일</option>
+                                        <option value="popThu">목요일</option>
+                                        <option value="popFri">금요일</option>
+                                        <option value="popSat">토요일</option>
+                                        <option value="popSun">일요일</option>
+                                    </select>
+                                    <select id="colType5_2" style="display:none;">
+                                        <option value="0">항목</option>
+                                        <option value="pop">전체 주거인구 수</option>
+                                        <option value="m20Under">남성 10대 이하</option>
+                                        <option value="m20">남성 20대</option>
+                                        <option value="m30">남성 30대</option>
+                                        <option value="m40">남성 40대</option>
+                                        <option value="m50">남성 50대</option>
+                                        <option value="m60Over">남성 60대 이상</option>
+                                        <option value="w20Under">여성 10대 이하</option>
+                                        <option value="w20">여성 20대</option>
+                                        <option value="w30">여성 30대</option>
+                                        <option value="w40">여성 40대</option>
+                                        <option value="w50">여성 50대</option>
+                                        <option value="w60Over">여성 60대 이상</option>
+                                    </select>
+                                    <div class="col-1 st_box06">
+                                        <button id="search_2">조회</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -504,6 +525,7 @@ class = "login_none" 제거 및 추가
                 $("#upjong2").attr('disabled',false);
                 $("#upjong3").attr('disabled',false);
                 change_colType($(this).val(),true);
+                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon03.svg'});
 
             }else if(dataTypeNum == 2){
                 console.log('배달 데이터 선택');
@@ -512,6 +534,7 @@ class = "login_none" 제거 및 추가
                 $("#upjong2").attr('disabled',false);
                 $("#upjong3").attr('disabled',false);
                 change_colType($(this).val(),true);
+                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon01.svg'});
 
             }else if(dataTypeNum == 3){
                 console.log('메뉴 데이터 선택');
@@ -520,6 +543,7 @@ class = "login_none" 제거 및 추가
                 $("#upjong2").attr('disabled',false);
                 $("#upjong3").attr('disabled',false);
                 change_colType($(this).val(),true);
+                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon04.svg'});
 
             }else if(dataTypeNum == 4){
                 console.log('생활 인구 데이터 선택');
@@ -528,6 +552,7 @@ class = "login_none" 제거 및 추가
                 $("#upjong2").attr('disabled',true);
                 $("#upjong3").attr('disabled',true);
                 change_colType($(this).val(),true);
+                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon02.svg'});
 
             }else if(dataTypeNum == 5){
                 console.log('주거 인구 데이터 선택');
@@ -536,6 +561,7 @@ class = "login_none" 제거 및 추가
                 $("#upjong2").attr('disabled',true);
                 $("#upjong3").attr('disabled',true);
                 change_colType($(this).val(),true);
+                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon05.svg'});
 
             }
         });

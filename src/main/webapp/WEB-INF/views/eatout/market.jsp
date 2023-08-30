@@ -13,6 +13,7 @@
 <script>
 	$(function(){
 		$('.navList li:last-child').addClass('active');
+		$('.navList li:last-child img').attr({src:'/eatout/assets/eatout/images/icon/menu_icon_mt.svg'})
 	});
 </script>
 
