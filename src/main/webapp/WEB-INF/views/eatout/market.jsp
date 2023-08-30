@@ -17,14 +17,15 @@
 	});
 </script>
 
-<div class="container com_gridInner">
+<div class="container com_gridInner market">
 <%--	<%@ include file="/WEB-INF/views/eatout/include/side.jsp" %>--%>
 	<div class="row">
-		<div class="col-8">
-			<div>
-				<div>
-					전체업종리스트
-				</div>
+		<div class="col-8 left_box">
+			<div class="left_slide">
+				<p class="com_titleT">
+					<img src="/eatout/assets/eatout/images/icon/chart_icon.svg" alt=""/>
+					업종별 경기 변동
+				</p>
 				<div style="height:350px;overflow: scroll">
 					<div id="upjongList">
 					</div>
@@ -33,38 +34,40 @@
 			<div id="tableList" style="display:block;">
 				<div>
 					<div class="row">
-						<div class="col-3">
-							<p>지역별 외식업 경기</p>
+						<div class="col-3 tabTit">
+							<p  class="tab_text active">지역별 외식업 경기</p>
 						</div>
 						<div class="col-9">
-							<div class="row">
-								<div id="typeChk" class="col-3">
+							<div class="row flex">
+								<div id="typeChk" class="col-3 flex radioWrap">
 									<input type="radio" class="btn-check btn-sm" name="typeChk" id="typeChk1" value="sales"/>
-									<label class="btn btn-outline-primary" for="typeChk1">매출</label>
+									<label class="btn btn-outline-primary" for="typeChk1"><span><img src="/eatout/assets/eatout/images/icon/icon_coin_g.svg" alt=""/>매출</span></label>
 									<input type="radio" class="btn-check btn-sm" name="typeChk" id="typeChk2"  value="store"/>
-									<label class="btn btn-outline-primary" for="typeChk2">점포 수</label>
+									<label class="btn btn-outline-primary" for="typeChk2"><span><img src="/eatout/assets/eatout/images/icon/icon_store_mono.svg" alt=""/>점포 수</span></label>
 								</div>
-								<div id="dateChk" class="col-6">
-									<input type="radio" class="btn-check" name="dateChk" id="dateChk1" value="1"/>
-									<label class="btn btn-outline-primary" for="dateChk1">1개월</label>
-									<input type="radio" class="btn-check" name="dateChk" id="dateChk2" value="3"/>
-									<label class="btn btn-outline-primary" for="dateChk2">3개월</label>
-									<input type="radio" class="btn-check" name="dateChk" id="dateChk3" value="6"/>
-									<label class="btn btn-outline-primary" for="dateChk3">6개월</label>
-									<input type="radio" class="btn-check" name="dateChk" id="dateChk4" value="12"/>
-									<label class="btn btn-outline-primary" for="dateChk4">1년</label>
-								</div>
-								<div id="orderChk" class="col-2">
+
+								<div id="orderChk" class="col-2 flex radioWrap">
 									<input type="radio" class="btn-check btn-sm" name="orderChk" id="orderChk1" value="desc"/>
-									<label class="btn btn-outline-primary" for="orderChk1">증가</label>
+									<label class="btn btn-outline-primary" for="orderChk1"><span>증가</span></label>
 									<input type="radio" class="btn-check btn-sm" name="orderChk" id="orderChk2" value="asc"/>
-									<label class="btn btn-outline-primary" for="orderChk2">감소</label>
+									<label class="btn btn-outline-primary" for="orderChk2"><span>감소</span></label>
+								</div>
+
+								<div id="dateChk" class="col-6 flex radioWrap">
+									<input type="radio" class="btn-check" name="dateChk" id="dateChk1" value="1"/>
+									<label class="btn btn-outline-primary" for="dateChk1"><span>1개월</span></label>
+									<input type="radio" class="btn-check" name="dateChk" id="dateChk2" value="3"/>
+									<label class="btn btn-outline-primary" for="dateChk2"><span>3개월</span></label>
+									<input type="radio" class="btn-check" name="dateChk" id="dateChk3" value="6"/>
+									<label class="btn btn-outline-primary" for="dateChk3"><span>6개월</span></label>
+									<input type="radio" class="btn-check" name="dateChk" id="dateChk4" value="12"/>
+									<label class="btn btn-outline-primary" for="dateChk4"><span>1년</span></label>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div style="height:600px;overflow: scroll">
+				<div class="mk_list01_box">
 					<div id="admiUpjongInfo">
 					</div>
 				</div>
@@ -89,44 +92,53 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-4">
-			<div>
-				<div class="row">
-					<div class="col-2">
-						<p>지역별 외식업 경기</p>
-					</div>
-					<div class="col-10">
-						<div class="row">
-							<div id="dateChk_2" class="col-4">
-								<input type="radio" class="btn-check" name="dateChk_2" id="dateChk1_2" value="1"/>
-								<label class="btn btn-outline-primary" for="dateChk1_2">1개월</label>
-								<input type="radio" class="btn-check" name="dateChk_2" id="dateChk2_2" value="3"/>
-								<label class="btn btn-outline-primary" for="dateChk2_2">3개월</label>
-								<input type="radio" class="btn-check" name="dateChk_2" id="dateChk3_2" value="6"/>
-								<label class="btn btn-outline-primary" for="dateChk3_2">6개월</label>
-								<input type="radio" class="btn-check" name="dateChk_2" id="dateChk4_2" value="12"/>
-								<label class="btn btn-outline-primary" for="dateChk4_2">1년</label>
+		<div class="col-4 right_box">
+
+			<div class="rightInner">
+				<div class="mk_right_tit">
+					<div class="row flex">
+						<div class="col-2">
+							<p class="com_titleT">
+								<img src="/eatout/assets/eatout/images/icon/chart_icon.svg" alt=""/>
+								업종별 상승률
+							</p>
+						</div>
+						<div class="col-10 font12Radio">
+							<div class="row">
+								<div id="dateChk_2" class="col-4 flex radioWrap">
+									<input type="radio" class="btn-check" name="dateChk_2" id="dateChk1_2" value="1"/>
+									<label class="btn btn-outline-primary" for="dateChk1_2"><span>1개월</span></label>
+									<input type="radio" class="btn-check" name="dateChk_2" id="dateChk2_2" value="3"/>
+									<label class="btn btn-outline-primary" for="dateChk2_2"><span>3개월</span></label>
+									<input type="radio" class="btn-check" name="dateChk_2" id="dateChk3_2" value="6"/>
+									<label class="btn btn-outline-primary" for="dateChk3_2"><span>6개월</span></label>
+									<input type="radio" class="btn-check" name="dateChk_2" id="dateChk4_2" value="12"/>
+									<label class="btn btn-outline-primary" for="dateChk4_2"><span>1년</span></label>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div style="height:70%;">
+
 				<div id="upjongGrowth">
 				</div>
 			</div>
-			<p>외식상권분석 보고서</p>
-			<div style="height:30%;">
+
+			<div class="rightInner">
+				<p class="com_titleT">
+					<img src="/eatout/assets/eatout/images/icon/chart_icon.svg" alt=""/>
+					외식상권 분석 보고서
+				</p>
 				<div class="col-12 center">
 					<table class="board_tb">
-						<thead>
+						<!--<thead>
 						<tr>
 							<th>NO</th>
 							<th>파일명</th>
 							<th>정보</th>
 							<th>등록일자</th>
 						</tr>
-						</thead>
+						</thead>-->
 						<tbody id="tfileList">
 
 						</tbody>
@@ -141,8 +153,6 @@
 </div>
 
 <script type="text/javascript" src="/eatout/assets/eatout/js/chart/statistics.js"></script>
-<!--공통 footer-->
-<%@ include file="/WEB-INF/views/eatout/include/footer.jsp" %>
 
 <script type="text/javascript">
 
@@ -356,6 +366,11 @@
 		var html = templateScript(context);
 		$('#tfileList').html(html);
 
+		$('#tfileList tr').click(function(){
+			$('#tfileList tr').removeClass('active');
+			$(this).addClass('active');
+		});
+
 		if (!common.isEmpty(response.data)) {
 			pagingInfo.totalCnt = response.data[0].totalCnt;
 			util.renderPagingNavigation('paginate_filelist', pagingInfo);
@@ -364,6 +379,8 @@
 			pagingInfo.totalCnt = 0;
 		}
 		(pagingInfo.totalCnt < 1) ? $("#paginate_filelist").hide() : $("#paginate_filelist").show();
+
+
 
 	}
 
@@ -457,10 +474,10 @@
 <script type="text/x-handlebars_template" id="tmp_tfileList">
 	{{#each this}}
 	<tr>
-		<td>{{fileNo}}</td>
-		<td><a onclick="fileDownload('{{filePath}}','{{fileNm}}','{{fileOriNm}}')">{{fileOriNm}}</a></td>
-		<td>{{fileInfo}}</td>
-		<td>{{regDate}}</td>
+		<td><img src="/eatout/assets/eatout/images/icon/pdf.svg" alt=""/><!--{{fileNo}}--></td>
+		<td><span class="icon_show "><a onclick="fileDownload('{{filePath}}','{{fileNm}}','{{fileOriNm}}')">{{fileOriNm}}</a></span></td>
+		<!--td>{{fileInfo}}</td-->
+		<td><p>{{regDate}}</p></td>
 	</tr>
 	{{/each}}
 </script>

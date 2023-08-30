@@ -148,8 +148,8 @@ header p.logo_title {font-size:16px;display:inline-block;font-weight:700}
 .com_gridInner::-webkit-scrollbar{display:none;}
 .right_box {width:372px;overflow-y:scroll;padding:24px 10px;height:calc(100vh - 60px);background:var(--mono_wh);margin-left:3px;border-left:1px solid var(--gray_10)}
 .right_box::-webkit-scrollbar{width:4px;}
-.right_box::-webkit-scrollbar-thumb{width:4px;border-radius:8px;background:var(--gray_30)}
-.left_box {width:calc(100% - 372px);padding:24px 20px;overflow-y:scroll;height:calc(100vh - 57px)}
+.right_box::-webkit-scrollbar-thumb{width:4px;border-radius:8px;background:var(--gray_30);opacity: .3}
+.left_box {width:calc(100% - 372px);padding:24px 40px;overflow-y:scroll;height:calc(100vh - 57px)}
 .left_box::-webkit-scrollbar{width:4px;}
 .left_box::-webkit-scrollbar-thumb{width:4px;border-radius:8px;background:var(--gray_30)}
 .leftTitleBox div{font-size:18px;font-weight:600;color:var(--gray_100);margin:0 8px;padding:0 8px;position:relative;}
@@ -163,7 +163,7 @@ header p.logo_title {font-size:16px;display:inline-block;font-weight:700}
 .left_top_box div#setDateInfo2{font-size:14px;font-weight:400;color:var(--gray_60)}
 
 select{height:36px;border:1px solid var(--gray_20);border-radius:4px;min-width:120px;color:var(--gray_100);font-weight:500;cursor:pointer;position:relative;background:url('/eatout/assets/eatout/images/icon/g_arrow_line.svg') no-repeat center right 8px / 16px 16px;-webkit-appearance:none; /* 크롬 화살표 없애기 */-moz-appearance:none; /* 파이어폭스 화살표 없애기 */appearance:none /* 화살표 없애기 */}
-select:focus {border:1px solid var(--pr_120);background:var(--mono_wh) url('/eatout/assets/eatout/images/icon/bk_arrow_line.svg') no-repeat center right 8px / 16px 16px;}
+select:focus {outline:1px solid var(--pr_120);border:1px solid var(--pr_120);background:var(--mono_wh) url('/eatout/assets/eatout/images/icon/bk_arrow_line.svg') no-repeat center right 8px / 16px 16px;}
 select:hover {background:var(--gray_5) url('/eatout/assets/eatout/images/icon/bk_arrow_line.svg') no-repeat center right 8px / 16px 16px}
 select:disabled{background:var(--gray_5)  url('/eatout/assets/eatout/images/icon/g_arrow_line.svg') no-repeat center right 8px / 16px 16px;;pointer-events: none;}
 
@@ -233,7 +233,66 @@ table {border-collapse : collapse;margin:0 !important;width:100%}
 .cpTable tr.active td:first-child span:after {content:'';display:inline-block;width:16px;height:16px;position:absolute;top:50%;right:-20px;transform:translateY(-50%);background:url('/eatout/assets/eatout/images/icon/search_mt.svg') no-repeat center center / 16px 16px;}
 .cpTable tr:last-child td{border-bottom:0}
 
+/*시장동향*/
+.com_gridInner.market .left_box {padding:0}
+.com_titleT {font-size:18px;font-weight:600;color:var(--gray_100);display:flex;align-items: center;margin-bottom:20px;}
+.com_titleT img {margin-right:8px;}
+.left_slide {padding:24px 40px;background:var(--mono_wh)}
+#tableList {padding:24px 40px;height:auto;overflow:hidden;}
+.tabTit {margin-bottom:40px}
 
+input[type="radio"]{display:none;}
+input[type="radio"] + label{display: inline-block;position: relative;overflow:hidden;text-align:center;border-right:1px solid var(--gray_10);cursor:pointer;}
+input[type="radio"] + label:last-child {border-right:0}
+input[type="radio"] + label:before {content:'';width: 100%;height: 100%;background:#F6F6F6;position:absolute;top:0;left:0;}
+input[type="radio"]:checked + label::after{content:'';position: absolute;left:0;top:0;width:100%;height:38px;background:var(--mono_wh);}
+input[type="radio"] + label span {display:flex;position:relative;z-index: 9;padding:8px 16px;font-size:16px;font-weight:500;color:var(--gray_60);align-items:center;}
+input[type="radio"]:checked + label span {color:var(--pr_140);font-weight:600;}
+input[type="radio"] + label span img {margin-right:8px}
+.radioWrap {border:1px solid var(--gray_10);border-radius:6px;overflow:hidden;}
+#orderChk {margin-left:16px;}
+#dateChk {margin-left:auto;}
+#dateChk input[type="radio"] + label span{width:80px;display:inline-block;text-align:center;}
+.tab_text {font-size:20px;font-weight:600;color:var(--gray_100);padding:8px 16px;display:inline-block;}
+.tab_text.active {border-bottom:2px solid var(--gray_100)}
+
+#admiUpjongInfo div.col-4.border.border-4 {width:calc(100% / 3 - 16px);float:left;margin-right:24px;background:var(--mono_wh);border-top:1px solid var(--gray_10);padding:24px 20px;margin-top:24px;}
+#admiUpjongInfo div.col-4.border.border-4:nth-child(3n){margin-right:0}
+#admiUpjongInfo div.col-4.border.border-4:nth-child(3n+1){clear:both;}
+#admiUpjongInfo div.col-4.border.border-4 table tr:first-child th{font-size:18px;text-align:left;font-weight:600;padding-bottom:16px;}
+#admiUpjongInfo div.col-4.border.border-4 table tr:nth-child(2) th {font-size:16px;font-weight:600;color:var(--gray_80);padding:8px;border-bottom:1px solid var(--gray_10)}
+#admiUpjongInfo div.col-4.border.border-4 table td{padding:12px 0;text-align:center;}
+#admiUpjongInfo div.col-4.border.border-4 table tr:nth-child(1) td:first-child, #admiUpjongInfo div.col-4.border.border-4 table tr:nth-child(2) td:first-child, #admiUpjongInfo div.col-4.border.border-4 table tr:nth-child(3) td:first-child{color:var(--pr_120);font-weight:700}
+
+.market .right_box {position:fixed;top:56px;right:0;padding:0;background:transparent}
+.market .right_box .row.flex .com_titleT{margin-bottom:0}
+.font12Radio {margin-left:auto;}
+.font12Radio input[type="radio"] + label span{padding:4px;}
+.font12Radio #dateChk_2 input[type="radio"] + label span{font-size:12px;width:44px;display:inline-block;text-align:center;}
+.mk_right_tit {margin-bottom:20px;}
+#upjongGrowth tr{border-bottom:1px dashed var(--gray_10)}
+#upjongGrowth tr:last-child{border-bottom:0}
+#upjongGrowth td{padding:12px 0;font-size:14px;}
+#upjongGrowth tr td:nth-child(1){width:10%;text-align:center;font-weight:600;color:var(--gray_80)}
+#upjongGrowth tr td:nth-child(2){padding-left:10px}
+#upjongGrowth tr:nth-child(1) td:nth-child(1), #upjongGrowth tr:nth-child(2) td:nth-child(1), #upjongGrowth tr:nth-child(3) td:nth-child(1){font-size:1px;color:var(--mono_wh);position:relative;}
+#upjongGrowth tr:nth-child(1) td:nth-child(1):after{content:'';display:inline-block;width:24px;height:24px;background:url('/eatout/assets/eatout/images/icon/Rank01.svg') no-repeat center center / 24px 24px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+#upjongGrowth tr:nth-child(2) td:nth-child(1):after{content:'';display:inline-block;width:24px;height:24px;background:url('/eatout/assets/eatout/images/icon/Rank02.svg') no-repeat center center / 24px 24px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+#upjongGrowth tr:nth-child(3) td:nth-child(1):after{content:'';display:inline-block;width:24px;height:24px;background:url('/eatout/assets/eatout/images/icon/Rank03.svg') no-repeat center center / 24px 24px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+#upjongGrowth tr td button {background:transparent;border:0;font-size:14px;}
+.rightInner {background:var(--mono_wh);padding:24px 10px;margin-bottom:9px;}
+#tfileList tr {border-bottom:1px dashed var(--gray_10);cursor:pointer;}
+#tfileList td:first-child{width:10%;text-align:center;}
+#tfileList td:nth-child(2){width:66%}
+#tfileList td{padding:12px 0;font-size:14px;display:inline-flex;align-items: center;}
+#tfileList td:last-child p{overflow: hidden;white-space: nowrap;word-break: break-all;display:inline-block;width:80px;line-height:100%;color:var(--gray_60)}
+#paginate_filelist {padding:16px 0}
+#paginate_filelist ul {display:flex}
+#paginate_filelist li {}
+#tfileList .icon_show{position:relative;display:inline-block;}
+#tfileList tr.active {background:var(--gray_5)}
+#tfileList tr.active .icon_show a{text-decoration: underline; text-underline-position : under;color:var(--pr_140)}
+#tfileList tr.active .icon_show:after{content:'';display:inline-block;width:16px;height:16px;position:absolute;top:50%;right:-20px;transform:translateY(-50%);background:url('/eatout/assets/eatout/images/icon/pdf_file.svg') no-repeat center center / 16px 16px;}
 
 @media screen and (max-width:1919px){
     .left_top_box {display:block;}
