@@ -41,9 +41,9 @@
 							<div class="row flex">
 								<div id="typeChk" class="col-3 flex radioWrap">
 									<input type="radio" class="btn-check btn-sm" name="typeChk" id="typeChk1" value="sales"/>
-									<label class="btn btn-outline-primary" for="typeChk1"><span><img src="/eatout/assets/eatout/images/icon/icon_coin_g.svg" alt=""/>매출</span></label>
+									<label class="btn btn-outline-primary" for="typeChk1"><span class="tc_change01"><img src="/eatout/assets/eatout/images/icon/icon_coin_g.svg" alt=""/>매출</span></label>
 									<input type="radio" class="btn-check btn-sm" name="typeChk" id="typeChk2"  value="store"/>
-									<label class="btn btn-outline-primary" for="typeChk2"><span><img src="/eatout/assets/eatout/images/icon/icon_store_mono.svg" alt=""/>점포 수</span></label>
+									<label class="btn btn-outline-primary" for="typeChk2"><span class="tc_change02"><img src="/eatout/assets/eatout/images/icon/icon_store_mono.svg" alt=""/>점포 수</span></label>
 								</div>
 
 								<div id="orderChk" class="col-2 flex radioWrap">
@@ -180,6 +180,16 @@
 		$('#orderChk1').prop('checked',true);
 		$('#dateChk1_2').prop('checked',true);
 
+		$('.tc_change01').click(function(){
+			$('.tc_change01 img').attr({src:'/eatout/assets/eatout/images/icon/icon_coin_mt.svg'})
+			$('.tc_change02 img').attr({src:'/eatout/assets/eatout/images/icon/icon_store_mono.svg'})
+		});
+
+		$('.tc_change02').click(function(){
+			$('.tc_change01 img').attr({src:'/eatout/assets/eatout/images/icon/icon_coin_g.svg'})
+			$('.tc_change02 img').attr({src:'/eatout/assets/eatout/images/icon/icon_store_mt.svg'})
+		});
+
 		//지역별 외식업 이벤트
 		$('input[name="typeChk"]').change(function(){
 			console.log('click typechk : '+$(this).val());
@@ -242,6 +252,9 @@
 				}
 			})
 			getAjax("getAdmiUpjongInfo", "/agile/market/getAdmiUpjongInfo",param, fn_admiUpjongInfo, fn_error);
+
+
+
 		});
 
 		param ={};
@@ -397,6 +410,7 @@
 		// getAjax("fileDownLoad", "/common/fileDownLoad", param, fn_fileDownload,fn_error);
 		common.fileDownload("/common/fileDownLoad",param)
 	}
+
 </script>
 
 
