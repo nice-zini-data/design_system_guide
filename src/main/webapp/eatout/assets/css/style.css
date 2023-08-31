@@ -347,14 +347,14 @@ input[type="radio"] + label span img {margin-right:8px}
 
 .slide_titleText {position:absolute;top:24px;left:40px;}
 
-#chartList {position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:1288px;height:88vh;z-index:999;background:var(--mono_wh);border:2px solid var(--pr_100);border-radius:32px;overflow:hidden;display:none;}
+#chartList {position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:1288px;height:90vh;z-index:999;background:var(--mono_wh);border:2px solid var(--pr_100);border-radius:32px;overflow:hidden;display:none;}
 #chartList.active {display:inline-block;}
 .popupBox {display:flex;align-items: center;}
 .popupBox > div {width:calc(100% / 2);padding:32px 32px 0 32px }
 .popupBox:first-child > div {border-bottom:1px dashed var(--gray_10);}
 .popupBox > div:first-child {border-right:1px dashed var(--gray_10)}
 .popupChart {width:100%;height:270px;}
-#chartTitle {font-size:18px;font-weight:600;text-align:center;color:var(--gray_100);padding:22px 0;border-bottom:1px solid var(--gray_10)}
+#chartTitle {font-size:18px;font-weight:600;text-align:center;color:var(--gray_100);padding:22px 0;border-bottom:1px solid var(--gray_10);margin-bottom:24px;}
 .popupBtn {position:absolute;top:15px;right:20px;display:flex;justify-content: center;align-items: center;}
 .popupBtn > div {width:36px;height:36px;margin-left:16px;cursor:pointer;}
 .popupBtn > div:first-child {position:relative;}
