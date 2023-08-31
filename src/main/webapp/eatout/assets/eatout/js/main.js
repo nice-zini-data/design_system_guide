@@ -527,12 +527,44 @@ function fn_UpjongDetail(id, response, param){
     var rpt_chart1 = echarts.init(chartDom);
 
     var option = {
+        grid:{
+            top:'10%',right:'10%',left:'18%',bottom:'15%'
+        },
         xAxis: {
             type: 'category',
-            data: resultLabel
+            data: resultLabel,
+            axisLine: {
+                show:true,
+                lineStyle: {
+                    color: '#ededed', // 분할선 색상 변경
+                },
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#8f8f8f',
+                    fontSize: 11,
+                    fontWeight:'500',
+                    fontFamily: 'Pretendard'
+                }
+            },
         },
         yAxis: {
-            type: 'value'
+            type: 'value',
+            splitLine: {
+                show: true,   // splitLine 활성화
+                lineStyle: {
+                    color: 'transparent' // 나머지 라인 색상을 투명하게 설정
+                }
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#8f8f8f',
+                    fontSize: 11,
+                    fontWeight:'500',
+                    fontFamily: 'Pretendard'
+                }
+            },
         },
         series: [
             {
@@ -541,9 +573,18 @@ function fn_UpjongDetail(id, response, param){
                 label: {
                     show: true,
                     position: 'top',
+                    color:'#04a6b5',
+                    fontSize: '11',
+                    textBorderWidth:'2',
+                    textBorderColor:'#fff',
+                    fontFamily: 'Pretendard',
                     formatter: function(c){
                         return  common.addComma(c.data);
                     }
+                },
+                itemStyle:{
+                    color:'#17c7d0',
+                    barBorderRadius: [4, 4, 4, 4],
                 }
             }
         ],
@@ -570,12 +611,44 @@ function fn_UpjongDetail(id, response, param){
     var rpt_chart2 = echarts.init(chartDom);
 
     var option = {
+        grid:{
+            top:'10%',right:'10%',left:'18%',bottom:'15%'
+        },
         xAxis: {
             type: 'category',
-            data: resultLabel
+            data: resultLabel,
+            axisLine: {
+                show:true,
+                lineStyle: {
+                    color: '#ededed', // 분할선 색상 변경
+                },
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#8f8f8f',
+                    fontSize: 11,
+                    fontWeight:'500',
+                    fontFamily: 'Pretendard'
+                }
+            },
         },
         yAxis: {
-            type: 'value'
+            type: 'value',
+            splitLine: {
+                show: true,   // splitLine 활성화
+                lineStyle: {
+                    color: 'transparent' // 나머지 라인 색상을 투명하게 설정
+                }
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#8f8f8f',
+                    fontSize: 11,
+                    fontWeight:'500',
+                    fontFamily: 'Pretendard'
+                }
+            },
         },
         series: [
             {
@@ -584,9 +657,18 @@ function fn_UpjongDetail(id, response, param){
                 label: {
                     show: true,
                     position: 'top',
+                    color:'#009df5',
+                    fontSize: '11',
+                    textBorderWidth:'2',
+                    textBorderColor:'#fff',
+                    fontFamily: 'Pretendard',
                     formatter: function(c){
                         return  common.addComma(c.data);
                     }
+                },
+                itemStyle:{
+                    color:'#38c3ff',
+                    barBorderRadius: [4, 4, 4, 4],
                 }
             }
         ],
@@ -613,12 +695,44 @@ function fn_UpjongDetail(id, response, param){
     var rpt_chart3 = echarts.init(chartDom);
 
     var option = {
+        grid:{
+            top:'10%',right:'10%',left:'18%',bottom:'15%'
+        },
         xAxis: {
             type: 'category',
-            data: resultLabel
+            data: resultLabel,
+            axisLine: {
+                show:true,
+                lineStyle: {
+                    color: '#ededed', // 분할선 색상 변경
+                },
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#8f8f8f',
+                    fontSize: 11,
+                    fontWeight:'500',
+                    fontFamily: 'Pretendard'
+                }
+            },
         },
         yAxis: {
-            type: 'value'
+            type: 'value',
+            splitLine: {
+                show: true,   // splitLine 활성화
+                lineStyle: {
+                    color: 'transparent' // 나머지 라인 색상을 투명하게 설정
+                }
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#8f8f8f',
+                    fontSize: 11,
+                    fontWeight:'500',
+                    fontFamily: 'Pretendard'
+                }
+            },
         },
         series: [
             {
@@ -627,9 +741,18 @@ function fn_UpjongDetail(id, response, param){
                 label: {
                     show: true,
                     position: 'top',
+                    color:'#89c707',
+                    fontSize: '11',
+                    textBorderWidth:'2',
+                    textBorderColor:'#fff',
+                    fontFamily: 'Pretendard',
                     formatter: function(c){
                         return  common.addComma(c.data);
                     }
+                },
+                itemStyle:{
+                    color:'#c1da4b',
+                    barBorderRadius: [4, 4, 4, 4],
                 }
             }
         ],
@@ -656,12 +779,44 @@ function fn_UpjongDetail(id, response, param){
     var rpt_chart4 = echarts.init(chartDom);
 
     var option = {
+        grid:{
+            top:'10%',right:'10%',left:'18%',bottom:'15%'
+        },
         xAxis: {
             type: 'category',
-            data: resultLabel
+            data: resultLabel,
+            axisLine: {
+                show:true,
+                lineStyle: {
+                    color: '#ededed', // 분할선 색상 변경
+                },
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: '#8f8f8f',
+                    fontSize: 11,
+                    fontWeight:'500',
+                    fontFamily: 'Pretendard'
+                }
+            },
         },
         yAxis: {
-            type: 'value'
+            type: 'value',
+            splitLine: {
+                show: true,   // splitLine 활성화
+                lineStyle: {
+                    color: 'transparent' // 나머지 라인 색상을 투명하게 설정
+                }
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#8f8f8f',
+                    fontSize: 11,
+                    fontWeight:'500',
+                    fontFamily: 'Pretendard'
+                }
+            },
         },
         series: [
             {
@@ -670,9 +825,18 @@ function fn_UpjongDetail(id, response, param){
                 label: {
                     show: true,
                     position: 'top',
+                    color:'#ffa004',
+                    fontSize: '11',
+                    textBorderWidth:'2',
+                    textBorderColor:'#fff',
+                    fontFamily: 'Pretendard',
                     formatter: function(c){
                         return  common.addComma(c.data);
                     }
+                },
+                itemStyle:{
+                    color:'#f8bd24',
+                    barBorderRadius: [4, 4, 4, 4],
                 }
             }
         ],

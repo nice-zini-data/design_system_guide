@@ -11,7 +11,7 @@
     <script>
         $(function(){
             $('.navList li:first-child').addClass('active');
-            $('.navList li:first-child img').attr({src:'/eatout/assets/eatout/images/icon/menu_icon_mt.svg'})
+            $('.navList li:first-child img').attr({src:'/eatout/assets/eatout/images/icon/tab01_icon_on.svg'})
         });
     </script>
 <!--

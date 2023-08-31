@@ -15,7 +15,7 @@
 <script>
 	$(function(){
 		$('.navList li:last-child').addClass('active');
-		$('.navList li:last-child img').attr({src:'/eatout/assets/eatout/images/icon/menu_icon_mt.svg'})
+		$('.navList li:last-child img').attr({src:'/eatout/assets/eatout/images/icon/tab02_icon_on.svg'})
 	});
 </script>
 
@@ -24,8 +24,8 @@
 	<div class="row">
 		<div class="col-8 left_box">
 			<div class="left_slide">
-				<p class="com_titleT">
-					<img src="/eatout/assets/eatout/images/icon/chart_icon.svg" alt=""/>
+				<p class="com_titleT slide_titleText">
+					<img src="/eatout/assets/eatout/images/icon/icon_title_001.svg" alt=""/>
 					업종별 경기 변동
 				</p>
 				<div class="slideBox">
@@ -36,8 +36,11 @@
 			<div id="tableList" style="display:block;">
 				<div>
 					<div class="row">
-						<div class="col-3 tabTit">
-							<p  class="tab_text active">지역별 외식업 경기</p>
+						<div class="col-3">
+							<p class="com_titleT">
+								<img src="/eatout/assets/eatout/images/icon/icon_title_004.svg" alt=""/>
+								지역별 외식업 경기
+							</p>
 						</div>
 						<div class="col-9">
 							<div class="row flex">
@@ -50,9 +53,9 @@
 
 								<div id="orderChk" class="col-2 flex radioWrap">
 									<input type="radio" class="btn-check btn-sm" name="orderChk" id="orderChk1" value="desc"/>
-									<label class="btn btn-outline-primary" for="orderChk1"><span>증가</span></label>
+									<label class="btn btn-outline-primary" for="orderChk1"><span class="orderChk1">증가</span></label>
 									<input type="radio" class="btn-check btn-sm" name="orderChk" id="orderChk2" value="asc"/>
-									<label class="btn btn-outline-primary" for="orderChk2"><span>감소</span></label>
+									<label class="btn btn-outline-primary" for="orderChk2"><span class="orderChk2">감소</span></label>
 								</div>
 
 								<div id="dateChk" class="col-6 flex radioWrap">
@@ -74,22 +77,48 @@
 					</div>
 				</div>
 			</div>
-			<div id="chartList" style="display:none;">
+			<div id="chartList">
 				<div class="row">
 					<div class="col-12">
-						<p id="chartTitle">타이틀</p>
+						<p id="chartTitle">업종명</p>
 					</div>
-					<div class="col-6">
-						<div id="market_chart01" style="width:100%;height:300px;"></div>
+					<div class="popupBtn">
+
+						<div class="popup_close"><img src="/eatout/assets/eatout/images/icon/close.svg" alt=""/></div>
 					</div>
-					<div class="col-6">
-						<div id="market_chart02" style="width:100%;height:300px;"></div>
-					</div>
-					<div class="col-6">
-						<div id="market_chart03" style="width:100%;height:300px;"></div>
-					</div>
-					<div class="col-6">
-						<div id="market_chart04" style="width:100%;height:300px;"></div>
+					<div class="popupInner">
+						<div class="popupBox">
+							<div class="col-6">
+								<p class="popupChart_tit">
+									<img src="/eatout/assets/eatout/images/icon/s_dish.svg" alt=""/>
+									외식 총매출</p>
+								<span class="popup_sTxt">[단위 : 억 원/월]</span>
+								<div id="market_chart01" class="popupChart"></div>
+							</div>
+							<div class="col-6">
+								<p class="popupChart_tit">
+									<img src="/eatout/assets/eatout/images/icon/s_delivery_bike.svg" alt=""/>
+									배달 총매출</p>
+								<span class="popup_sTxt">[단위 : 억 원/월]</span>
+								<div id="market_chart02" class="popupChart"></div>
+							</div>
+						</div>
+						<div class="popupBox">
+							<div class="col-6">
+								<p class="popupChart_tit">
+									<img src="/eatout/assets/eatout/images/icon/s_mart.svg" alt=""/>
+									점포 수</p>
+								<span class="popup_sTxt">[단위 : 억 원/월]</span>
+								<div id="market_chart03" class="popupChart"></div>
+							</div>
+							<div class="col-6">
+								<p class="popupChart_tit">
+									<img src="/eatout/assets/eatout/images/icon/s_coin.svg" alt=""/>
+									점포당 매출액</p>
+								<span class="popup_sTxt">[단위 : 억 원/월]</span>
+								<div id="market_chart04" class="popupChart"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -101,7 +130,7 @@
 					<div class="row flex">
 						<div class="col-2">
 							<p class="com_titleT">
-								<img src="/eatout/assets/eatout/images/icon/chart_icon.svg" alt=""/>
+								<img src="/eatout/assets/eatout/images/icon/icon_title_002.svg" alt=""/>
 								업종별 상승률
 							</p>
 						</div>
@@ -128,7 +157,7 @@
 
 			<div class="rightInner rt_bottomBox">
 				<p class="com_titleT">
-					<img src="/eatout/assets/eatout/images/icon/chart_icon.svg" alt=""/>
+					<img src="/eatout/assets/eatout/images/icon/icon_title_003.svg" alt=""/>
 					외식상권 분석 보고서
 				</p>
 				<div class="col-12 center">
@@ -152,6 +181,7 @@
 			</div>
 		</div>
 	</div>
+	<div class="bk_bg"></div>
 </div>
 
 <script type="text/javascript" src="/eatout/assets/eatout/js/chart/statistics.js"></script>
@@ -181,6 +211,8 @@
 		$('#dateChk1').prop('checked',true);
 		$('#orderChk1').prop('checked',true);
 		$('#dateChk1_2').prop('checked',true);
+
+
 
 		$('.tc_change01').click(function(){
 			$('.tc_change01 img').attr({src:'/eatout/assets/eatout/images/icon/icon_coin_mt.svg'})
@@ -269,6 +301,7 @@
 			getAjax("getUpjongGrowth", "/agile/market/getUpjongGrowth",param, fn_upjongGrowth, fn_error);
 		});
 		list();
+
 	});
 
 	// 전지역 업종 증감률 리스트
@@ -355,17 +388,32 @@
 
 		// $(".ed1").find('.label_m').text($(".selectTit.cty.cty1 > span").text());
 		// $(".ed2").find('.label_m').text($(".selectTit.cty.cty2 > span").text());
+
+
 	}
 	//
 	function makeChart(upjongCd){
 		var param ={};
 
 		//화면 전환
-		$('#chartList').css('display','block');
-		$('#tableList').css('display','none');
+		//$('#chartList').css('display','block');
+		//$('#tableList').css('display','none');
 
 		param.upjong3Cd = upjongCd;
 		getAjax("getUpjongDetail", "/agile/market/getUpjongDetail",param, fn_UpjongDetail, fn_error);
+
+		$('#chartList').addClass('active');
+		$('.bk_bg').addClass('active');
+
+		$('#chartList .popup_close').click(function(){
+			$('#chartList').removeClass('active');
+			$('.bk_bg').removeClass('active');
+		});
+
+
+
+
+
 	}
 
 	function list() {
@@ -450,16 +498,18 @@
 			</div>
 		</div>
 		{{/each}}
-		<div class="swiper-button-next"></div>
-		<div class="swiper-button-prev"></div>
-		<div class="swiper-pagination"></div>
+
 	</div>
+	<div class="swiper-button-next"></div>
+	<div class="swiper-button-prev"></div>
+	<div class="swiper-pagination"></div>
 </script>
 
 <script type="text/x-handlebars-template" id="tmp_admiUpjongInfo">
 	<div class="row">
 	{{#each this.tmpAdmi}}
 		<div class="col-4 border border-4">
+			<!--증감률 td에 클래스 추가 부탁드립니다. 상승 : up / 하락 : down-->
 			<table>
 				<thead>
 				<tr>
@@ -476,7 +526,7 @@
 				<tr>
 					<td>{{rnk}}</td>
 					<td>{{upjong3Nm}}</td>
-					<td>{{calcPer}} %</td>
+					<td><span>{{calcPer}} %</span></td>
 				</tr>
 				{{/each}}
 				</tbody>
@@ -501,8 +551,8 @@
 		<tr>
 			<td>{{rnk}}</td>
 			<td><button onclick="makeChart('{{upjong3Cd}}')">{{upjong3Nm}}</button></td>
-			<td>{{salePer}} %</td>
-			<td>{{addComma calcSaleAmt}} 만원</td>
+			<td><span>{{salePer}} %</span></td>
+			<td><span>{{addComma calcSaleAmt}} 만원</span></td>
 		</tr>
 		{{/each}}
 		</tbody>

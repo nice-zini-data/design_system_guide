@@ -134,7 +134,7 @@ header {height:56px;border-bottom:1px solid var(--gray_10);display:flex;align-it
 header img {width:71px;margin-right:8px;height:16px;}
 header p.logo_title {font-size:16px;display:inline-block;font-weight:700}
 .head {display:flex;align-items: center;}
-.topHeader {position:fixed;width:180px;height:100vh;box-shadow: 0px 25px 25px -5px rgba(16, 24, 40, 0.10), 0px 8px 10px -6px rgba(0, 0, 0, 0.10);}
+.topHeader {position:fixed;width:180px;height:100vh;box-shadow: 0px 25px 25px -5px rgba(16, 24, 40, 0.10), 0px 8px 10px -6px rgba(0, 0, 0, 0.10);z-index:99}
 .navList {padding-top:24px;margin:0;padding-left:0}
 .navList li{padding:20px 20px;display:flex;align-items: center;cursor:pointer;position:relative;}
 .navList li:after {content:'';display:inline-block;width:100%;height:1px;background:var(--gray_10);position:absolute;bottom:0;left:0}
@@ -237,7 +237,7 @@ table {border-collapse : collapse;margin:0 !important;width:100%}
 .com_gridInner.market .left_box {padding:0}
 .com_titleT {font-size:18px;font-weight:600;color:var(--gray_100);display:flex;align-items: center;margin-bottom:20px;}
 .com_titleT img {margin-right:8px;}
-.left_slide {padding:24px 40px;background:var(--mono_wh)}
+.left_slide {padding:24px 40px;background:var(--mono_wh);position:relative;}
 #tableList {padding:24px 40px;height:auto;overflow:hidden;}
 .tabTit {margin-bottom:40px}
 
@@ -263,8 +263,14 @@ input[type="radio"] + label span img {margin-right:8px}
 #admiUpjongInfo div.col-4.border.border-4 table tr:nth-child(2) th {font-size:16px;font-weight:600;color:var(--gray_80);padding:8px;border-bottom:1px solid var(--gray_10)}
 #admiUpjongInfo div.col-4.border.border-4 table td{padding:12px 0;text-align:center;}
 #admiUpjongInfo div.col-4.border.border-4 table tr:nth-child(1) td:first-child, #admiUpjongInfo div.col-4.border.border-4 table tr:nth-child(2) td:first-child, #admiUpjongInfo div.col-4.border.border-4 table tr:nth-child(3) td:first-child{color:var(--pr_120);font-weight:700}
+#admiUpjongInfo td.up span {color:var(--red);position:relative;display:inline-block;}
+#admiUpjongInfo td.down span {color:var(--blue_120);position:relative;display:inline-block;}
+#admiUpjongInfo td.up span:after{content:'';display:inline-block;width:14px;height:14px;background:url('/eatout/assets/eatout/images/icon/red_arrow.svg') no-repeat center center / 14px 14px;position:absolute;top:50%;left:-16px;transform:translateY(-50%)}
+#admiUpjongInfo td.down span:after{content:'';display:inline-block;width:14px;height:14px;background:url('/eatout/assets/eatout/images/icon/mt_arrow.svg') no-repeat center center / 14px 14px;position:absolute;top:49%;left:-16px;transform:translateY(-50%)}
 
-.market .right_box {position:fixed;top:56px;right:0;padding:0;background:transparent}
+
+
+.market .right_box {position:fixed;top:56px;right:0;padding:0;background:transparent;overflow:hidden;}
 .market .right_box .row.flex .com_titleT{margin-bottom:0}
 .font12Radio {margin-left:auto;}
 .font12Radio input[type="radio"] + label span{padding:4px;}
@@ -279,7 +285,13 @@ input[type="radio"] + label span img {margin-right:8px}
 #upjongGrowth tr:nth-child(1) td:nth-child(1):after{content:'';display:inline-block;width:24px;height:24px;background:url('/eatout/assets/eatout/images/icon/Rank01.svg') no-repeat center center / 24px 24px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 #upjongGrowth tr:nth-child(2) td:nth-child(1):after{content:'';display:inline-block;width:24px;height:24px;background:url('/eatout/assets/eatout/images/icon/Rank02.svg') no-repeat center center / 24px 24px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 #upjongGrowth tr:nth-child(3) td:nth-child(1):after{content:'';display:inline-block;width:24px;height:24px;background:url('/eatout/assets/eatout/images/icon/Rank03.svg') no-repeat center center / 24px 24px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
-#upjongGrowth tr td button {background:transparent;border:0;font-size:14px;}
+#upjongGrowth tr td button {background:transparent;border:0;font-size:14px;cursor:pointer;}
+#upjongGrowth tr td button:hover {color:var(--pr_120)}
+#upjongGrowth td.up span {color:var(--red);position:relative;display:inline-block;}
+#upjongGrowth td.down span {color:var(--blue_120);position:relative;display:inline-block;}
+#upjongGrowth td.up span:after{content:'';display:inline-block;width:14px;height:14px;background:url('/eatout/assets/eatout/images/icon/red_arrow.svg') no-repeat center center / 14px 14px;position:absolute;top:50%;left:-16px;transform:translateY(-50%)}
+#upjongGrowth td.down span:after{content:'';display:inline-block;width:14px;height:14px;background:url('/eatout/assets/eatout/images/icon/mt_arrow.svg') no-repeat center center / 14px 14px;position:absolute;top:49%;left:-16px;transform:translateY(-50%)}
+
 .rightInner {background:var(--mono_wh);padding:24px 10px;margin-bottom:9px;}
 #tfileList tr {border-bottom:1px dashed var(--gray_10);cursor:pointer;}
 #tfileList td:first-child{width:10%;text-align:center;}
@@ -287,17 +299,31 @@ input[type="radio"] + label span img {margin-right:8px}
 #tfileList td{padding:12px 0;font-size:14px;display:inline-flex;align-items: center;}
 #tfileList td:last-child p{overflow: hidden;white-space: nowrap;word-break: break-all;display:inline-block;width:80px;line-height:100%;color:var(--gray_60)}
 #paginate_filelist {padding:16px 0}
-#paginate_filelist ul {display:flex}
-#paginate_filelist li {}
+#paginate_filelist ul {display:flex;justify-content: center}
+#paginate_filelist li {margin-right:4px;width:20px;height:20px;text-align:center;}
+#paginate_filelist li:last-child {margin-right:0;}
+#paginate_filelist li.on a{color:var(--pr_120)}
+#paginate_filelist li a{font-size:14px;font-weight:500;color:var(--gray_60);text-decoration: none;width:20px;height:20px;display:inline-block;}
+#paginate_filelist #list_info_first {margin-right:8px;}
+#paginate_filelist #list_info_first a{background:url('/eatout/assets/eatout/images/icon/paginate_arrow01.svg') no-repeat center center / 12px 12px;border-radius:50%;box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.08);}
+#paginate_filelist #list_info_previous {margin-right:8px;}
+#paginate_filelist #list_info_previous a{background:url('/eatout/assets/eatout/images/icon/paginate_arrow02.svg') no-repeat center center / 12px 12px;border-radius:50%;box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.08);}
+#paginate_filelist #list_info_next {margin-right:8px;}
+#paginate_filelist #list_info_next a{background:url('/eatout/assets/eatout/images/icon/paginate_arrow02.svg') no-repeat center center / 12px 12px;transform:rotate(180deg);border-radius:50%;box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.08);}
+#paginate_filelist #list_info_last {margin-right:8px;}
+#paginate_filelist #list_info_last a{background:url('/eatout/assets/eatout/images/icon/paginate_arrow01.svg') no-repeat center center / 12px 12px;transform:rotate(180deg);border-radius:50%;box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.08);}
+
 #tfileList .icon_show{position:relative;display:inline-block;}
 #tfileList tr.active {background:var(--gray_5)}
-#tfileList tr.active .icon_show a{text-decoration: underline; text-underline-position : under;color:var(--pr_140)}
-#tfileList tr.active .icon_show:after{content:'';display:inline-block;width:16px;height:16px;position:absolute;top:50%;right:-20px;transform:translateY(-50%);background:url('/eatout/assets/eatout/images/icon/pdf_file.svg') no-repeat center center / 16px 16px;}
+#tfileList tr.active .icon_show a{text-decoration: underline; text-underline-position : under;}
+#tfileList tr.active .icon_show:after{content:'';display:inline-block;width:20px;height:20px;position:absolute;top:50%;right:-24px;transform:translateY(-50%);background:var(--mono_wh) url('/eatout/assets/eatout/images/icon/pdf_file_bk.svg') no-repeat center center / 16px 16px;border-radius:4px;box-shadow: 0px 1px 2px -1px rgba(16, 24, 40, 0.10), 0px 1px 3px 0px rgba(0, 0, 0, 0.10);}
 .rt_bottomBox {height:100%}
 
 .swiper {width: 100%;height: 100%;margin-left: auto;margin-right: auto;}
-.swiper-slide {text-align:left;background: #fff;height: calc((100% - 24px) / 2) !important;display: flex;justify-content: center;align-items: center;padding:20px;border:1px solid var(--gray_10);border-radius:16px;}
-.slideBox {width:100%;height:334px;}
+.swiper-slide {text-align:left;background: #fff;height: calc((100% - 24px) / 2) !important;display: flex;justify-content: center;align-items: center;padding:20px;border:1px solid var(--gray_10);border-radius:16px;cursor:pointer;}
+.swiper-slide:hover:before {content:'';display:inline-block;width:100%;height:100%;background:rgba(0,0,0,.1);position:absolute;top:0;left:0;z-index:99;border-radius:16px;}
+.swiper-slide:hover:after {content:'';display:inline-block;width:40px;height:40px;border-radius:8px;background:var(--mono_wh) url('/eatout/assets/eatout/images/icon/search_bk.svg') no-repeat center center / 16px 16px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999;box-shadow: 0px 1px 2px -1px rgba(16, 24, 40, 0.10), 0px 1px 3px 0px rgba(0, 0, 0, 0.10);}
+.slideBox {width:100%;height:375px;}
 .slideTit {font-size:18px;font-weight:600;color:var(--gray_100);margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--gray_10)}
 .slide_txt01 {font-size:14px;font-weight:400;margin-bottom:8px;color:var(--mono_g7)}
 .slide_txt02 {font-size:18px;font-weight:600;}
@@ -310,12 +336,46 @@ input[type="radio"] + label span img {margin-right:8px}
 .slide_flex.down .slide_txt02{color:var(--blue_120)}
 .slide_flex.down .slide_txt03{background:var(--blue_bg);color:var(--blue_120);position:relative;}
 .slide_flex.down .slide_txt03:after {content:'';display:inline-block;position:absolute;top:50%;right:8px;transform:translateY(-50%);width:16px;height:16px;background:url('/eatout/assets/eatout/images/icon/mt_arrow.svg') no-repeat center center / 16px 16px}
-.mySwiper .swiper-wrapper div.swiper-button-next {width:16px !important;height:16px !important;border-radius:50% !important;box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.08) !important;background:var(--mono_wh) !important;overflow:hidden;}
-.mySwiper .swiper-wrapper div.swiper-button-next:after {content:'';display:inline-block;width:16px;height:16px;background:url('/eatout/assets/eatout/images/icon/')}
-.mySwiper .swiper-wrapper div.swiper-button-prev {width:16px !important;height:16px !important;border-radius:50% !important;box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.08) !important;background:var(--mono_wh) !important;overflow:hidden;}
-.mySwiper .swiper-wrapper div.swiper-button-prev:after {content:'';display:inline-block;width:16px;height:16px;background:url('/eatout/assets/eatout/images/icon/')}
+.mySwiper {padding-top:41px !important;position:relative}
+.mySwiper div.swiper-button-next {width:32px !important;height:32px !important;border-radius:50% !important;box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.08) !important;background:var(--mono_wh) !important;overflow:hidden;display:inline-block;z-index:9999;top:22px;right:0px;left:auto;}
+.mySwiper div.swiper-button-next:after {content:'';display:inline-block;width:16px;height:16px;background:url('/eatout/assets/eatout/images/icon/bk_arrow_line.svg') no-repeat center center / 16px 16px;transform:translate(-50%,-50%) rotate(-90deg);position:absolute;top:50%;left:50%}
+.mySwiper div.swiper-button-prev {width:32px !important;height:32px !important;border-radius:50% !important;box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.08) !important;background:var(--mono_wh) !important;overflow:hidden;display:inline-block;z-index:9999;top:22px;right:121px;left:auto;}
+.mySwiper div.swiper-button-prev:after {content:'';display:inline-block;width:16px;height:16px;background:url('/eatout/assets/eatout/images/icon/bk_arrow_line.svg') no-repeat center center / 16px 16px;transform:translate(-50%,-50%) rotate(90deg);position:absolute;top:50%;left:50%}
+.mySwiper .swiper-pagination-fraction {width:auto;min-width: 58px;right:48px;left:auto;display:inline-block;top:6px;color:var(--gray_40)}
+.mySwiper .swiper-pagination-fraction span {font-size:18px;font-family: 'Pretendard';font-weight:600;color:var(--gray_40)}
+.mySwiper .swiper-pagination-current {color:var(--gray_100) !important}
 
+.slide_titleText {position:absolute;top:24px;left:40px;}
 
+#chartList {position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:1288px;height:90vh;z-index:999;background:var(--mono_wh);border:2px solid var(--pr_100);border-radius:32px;overflow:hidden;display:none;}
+#chartList.active {display:inline-block;}
+.popupBox {display:flex;align-items: center;}
+.popupBox > div {width:calc(100% / 2);padding:32px 32px 0 32px }
+.popupBox:first-child > div {border-bottom:1px dashed var(--gray_10);}
+.popupBox > div:first-child {border-right:1px dashed var(--gray_10)}
+.popupChart {width:100%;height:270px;}
+#chartTitle {font-size:18px;font-weight:600;text-align:center;color:var(--gray_100);padding:22px 0;border-bottom:1px solid var(--gray_10);margin-bottom:24px;}
+.popupBtn {position:absolute;top:15px;right:20px;display:flex;justify-content: center;align-items: center;}
+.popupBtn > div {width:36px;height:36px;margin-left:16px;cursor:pointer;}
+.popupBtn > div:first-child {position:relative;}
+
+.popupInner {padding:0 20px 32px 20px;}
+.popupChart_tit {font-size:18px;font-weight:700;color:var(--gray_100);display:flex;align-items: center;margin-bottom:16px;}
+.popupChart_tit img{margin-right:6px;width:16px;height:16px;}
+.popup_sTxt{font-size:11px;text-align:right;color:var(--gray_60);display:inline-block;width:100%;}
+.bk_bg {display:none;background:rgba(0,0,0,.1);width:100%;height:100vh;position:fixed;top:0;left:0;z-index:99}
+.bk_bg.active {display:block;}
+.bk_bg.on_hide {display:none;}
+
+#chartList.on_hide .popupInner {display:none;}
+#chartList.on_hide{height:auto;padding:18px 88px 18px 42px;width:auto;top:auto;bottom:40px;left:auto;right:412px;transform:none;}
+#chartList.on_hide .popupBtn > div {width:24px;height:24px;margin-left:8px;}
+#chartList.on_hide .popup_hide {width:14px !important;height:14px !important;}
+#chartList.on_hide .popup_hide img {width:14px !important;height:14px !important;}
+#chartList.on_hide .popupBtn > div img {width:24px;height:24px;}
+
+#chartList.on_hide #chartTitle {font-size:16px;padding:0;margin-bottom:0;border-bottom:0;position:relative;}
+#chartList.on_hide #chartTitle:after {content:'';display:inline-block;width:18px;height:18px;background:url('/eatout/assets/eatout/images/icon/popup_icon.svg') no-repeat center center / 18px 18px;position:absolute;top:50%;left:-24px;transform:translateY(-50%)}
 
 @media screen and (max-width:1919px){
     .left_top_box {display:block;}

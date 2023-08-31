@@ -10,11 +10,11 @@
         <!--로그인 전-->
         <ul class="logout navList">
             <li id="statistics">
-                <img src="/eatout/assets/eatout/images/icon/menu_icon_g.svg" alt=""/>
+                <img src="/eatout/assets/eatout/images/icon/tab01_icon.svg" alt=""/>
                 <p class="txt_l_m">통계조회</p>
             </li>
             <li  id="market">
-                <img src="/eatout/assets/eatout/images/icon/menu_icon_g.svg" alt=""/>
+                <img src="/eatout/assets/eatout/images/icon/tab02_icon.svg" alt=""/>
                 <p class="txt_l_m">시장동향</p>
             </li>
         </ul>
