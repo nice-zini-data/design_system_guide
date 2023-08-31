@@ -202,7 +202,7 @@ select:disabled{background:var(--gray_5)  url('/eatout/assets/eatout/images/icon
 .chart_box {background:var(--mono_wh);border-top:1px solid var(--gray_10)}
 .chart_text {font-size:12px;font-weight:400;color:var(--mono_g6);padding:8px 24px;text-align:right;display:block;}
 .bt0 {border-top:0 !important}
-.clickBtn {width:100%;padding:20px 0;text-align:center;border:1px solid var(--gray_20);margin-top:110px;border-radius:8px;font-size:16px;font-weight:600;color:var(--gray_80);display:flex;justify-content: center;align-items: center;cursor:pointer;}
+.clickBtn {width:100%;padding:20px 0;text-align:center;border:1px solid var(--gray_20);margin-top:24px;border-radius:8px;font-size:16px;font-weight:600;color:var(--gray_80);display:flex;justify-content: center;align-items: center;cursor:pointer;}
 .clickBtn button{width:18px;height:18px;border:0;background:transparent;margin-left:8px;background:url('/eatout/assets/eatout/images/icon/bk_arrow.svg') no-repeat;}
 .clickBtn:hover {border:1px solid var(--pr_80);color:var(--pr_120)}
 .clickBtn:hover button {background:url('/eatout/assets/eatout/images/icon/mt_arrow.svg') no-repeat;}
