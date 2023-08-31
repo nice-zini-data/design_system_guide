@@ -10,6 +10,8 @@
 </script>
 
 <%@ include file="/WEB-INF/views/eatout/include/navbar.jsp" %>
+<link rel="stylesheet" href="/eatout/assets/eatout/css/swiper-bundle.min.css"/>
+<script type="text/javascript" src="/eatout/assets/eatout/js/swiper-bundle.min.js"></script>
 <script>
 	$(function(){
 		$('.navList li:last-child').addClass('active');
@@ -26,8 +28,8 @@
 					<img src="/eatout/assets/eatout/images/icon/chart_icon.svg" alt=""/>
 					업종별 경기 변동
 				</p>
-				<div style="height:350px;overflow: scroll">
-					<div id="upjongList">
+				<div class="slideBox">
+					<div id="upjongList" class="swiper mySwiper">
 					</div>
 				</div>
 			</div>
@@ -41,7 +43,7 @@
 							<div class="row flex">
 								<div id="typeChk" class="col-3 flex radioWrap">
 									<input type="radio" class="btn-check btn-sm" name="typeChk" id="typeChk1" value="sales"/>
-									<label class="btn btn-outline-primary" for="typeChk1"><span class="tc_change01"><img src="/eatout/assets/eatout/images/icon/icon_coin_g.svg" alt=""/>매출</span></label>
+									<label class="btn btn-outline-primary" for="typeChk1"><span class="tc_change01"><img src="/eatout/assets/eatout/images/icon/icon_coin_mt.svg" alt=""/>매출</span></label>
 									<input type="radio" class="btn-check btn-sm" name="typeChk" id="typeChk2"  value="store"/>
 									<label class="btn btn-outline-primary" for="typeChk2"><span class="tc_change02"><img src="/eatout/assets/eatout/images/icon/icon_store_mono.svg" alt=""/>점포 수</span></label>
 								</div>
@@ -124,7 +126,7 @@
 				</div>
 			</div>
 
-			<div class="rightInner">
+			<div class="rightInner rt_bottomBox">
 				<p class="com_titleT">
 					<img src="/eatout/assets/eatout/images/icon/chart_icon.svg" alt=""/>
 					외식상권 분석 보고서
@@ -281,6 +283,23 @@
 		var html = templateScript(context);
 		$('#upjongList').html(html);
 
+		//슬라이드
+		var swiper = new Swiper(".mySwiper", {
+			slidesPerView: 4,
+			grid: {
+				rows: 2,
+			},
+			spaceBetween: 24,
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
+			pagination: {
+				el: ".swiper-pagination",
+				type: "fraction",
+			},
+		});
+
 		// $(".ed1").find('.label_m').text($(".selectTit.cty.cty1 > span").text());
 		// $(".ed2").find('.label_m').text($(".selectTit.cty.cty2 > span").text());
 	}
@@ -416,19 +435,24 @@
 
 
 <script type="text/x-handlebars-template" id="tmp_upjongList">
-	<div class="row">
+	<div class="row swiper-wrapper">
 		{{#each this}}
-		<div class="col-4 border border-4">
-			<div>
+		<div class="col-4 border border-4 swiper-slide">
+			<div class="slideTit">
 				{{upjong3Nm}}
 			</div>
 			<div>
-				<div>전월대비</div>
-				<div>{{addComma calcSaleAmt}}</div>
-				<div>{{salePer}} %</div>
+				<div class="slide_txt01">전월대비</div>
+				<div class="slide_flex"> <!--slide_flex 위치에 클래스 추가 부탁드립니다. 상승 : up / 하락 : down-->
+					<div class="slide_txt02">{{addComma calcSaleAmt}}</div>
+					<div class="slide_txt03">{{salePer}} %</div>
+				</div>
 			</div>
 		</div>
 		{{/each}}
+		<div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-pagination"></div>
 	</div>
 </script>
 
@@ -486,6 +510,7 @@
 </script>
 
 <script type="text/x-handlebars_template" id="tmp_tfileList">
+	<!--리스트 최대 갯수 5개 부탁드립니다.-->
 	{{#each this}}
 	<tr>
 		<td><img src="/eatout/assets/eatout/images/icon/pdf.svg" alt=""/><!--{{fileNo}}--></td>
