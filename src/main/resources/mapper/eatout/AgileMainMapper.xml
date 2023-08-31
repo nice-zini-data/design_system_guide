@@ -183,4 +183,26 @@
             1,2,3
         </if>
     </select>
+    <select id="getMenuList" resultType="com.zinidata.eatout.vo.output.AgileMenuOutVO">
+        select
+            <if test='menuType == "1"'>
+                a.menu1_cd,a.menu1_nm
+            </if>
+            <if test='menuType == "2"'>
+                b.menu2_cd, b.menu2_nm
+             </if>
+            <if test='menuType == "3"'>
+                c.menu3_cd, c.menu3_nm
+            </if>
+        from tb_menu1 a, tb_menu2 b, tb_menu3 c
+        where 1=1
+            and a.menu1_cd = b.menu1_cd
+            and b.menu2_cd = c.menu2_cd
+            <if test='menuType == "1"'>
+                a.menu1_cd = '${menuCd}'
+            </if>
+            <if test='menuType == "2"'>
+                b.menu2_cd = '${menuCd}'
+            </if>
+    </select>
 </mapper>
