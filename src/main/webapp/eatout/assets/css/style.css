@@ -387,4 +387,7 @@ input[type="radio"] + label span img {margin-right:8px}
     .slide_flex {display:block;clear:both;}
     .slide_txt03 {float:right;margin-top:4px}
     #chartList {width:95%;overflow-y:scroll}
+    .market .right_box {overflow-y:scroll}
+    .rt_bottomBox {height:auto;}
+
 }
