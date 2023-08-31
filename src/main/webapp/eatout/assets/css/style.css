@@ -382,4 +382,9 @@ input[type="radio"] + label span img {margin-right:8px}
     .left_top_box .col-8.flex{margin-bottom:20px}
     .row.left_g_box > .flex {display:block;}
     .left_g_box .flex > div.col-2{width:100%}
+    #admiUpjongInfo div.col-4.border.border-4 {width:100%}
+    .swiper-slide {padding:10px}
+    .slide_flex {display:block;clear:both;}
+    .slide_txt03 {float:right;margin-top:4px}
+    #chartList {width:95%;overflow-y:scroll}
 }
