@@ -296,7 +296,7 @@ input[type="radio"] + label span img {margin-right:8px}
 #tfileList tr {border-bottom:1px dashed var(--gray_10);cursor:pointer;}
 #tfileList td:first-child{width:10%;text-align:center;}
 #tfileList td:nth-child(2){width:66%}
-#tfileList td{padding:12px 0;font-size:14px;display:inline-flex;align-items: center;}
+#tfileList td{padding:8px 0;font-size:14px;display:inline-flex;align-items: center;}
 #tfileList td:last-child p{overflow: hidden;white-space: nowrap;word-break: break-all;display:inline-block;width:80px;line-height:100%;color:var(--gray_60)}
 #paginate_filelist {padding:16px 0}
 #paginate_filelist ul {display:flex;justify-content: center}
@@ -389,24 +389,24 @@ input[type="radio"] + label span img {margin-right:8px}
 .main_wrap {background:var(--gray_5)}
 .main_layout {width:1280px;margin:0 auto;height:100vh;padding:60px 0}
 .myLayout {background:var(--mono_wh);padding:70px;height:100%;border-radius:8px}
-.board_tb {text-align: center;border-top:2px solid var(--gray_20);}
-.board_tb th, .board_tb td{padding:12px 0;border-bottom:1px solid var(--gray_10);font-size:16px;}
-.board_tb th{color:var(--gray_80)}
-.board_tb td:nth-child(2){color:var(--gray_60)}
+.main_layout .board_tb {text-align: center;border-top:2px solid var(--gray_20);}
+.main_layout .board_tb th, .main_layout .board_tb td{padding:12px 0;border-bottom:1px solid var(--gray_10);font-size:16px;}
+.main_layout .board_tb th{color:var(--gray_80)}
+.main_layout .board_tb td:nth-child(2){color:var(--gray_60)}
 .myL_Table {height:550px;margin-bottom:50px;}
-#uploadFile, #closeBtn {padding:8px 24px;font-size:16px;font-weight:600;border-radius:8px;background:var(--gray_100);border:0;color:var(--mono_wh);cursor:pointer;margin-right:8px}
-#uploadFile:hover, #closeBtn:hover{background:var(--gray_80)}
-#deleteFile {padding:8px 24px;font-size:16px;font-weight:600;border-radius:8px;background:var(--red);border:0;color:var(--mono_wh);cursor:pointer;}
+.myLayout #uploadFile, .modal0913 #closeBtn {padding:8px 24px;font-size:16px;font-weight:600;border-radius:8px;background:var(--gray_100);border:0;color:var(--mono_wh);cursor:pointer;margin-right:8px}
+.myLayout #uploadFile:hover, .modal0913 #closeBtn:hover{background:var(--gray_80)}
+.myLayout #deleteFile {padding:8px 24px;font-size:16px;font-weight:600;border-radius:8px;background:var(--red);border:0;color:var(--mono_wh);cursor:pointer;}
 .tar {text-align:right;}
 .flexRight {justify-content: end}
 .modal0913 .modal_body {text-align: left;height:auto;}
 .text0913_01 {font-size:20px;font-weight:600;text-align:center;margin-bottom:20px;}
-#fileInfoTxt {width:100%;height:50px;padding:0 10px; border:1px solid var(--gray_10);border-radius:8px;}
+.modal0913 #fileInfoTxt {width:100%;height:50px;padding:0 10px; border:1px solid var(--gray_10);border-radius:8px;}
 .text0913_02 {font-size:15px;font-weight:400;color:var(--gray_60);margin-bottom:10px;}
-#uploadfiles {margin-bottom:20px;border-radius:8px;}
+.modal0913 #uploadfiles {margin-bottom:20px;border-radius:8px;}
 .modal0913 input[type="file"] {border:1px solid var(--gray_10);padding:6px 4px 6px 10px;border-radius:8px;width:100%;color:var(--gray_80);line-height:35px;}
 .modal0913 input[type=file]::file-selector-button{background:var(--gray_30);border:0;border-radius:8px;color:var(--mono_wh);padding:8px 12px;margin-left:8px;float:right;margin-right:2px;font-weight:600}
-#uploadBtn{padding:8px 24px;font-size:16px;font-weight:600;border-radius:8px;background:var(--pr_120);border:0;color:var(--mono_wh);cursor:pointer;margin-right:8px}
+.modal0913 #uploadBtn{padding:8px 24px;font-size:16px;font-weight:600;border-radius:8px;background:var(--pr_120);border:0;color:var(--mono_wh);cursor:pointer;margin-right:8px}
 .w50_0913 {margin-top:40px}
 .w50_0913 div{width:calc(100% / 2 - 20px);margin:0 10px;}
 .w50_0913 div input {width:100%}
