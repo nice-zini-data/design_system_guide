@@ -386,8 +386,30 @@ input[type="radio"] + label span img {margin-right:8px}
 .login_page .login_btn button{width:100%;height:40px;text-align:center;border:1px solid var(--pr_120);background:var(--mono_wh);margin-top:40px;border-radius:8px;color:var(--pr_140);font-size:16px;font-weight:600;cursor:pointer;}
 .login_page .login_btn button:hover {background:var(--pr_120);color:var(--mono_wh)}
 
-.main_layout {width:1200px;margin:0 auto;}
-.board_tb th{padding:15px 0}
+.main_wrap {background:var(--gray_5)}
+.main_layout {width:1280px;margin:0 auto;height:100vh;padding:60px 0}
+.myLayout {background:var(--mono_wh);padding:70px;height:100%;border-radius:8px}
+.board_tb {text-align: center;border-top:2px solid var(--gray_20);}
+.board_tb th, .board_tb td{padding:12px 0;border-bottom:1px solid var(--gray_10);font-size:16px;}
+.board_tb th{color:var(--gray_80)}
+.board_tb td:nth-child(2){color:var(--gray_60)}
+.myL_Table {height:550px;margin-bottom:50px;}
+#uploadFile, #closeBtn {padding:8px 24px;font-size:16px;font-weight:600;border-radius:8px;background:var(--gray_100);border:0;color:var(--mono_wh);cursor:pointer;margin-right:8px}
+#uploadFile:hover, #closeBtn:hover{background:var(--gray_80)}
+#deleteFile {padding:8px 24px;font-size:16px;font-weight:600;border-radius:8px;background:var(--red);border:0;color:var(--mono_wh);cursor:pointer;}
+.tar {text-align:right;}
+.flexRight {justify-content: end}
+.modal0913 .modal_body {text-align: left;height:auto;}
+.text0913_01 {font-size:20px;font-weight:600;text-align:center;margin-bottom:20px;}
+#fileInfoTxt {width:100%;min-height:200px;border:1px solid var(--gray_10);border-radius:8px;}
+.text0913_02 {font-size:15px;font-weight:400;color:var(--gray_60);margin-bottom:10px;}
+#uploadfiles {margin-bottom:20px;border-radius:8px;}
+.modal0913 input[type="file"] {border:1px solid var(--gray_10);padding:6px 4px 6px 10px;border-radius:8px;width:100%;color:var(--gray_80);line-height:35px;}
+.modal0913 input[type=file]::file-selector-button{background:var(--pr_120);border:0;border-radius:8px;color:var(--mono_wh);padding:8px 12px;margin-left:8px;float:right;margin-right:2px;font-weight:600}
+#uploadBtn{padding:8px 24px;font-size:16px;font-weight:600;border-radius:8px;background:var(--pr_120);border:0;color:var(--mono_wh);cursor:pointer;margin-right:8px}
+.w50_0913 {margin-top:40px}
+.w50_0913 div{width:calc(100% / 2 - 20px);margin:0 10px;}
+.w50_0913 div input {width:100%}
 
 
 
