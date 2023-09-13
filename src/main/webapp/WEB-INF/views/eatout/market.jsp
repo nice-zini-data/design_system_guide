@@ -491,7 +491,7 @@
 			</div>
 			<div>
 				<div class="slide_txt01">전월대비</div>
-				<div class="slide_flex"> <!--slide_flex 위치에 클래스 추가 부탁드립니다. 상승 : up / 하락 : down-->
+				<div class="slide_flex {{checkUpDown salePer}}"> <!--slide_flex 위치에 클래스 추가 부탁드립니다. 상승 : up / 하락 : down-->
 					<div class="slide_txt02">{{addComma calcSaleAmt}}</div>
 					<div class="slide_txt03">{{salePer}} %</div>
 				</div>
@@ -510,7 +510,7 @@
 	{{#each this.tmpAdmi}}
 		<div class="col-4 border border-4">
 			<!--증감률 td에 클래스 추가 부탁드립니다. 상승 : up / 하락 : down-->
-			<table>
+			<table class="cpTable">
 				<thead>
 				<tr>
 					<th colspan="3">{{this.[0].megaNm}}</th>
@@ -526,7 +526,7 @@
 				<tr>
 					<td>{{rnk}}</td>
 					<td>{{upjong3Nm}}</td>
-					<td><span>{{calcPer}} %</span></td>
+					<td class="{{checkUpDown calcPer}}"><span>{{calcPer}} %</span></td>
 				</tr>
 				{{/each}}
 				</tbody>
@@ -538,7 +538,7 @@
 
 
 <script type="text/x-handlebars-template" id="tmp_upjongGrowth">
-	<table>
+	<table class="cpTable">
 		<%--<thead>
 		<tr>
 			<th>순위</th>
@@ -551,7 +551,7 @@
 		<tr>
 			<td>{{rnk}}</td>
 			<td><button onclick="makeChart('{{upjong3Cd}}')">{{upjong3Nm}}</button></td>
-			<td><span>{{salePer}} %</span></td>
+			<td class="{{checkUpDown salePer}}"><span>{{salePer}} %</span></td>
 			<td><span>{{addComma calcSaleAmt}} 만원</span></td>
 		</tr>
 		{{/each}}

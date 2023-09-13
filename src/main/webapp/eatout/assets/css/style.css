@@ -330,12 +330,12 @@ input[type="radio"] + label span img {margin-right:8px}
 .slide_txt03 {font-size:14px;font-weight:600;display:inline-block;padding:2px 26px 2px 8px;border-radius:17px;}
 
 .slide_flex {display:flex;justify-content: space-between;}
-.slide_flex.up .slide_txt02{color:var(--red)}
-.slide_flex.up .slide_txt03{background:var(--red_bg);color:var(--red);position:relative;}
-.slide_flex.up .slide_txt03:after {content:'';display:inline-block;position:absolute;top:50%;right:8px;transform:translateY(-50%);width:16px;height:16px;background:url('/eatout/assets/eatout/images/icon/red_arrow.svg') no-repeat center center / 16px 16px}
-.slide_flex.down .slide_txt02{color:var(--blue_120)}
-.slide_flex.down .slide_txt03{background:var(--blue_bg);color:var(--blue_120);position:relative;}
-.slide_flex.down .slide_txt03:after {content:'';display:inline-block;position:absolute;top:50%;right:8px;transform:translateY(-50%);width:16px;height:16px;background:url('/eatout/assets/eatout/images/icon/mt_arrow.svg') no-repeat center center / 16px 16px}
+.slide_flex.up_p .slide_txt02{color:var(--red)}
+.slide_flex.up_p .slide_txt03{background:var(--red_bg);color:var(--red);position:relative;}
+.slide_flex.up_p .slide_txt03:after {content:'';display:inline-block;position:absolute;top:50%;right:8px;transform:translateY(-50%);width:16px;height:16px;background:url('/eatout/assets/eatout/images/icon/red_arrow.svg') no-repeat center center / 16px 16px}
+.slide_flex.down_p .slide_txt02{color:var(--blue_120)}
+.slide_flex.down_p .slide_txt03{background:var(--blue_bg);color:var(--blue_120);position:relative;}
+.slide_flex.down_p .slide_txt03:after {content:'';display:inline-block;position:absolute;top:50%;right:8px;transform:translateY(-50%);width:16px;height:16px;background:url('/eatout/assets/eatout/images/icon/mt_arrow.svg') no-repeat center center / 16px 16px}
 .mySwiper {padding-top:41px !important;position:relative}
 .mySwiper div.swiper-button-next {width:32px !important;height:32px !important;border-radius:50% !important;box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.08) !important;background:var(--mono_wh) !important;overflow:hidden;display:inline-block;z-index:9999;top:22px;right:0px;left:auto;}
 .mySwiper div.swiper-button-next:after {content:'';display:inline-block;width:16px;height:16px;background:url('/eatout/assets/eatout/images/icon/bk_arrow_line.svg') no-repeat center center / 16px 16px;transform:translate(-50%,-50%) rotate(-90deg);position:absolute;top:50%;left:50%}

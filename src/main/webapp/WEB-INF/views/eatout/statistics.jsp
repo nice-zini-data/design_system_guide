@@ -125,7 +125,6 @@ class = "login_none" 제거 및 추가
                                         <option name="2" value="2">반기 데이터</option>
                                         <option name="3" value="3">분기 데이터</option>
                                         <option name="4" value="4">월별 데이터</option>
-                                        <option name="5" value="5">주간 데이터</option>
                                     </select>
                                     <select id="startDate">
                                         <option name="0" value="0">시작일</option>
@@ -518,9 +517,13 @@ class = "login_none" 제거 및 추가
             //selected value
             $("#type_nm").text($('#dataType option:selected').text())
             dataTypeNum = $(this).val();
+            console.log($('#dateType').children('option:last').val())
             if(dataTypeNum == 1){
-                reset_select(0);
                 console.log('외식 데이터 선택');
+                reset_select(0);
+                if($('#dateType').children('option:last').val() == 5){
+                    $('#dateType').children('option:last').remove();
+                }
                 $("#area_admi").attr('disabled',false);
                 $("#upjong2").attr('disabled',false);
                 $("#upjong3").attr('disabled',false);
@@ -529,6 +532,9 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 2){
                 console.log('배달 데이터 선택');
+                if($('#dateType').children('option:last').val() == 5){
+                    $('#dateType').children('option:last').remove();
+                }
                 reset_select(0);
                 $("#area_admi").attr('disabled',true);
                 $("#upjong2").attr('disabled',false);
@@ -544,9 +550,13 @@ class = "login_none" 제거 및 추가
                 $("#upjong3").attr('disabled',false);
                 change_colType($(this).val(),true);
                 $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon04.svg'});
+                $('#dateType').append('<option name="5" value="5">주간 데이터</option>');
 
             }else if(dataTypeNum == 4){
                 console.log('생활 인구 데이터 선택');
+                if($('#dateType').children('option:last').val() == 5){
+                    $('#dateType').children('option:last').remove();
+                }
                 reset_select(0);
                 $("#area_admi").attr('disabled',false);
                 $("#upjong2").attr('disabled',true);
@@ -556,6 +566,9 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 5){
                 console.log('주거 인구 데이터 선택');
+                if($('#dateType').children('option:last').val() == 5){
+                    $('#dateType').children('option:last').remove();
+                }
                 reset_select(0);
                 $("#area_admi").attr('disabled',false);
                 $("#upjong2").attr('disabled',true);
@@ -877,7 +890,13 @@ class = "login_none" 제거 및 추가
         // console.log(param);
         // searchBtnNum = 1;
         // main_search(dataTypeNum_sub,param);
-
+        console.log(upjongCd.substring(0,3));
+        $("#upjong2").val(upjongCd.substring(0,3)).trigger("change");
+        // $("#upjong3").val(upjongCd).trigger("change");
+        // $('#upjong2').val(upjongCd.substring(0,3)).prop("selected",true);
+        setTimeout(function() {
+            $('#upjong3').val(upjongCd).prop("selected", true);
+        },200)
     }
     // 전지역 업종 증감률 리스트
     function fn_eatoutDiff(id, response, param){
