@@ -401,7 +401,7 @@ input[type="radio"] + label span img {margin-right:8px}
 .flexRight {justify-content: end}
 .modal0913 .modal_body {text-align: left;height:auto;}
 .text0913_01 {font-size:20px;font-weight:600;text-align:center;margin-bottom:20px;}
-#fileInfoTxt {width:100%;min-height:200px;border:1px solid var(--gray_10);border-radius:8px;}
+#fileInfoTxt {width:100%;height:50px;padding:0 10px; border:1px solid var(--gray_10);border-radius:8px;}
 .text0913_02 {font-size:15px;font-weight:400;color:var(--gray_60);margin-bottom:10px;}
 #uploadfiles {margin-bottom:20px;border-radius:8px;}
 .modal0913 input[type="file"] {border:1px solid var(--gray_10);padding:6px 4px 6px 10px;border-radius:8px;width:100%;color:var(--gray_80);line-height:35px;}
