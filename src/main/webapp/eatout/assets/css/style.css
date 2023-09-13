@@ -405,7 +405,7 @@ input[type="radio"] + label span img {margin-right:8px}
 .text0913_02 {font-size:15px;font-weight:400;color:var(--gray_60);margin-bottom:10px;}
 #uploadfiles {margin-bottom:20px;border-radius:8px;}
 .modal0913 input[type="file"] {border:1px solid var(--gray_10);padding:6px 4px 6px 10px;border-radius:8px;width:100%;color:var(--gray_80);line-height:35px;}
-.modal0913 input[type=file]::file-selector-button{background:var(--pr_120);border:0;border-radius:8px;color:var(--mono_wh);padding:8px 12px;margin-left:8px;float:right;margin-right:2px;font-weight:600}
+.modal0913 input[type=file]::file-selector-button{background:var(--gray_30);border:0;border-radius:8px;color:var(--mono_wh);padding:8px 12px;margin-left:8px;float:right;margin-right:2px;font-weight:600}
 #uploadBtn{padding:8px 24px;font-size:16px;font-weight:600;border-radius:8px;background:var(--pr_120);border:0;color:var(--mono_wh);cursor:pointer;margin-right:8px}
 .w50_0913 {margin-top:40px}
 .w50_0913 div{width:calc(100% / 2 - 20px);margin:0 10px;}
