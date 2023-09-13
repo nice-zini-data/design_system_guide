@@ -39,11 +39,15 @@ class ComAESEncyptTestControllerApi {
             @ApiResponse(code=200, message = "프로퍼티암호화")
     })
     public String AESEncyptTest(ComPropertiesVO comPropertiesVO){
+        System.err.println(comPropertiesVO);
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         encryptor.setProvider(new BouncyCastleProvider());
         encryptor.setPoolSize(2);
         encryptor.setPassword("password");
         encryptor.setAlgorithm("PBEWithSHA256And128BitAES-CBC-BC");
+        log.info(comPropertiesVO.getJdbcUrl());
+        log.info(comPropertiesVO.getUsername());
+        log.info(comPropertiesVO.getPassword());
 
         String jdbcUrlEnc = encryptor.encrypt(comPropertiesVO.getJdbcUrl().replaceAll("amp;", ""));
         String jdbcUrlDec = encryptor.decrypt(jdbcUrlEnc);

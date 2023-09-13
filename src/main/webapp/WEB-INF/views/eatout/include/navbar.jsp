@@ -1,14 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<header>
+    <div class="head">
+        <img src="/eatout/assets/eatout/images/logo/logo.svg" alt="로고"/>
+        <p class="logo_title">외식통계조회  시스템</p>
+    </div>
+</header>
 <div class="topHeader">
     <div class="topHeaderInner">
         <!--로그인 전-->
         <ul class="logout navList">
-            <li>
-                <p class="txt_l_m" id="statistics">통계조회</p>
+            <li id="statistics">
+                <img src="/eatout/assets/eatout/images/icon/tab01_icon.svg" alt=""/>
+                <p class="txt_l_m">통계조회</p>
             </li>
-            <li>
-                <p class="txt_l_m" id="market">시장동향</p>
+            <li  id="market">
+                <img src="/eatout/assets/eatout/images/icon/tab02_icon.svg" alt=""/>
+                <p class="txt_l_m">시장동향</p>
             </li>
         </ul>
         <!--로그인 후-->

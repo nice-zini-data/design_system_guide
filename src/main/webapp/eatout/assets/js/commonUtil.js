@@ -336,8 +336,8 @@ util.renderPagingNavigation = function(targetId, pagingInfo){
             }
         }
         var pagingPrefix = '<ul class="pagination borderless handlebarsPaging justify-content-center">';
-        pagingPrefix += '<li class="paginate_button first '+ (pagingInfo.pageNo == 1 ? 'disabled' : '')+'" aria-controls="list_info" tabindex="0" id="list_info_first" data-index="1"><a href="javascript:;"> <img src="/eatout/assets/eatout/images/icon/ico_arrow_line_g02.svg" alt="처음으로 이동"> </a></li>&nbsp;';
-        pagingPrefix += '<li class="paginate_button previous '+ (pagingInfo.pageNo == 1 ? 'disabled' : '')+'" aria-controls="list_info" tabindex="0" id="list_info_previous"><a href="javascript:;"> <img class="paginate_button previous" src="/eatout/assets/eatout/images/icon/ico_arrow_line_g.svg" alt="이전으로 이동"> </a></li>&nbsp;';
+        pagingPrefix += '<li class="paginate_button first '+ (pagingInfo.pageNo == 1 ? 'disabled' : '')+'" aria-controls="list_info" tabindex="0" id="list_info_first" data-index="1"><a href="javascript:;"></a></li>&nbsp;';
+        pagingPrefix += '<li class="paginate_button previous '+ (pagingInfo.pageNo == 1 ? 'disabled' : '')+'" aria-controls="list_info" tabindex="0" id="list_info_previous"><a href="javascript:;"></a></li>&nbsp;';
 
         var pagingContent = '';
         for (var i = startPage; i <= endPage; i++) {
@@ -345,8 +345,8 @@ util.renderPagingNavigation = function(targetId, pagingInfo){
         }
 
         var isEndPage = Math.floor(pagingInfo.totalCnt/pagingInfo.pageCnt) + (pagingInfo.totalCnt % pagingInfo.pageCnt == 0 ? 0 : 1);
-        var pagingSurfix = '<li class="paginate_button next '+ (endPage <= 1 || isEndPage == pagingInfo.pageNo ? 'disabled' : '') +'" aria-controls="list_info" tabindex="0" id="list_info_next"><a href="javascript:;"> <img class="paginate_button next" src="/eatout/assets/eatout/images/icon/ico_arrow_line_g.svg" alt="다음으로 이동"> </a></li>&nbsp;';
-        pagingSurfix += '<li class="paginate_button last '+ (endPage <= 1 || isEndPage == pagingInfo.pageNo ? 'disabled' : '') +'" aria-controls="list_info" tabindex="0" id="list_info_last" data-index="'+ isEndPage +'"><a href="javascript:;"> <img src="/eatout/assets/eatout/images/icon/ico_arrow_line_g02.svg" alt="끝으로 이동"> </a></li>';
+        var pagingSurfix = '<li class="paginate_button next '+ (endPage <= 1 || isEndPage == pagingInfo.pageNo ? 'disabled' : '') +'" aria-controls="list_info" tabindex="0" id="list_info_next"><a href="javascript:;">  </a></li>&nbsp;';
+        pagingSurfix += '<li class="paginate_button last '+ (endPage <= 1 || isEndPage == pagingInfo.pageNo ? 'disabled' : '') +'" aria-controls="list_info" tabindex="0" id="list_info_last" data-index="'+ isEndPage +'"><a href="javascript:;"> </a></li>';
         pagingSurfix += '</ul>';
 
         var paging = pagingPrefix + pagingContent + pagingSurfix;

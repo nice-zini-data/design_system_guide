@@ -78,8 +78,8 @@ html, body {
 	<div class="main_wrap">
 		<div class="main_section_wrap pd main_layout">
 			<!--main_section full_sec END-->
-			<div class="center">
-				<div class="row">
+			<div class="center myLayout">
+				<div class="row myL_Table">
 					<div class="col-12 center">
 						<table class="board_tb">
 							<thead>
@@ -98,35 +98,39 @@ html, body {
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-4">
-						<button id="uploadFile">등록하기</button>
+					<div class="flex flexRight">
+						<div class="col-4">
+							<button id="uploadFile">등록하기</button>
+						</div>
+						<div class="col-4">
+							<button id="deleteFile">삭제하기</button>
+						</div>
 					</div>
 					<div class="col-4">
 						<div id="paginate_filelist"></div>
 					</div>
-					<div class="col-4">
-						<button id="deleteFile">삭제하기</button>
-					</div>
+
 				</div>
 			</div>
 			<!--main_section full_sec END-->
 		</div>
 		<!--main_section_wrap END-->
 	</div>
-	<div>
+	<div class="modal0913">
 		<div class="modal">
 			<div class="modal_body">
 				<div class="row">
-					<div class="col-12">파일업로드</div>
+					<div class="col-12 text0913_01">파일업로드</div>
 				</div>
 				<div class="row">
-					<div class="col-3">파일경로</div>
+					<div class="col-3 text0913_02">파일경로</div>
 					<div class="col-9"><input type="file" id="uploadfiles"></div>
-					<div class="col-3">파일설명</div>
+					<div class="col-3 text0913_02">파일설명</div>
 					<div class="col-9"><input type="text" id="fileInfoTxt"></div>
-					<div class="col-12"><input type="button" value="파일업로드" id="uploadBtn"></div>
+
 				</div>
-				<div class="row">
+				<div class="row flex w50_0913">
+					<div class="col-12"><input type="button" value="파일업로드" id="uploadBtn"></div>
 					<div class="col-12"><input type="button" value="창닫기" id="closeBtn"></div>
 				</div>
 			</div>

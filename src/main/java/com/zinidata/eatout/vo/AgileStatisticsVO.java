@@ -22,5 +22,6 @@ public class AgileStatisticsVO {
     private String dateEnd;     // 년도기준 종료
     private String subDateEnd;   // 년도기준 시작
     private String columnType;  // 항목 타입(총 매출, 점포당 매출,....)
-
+    private String menuType;    // 메뉴 타입선택(대분류 : 1 /중분류 : 2/소분류 : 3)
+    private String menuCd;      // 선택메뉴 코드
 }

@@ -6,124 +6,11 @@
 /*
 RESET CSS
 */
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-th,
-td {
-    word-break: keep-all;
-    line-height: 140%;
-}
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {margin: 0;padding: 0;border: 0;font-size: 100%;font: inherit;vertical-align: baseline;}
+h1,h2,h3,h4,h5,h6,p,span,th,td {word-break: keep-all;line-height: 140%;}
 
 /* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-    display: block;
-}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {display: block;}
 
 body {
     line-height: 100%;
@@ -3167,7 +3054,7 @@ input[type="text"].address_search::placeholder{
 
 .alrt_pop.pop1 .alrt_bdy{
     top: 70px;
-    height: calc(100% - 76px - 107px);	
+    height: calc(100% - 76px - 107px);
 }
 
 .alrt_pop .alrt_bdy.no_ul{
@@ -7831,7 +7718,7 @@ button.statistic_btn{
     .statistic .has_two_con .tb_ht_322{
         height: unset;
     }
-    
+
     /*수정- 작은사이즈 탭 조절*/
 	.pc_sheet .pc_tab_right.show{
 		left:0;
@@ -7855,7 +7742,7 @@ button.statistic_btn{
 	.pc_sheet{
     	top: 110px;
 	}
-	
+
 	.fixed_main_box.left,
 	.fixed_main_box{
 		left:0;
@@ -7863,7 +7750,7 @@ button.statistic_btn{
 		width:100%;
 		z-index:8;
 	}
-	
+
 	.fixed_main_box .select_main{
 		border:none;
 		border-bottom:2px solid var(--sec4);
@@ -7871,24 +7758,24 @@ button.statistic_btn{
     	border-radius: 0;
     	border-top: 1px solid #eee;
 	}
-	
+
 	.fixed_main_box .select_main_show{
 		top: 50px;
 		border-radius:0;
 		border:none;
 		border-bottom:1px solid var(--mono5);
 	}
-	
+
 	.select_main_show .show_foot{
 		width: 50%;
     	margin-left: 50%;
 	}
-	
+
 	.tab_box.onlypc{
 	    height: calc(var(--vh, 1vh) * 100 - 110px);
     	top: 110px;
 	}
-	
+
 	.pc_sheet .pc_tab_right{
 	    height: calc(100% - 48px);
 	}
@@ -8203,7 +8090,7 @@ css 끝끝
 }
 
 .shop_none_box::before{
-    background: url(../images/icons/ico_olive_noshop.svg) 50% 50%/cover;	
+    background: url(../images/icons/ico_olive_noshop.svg) 50% 50%/cover;
 }
 
 .show_body_title {
@@ -8340,12 +8227,12 @@ button.statistic_btn{
 		padding:40px;
 		width:100%;
 		/* border-top:3px solid #A6CD48; */
-		background:#F7F7F7; 
+		background:#F7F7F7;
 		color:#222;
 		margin-bottom:40px;
 		box-sizing:content-box;
-	}	
-	
+	}
+
 	.print_header p:nth-child(1){
 		font-size:24px;
 		font-weight:700;
@@ -8356,7 +8243,7 @@ button.statistic_btn{
 		font-size:14px;
 		font-weight:300;
 	}
-	
+
 	.print_header::before{
 		content: "";
     	height: 20px;
@@ -8364,13 +8251,13 @@ button.statistic_btn{
     	display: block;
     	background: url(../images/logo/h1_logo.svg) no-repeat 0% 50%/contain;
     	margin-bottom: 12px;
-	}	
-	
-	
+	}
+
+
 	.rpt_r_body{
 		padding:20px;
 	}
-	
+
 	.bgw{
 		box-shadow: none;
 		border-radius:none;
@@ -8378,17 +8265,17 @@ button.statistic_btn{
 	.r_con_box{
 		padding:0;
 	}
-	
+
 	.box_p{
 	    border-radius:0;
 	}
-	
+
 	.percent_ul.wide4, .percent_ul.wide3{
 	    box-shadow: none;
 	    border-radius:0;
 	}
-	
-	
+
+
 	.r_section_tt h6::before{
     	content: "";
     	width: 8px;
@@ -8399,21 +8286,21 @@ button.statistic_btn{
     	margin-right:12px;
     	margin-top:-4px;
 	}
-	
+
 	.table_pd th, .table_pd td{
 		padding: 4px 0px !important;
 	}
 	.table_box table.long td, .table_box table.long th{
 		font-size:8px !important;
 	}
-	
+
 	.table_box.x-scroll table.long th:first-child, .table_box.x-scroll table.long td:first-child{
 	    position: sticky !important;
 	}
-	
+
 	.table_box.x-scroll table.long th:before,
 	.table_box.x-scroll table.long td:before{
 	    display:none;
 	}
-	
+
 }
