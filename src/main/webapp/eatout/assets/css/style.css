@@ -413,7 +413,7 @@ input[type="radio"] + label span img {margin-right:8px}
 
 
 
-@media screen and (max-width:1919px){
+@media screen and (max-width:1900px){
     .left_top_box {display:block;}
     .left_top_box .col-8.flex{margin-bottom:20px}
     .row.left_g_box > .flex {display:block;}
