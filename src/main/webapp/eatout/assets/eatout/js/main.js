@@ -346,13 +346,18 @@ function fn_makechart(id, response, param){
     var tmpYyyymm = '';
     var tmpSel = $("#colType"+dataTypeNum+" option:selected").val();
     var tmpSel_sub = $("#colType"+dataTypeNum_sub+"_2 option:selected").val();
-
+    var tmpLastVal = 0;
+    var tmpThisVal = 0;
     //rpt_chart1
     var resultData = [];
     var resultName = [];
     if(!common.isEmpty(response.data[0])) {
         $.each(response.data,function(index,item){
+            // console.log(index);
+            // console.log(response.data.length -1);
             $.each(item,function(key,value) {
+                if(index == (response.data.length -1) && key == tmpSel) tmpThisVal = value;
+                if(index == (response.data.length -2) && key == tmpSel) tmpLastVal = value;
                 if(key == 'yyyymm'){
                     tmpYyyymm = value;
                     resultName.push(value);
@@ -379,7 +384,23 @@ function fn_makechart(id, response, param){
                     }
                 }
             });
+            // console.log(tmpLastVal + " : " + tmpThisVal + " :  " + common.round(((tmpThisVal/tmpLastVal)*100)-100,2));
+            // console.log(common.upAndDownClass(common.round(((tmpThisVal/tmpLastVal)*100)-100,2)));
         });
+
+        console.log(dateTypeNum);
+        $('#calcAmt').parent().removeClass('down');
+        $('#calcAmt').parent().removeClass('up');
+        $('#calcAmt').parent().addClass(common.upAndDownClass(common.round(((tmpThisVal/tmpLastVal)*100)-100,2)));
+        $('#calcAmt').text(common.round(((tmpThisVal/tmpLastVal)*100)-100,2)+'%');
+        $('#calcDateType').text('')
+        if(dateTypeNum == 1){
+            $('#calcDateType').text('전년')
+        }else if(dateTypeNum == 4){
+            $('#calcDateType').text('전월')
+        }else{
+            $('#calcDateType').text('전기')
+        }
         if(searchType == 0){
             console.log(maxYyyymm + ' : ' +maxVal);
             $('#maxYyyymm').text(maxYyyymm);

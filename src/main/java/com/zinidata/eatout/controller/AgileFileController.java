@@ -30,8 +30,6 @@ public class AgileFileController {
 
     public String pwcheck(HttpServletRequest request, HttpServletResponse response){
         String tmpPasswd = request.getParameter("passwd");
-        System.err.println(tmpPasswd);
-        System.err.println(passwd);
         String tmpVal = "";
         if(passwd.equals(tmpPasswd)){
             tmpVal = "eatout/fileupload/fileUpload";
@@ -39,7 +37,6 @@ public class AgileFileController {
         }else{
             tmpVal = "redirect:/login";
         }
-        System.err.println(tmpVal);
         return tmpVal;
     }
 

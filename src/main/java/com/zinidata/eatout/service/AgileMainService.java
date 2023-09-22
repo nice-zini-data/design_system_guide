@@ -5,6 +5,7 @@ import com.zinidata.eatout.mapper.AgileStatisticsMapper;
 import com.zinidata.eatout.vo.AgileStatisticsVO;
 import com.zinidata.eatout.vo.output.AgileAdmiOutVO;
 import com.zinidata.eatout.vo.output.AgileDateOutVO;
+import com.zinidata.eatout.vo.output.AgileMainOutVO;
 import com.zinidata.eatout.vo.output.AgileUpjongOutVO;
 import com.zinidata.util.GsonUtil;
 import com.zinidata.util.JsonOutputVo;
@@ -73,6 +74,21 @@ public class AgileMainService {
         }
         return result;
     }
+
+    public String getMainInfo(){
+        String result = "";
+        String yyyymm = agileMainMapper.getYyyymm();
+        System.err.println("yyyymm : " + yyyymm);
+        ArrayList<AgileMainOutVO> outVo = agileMainMapper.getMainInfo(yyyymm);
+
+        if (!ZiniUtil.isEmpty(outVo)) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.조회, outVo));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.실패));
+        }
+        return result;
+    }
+
 
 
 }

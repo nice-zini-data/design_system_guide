@@ -73,4 +73,22 @@ public class AgileMainControllerApi {
         return result;
     }
 
+    /***
+     * 소비정보
+     * @param
+     * @return
+     * @throws IOException
+     */
+    @ResponseBody
+    @PostMapping(value="/getMainInfo")
+    @ApiOperation(value="업정정보 가져오기")
+    @ApiResponses(value = {
+            @ApiResponse(code=200, message = "업종정보 가져오기")
+    })
+    public String getMainInfo(){
+        System.err.println("getMainInfo");
+        String result = agileMainService.getMainInfo();
+        return result;
+    }
+
 }

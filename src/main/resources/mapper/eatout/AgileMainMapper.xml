@@ -32,11 +32,13 @@
 <!--        from tb_cellphone_cert-->
 <!--        where seq = #{seqNo}-->
 <!--    </select>-->
-
     <select id="getSubscribe" resultType="integer">
         select count(*) as cnt
         from tb_subscribe_info
         where mobile_no =#{mobileNo} and mem_nm=#{memNm}
+    </select>
+    <select id="getYyyymm" resultType="String">
+        select max(yyyymm) as yyyymm from tbss_sum_sales_mega_his
     </select>
 
     <insert id="setSubscribeIns">
@@ -199,10 +201,52 @@
             and a.menu1_cd = b.menu1_cd
             and b.menu2_cd = c.menu2_cd
             <if test='menuType == "1"'>
-                a.menu1_cd = '${menuCd}'
+                a.menu1_cd = #{menuCd}
             </if>
             <if test='menuType == "2"'>
-                b.menu2_cd = '${menuCd}'
+                b.menu2_cd = #{menuCd}
             </if>
+    </select>
+    <select id="getMainInfo" resultType="com.zinidata.eatout.vo.output.AgileMainOutVO">
+        with tmp_date as(
+            select
+                row_number() over(order by yyyymm) as row
+                , to_char(yyyymm,'YYYYMM') as yyyymm
+                , substring(yyyymm::varchar,1,4) as year
+                , to_char(yyyymm,'MM')::numeric as month
+                , date_part('QUARTER',yyyymm::timestamp) as quarter
+                <![CDATA[
+               , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then 1 else 2 end half
+               ]]>
+                , case when row_number() over(order by yyyymm) = 13 then 1 else 0 end as this_month
+                , case when row_number() over(order by yyyymm) = 12 then 1 else 0 end as last_month
+                , case when row_number() over(order by yyyymm) between 10 and 13 then 1 else 0 end as last_quarter
+                , case when row_number() over(order by yyyymm) between 6 and 13 then 1 else 0 end as last_half
+            from
+            generate_series(
+                to_date(#{yyyymm},'yyyymm') - '12 month'::interval,to_date(#{yyyymm},'yyyymm'),'1 month'
+            ) yyyymm
+        )
+        select
+            --	sum(this_sales_amt), sum(last_sales_amt),
+            round(((sum(this_sales_amt) / sum(last_sales_amt)) * 100)- 100,2) as calc_amt
+            ,#{yyyymm} as yyyymm
+        from(
+            select
+                case when row = 1 then sale_amt end as this_sales_amt
+                ,case when row = 2 then sale_amt end as last_sales_amt
+            from(
+                select
+                    row_number() over(order by year desc, quarter desc) as row, year, quarter
+                    ,sum(a.sale_amt) as sale_amt
+                from
+                    tbss_sum_sales_mega_his a, tmp_date b
+                where 1=1
+                    and a.yyyymm = b.yyyymm
+                group by
+                    2,3
+                limit 2
+            ) tmp
+        ) tmp
     </select>
 </mapper>
