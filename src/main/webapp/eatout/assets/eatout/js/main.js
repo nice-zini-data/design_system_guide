@@ -1,5 +1,6 @@
 
 var strMenuGubun = "1"; // 1: 요약, 2: 인구, 3:소득,4:대출,5:산업,6:지역경제,7:부동산,8:인프라
+var typeCdTmp = '';
 var pageHistory = [];
 var objPage = {
     navbar : "elecmap"
@@ -73,12 +74,18 @@ function menuMove(menu, id){
 //------------------------- 상위메뉴 ---------------------------------------------------
 //------------------------ 지역 선택 리스트 기능 START ----------------------------------------
 var tmpadmiVal = 1;
-function setAreaList(admGb,areaCd){
+function setAreaList(admGb,areaCd,typeCd){
     var param = {};
     param.admGb = admGb;
     tmpadmiVal = admGb;
     param.areaCd = areaCd;
-    getAjax("getAdmiList", "/agile/main/getAdmiList",param, fn_setArea, fn_error);
+    // console.log(typeCd);
+    if(typeCd == undefined){
+        typeCd = 'main'
+    }
+    typeCdTmp = typeCd;
+    // console.log(typeCd);
+    getAjax("getAdmiList", "/agile/"+typeCd+"/getAdmiList",param, fn_setArea, fn_error);
 }
 function fn_setArea(id, response, param) {
     var html = '';
@@ -120,11 +127,15 @@ function fn_setUpjong(id, response, param) {
 }
 //------------------------ 업종 선택 리스트 기능 END ----------------------------------------
 //------------------------ 날짜 선택 리스트 기능 START ----------------------------------------
-function setDateList(dateType){
+function setDateList(dateType,typeCd){
     var param = {};
     param.dateType = dateType;
     dateTypeNum = dateType;
-    getAjax("getUpjongList", "/agile/main/getDateList",param, fn_setDate, fn_error);
+    typeCdTmp = typeCd;
+    if(typeCd == undefined){
+        typeCd = 'main'
+    }
+    getAjax("getUpjongList", "/agile/"+typeCd+"/getDateList",param, fn_setDate, fn_error);
 }
 function fn_setDate(id, response, param) {
     var html = '';
@@ -135,12 +146,16 @@ function fn_setDate(id, response, param) {
     response.data.forEach(function (val, idx){
         var tmpdate = '';
         if(dateTypeNum != 1) {
-            tmpdate = val.dateNm.substring(0, 4) + val.date
-            // console.log(tmpdate);
+            if(typeCdTmp == 'vacancy'){
+                tmpdate = val.date
+            }else{
+                tmpdate = val.dateNm.substring(0, 4) + val.date
+            }
         }else{
             tmpdate = val.date
         }
         html += '<option value="' + tmpdate + '" data-areaCd="'+tmpdate+'">' + val.dateNm + '</option>';
+        tmpdate = '';
     });
 
     $("#startDate").append(html);
@@ -153,12 +168,15 @@ function fn_setDate(id, response, param) {
 //------------------------- 하위메뉴 ---------------------------------------------------
 //------------------------ 지역 선택 리스트 기능 START ----------------------------------------
 var tmpadmiVal = 1;
-function setAreaList_sub(admGb,areaCd){
+function setAreaList_sub(admGb,areaCd,typeCd){
     var param = {};
+    if(typeCd == undefined){
+        typeCd = 'main'
+    }
     param.admGb = admGb;
     tmpadmiVal = admGb;
     param.areaCd = areaCd;
-    getAjax("getAdmiList", "/agile/main/getAdmiList",param, fn_setArea_sub, fn_error);
+    getAjax("getAdmiList", "/agile/"+typeCd+"/getAdmiList",param, fn_setArea_sub, fn_error);
 }
 function fn_setArea_sub(id, response, param) {
     var html = '';
@@ -200,11 +218,14 @@ function fn_setUpjong_sub(id, response, param) {
 }
 //------------------------ 업종 선택 리스트 기능 END ----------------------------------------
 //------------------------ 날짜 선택 리스트 기능 START ----------------------------------------
-function setDateList_sub(dateType){
+function setDateList_sub(dateType,typeCd){
     var param = {};
     param.dateType = dateType;
     dateTypeNum = dateType;
-    getAjax("getUpjongList", "/agile/main/getDateList",param, fn_setDate_sub, fn_error);
+    if(typeCd == undefined){
+        typeCd = 'main'
+    }
+    getAjax("getUpjongList", "/agile/"+typeCd+"/getDateList",param, fn_setDate_sub, fn_error);
 }
 function fn_setDate_sub(id, response, param) {
     var html = '';
@@ -215,7 +236,11 @@ function fn_setDate_sub(id, response, param) {
     response.data.forEach(function (val, idx){
         var tmpdate = '';
         if(dateTypeNum != 1) {
-            tmpdate = val.dateNm.substring(0, 4) + val.date
+            if(typeCdTmp == 'vacancy'){
+                tmpdate = val.date
+            }else{
+                tmpdate = val.dateNm.substring(0, 4) + val.date
+            }
         }else{
             tmpdate = val.date
         }
@@ -247,6 +272,8 @@ function main_search(dataType,param){
         getAjax("getUpjongList", "/agile/statistics/getLiviList",param, fn_makechart, fn_error);
     }else if(dataType == 5){
         getAjax("getUpjongList", "/agile/statistics/getHousList",param, fn_makechart, fn_error);
+    }else if(dataType == 6){
+        getAjax("getVacancyList", "/agile/vacancy/getVacancyList",param, fn_makechart, fn_error);
     }else{
         alert('주제가 잘못 선택되었습니다. \n관리자에게 문의하시기 바랍니다.')
     }
@@ -336,8 +363,6 @@ function change_colType(type,check){
 
 // 메인화면 그래프 생성
 function fn_makechart(id, response, param){
-    console.log(id);
-    console.log(response);
     var maxVal = 0;
     var minVal = 0;
     var tmpVal = 0;
@@ -353,12 +378,13 @@ function fn_makechart(id, response, param){
     var resultName = [];
     if(!common.isEmpty(response.data[0])) {
         $.each(response.data,function(index,item){
-            // console.log(index);
-            // console.log(response.data.length -1);
+            // console.log(item);
             $.each(item,function(key,value) {
+                // console.log(key);
+                // console.log(tmpSel);
                 if(index == (response.data.length -1) && key == tmpSel) tmpThisVal = value;
                 if(index == (response.data.length -2) && key == tmpSel) tmpLastVal = value;
-                if(key == 'yyyymm'){
+                if(key == 'yyyymm' || key == 'label'){
                     tmpYyyymm = value;
                     resultName.push(value);
                 }
@@ -384,11 +410,8 @@ function fn_makechart(id, response, param){
                     }
                 }
             });
-            // console.log(tmpLastVal + " : " + tmpThisVal + " :  " + common.round(((tmpThisVal/tmpLastVal)*100)-100,2));
-            // console.log(common.upAndDownClass(common.round(((tmpThisVal/tmpLastVal)*100)-100,2)));
         });
 
-        console.log(dateTypeNum);
         $('#calcAmt').parent().removeClass('down');
         $('#calcAmt').parent().removeClass('up');
         $('#calcAmt').parent().addClass(common.upAndDownClass(common.round(((tmpThisVal/tmpLastVal)*100)-100,2)));
@@ -484,6 +507,7 @@ function fn_makechart(id, response, param){
                     textBorderColor:'#fff',
                     fontFamily: 'Pretendard',
                     formatter: function(c){
+                        console.log(c.data)
                         return  common.addComma(c.data);
                     }
                 },

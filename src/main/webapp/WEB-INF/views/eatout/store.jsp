@@ -52,22 +52,22 @@ class = "login_none" 제거 및 추가
                         <div class="col-4 topRightTextBox">
                             <div class="row flex">
                                 <div class="col-12">
-                                    <p class="txt_n_sb tr_up"><img src="/eatout/assets/eatout/images/icon/up_arrow_red.svg" alt=""/>고가</p>
-                                    <div class="flex">
-                                        <span class="trt_txt">기간</span>
-                                        <span id="maxYyyymm">2023.05</span>
-                                        <span class="trt_txt">총매출</span>
-                                        <span id="maxVal">0억원</span>
-                                    </div>
+<%--                                    <p class="txt_n_sb tr_up"><img src="/eatout/assets/eatout/images/icon/up_arrow_red.svg" alt=""/>고가</p>--%>
+<%--                                    <div class="flex">--%>
+<%--                                        <span class="trt_txt">기간</span>--%>
+<%--                                        <span id="maxYyyymm">2023.05</span>--%>
+<%--                                        <span class="trt_txt">총매출</span>--%>
+<%--                                        <span id="maxVal">0억원</span>--%>
+<%--                                    </div>--%>
                                 </div>
                                 <div class="col-12">
-                                    <p class="txt_n_sb tr_dw"><img src="/eatout/assets/eatout/images/icon/down_arrow_mt.svg" alt=""/>저가</p>
-                                    <div class="flex">
-                                        <span class="trt_txt">기간</span>
-                                        <span id="minYyyymm">2023.05</span>
-                                        <span class="trt_txt">총매출</span>
-                                        <span id="minVal">0억원</span>
-                                    </div>
+<%--                                    <p class="txt_n_sb tr_dw"><img src="/eatout/assets/eatout/images/icon/down_arrow_mt.svg" alt=""/>저가</p>--%>
+<%--                                    <div class="flex">--%>
+<%--                                        <span class="trt_txt">기간</span>--%>
+<%--                                        <span id="minYyyymm">2023.05</span>--%>
+<%--                                        <span class="trt_txt">총매출</span>--%>
+<%--                                        <span id="minVal">0억원</span>--%>
+<%--                                    </div>--%>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@ class = "login_none" 제거 및 추가
                                 <p class="selectText">주제</p>
                                 <div class="selectWrap">
                                     <select id="dataType">
-                                        <option name="1" value="1">상가 데이터</option>
+                                        <option name="6" value="6">상가 데이터</option>
                                         <%--<option name="2" value="2">상가 임대료</option>
                                         <option name="3" value="3">상가 관리비</option>--%>
                                     </select>
@@ -120,7 +120,7 @@ class = "login_none" 제거 및 추가
                                 <div class="selectWrap">
                                     <select id="dateType">
                                         <option name="1" value="1">년도 데이터</option>
-<%--                                        <option name="2" value="2">반기 데이터</option>--%>
+                                        <option name="2" value="2">반기 데이터</option>
                                         <option name="3" value="3">분기 데이터</option>
 <%--                                        <option name="4" value="4">월별 데이터</option>--%>
                                     </select>
@@ -135,11 +135,11 @@ class = "login_none" 제거 및 추가
                             <div class="col-2 bd_r0 st_box05_wi">
                                 <p class="selectText">항목</p>
                                 <div class="selectWrap st_box05">
-                                    <select id="colType1" style="display:block;">
+                                    <select id="colType6" style="display:block;">
                                         <option value="0">항목</option>
-                                        <option value="vacancy">상가 공실율(평균)</option>
-                                        <option value="rant">상가 임대료(평균)</option>
-                                        <option value="maintenance">상가 관리비(평균)</option>
+                                        <option value="gnsl">상가 공실율(평균)</option>
+                                        <option value="rentPyn">상가 임대료(평균)</option>
+                                        <option value="cstPyn">상가 관리비(평균)</option>
                                     </select>
                                     <div class="col-1 st_box06">
                                         <button id="search">조회</button>
@@ -152,7 +152,7 @@ class = "login_none" 제거 및 추가
                     <div class="row">
                         <!-- 상단 선택지 항목 -->
                         <div class="col-12 chart_box">
-                            <span class="chart_text">[단위 : 억 원]</span>
+                            <span class="chart_text" id="chart_text1">[단위 : ]</span>
                             <div id="main_chart1" class="chart"></div>
                         </div>
                     </div>
@@ -166,11 +166,7 @@ class = "login_none" 제거 및 추가
                                 <p class="selectText">주제</p>
                                 <div class="selectWrap">
                                     <select id="dataType_2">
-                                        <option name="1" value="1">외식 데이터(카드)</option>
-                                        <option name="2" value="2">배달 데이터(카드)</option>
-                                        <option name="3" value="3">메뉴 데이터(POS)</option>
-                                        <option name="4" value="4">생활 인구 데이터(통신)</option>
-                                        <option name="5" value="5">주거 인구 데이터(공공)</option>
+                                        <option name="6" value="6">상가 데이터</option>
                                     </select>
                                 </div>
                             </div>
@@ -183,24 +179,24 @@ class = "login_none" 제거 및 추가
                                     <select id="area_cty_2">
                                         <option name="0" value="0">시/군/구</option>
                                     </select>
-                                    <select id="area_admi_2">
-                                        <option name="0" value="0">읍면동</option>
-                                    </select>
+<%--                                    <select id="area_admi_2">--%>
+<%--                                        <option name="0" value="0">읍면동</option>--%>
+<%--                                    </select>--%>
                                 </div>
                             </div>
                             <div class="col-2 st_box03">
-                                <p class="selectText">업종</p>
-                                <div class="selectWrap">
-                                    <select id="upjong1_2">
-                                        <option name="0" value="0">외식업</option>
-                                    </select>
-                                    <select id="upjong2_2">
-                                        <option name="0" value="0">중분류</option>
-                                    </select>
-                                    <select id="upjong3_2">
-                                        <option name="0" value="0">소분류</option>
-                                    </select>
-                                </div>
+<%--                                <p class="selectText">업종</p>--%>
+<%--                                <div class="selectWrap">--%>
+<%--                                    <select id="upjong1_2">--%>
+<%--                                        <option name="0" value="0">외식업</option>--%>
+<%--                                    </select>--%>
+<%--                                    <select id="upjong2_2">--%>
+<%--                                        <option name="0" value="0">중분류</option>--%>
+<%--                                    </select>--%>
+<%--                                    <select id="upjong3_2">--%>
+<%--                                        <option name="0" value="0">소분류</option>--%>
+<%--                                    </select>--%>
+<%--                                </div>--%>
                             </div>
                         </div>
                         <div class="flex">
@@ -211,8 +207,8 @@ class = "login_none" 제거 및 추가
                                         <option name="1" value="1">년도 데이터</option>
                                         <option name="2" value="2">반기 데이터</option>
                                         <option name="3" value="3">분기 데이터</option>
-                                        <option name="4" value="4">월별 데이터</option>
-                                        <option name="5" value="5">주간 데이터</option>
+<%--                                        <option name="4" value="4">월별 데이터</option>--%>
+<%--                                        <option name="5" value="5">주간 데이터</option>--%>
                                     </select>
                                     <select id="startDate_2">
                                         <option name="0" value="0">시작일</option>
@@ -225,110 +221,11 @@ class = "login_none" 제거 및 추가
                             <div class="col-2 bd_r0 st_box05_wi">
                                 <p class="selectText">항목</p>
                                 <div class="selectWrap st_box05">
-                                    <select id="colType1_2" style="display:block;">
-                                    <option value="0">항목</option>
-                                    <option value="saleAmt">총 매출</option>
-                                    <option value="storeCnt">점포 수</option>
-                                    <option value="storeAmt">점포당 매출</option>
-                                    <option value="useCnt">결제 건수</option>
-                                    <option value="useAmt">결제 단가</option>
-                                    <option value="cnt20under">20대 이하 고객수</option>
-                                    <option value="cnt30">30대 고객수</option>
-                                    <option value="cnt40">40대 고객수</option>
-                                    <option value="cnt50">50대 고객수</option>
-                                    <option value="cnt60over">60대 이상 고객 수 </option>
-                                    <option value="time2406">00~06시 고객수</option>
-                                    <option value="time0609">06~09시 고객수</option>
-                                    <option value="time0912">09~12시 고객수</option>
-                                    <option value="time1215">12~15시 고객수</option>
-                                    <option value="time1518">15~18시 고객수</option>
-                                    <option value="time1821">18~21시 고객수</option>
-                                    <option value="time2124">21~24시 고객수</option>
-                                    <option value="mon">월요일 고객수</option>
-                                    <option value="tue">화요일 고객수</option>
-                                    <option value="wed">수요일 고객수</option>
-                                    <option value="thu">목요일 고객수</option>
-                                    <option value="fri">금요일 고객수</option>
-                                    <option value="sat">토요일 고객수</option>
-                                    <option value="sun">일요일 고객수</option>
-                                </select>
-                                    <select id="colType2_2" style="display:none;">
+                                    <select id="colType6_2" style="display:block;">
                                         <option value="0">항목</option>
-                                        <option value="saleAmt">총 매출</option>
-                                        <option value="storeCnt">점포 수</option>
-                                        <option value="storeAmt">점포당 매출</option>
-                                        <option value="useCnt">결제 건수</option>
-                                        <option value="useAmt">결제 단가</option>
-                                        <option value="cnt20under">20대 이하 고객수</option>
-                                        <option value="cnt30">30대 고객수</option>
-                                        <option value="cnt40">40대 고객수</option>
-                                        <option value="cnt50">50대 고객수</option>
-                                        <option value="cnt60over">60대 이상 고객 수 </option>
-                                        <option value="time2406">00~06시 고객수</option>
-                                        <option value="time0609">06~09시 고객수</option>
-                                        <option value="time0912">09~12시 고객수</option>
-                                        <option value="time1215">12~15시 고객수</option>
-                                        <option value="time1518">15~18시 고객수</option>
-                                        <option value="time1821">18~21시 고객수</option>
-                                        <option value="time2124">21~24시 고객수</option>
-                                        <option value="mon">월요일 고객수</option>
-                                        <option value="tue">화요일 고객수</option>
-                                        <option value="wed">수요일 고객수</option>
-                                        <option value="thu">목요일 고객수</option>
-                                        <option value="fri">금요일 고객수</option>
-                                        <option value="sat">토요일 고객수</option>
-                                        <option value="sun">일요일 고객수</option>
-                                    </select>
-                                    <select id="colType3_2" style="display:none;">
-                                        <option value="">항목</option>
-                                        <option value="">총 매출</option>
-                                        <option value="">표본점포 수</option>
-                                        <option value="">판매건수</option>
-                                        <option value="">판매단가</option>
-                                    </select>
-                                    <select id="colType4_2" style="display:none;">
-                                        <option value="0">항목</option>
-                                        <option value="pop">전체 생활인구 수</option>
-                                        <option value="m20Under">남성 20대 이하</option>
-                                        <option value="m30">남성 30대</option>
-                                        <option value="m40">남성 40대</option>
-                                        <option value="m50">남성 50대</option>
-                                        <option value="m60Over">남성 60대 이상</option>
-                                        <option value="w20Under">여성 20대 이하</option>
-                                        <option value="w30">여성 30대</option>
-                                        <option value="w40">여성 40대</option>
-                                        <option value="w50">여성 50대</option>
-                                        <option value="w60Over">여성 60대 이상</option>
-                                        <option value="time2406">00~06시</option>
-                                        <option value="time0609">06~09시</option>
-                                        <option value="time0912">09~12시</option>
-                                        <option value="time1215">12~15시</option>
-                                        <option value="time1518">15~18시</option>
-                                        <option value="time1821">18~21시</option>
-                                        <option value="time2124">21~24시</option>
-                                        <option value="popMon">월요일</option>
-                                        <option value="popTue">화요일</option>
-                                        <option value="popWed">수요일</option>
-                                        <option value="popThu">목요일</option>
-                                        <option value="popFri">금요일</option>
-                                        <option value="popSat">토요일</option>
-                                        <option value="popSun">일요일</option>
-                                    </select>
-                                    <select id="colType5_2" style="display:none;">
-                                        <option value="0">항목</option>
-                                        <option value="pop">전체 주거인구 수</option>
-                                        <option value="m20Under">남성 10대 이하</option>
-                                        <option value="m20">남성 20대</option>
-                                        <option value="m30">남성 30대</option>
-                                        <option value="m40">남성 40대</option>
-                                        <option value="m50">남성 50대</option>
-                                        <option value="m60Over">남성 60대 이상</option>
-                                        <option value="w20Under">여성 10대 이하</option>
-                                        <option value="w20">여성 20대</option>
-                                        <option value="w30">여성 30대</option>
-                                        <option value="w40">여성 40대</option>
-                                        <option value="w50">여성 50대</option>
-                                        <option value="w60Over">여성 60대 이상</option>
+                                        <option value="gnsl">상가 공실율(평균)</option>
+                                        <option value="rentPyn">상가 임대료(평균)</option>
+                                        <option value="cstPyn">상가 관리비(평균)</option>
                                     </select>
                                     <div class="col-1 st_box06">
                                         <button id="search_2">조회</button>
@@ -340,7 +237,7 @@ class = "login_none" 제거 및 추가
                     </div>
                     <div class="row">
                         <div class="col-12 chart_box">
-                            <span class="chart_text">[단위 : 억 원]</span>
+                            <span class="chart_text" id="chart_text2">[단위 : ]</span>
                             <div id="main_chart2" class="chart"></div>
                         </div>
                     </div>
@@ -393,13 +290,13 @@ class = "login_none" 제거 및 추가
 
     $(function() {
         var param = {};
-        getAjax("getUpjongChgRate", "/agile/statistics/getUpjongChgRate",param, fn_eatoutDiff, fn_error);
-        setAreaList(1);
+        getAjax("getUpjongChgRate", "/agile/vacancy/getDepositList",param, fn_depositDiff, fn_error);
+        setAreaList(1,null,'vacancy');
         setUpjongList(2);
-        setDateList(1);
-        setAreaList_sub(1);
+        setDateList(1,'vacancy');
+        setAreaList_sub(1,null,'vacancy');
         setUpjongList_sub(2);
-        setDateList_sub(1);
+        setDateList_sub(1,'vacancy');
         setDateInfo();
         $("#upjong1").attr('disabled',true);
         $("#upjong1_2").attr('disabled',true);
@@ -412,70 +309,25 @@ class = "login_none" 제거 및 추가
         //-------------------------------------------- 상단 선택 항목
         // 주제 선택 이벤트
         $("#dataType").on("change", function(){
-            console.log($('#dataType option:selected').text());
+            // console.log($('#dataType option:selected').text());
             //selected value
             $("#type_nm").text($('#dataType option:selected').text())
             dataTypeNum = $(this).val();
-            console.log($('#dateType').children('option:last').val())
-            if(dataTypeNum == 1){
-                console.log('외식 데이터 선택');
-                reset_select(0);
-                if($('#dateType').children('option:last').val() == 5){
-                    $('#dateType').children('option:last').remove();
-                }
-                $("#area_admi").attr('disabled',false);
-                $("#upjong2").attr('disabled',false);
-                $("#upjong3").attr('disabled',false);
-                change_colType($(this).val(),true);
-                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon03.svg'});
-
-            }else if(dataTypeNum == 2){
-                console.log('배달 데이터 선택');
-                if($('#dateType').children('option:last').val() == 5){
-                    $('#dateType').children('option:last').remove();
-                }
-                reset_select(0);
-                $("#area_admi").attr('disabled',true);
-                $("#upjong2").attr('disabled',false);
-                $("#upjong3").attr('disabled',false);
-                change_colType($(this).val(),true);
-                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon01.svg'});
-
-            }else if(dataTypeNum == 3){
-                console.log('메뉴 데이터 선택');
-                reset_select(0);
-                $("#area_admi").attr('disabled',false);
-                $("#upjong2").attr('disabled',false);
-                $("#upjong3").attr('disabled',false);
-                change_colType($(this).val(),true);
-                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon04.svg'});
-                $('#dateType').append('<option name="5" value="5">주간 데이터</option>');
-
-            }else if(dataTypeNum == 4){
-                console.log('생활 인구 데이터 선택');
-                if($('#dateType').children('option:last').val() == 5){
-                    $('#dateType').children('option:last').remove();
-                }
-                reset_select(0);
-                $("#area_admi").attr('disabled',false);
-                $("#upjong2").attr('disabled',true);
-                $("#upjong3").attr('disabled',true);
-                change_colType($(this).val(),true);
-                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon02.svg'});
-
-            }else if(dataTypeNum == 5){
-                console.log('주거 인구 데이터 선택');
-                if($('#dateType').children('option:last').val() == 5){
-                    $('#dateType').children('option:last').remove();
-                }
-                reset_select(0);
-                $("#area_admi").attr('disabled',false);
-                $("#upjong2").attr('disabled',true);
-                $("#upjong3").attr('disabled',true);
-                change_colType($(this).val(),true);
-                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon05.svg'});
-
-            }
+            // console.log($('#dateType').children('option:last').val())
+            // console.log(dataTypeNum);
+            // if(dataTypeNum == 1){
+            //     console.log('외식 데이터 선택');
+            //     reset_select(0);
+            //     if($('#dateType').children('option:last').val() == 5){
+            //         $('#dateType').children('option:last').remove();
+            //     }
+            //     $("#area_admi").attr('disabled',false);
+            //     $("#upjong2").attr('disabled',false);
+            //     $("#upjong3").attr('disabled',false);
+            //     change_colType($(this).val(),true);
+            //     $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon03.svg'});
+            //
+            // }
         });
         // 지역 선택 이벤트
         $("#area_mega").on("change", function(){
@@ -483,7 +335,7 @@ class = "login_none" 제거 및 추가
             $("#admi_nm").text($('#area_mega option:selected').text());
             //selected value
             if($(this).val() != 0){
-                setAreaList(2,$(this).val());
+                setAreaList(2,$(this).val(),'vacancy');
                 admiCd = $(this).val();
             }else{
                 reset_select(1);
@@ -492,41 +344,19 @@ class = "login_none" 제거 및 추가
             }
         });
         $("#area_cty").on("change", function(){
-            $('#area_admi').children('option:not(:first)').remove();
-            $("#admi_nm").text($('#area_cty option:selected').text());
-            //selected value
-            setAreaList(3,$(this).val());
+            // $('#area_admi').children('option:not(:first)').remove();
+            // $("#admi_nm").text($('#area_cty option:selected').text());
+            // //selected value
+            // setAreaList(3,$(this).val(),'vacancy');
             admiCd = $(this).val();
             admGbNum = 2;
-        });
-        $("#area_admi").on("change", function(){
-            $("#admi_nm").text($('#area_admi option:selected').text());
-            //selected value
-            admiCd = $(this).val();
-            admGbNum = 3;
-        });
-
-        //업종 선택 이벤트
-        $("#upjong2").on("change", function(){
-            $("#upjong_nm").text($('#upjong2 option:selected').text())
-            $('#upjong3').children('option:not(:first)').remove();
-            //selected value
-            setUpjongList(3,$(this).val());
-            upjongCd = $(this).val();
-            upjongGbNum = 2;
-        });
-        $("#upjong3").on("change", function(){
-            $("#upjong_nm").text($('#upjong3 option:selected').text())
-            // 마지막 업종 선택시 데이터 출력
-            upjongCd = $(this).val();
-            upjongGbNum = 3;
         });
 
         //날짜 선택 이벤트
         $("#dateType").on("change", function(){
             //selected value
             reset_select(3);
-            setDateList($(this).val());
+            setDateList($(this).val(),'vacancy');
             dateTypeNum = $(this).val();
         });
         $("#startDate").on("change", function(){
@@ -544,16 +374,20 @@ class = "login_none" 제거 및 추가
                 alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
                 return;
             }
+            if($('#startDate option:selected').val() == 0 || $('#endDate option:selected').val() == 0){
+                alert('검색 일자를 선택해주세요.');
+                return;
+            }
             param.admGb = admGbNum;
             param.upjongType = upjongGbNum;
             param.dateType = dateTypeNum;
             if(!(admiCd == '' || admiCd == 0 || admiCd == null)) param.areaCd = admiCd;
-            if(!(upjongCd == '' || upjongCd == 0 || upjongCd == null)) param.upjongCd = upjongCd;
+            // if(!(upjongCd == '' || upjongCd == 0 || upjongCd == null)) param.upjongCd = upjongCd;
             if(!(startDate == '' || startDate == 0 || startDate == null)) param.dateStart = startDate;
             if(!(endDate == '' || endDate == 0 || endDate == null)) param.dateEnd = endDate;
-
-            console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum+')');
-            console.log(param);
+            dataTypeNum = $("#dataType").val();
+            // console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum+')');
+            // console.log(param);
             searchBtnNum = 1;
             main_search(dataTypeNum,param);
         });
@@ -571,34 +405,6 @@ class = "login_none" 제거 및 추가
                 $("#upjong2_2").attr('disabled',false);
                 $("#upjong3_2").attr('disabled',false);
                 change_colType($(this).val(),false);
-            }else if(dataTypeNum_sub == 2){
-                console.log('배달 데이터 선택');
-                reset_select(0);
-                $("#area_admi_2").attr('disabled',true);
-                $("#upjong2_2").attr('disabled',false);
-                $("#upjong3_2").attr('disabled',false);
-                change_colType($(this).val(),false);
-            }else if(dataTypeNum_sub == 3){
-                console.log('메뉴 데이터 선택');
-                reset_select(0);
-                $("#area_admi_2").attr('disabled',false);
-                $("#upjong2_2").attr('disabled',false);
-                $("#upjong3_2").attr('disabled',false);
-                change_colType($(this).val(),false);
-            }else if(dataTypeNum_sub == 4){
-                console.log('생활 인구 데이터 선택');
-                reset_select(0);
-                $("#area_admi_2").attr('disabled',false);
-                $("#upjong2_2").attr('disabled',true);
-                $("#upjong3_2").attr('disabled',true);
-                change_colType($(this).val(),false);
-            }else if(dataTypeNum_sub == 5){
-                console.log('주거 인구 데이터 선택');
-                reset_select(0);
-                $("#area_admi_2").attr('disabled',false);
-                $("#upjong2_2").attr('disabled',true);
-                $("#upjong3_2").attr('disabled',true);
-                change_colType($(this).val(),false);
             }
         });
         // 지역 선택 이벤트
@@ -606,7 +412,7 @@ class = "login_none" 제거 및 추가
             $('#area_cty_2').children('option:not(:first)').remove();
             //selected value
             if($(this).val() != 0){
-                setAreaList_sub(2,$(this).val());
+                setAreaList_sub(2,$(this).val(),'vacancy');
                 admiCd_sub = $(this).val();
             }else{
                 reset_select(1);
@@ -615,37 +421,19 @@ class = "login_none" 제거 및 추가
             }
         });
         $("#area_cty_2").on("change", function(){
-            $('#area_admi_2').children('option:not(:first)').remove();
-            console.log('#area_cty_2 : '+$(this).val())
-            //selected value
-            setAreaList_sub(3,$(this).val());
+            // $('#area_admi_2').children('option:not(:first)').remove();
+            // console.log('#area_cty_2 : '+$(this).val())
+            // //selected value
+            // setAreaList_sub(3,$(this).val());
             admiCd_sub = $(this).val();
             admGbNum_sub = 2;
         });
-        $("#area_admi_2").on("change", function(){
-            //selected value
-            admiCd_sub = $(this).val();
-            admGbNum_sub = 3;
-        });
 
-        //업종 선택 이벤트
-        $("#upjong2_2").on("change", function(){
-            $('#upjong3_2').children('option:not(:first)').remove();
-            //selected value
-            setUpjongList_sub(3,$(this).val());
-            upjongCd_sub = $(this).val();
-            upjongGbNum_sub = 2;
-        });
-        $("#upjong3_2").on("change", function(){
-            // 마지막 업종 선택시 데이터 출력
-            upjongCd_sub = $(this).val();
-            upjongGbNum_sub = 3;
-        });
 
         //날짜 선택 이벤트
         $("#dateType_2").on("change", function(){
             //selected value
-            setDateList_sub($(this).val());
+            setDateList_sub($(this).val(),'vacancy');
             dateTypeNum_sub = $(this).val();
         });
         $("#startDate_2").on("change", function(){
@@ -663,48 +451,28 @@ class = "login_none" 제거 및 추가
                 alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
                 return;
             }
+            if($('#startDate_2 option:selected').val() == 0 || $('#endDate_2 option:selected').val() == 0){
+                alert('검색 일자를 선택해주세요.');
+                return;
+            }
 
             param.admGb = admGbNum_sub;
             param.upjongType = upjongGbNum_sub;
             param.dateType = dateTypeNum_sub;
             if(!(admiCd_sub == '' || admiCd_sub == 0 || admiCd_sub == null)) param.areaCd = admiCd_sub;
-            if(!(upjongCd_sub == '' || upjongCd_sub == 0 || upjongCd_sub == null)) param.upjongCd = upjongCd_sub;
+            // if(!(upjongCd_sub == '' || upjongCd_sub == 0 || upjongCd_sub == null)) param.upjongCd = upjongCd_sub;
             if(!(startDate_sub == '' || startDate_sub == 0 || startDate_sub == null)) param.dateStart = startDate_sub;
             if(!(endDate_sub == '' || endDate_sub == 0 || endDate_sub == null)) param.dateEnd = endDate_sub;
 
             console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum_sub+')');
-            console.log(param);
+            // console.log(param);
             searchBtnNum = 2;
+            dataTypeNum_sub = $("#dataType_2").val()
+            // console.log(dataTypeNum_sub);
             main_search(dataTypeNum_sub,param);
         });
         //-------------------------------------------- 하단 선택 항목
 
-        //------------------------------------------- 좌측 업종 이름 클릭
-        // $('#upjongNmClick').click(function(){
-        //     console.log('upjongNmClick start');
-        //     console.log($(this).val());
-        //
-        //     searchType = 1;
-        //     var param = {};
-        //     if($("#colType"+dataTypeNum+"_2 option:selected").val() == 0){
-        //         alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
-        //         return;
-        //     }
-        //
-        //     param.admGb = admGbNum_sub;
-        //     param.upjongType = upjongGbNum_sub;
-        //     param.dateType = dateTypeNum_sub;
-        //     if(!(admiCd_sub == '' || admiCd_sub == 0 || admiCd_sub == null)) param.areaCd = admiCd_sub;
-        //     if(!(upjongCd_sub == '' || upjongCd_sub == 0 || upjongCd_sub == null)) param.upjongCd = upjongCd_sub;
-        //     if(!(startDate_sub == '' || startDate_sub == 0 || startDate_sub == null)) param.dateStart = startDate_sub;
-        //     if(!(endDate_sub == '' || endDate_sub == 0 || endDate_sub == null)) param.dateEnd = endDate_sub;
-        //
-        //     console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum_sub+')');
-        //     console.log(param);
-        //     // searchBtnNum = 2;
-        //     // main_search(dataTypeNum_sub,param);
-        // })
-        //------------------------------------------- 좌측 업종 이름 클릭
 
         //-------------------------------------------- 설정 동기화 항목
         $('#setting_btn').on("click",function(){
@@ -720,30 +488,9 @@ class = "login_none" 제거 및 추가
                     $("#area_cty_2").val($('#area_cty').val()).trigger("change");
                 }, 100);
             }
-            if($('#area_admi').val() != 0){
-                setTimeout(function(){
-                    $("#area_admi_2").val($('#area_admi').val()).trigger("change");
-                },200);
-            }
 
-            //업종 동기화
-            if(dataTypeNum_sub == 1 || dataTypeNum_sub == 2){
-                $("#upjong1_2").val($('#upjong1').val()).trigger("change");
-
-                if($('#upjong2').val() != 0){
-                    setTimeout(function(){
-                        $("#upjong2_2").val($('#upjong2').val()).trigger("change");
-                    },100);
-                }
-                if($('#upjong3').val() != 0){
-                    setTimeout(function(){
-                        $("#upjong3_2").val($('#upjong3').val()).trigger("change");
-                    },200);
-                }
-            }
 
             //기간 동기화
-            $("#dateType_2").val($('#dateType').val()).trigger("change");
             setTimeout(function(){
                 $("#startDate_2").val($('#startDate').val()).trigger("change");
                 $("#endDate_2").val($('#endDate').val()).trigger("change");
@@ -751,54 +498,14 @@ class = "login_none" 제거 및 추가
 
             //항목 동기화
             if($("#dataType option").index($("#dataType option:selected")) == 0){
-                $("#colType1_2").val($('#colType1').val()).trigger("change");
-            }else if($("#dataType option").index($("#dataType option:selected")) == 1){
-                $("#colType2_2").val($('#colType2').val()).trigger("change");
-            }else if($("#dataType option").index($("#dataType option:selected")) == 2){
-                $("#colType3_2").val($('#colType3').val()).trigger("change");
-            }else if($("#dataType option").index($("#dataType option:selected")) == 3){
-                $("#colType4_2").val($('#colType4').val()).trigger("change");
-            }else if($("#dataType option").index($("#dataType option:selected")) == 4){
-                $("#colType5_2").val($('#colType5').val()).trigger("change");
+                $("#colType6_2").val($('#colType6').val()).trigger("change");
             }
         })
         //-------------------------------------------- 설정 동기화 항목
     });
-    function upjongNmClick(upjongCd){
-        console.log('upjongNmClick start2');
-        console.log(upjongCd);
 
-        searchType = 0;
-        var param = {};
-        // if($("#colType"+dataTypeNum+"_2 option:selected").val() == 0){
-        //     alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
-        //     return;
-        // }
-        $('#dataType').val('1').trigger("change");
-        $('#colType1').val('saleAmt').trigger("change");
-
-        // param.admGb = 1;
-        // param.upjongType = 3;
-        // param.dateType = 1;
-        // if(!(admiCd == '' || admiCd == 0 || admiCd == null)) param.areaCd = admiCd;
-        // if(!(upjongCd == '' || upjongCd == 0 || upjongCd == null)) param.upjongCd = upjongCd;
-        // if(!(startDate == '' || startDate == 0 || startDate == null)) param.dateStart = startDate;
-        // if(!(endDate == '' || endDate == 0 || endDate == null)) param.dateEnd = endDate;
-        //
-        // console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum_sub+')');
-        // console.log(param);
-        // searchBtnNum = 1;
-        // main_search(dataTypeNum_sub,param);
-        console.log(upjongCd.substring(0,3));
-        $("#upjong2").val(upjongCd.substring(0,3)).trigger("change");
-        // $("#upjong3").val(upjongCd).trigger("change");
-        // $('#upjong2').val(upjongCd.substring(0,3)).prop("selected",true);
-        setTimeout(function() {
-            $('#upjong3').val(upjongCd).prop("selected", true);
-        },200)
-    }
     // 전지역 업종 증감률 리스트
-    function fn_eatoutDiff(id, response, param){
+    function fn_depositDiff(id, response, param){
 
         eatoutDiffResponse.diff = response.data;
 
@@ -827,7 +534,28 @@ class = "login_none" 제거 및 추가
         $('#setDateInfo').text(returnHtml);
         $('#setDateInfo2').text(returnHtml2);
     }
-
+    //
+    function admiClick(ctyCd){
+        console.log(ctyCd.substring(0,2));
+        $("#area_mega").val(ctyCd.substring(0,2)).trigger("change");
+        setTimeout(function () {
+            $("#area_cty").val(ctyCd).trigger("change");
+        },400);
+    }
+    $('#colType6').change(function(){
+        console.log($(this).val())
+        if($(this).val() == 'gnsl') $('#chart_text1').text('[단위 : %]');
+        if($(this).val() == 'rentPyn') $('#chart_text1').text('[단위 : 천 원/평]');
+        if($(this).val() == 'cstPyn') $('#chart_text1').text('[단위 : 천 원/평]');
+    })
+    $('#colType6_2').change(function(){
+        console.log($(this).val())
+        if($(this).val() == 'gnsl') {
+            if($(this).val() == 'gnsl') $('#chart_text2').text('[단위 : %]');
+            if($(this).val() == 'rentPyn') $('#chart_text2').text('[단위 : 천 원/평]');
+            if($(this).val() == 'cstPyn') $('#chart_text2').text('[단위 : 천 원/평]');
+        }
+    })
 
 </script>
 
@@ -866,9 +594,9 @@ class = "login_none" 제거 및 추가
         </tr>
         {{#each this}}
         <tr>
-            <td><span onclick="upjongNmClick('{{upjong3Cd}}')" value="{{upjong3Cd}}">{{upjong3Nm}}</span></td>
-            <td class="{{checkUpDown calcPer}}">{{checkUpDown clacPer}} {{chgAbs calcPer}} %</td>
-            <td>{{addComma saleAmt}}</td>
+            <td><span onclick="admiClick('{{ctyCd}}')" value="{{ctyCd}}">{{ctyNm}}</span></td>
+            <td class="{{checkUpDown per}}">{{chgAbs per}} %</td>
+            <td>{{addComma thisDeposit}}</td>
         </tr>
         {{/each}}
     </table>
