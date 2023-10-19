@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  eatout:
+  agile_eatout:
     container_name: agile_eatout
     build: .
     restart: always
