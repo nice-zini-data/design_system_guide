@@ -192,11 +192,11 @@ class = "login_none" 제거 및 추가
                                         <option value="sun">일요일 고객수</option>
                                     </select>
                                     <select id="colType3" style="display:none;">
-                                        <option value="">항목</option>
-                                        <option value="">총 매출</option>
-                                        <option value="">표본점포 수</option>
-                                        <option value="">판매건수</option>
-                                        <option value="">판매단가</option>
+                                        <option value="0">항목</option>
+                                        <option value="totSaleAmt">총 매출</option>
+                                        <option value="storeCnt">표본점포 수</option>
+                                        <option value="saleQty">판매건수</option>
+                                        <option value="saleAmt">판매단가</option>
                                     </select>
                                     <select id="colType4" style="display:none;">
                                         <option value="0">항목</option>
@@ -381,11 +381,11 @@ class = "login_none" 제거 및 추가
                                         <option value="sun">일요일 고객수</option>
                                     </select>
                                     <select id="colType3_2" style="display:none;">
-                                        <option value="">항목</option>
-                                        <option value="">총 매출</option>
-                                        <option value="">표본점포 수</option>
-                                        <option value="">판매건수</option>
-                                        <option value="">판매단가</option>
+                                        <option value="0">항목</option>
+                                        <option value="totSaleAmt">총 매출</option>
+                                        <option value="storeCnt">표본점포 수</option>
+                                        <option value="saleQty">판매건수</option>
+                                        <option value="saleAmt">판매단가</option>
                                     </select>
                                     <select id="colType4_2" style="display:none;">
                                         <option value="0">항목</option>
@@ -521,6 +521,9 @@ class = "login_none" 제거 및 추가
             console.log($('#dateType').children('option:last').val())
             if(dataTypeNum == 1){
                 console.log('외식 데이터 선택');
+                setDateList(1);
+                setAreaList(1);
+                setUpjongList(2);
                 reset_select(0);
                 if($('#dateType').children('option:last').val() == 5){
                     $('#dateType').children('option:last').remove();
@@ -533,6 +536,9 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 2){
                 console.log('배달 데이터 선택');
+                setDateList(1);
+                setAreaList(1);
+                setUpjongList(2);
                 if($('#dateType').children('option:last').val() == 5){
                     $('#dateType').children('option:last').remove();
                 }
@@ -545,6 +551,9 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 3){
                 console.log('메뉴 데이터 선택');
+                setDateList(1);
+                setAreaList(1);
+                setUpjongList(2);
                 reset_select(0);
                 $("#area_admi").attr('disabled',false);
                 $("#upjong2").attr('disabled',false);
@@ -555,6 +564,9 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 4){
                 console.log('생활 인구 데이터 선택');
+                setDateList(1);
+                setAreaList(1);
+                setUpjongList(2);
                 if($('#dateType').children('option:last').val() == 5){
                     $('#dateType').children('option:last').remove();
                 }
@@ -567,6 +579,9 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 5){
                 console.log('주거 인구 데이터 선택');
+                setDateList(1);
+                setAreaList(1);
+                setUpjongList(2);
                 if($('#dateType').children('option:last').val() == 5){
                     $('#dateType').children('option:last').remove();
                 }
@@ -642,6 +657,8 @@ class = "login_none" 제거 및 추가
         $("#search").on("click", function(){
             searchType = 0;
             var param = {};
+            console.log(dataTypeNum);
+            console.log($("#colType"+dataTypeNum+" option:selected").val());
             if($("#colType"+dataTypeNum+" option:selected").val() == 0){
                 alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
                 return;
@@ -657,6 +674,7 @@ class = "login_none" 제거 및 추가
             console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum+')');
             console.log(param);
             searchBtnNum = 1;
+
             main_search(dataTypeNum,param);
         });
         //-------------------------------------------- 상단 선택 항목
@@ -829,18 +847,18 @@ class = "login_none" 제거 및 추가
             }
 
             //업종 동기화
-            if(dataTypeNum_sub == 1 || dataTypeNum_sub == 2){
-                $("#upjong1_2").val($('#upjong1').val()).trigger("change");
+            if(dataTypeNum_sub == 1 || dataTypeNum_sub == 2 || dataTypeNum_sub == 3){
+                // $("#upjong1_2").val($('#upjong1').val()).trigger("change");
 
                 if($('#upjong2').val() != 0){
                     setTimeout(function(){
                         $("#upjong2_2").val($('#upjong2').val()).trigger("change");
-                    },100);
+                    },300);
                 }
                 if($('#upjong3').val() != 0){
                     setTimeout(function(){
                         $("#upjong3_2").val($('#upjong3').val()).trigger("change");
-                    },200);
+                    },600);
                 }
             }
 
@@ -849,7 +867,7 @@ class = "login_none" 제거 및 추가
             setTimeout(function(){
                 $("#startDate_2").val($('#startDate').val()).trigger("change");
                 $("#endDate_2").val($('#endDate').val()).trigger("change");
-            },200);
+            },500);
 
             //항목 동기화
             if($("#dataType option").index($("#dataType option:selected")) == 0){

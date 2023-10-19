@@ -132,6 +132,8 @@ function setDateList(dateType,typeCd){
     param.dateType = dateType;
     dateTypeNum = dateType;
     typeCdTmp = typeCd;
+    console.log('dataTypeNum : '+dataTypeNum);
+    param.dataType = dataTypeNum;
     if(typeCd == undefined){
         typeCd = 'main'
     }
@@ -142,11 +144,12 @@ function fn_setDate(id, response, param) {
     //화면 초기화
     $('#startDate').children('option:not(:first)').remove();
     $('#endDate').children('option:not(:first)').remove();
-
+    console.log('fn_setDate');
+    console.log(response);
     response.data.forEach(function (val, idx){
         var tmpdate = '';
         if(dateTypeNum != 1) {
-            if(typeCdTmp == 'vacancy'){
+            if(typeCdTmp == 'vacancy' || dataTypeNum == '3'){
                 tmpdate = val.date
             }else{
                 tmpdate = val.dateNm.substring(0, 4) + val.date
@@ -222,6 +225,8 @@ function setDateList_sub(dateType,typeCd){
     var param = {};
     param.dateType = dateType;
     dateTypeNum = dateType;
+    console.log('dataTypeNum : '+dataTypeNum);
+    param.dataType = dataTypeNum;
     if(typeCd == undefined){
         typeCd = 'main'
     }
@@ -236,7 +241,7 @@ function fn_setDate_sub(id, response, param) {
     response.data.forEach(function (val, idx){
         var tmpdate = '';
         if(dateTypeNum != 1) {
-            if(typeCdTmp == 'vacancy'){
+            if(typeCdTmp == 'vacancy' || dataTypeNum == '3'){
                 tmpdate = val.date
             }else{
                 tmpdate = val.dateNm.substring(0, 4) + val.date
@@ -245,6 +250,7 @@ function fn_setDate_sub(id, response, param) {
             tmpdate = val.date
         }
         html += '<option value="' + tmpdate + '" data-areaCd="'+tmpdate+'">' + val.dateNm + '</option>';
+        tmpdate = '';
     });
 
     $("#startDate_2").append(html);
@@ -267,7 +273,7 @@ function main_search(dataType,param){
     }else if(dataType == 2){
         getAjax("getUpjongList", "/agile/statistics/getDeliveryList",param, fn_makechart, fn_error);
     }else if(dataType == 3){
-        // getAjax("getUpjongList", "/agile/main/getDateList",param, fn_setDate, fn_error);
+        getAjax("getPosList", "/agile/statistics/getPosList",param, fn_makechart, fn_error);
     }else if(dataType == 4){
         getAjax("getUpjongList", "/agile/statistics/getLiviList",param, fn_makechart, fn_error);
     }else if(dataType == 5){
@@ -363,6 +369,7 @@ function change_colType(type,check){
 
 // 메인화면 그래프 생성
 function fn_makechart(id, response, param){
+    console.log(response);
     var maxVal = 0;
     var minVal = 0;
     var tmpVal = 0;
@@ -378,7 +385,7 @@ function fn_makechart(id, response, param){
     var resultName = [];
     if(!common.isEmpty(response.data[0])) {
         $.each(response.data,function(index,item){
-            // console.log(item);
+            console.log(item);
             $.each(item,function(key,value) {
                 // console.log(key);
                 // console.log(tmpSel);
@@ -411,6 +418,7 @@ function fn_makechart(id, response, param){
                 }
             });
         });
+        console.log(resultName);
 
         $('#calcAmt').parent().removeClass('down');
         $('#calcAmt').parent().removeClass('up');

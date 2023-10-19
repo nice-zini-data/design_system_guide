@@ -133,30 +133,27 @@
         </if>
     </select>
     <select id="getDateList" resultType="com.zinidata.eatout.vo.output.AgileDateOutVO">
-        select
-        year,
-        <if test='dateType == "1"'>
-            year as date,
-            concat(year,'년') as date_nm
-        </if>
-        <if test='dateType == "2"'>
-            half as date,
-            case when half = 1 then concat(year,'년 하반기') else concat(year,'년 상반기') end as date_nm
-        </if>
-        <if test='dateType == "3"'>
-            quarter as date,
-            concat(year,'년 ',quarter,'분기') as date_nm
-        </if>
-        <if test='dateType == "4"'>
-            month as date,
-            yyyymm as date_nm
-        </if>
-        <if test='dateType == "5"'>
-            week as date,
-            concat(year,'년 ',week,'주차') as date_nm
-        </if>
-        from(
+        <if test='dataType != "3"'>
             select
+                year,
+            <if test='dateType == "1"'>
+                year as date,
+                concat(year,'년') as date_nm
+            </if>
+            <if test='dateType == "2"'>
+                half as date,
+                case when half = 1 then concat(year,'년 하반기') else concat(year,'년 상반기') end as date_nm
+            </if>
+            <if test='dateType == "3"'>
+                quarter as date,
+                concat(year,'년 ',quarter,'분기') as date_nm
+            </if>
+            <if test='dateType == "4"'>
+                month as date,
+                yyyymm as date_nm
+            </if>
+            from(
+                select
                 substring(yyyymm::varchar,1,4) as year
                 <![CDATA[
                     , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then 1 else 2 end half
@@ -164,25 +161,56 @@
                 , date_part('QUARTER',yyyymm::timestamp) as quarter
                 , to_char(yyyymm,'MM')::numeric as month
                 , to_char(yyyymm,'YYYYMM') as yyyymm
-                , date_part('WEEK',yyyymm::timestamp) as week
             from
                 generate_series(to_date(((select min(yyyymm) from tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
             order by
                 yyyymm desc
-        ) tmp
-        group by
-        <if test='dateType == "1"'>
-            1,2
+            ) tmp
+            group by
+            <if test='dateType == "1"'>
+                1,2
+            </if>
+            <if test='dateType != "1"'>
+                1,2,3
+            </if>
+            order by
+            <if test='dateType == "1"'>
+                1,2
+            </if>
+            <if test='dateType != "1"'>
+                1,2,3
+            </if>
         </if>
-        <if test='dateType != "1"'>
-            1,2,3
-        </if>
-        order by
-        <if test='dateType == "1"'>
-            1,2
-        </if>
-        <if test='dateType != "1"'>
-            1,2,3
+        <if test='dataType == "3"'>
+            select
+                <if test='dateType == "1"'>
+                    substring(a.sale_mm,1,4) as date
+                    ,concat(substring(a.sale_mm,1,4),'년') as date_nm
+                </if>
+                <if test='dateType == "2"'>
+                <![CDATA[
+                    concat(substring(a.sale_mm,1,4),case when date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp) <= 2 then 1 else 2 end) as date
+                    ,concat(substring(a.sale_mm,1,4),'년',case when date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp) <= 2 then '전' else '후' end,'반기') as date_nm
+                ]]>
+                </if>
+                <if test='dateType == "3"'>
+                    concat(substring(a.sale_mm,1,4),date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp)) as date
+                    ,concat(substring(a.sale_mm,1,4),'년',date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp),'분기') as date_nm
+                </if>
+                <if test='dateType == "4"'>
+                    sale_mm as date
+                    ,concat(substring(a.sale_mm,1,4),'년',substring(a.sale_mm,5,6),'월') as date_nm
+                </if>
+                <if test='dateType == "5"'>
+                    sale_mm || week as date
+                    ,concat(substring(a.sale_mm,1,4),'년',substring(a.sale_mm,5,6),'월', a.week,'주차') as date_nm
+                </if>
+            from
+                tbagile_pos_info a
+            group by
+                1,2
+            order by
+                1 desc
         </if>
     </select>
     <select id="getMenuList" resultType="com.zinidata.eatout.vo.output.AgileMenuOutVO">
@@ -248,5 +276,42 @@
                 limit 2
             ) tmp
         ) tmp
+    </select>
+    <select id="getFoundationCalc" resultType="com.zinidata.eatout.vo.output.AgileFoundationCalcOutVO">
+        select
+            tmp.*
+            --	손익분기점
+            ,ROUND(total2/30) as cost7
+            ,ROUND(total2/30*10000/${dangaCost}) as cost8
+            --	사업타당성 지표(투자비 대비월 3% 수익률)
+            ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.03+tmp.total1)/0.93) as cost9
+            ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.03+tmp.total1)/0.93/30) as cost10
+            ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.03+tmp.total1)/0.93/30*10000/${dangaCost}) as cost11
+            --	사업타당성 지표(투자비 대비월 3% 수익률)
+            ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.042+tmp.total1)/0.93) as cost9
+            ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.042+tmp.total1)/0.93/30) as cost10
+            ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.042+tmp.total1)/0.93/30*10000/${dangaCost}) as cost11
+        from(
+                select
+                    cost1,cost2,cost3,cost4
+                     ,ROUND(cost1+cost2+cost3+cost4) as sum1
+                     ,cost5,cost6
+                     ,ROUND(cost5 + cost6) as sum2
+                     ,ROUND(cost1+cost2+cost3+cost4+cost5+cost6) as total1
+                     ,ROUND((cost1+cost2+cost3+cost4+cost5+cost6)/0.93) as total2
+                from(
+                        select
+                            ${operCost1} as cost1
+                             ,(${operCost2}*0.9) as cost2
+                             ,ROUND(((${toojaCost1}+${toojaCost5})/(${toojaCost6}*12))
+                            +((${toojaCost1} + ${toojaCost2} + ${toojaCost5})*0.02/12)
+                            +(${toojaCost3}* ${toojaCost4}*0.01/12)
+                              ) as cost3
+                             ,${operCost4} as cost4
+                             ,${operCost3} as cost5
+                             ,(${operCost2}*0.1) as cost6
+--                         from dual
+                    ) tmp
+            ) tmp
     </select>
 </mapper>

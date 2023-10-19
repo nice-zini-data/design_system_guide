@@ -2,11 +2,9 @@ package com.zinidata.eatout.service;
 
 import com.zinidata.eatout.mapper.AgileMainMapper;
 import com.zinidata.eatout.mapper.AgileStatisticsMapper;
+import com.zinidata.eatout.vo.AgileFoundationCalcVO;
 import com.zinidata.eatout.vo.AgileStatisticsVO;
-import com.zinidata.eatout.vo.output.AgileAdmiOutVO;
-import com.zinidata.eatout.vo.output.AgileDateOutVO;
-import com.zinidata.eatout.vo.output.AgileMainOutVO;
-import com.zinidata.eatout.vo.output.AgileUpjongOutVO;
+import com.zinidata.eatout.vo.output.*;
 import com.zinidata.util.GsonUtil;
 import com.zinidata.util.JsonOutputVo;
 import com.zinidata.util.Status;
@@ -90,5 +88,18 @@ public class AgileMainService {
     }
 
 
+    public String getFoundationCalc(AgileFoundationCalcVO agileFoundationCalcVO){
+        String result = "";
+        ArrayList<AgileFoundationCalcOutVO> outVo = agileMainMapper.getFoundationCalc(agileFoundationCalcVO);
+        System.err.println("start getFoundationCalc");
+        System.err.println(outVo);
+        if (!ZiniUtil.isEmpty(outVo)) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.조회, outVo));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.실패));
+        }
+        System.err.println(result);
+        return result;
+    }
 
 }

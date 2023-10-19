@@ -196,6 +196,92 @@
             1
     </select>
 
+    <!--  Pos데이터 정보 호출  -->
+    <select id="getPosList" resultType="com.zinidata.eatout.vo.output.AgilePosOutVO">
+        with tmp_date as(
+            select
+                *
+            from(
+                select
+                    substring(a.sale_mm,1,4) as year
+                    <![CDATA[
+                    ,concat(substring(a.sale_mm,1,4),case when date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp) <= 2 then 1 else 2 end) as half
+                    ]]>
+                    ,concat(substring(a.sale_mm,1,4),date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp)) as quarter
+                    ,sale_mm as yyyymm
+                    ,sale_mm || week as week
+                from
+                    tbagile_pos_info a
+                group by
+                    1,2,3,4,5
+            ) tmp
+        <if test='dateStart != null and dateEnd != null'>
+            where
+            <if test='dateType == "1"'>
+                year between #{dateStart} and #{dateEnd}
+            </if>
+            <if test='dateType == "2"'>
+                half between #{dateStart} and #{dateEnd}
+            </if>
+            <if test='dateType == "3"'>
+                quarter between #{dateStart} and #{dateEnd}
+            </if>
+            <if test='dateType == "4"'>
+                yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
+            </if>
+            <if test='dateType == "5"'>
+                week between #{dateStart} and #{dateEnd}
+            </if>
+        </if>
+        )
+        select
+        <if test='dateType == "1"'>
+            concat(year,'년') as yyyymm
+        </if>
+        <if test='dateType == "2"'>
+            concat(year,'년',b.half,'분기') as yyyymm
+        </if>
+        <if test='dateType == "3"'>
+            concat(year,'.',b.quarter,'Q') as yyyymm
+        </if>
+        <if test='dateType == "4"'>
+            b.yyyymm
+        </if>
+        <if test='dateType == "5"'>
+            concat(substring(b.week,1,4),'년',substring(b.week,5,2),'월',substring(b.week,7,1),'주차') as yyyymm
+        </if>
+            ,sum(store_cnt) as store_cnt, sum(sale_qty) sale_qty, sum(tot_sale_amt) tot_sale_amt
+            ,ROUND(sum(tot_sale_amt) / sum(sale_qty),0) as sale_amt
+        from
+            tbagile_pos_info a,tmp_date b, tb_upjong3 c
+        where 1=1
+            and a.sale_mm = b.yyyymm
+            and a.upjong3_cd = c.upjong3_cd
+        <if test='admGb == "1"'>
+            and mega_cd like #{areaCd}||'%'
+        </if>
+        <if test='admGb == "2"'>
+            and cty_cd like #{areaCd}||'%'
+        </if>
+        <if test='upjongType == "1"'>
+            and a.upjong3_cd like 'Q%'
+        </if>
+        <if test='upjongType == "2"'>
+            and a.upjong3_cd like #{upjongCd}||'%'
+        </if>
+        <if test='upjongType == "3"'>
+            and a.upjong3_cd like #{upjongCd}||'%'
+        </if>
+        <if test='dateType == "5"'>
+            and concat(a.sale_mm,a.week) = b.week
+        </if>
+            and svc_yn = 'Y'
+        group by
+            1
+        order by
+            1
+    </select>
+
     <!--  생활인구데이터 정보 호출  -->
     <select id="getLiviList" resultType="com.zinidata.eatout.vo.output.AgileLiviOutVO">
         with tmp_date as(

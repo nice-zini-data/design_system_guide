@@ -490,7 +490,11 @@ class = "login_none" 제거 및 추가
             }
 
 
+            console.log($('#dateType').val() +" : "+$("#dateType_2").val());
+            console.log($('#startDate').val() +" : "+$("#startDate_2").val());
+            console.log($('#endDate').val() +" : "+$("#endDate_2").val());
             //기간 동기화
+            $("#dateType_2").val($('#dateType').val()).trigger("change");
             setTimeout(function(){
                 $("#startDate_2").val($('#startDate').val()).trigger("change");
                 $("#endDate_2").val($('#endDate').val()).trigger("change");

@@ -58,6 +58,24 @@ public class AgileStatisticsControllerApi {
      * @throws JsonProcessingException
      */
     @ResponseBody
+    @PostMapping(value="/getPosList")
+    @ApiOperation(value="Pos데이터 결과 리스트 호출")
+    @ApiResponses(value = {
+            @ApiResponse(code=200, message = "Pos데이터 결과 리스트 호출")
+    })
+    public String getPosList(AgileStatisticsVO agileStatisticsVO) throws Exception {
+        System.out.println(agileStatisticsVO);
+        String result = agileStatisticsService.getPosList(agileStatisticsVO);
+        return result;
+    }
+
+    /***
+     * 지역, 업종, 기간, 정보 리스트
+     * @param agileStatisticsVO
+     * @return
+     * @throws JsonProcessingException
+     */
+    @ResponseBody
     @PostMapping(value="/getLiviList")
     @ApiOperation(value="외식데이터 결과 리스트 호출")
     @ApiResponses(value = {
