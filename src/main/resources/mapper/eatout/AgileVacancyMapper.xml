@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zinidata.eatout.mapper.AgileVacancyMapper">
+
+    <select id="getTotUpjongInfo" resultType="com.zinidata.eatout.vo.output.AgileMarketMainOutVO">
+        select
+            upjong3_cd, upjong3_nm, sum(before_sale_amt) as before_sale_amt, sum(this_sale_amt) as this_sale_amt,
+            (sum(this_sale_amt) - sum(before_sale_amt)) as calc_sale_amt,
+            round((sum(this_sale_amt) - sum(before_sale_amt) )/ sum(this_sale_amt) * 100,2) as sale_per
+        from(
+                select
+                    yyyymm, a.upjong3_cd, b.upjong3_nm
+                     , case when yyyymm = (select max(yyyymm) from tbss_sum_sales_mega_his) then sum(sale_amt) end as this_sale_amt
+                     , case when yyyymm != (select max(yyyymm) from tbss_sum_sales_mega_his) then sum(sale_amt) end as before_sale_amt
+                from tbss_sum_sales_mega_his a, tb_upjong3 b
+                where 1=1
+                  and a.upjong3_cd = b.upjong3_cd
+                  and yyyymm between to_char(to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM') + interval '-1 month','YYYYMM') and (select max(yyyymm) from tbss_sum_sales_mega_his)
+                  and b.upjong3_cd like 'Q%'
+                group by
+                    1,2,3
+        ) tmp
+        group by
+            1,2
+    </select>
+    <select id="getAdmiList" resultType="com.zinidata.eatout.vo.output.AgileAdmiOutVO">
+        select
+            area_nm, area_cd
+        from(
+            select
+            <if test='admGb == "1"'>
+                mega_nm as area_nm,mega_cd as area_cd
+            </if>
+            <if test='admGb == "2"'>
+                cty_nm as area_nm,cty_cd as area_cd
+            </if>
+            from
+                tb_agile_vacancyrate
+        ) as tmp
+        where 1=1
+        <if test='admGb == "2"'>
+            and area_cd like #{areaCd}||'%'
+        </if>
+        group by
+            1,2
+        order by
+            2
+    </select>
+    <select id="getDateList" resultType="com.zinidata.eatout.vo.output.AgileDateOutVO">
+        select
+        <if test='dateType == "1"'>
+            year as date
+            ,year || '년' as date_nm
+        </if>
+        <if test='dateType == "2"'>
+            year|| case when quarter = 'Q1' or quarter = 'Q2' then '1'
+                when quarter = 'Q3' or quarter = 'Q4' then '2' end
+            as date
+            ,year || '년 '|| case when quarter = 'Q1' or quarter = 'Q2' then '상반기'
+                when quarter = 'Q3' or quarter = 'Q4' then '하반기' end
+            as date_nm
+        </if>
+        <if test='dateType == "3"'>
+            year||substring(quarter,2,1) as date
+            ,year || '년 '|| case when quarter = 'Q1' then '1분기'
+            when quarter = 'Q2' then '2분기'
+            when quarter = 'Q3' then '3분기'
+            when quarter = 'Q4' then '4분기' end
+            as date_nm
+        </if>
+        from(
+            select
+                year,quarter
+            from
+                tb_agile_vacancyrate
+        ) tmp
+        where 1=1
+<!--        <if test='dateType != "1"'>-->
+<!--            and year = #{year}||'%'-->
+<!--        </if>-->
+        group by
+        <if test='dateType == "1"'>
+            1
+        </if>
+        <if test='dateType != "1"'>
+            1,2
+        </if>
+        order by
+        <if test='dateType == "1"'>
+            1
+        </if>
+        <if test='dateType != "1"'>
+            1,2
+        </if>
+    </select>
+
+    <select id="getDepositList" resultType="com.zinidata.eatout.vo.output.AgileDepositOutVO">
+        select
+            cty_nm ,cty_cd
+             , ROUND((sum(this_deposit) / sum(last_deposit))*100,2) - 100 as per
+            --	,sum(last_deposit) as last_deposit
+             ,sum(this_deposit) as this_deposit
+        from(
+                select
+                    cty_nm,cty_cd
+                     ,case when row_num = 1 then deposit end as this_deposit
+                     ,case when row_num = 2 then deposit end as last_deposit
+                from(
+                        select
+                            row_number() over(partition by cty_cd order by date_cd desc) as row_num
+			,*
+                        from(
+                                select
+                                    year|| case when quarter = 'Q1' or quarter = 'Q2' then '1'
+                                    when quarter = 'Q3' or quarter = 'Q4' then '2' end
+                                    as date_cd
+                                        ,cty_nm, cty_cd,sum(deposit) as deposit
+                                from
+                                    tb_agile_vacancyrate
+                                where 1=1
+                                group by
+                                    1,2,3
+                            ) as tmp
+                    ) as tmp
+                where row_num in (1,2)
+                group by
+                    1,2,3,4
+            ) as tmp
+        group by
+            1,2
+        order by
+            2 desc
+    </select>
+    <select id="getVacancyList" resultType="com.zinidata.eatout.vo.output.AgileVacancyOutVO">
+        select
+            year
+            <if test='dateType == "1"'>
+                ,year || '년' as label
+            </if>
+            <if test='dateType == "2"'>
+               ,year || '년 '|| case when quarter = 'Q1' or quarter = 'Q2' then '상반기'
+                   when quarter = 'Q3' or quarter = 'Q4' then '하반기' end
+                as label
+            </if>
+            <if test='dateType == "3"'>
+               ,year || '년 '|| case when quarter = 'Q1' then '1분기'
+                   when quarter = 'Q2' then '2분기'
+                   when quarter = 'Q3' then '3분기'
+                   when quarter = 'Q4' then '4분기' end
+                   as label
+            </if>
+            , ROUND(sum(gnsl),2) as gnsl
+            , ROUND(sum(rent_pyn),2) as rent_pyn
+            , ROUND(sum(cst_pyn),2) as cst_pyn
+        from(
+            select
+                *
+                ,year|| case when quarter = 'Q1' or quarter = 'Q2' then '1'
+                    when quarter = 'Q3' or quarter = 'Q4' then '2' end as half_cd
+                ,year || substring(quarter,2,1) as quarter_cd
+            from tb_agile_vacancyrate
+        ) tav
+        where 1=1
+        <if test='dateType == "1"'>
+            and year between #{dateStart} and #{dateEnd}
+        </if>
+        <if test='dateType == "2"'>
+            and half_cd between #{dateStart} and #{dateEnd}
+        </if>
+        <if test='dateType == "3"'>
+            and quarter_cd between #{dateStart} and #{dateEnd}
+        </if>
+        <if test='admGb == "1"'>
+            and mega_cd = #{areaCd}
+        </if>
+        <if test='admGb == "2"'>
+            and cty_cd = #{areaCd}
+        </if>
+        group by
+            1,2
+    </select>
+
+</mapper>

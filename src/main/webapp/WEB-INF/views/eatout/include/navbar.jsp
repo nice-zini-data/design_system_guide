@@ -17,6 +17,10 @@
                 <img src="/eatout/assets/eatout/images/icon/tab02_icon.svg" alt=""/>
                 <p class="txt_l_m">시장동향</p>
             </li>
+            <li  id="vacancy">
+                <img src="/eatout/assets/eatout/images/icon/tab03_icon.svg" alt=""/>
+                <p class="txt_l_m">상가정보</p>
+            </li>
         </ul>
         <!--로그인 후-->
     </div>
@@ -30,7 +34,9 @@
         $("#market").on('click', function () {
             location.href="./market";
         });
-
+        $("#vacancy").on('click', function () {
+            location.href="./store";
+        });
     });
 
     function noticeClick(id, date){

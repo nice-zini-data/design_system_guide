@@ -2,6 +2,7 @@ package com.zinidata.eatout.controller.api;
 
 import com.zinidata.eatout.service.AgileMainService;
 import com.zinidata.eatout.service.AgileStatisticsService;
+import com.zinidata.eatout.vo.AgileFoundationCalcVO;
 import com.zinidata.eatout.vo.AgileStatisticsVO;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -73,4 +74,39 @@ public class AgileMainControllerApi {
         return result;
     }
 
+    /***
+     * 소비정보
+     * @param
+     * @return
+     * @throws IOException
+     */
+    @ResponseBody
+    @PostMapping(value="/getMainInfo")
+    @ApiOperation(value="업정정보 가져오기")
+    @ApiResponses(value = {
+            @ApiResponse(code=200, message = "업종정보 가져오기")
+    })
+    public String getMainInfo(){
+        System.err.println("getMainInfo");
+        String result = agileMainService.getMainInfo();
+        return result;
+    }
+
+    /***
+     * 소비정보
+     * @param
+     * @return
+     * @throws IOException
+     */
+    @ResponseBody
+    @PostMapping(value="/getFoundationCalc")
+    @ApiOperation(value="창업계산기 결과 가져오기")
+    @ApiResponses(value = {
+            @ApiResponse(code=200, message = "창업계산기 결과 가져오기")
+    })
+    public String getFoundationCalc(AgileFoundationCalcVO agileFoundationCalcVO){
+        System.err.println("getFoundationCalc");
+        String result = agileMainService.getFoundationCalc(agileFoundationCalcVO);
+        return result;
+    }
 }

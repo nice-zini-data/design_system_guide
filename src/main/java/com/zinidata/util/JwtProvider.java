@@ -25,7 +25,6 @@ public class JwtProvider {
 
     //==토큰 생성 메소드==//
     public String createToken(String memNo) {
-        System.err.println("createTocken");
         Date now = new Date();
         Date expiration = new Date(now.getTime() + Duration.ofMinutes(1440).toMillis()); // 만료기간 1시간
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
@@ -43,7 +42,6 @@ public class JwtProvider {
                 .setExpiration(expiration)
                 .signWith(SignatureAlgorithm.HS512,
                         secretKey.getBytes()).compact();
-        System.err.println("token : "+token);
         return "Bearer " + token;
 
     }
@@ -51,8 +49,6 @@ public class JwtProvider {
     //==Jwt 토큰의 유효성 체크 메소드==//
     public Claims parseJwtToken(String token) {
         token = BearerRemove(token); // Bearer 제거
-        System.err.println("tokens : "+token);
-        System.err.println("tokens2 : "+Base64.getEncoder().encodeToString(secretKey.getBytes()));
         return Jwts.parser()
                 .setSigningKey(Base64.getEncoder().encodeToString(secretKey.getBytes()))
                 .parseClaimsJws(token)

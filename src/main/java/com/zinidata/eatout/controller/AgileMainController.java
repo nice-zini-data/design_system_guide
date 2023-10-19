@@ -29,4 +29,9 @@ public class AgileMainController {
 //        comLogService.setServiceLog(request, response, 0);
         return "eatout/market";
     }
+    @GetMapping("/store")
+    public String store(HttpServletRequest request, HttpServletResponse response){
+//        comLogService.setServiceLog(request, response, 0);
+        return "eatout/store";
+    }
 }

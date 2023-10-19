@@ -392,12 +392,13 @@
 
 	}
 	//
-	function makeChart(upjongCd){
+	function makeChart(upjongCd,upjongNm){
 		var param ={};
 
 		//화면 전환
 		//$('#chartList').css('display','block');
 		//$('#tableList').css('display','none');
+		$('#chartTitle').text(upjongNm);
 
 		param.upjong3Cd = upjongCd;
 		getAjax("getUpjongDetail", "/agile/market/getUpjongDetail",param, fn_UpjongDetail, fn_error);
@@ -485,7 +486,7 @@
 <script type="text/x-handlebars-template" id="tmp_upjongList">
 	<div class="row swiper-wrapper">
 		{{#each this}}
-		<div class="col-4 border border-4 swiper-slide">
+		<div class="col-4 border border-4 swiper-slide" onclick="makeChart('{{upjong3Cd}}','{{upjong3Nm}}')">
 			<div class="slideTit">
 				{{upjong3Nm}}
 			</div>
@@ -550,7 +551,7 @@
 		{{#each this}}
 		<tr>
 			<td>{{rnk}}</td>
-			<td><button onclick="makeChart('{{upjong3Cd}}')">{{upjong3Nm}}</button></td>
+			<td><button onclick="makeChart('{{upjong3Cd}}','{{upjong3Nm}}')">{{upjong3Nm}}</button></td>
 			<td class="{{checkUpDown salePer}}"><span>{{salePer}} %</span></td>
 			<td><span>{{addComma calcSaleAmt}} 만원</span></td>
 		</tr>

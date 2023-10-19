@@ -14,4 +14,5 @@ public class AgileUpjongOutVO {
     private String upjong2Nm;
     private String upjong3Cd;
     private String upjong3Nm;
+    private int    storeCnt;
 }

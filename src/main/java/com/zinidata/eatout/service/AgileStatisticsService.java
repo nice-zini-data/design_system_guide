@@ -56,6 +56,22 @@ public class AgileStatisticsService {
         return result;
     }
 
+    public String getPosList(AgileStatisticsVO agileStatisticsVO){
+        String result = "";
+
+        System.err.println(gsonUtil.toJson(new JsonOutputVo(Status.조회, agileStatisticsVO)));
+        ArrayList<AgilePosOutVO> outVo = agileStatisticsMapper.getPosList(agileStatisticsVO);
+        System.err.println(gsonUtil.toJson(new JsonOutputVo(Status.조회, outVo)));
+        if(!ZiniUtil.isEmpty(outVo)){
+            result = gsonUtil.toJson(new JsonOutputVo(Status.성공, outVo));
+        }else{
+            // 로그인 실패
+            result = gsonUtil.toJson(new JsonOutputVo(Status.실패));
+        }
+        System.err.println(result);
+        return result;
+    }
+
     public String getLiviList(AgileStatisticsVO agileStatisticsVO){
         String result = "";
 

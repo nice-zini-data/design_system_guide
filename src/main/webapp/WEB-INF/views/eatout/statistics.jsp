@@ -36,9 +36,9 @@ class = "login_none" 제거 및 추가
                                         <div class="col-4" id="upjong_nm"></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-12 redText down">
-                                            전기 대비
-                                            <span id="">2.44% </span>
+                                        <div class="col-12 redText">
+                                            <span id="calcDateType"></span>대비
+                                            <span id="calcAmt">0.0% </span>
                                             <span class="img"></span>
                                         </div>
                                     </div>
@@ -55,18 +55,18 @@ class = "login_none" 제거 및 추가
                                     <p class="txt_n_sb tr_up"><img src="/eatout/assets/eatout/images/icon/up_arrow_red.svg" alt=""/>고가</p>
                                     <div class="flex">
                                         <span class="trt_txt">기간</span>
-                                        <span id="maxYyyymm">2023.05</span>
+                                        <span id="maxYyyymm"></span>
                                         <span class="trt_txt">총매출</span>
-                                        <span id="maxVal">37,809억원</span>
+                                        <span id="maxVal">0 억원</span>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <p class="txt_n_sb tr_dw"><img src="/eatout/assets/eatout/images/icon/down_arrow_mt.svg" alt=""/>저가</p>
                                     <div class="flex">
                                         <span class="trt_txt">기간</span>
-                                        <span id="minYyyymm">2023.05</span>
+                                        <span id="minYyyymm"></span>
                                         <span class="trt_txt">총매출</span>
-                                        <span id="minVal">37,809억원</span>
+                                        <span id="minVal">0 억원</span>
                                     </div>
                                 </div>
                             </div>
@@ -192,11 +192,11 @@ class = "login_none" 제거 및 추가
                                         <option value="sun">일요일 고객수</option>
                                     </select>
                                     <select id="colType3" style="display:none;">
-                                        <option value="">항목</option>
-                                        <option value="">총 매출</option>
-                                        <option value="">표본점포 수</option>
-                                        <option value="">판매건수</option>
-                                        <option value="">판매단가</option>
+                                        <option value="0">항목</option>
+                                        <option value="totSaleAmt">총 매출</option>
+                                        <option value="storeCnt">표본점포 수</option>
+                                        <option value="saleQty">판매건수</option>
+                                        <option value="saleAmt">판매단가</option>
                                     </select>
                                     <select id="colType4" style="display:none;">
                                         <option value="0">항목</option>
@@ -381,11 +381,11 @@ class = "login_none" 제거 및 추가
                                         <option value="sun">일요일 고객수</option>
                                     </select>
                                     <select id="colType3_2" style="display:none;">
-                                        <option value="">항목</option>
-                                        <option value="">총 매출</option>
-                                        <option value="">표본점포 수</option>
-                                        <option value="">판매건수</option>
-                                        <option value="">판매단가</option>
+                                        <option value="0">항목</option>
+                                        <option value="totSaleAmt">총 매출</option>
+                                        <option value="storeCnt">표본점포 수</option>
+                                        <option value="saleQty">판매건수</option>
+                                        <option value="saleAmt">판매단가</option>
                                     </select>
                                     <select id="colType4_2" style="display:none;">
                                         <option value="0">항목</option>
@@ -494,6 +494,7 @@ class = "login_none" 제거 및 추가
 
     $(function() {
         var param = {};
+        getAjax("getMainInfo", "/agile/main/getMainInfo",param, fn_mainInfo, fn_error);
         getAjax("getUpjongChgRate", "/agile/statistics/getUpjongChgRate",param, fn_eatoutDiff, fn_error);
         setAreaList(1);
         setUpjongList(2);
@@ -520,6 +521,9 @@ class = "login_none" 제거 및 추가
             console.log($('#dateType').children('option:last').val())
             if(dataTypeNum == 1){
                 console.log('외식 데이터 선택');
+                setDateList(1);
+                setAreaList(1);
+                setUpjongList(2);
                 reset_select(0);
                 if($('#dateType').children('option:last').val() == 5){
                     $('#dateType').children('option:last').remove();
@@ -532,6 +536,9 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 2){
                 console.log('배달 데이터 선택');
+                setDateList(1);
+                setAreaList(1);
+                setUpjongList(2);
                 if($('#dateType').children('option:last').val() == 5){
                     $('#dateType').children('option:last').remove();
                 }
@@ -544,6 +551,9 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 3){
                 console.log('메뉴 데이터 선택');
+                setDateList(1);
+                setAreaList(1);
+                setUpjongList(2);
                 reset_select(0);
                 $("#area_admi").attr('disabled',false);
                 $("#upjong2").attr('disabled',false);
@@ -554,6 +564,9 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 4){
                 console.log('생활 인구 데이터 선택');
+                setDateList(1);
+                setAreaList(1);
+                setUpjongList(2);
                 if($('#dateType').children('option:last').val() == 5){
                     $('#dateType').children('option:last').remove();
                 }
@@ -566,6 +579,9 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 5){
                 console.log('주거 인구 데이터 선택');
+                setDateList(1);
+                setAreaList(1);
+                setUpjongList(2);
                 if($('#dateType').children('option:last').val() == 5){
                     $('#dateType').children('option:last').remove();
                 }
@@ -641,6 +657,8 @@ class = "login_none" 제거 및 추가
         $("#search").on("click", function(){
             searchType = 0;
             var param = {};
+            console.log(dataTypeNum);
+            console.log($("#colType"+dataTypeNum+" option:selected").val());
             if($("#colType"+dataTypeNum+" option:selected").val() == 0){
                 alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
                 return;
@@ -656,6 +674,7 @@ class = "login_none" 제거 및 추가
             console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum+')');
             console.log(param);
             searchBtnNum = 1;
+
             main_search(dataTypeNum,param);
         });
         //-------------------------------------------- 상단 선택 항목
@@ -828,18 +847,18 @@ class = "login_none" 제거 및 추가
             }
 
             //업종 동기화
-            if(dataTypeNum_sub == 1 || dataTypeNum_sub == 2){
-                $("#upjong1_2").val($('#upjong1').val()).trigger("change");
+            if(dataTypeNum_sub == 1 || dataTypeNum_sub == 2 || dataTypeNum_sub == 3){
+                // $("#upjong1_2").val($('#upjong1').val()).trigger("change");
 
                 if($('#upjong2').val() != 0){
                     setTimeout(function(){
                         $("#upjong2_2").val($('#upjong2').val()).trigger("change");
-                    },100);
+                    },300);
                 }
                 if($('#upjong3').val() != 0){
                     setTimeout(function(){
                         $("#upjong3_2").val($('#upjong3').val()).trigger("change");
-                    },200);
+                    },600);
                 }
             }
 
@@ -848,7 +867,7 @@ class = "login_none" 제거 및 추가
             setTimeout(function(){
                 $("#startDate_2").val($('#startDate').val()).trigger("change");
                 $("#endDate_2").val($('#endDate').val()).trigger("change");
-            },200);
+            },500);
 
             //항목 동기화
             if($("#dataType option").index($("#dataType option:selected")) == 0){
@@ -898,6 +917,21 @@ class = "login_none" 제거 및 추가
             $('#upjong3').val(upjongCd).prop("selected", true);
         },200)
     }
+    // 메인화면 최초 데이터 세팅
+    function fn_mainInfo(id, response, param){
+        console.log(response.data);
+        var year = response.data[0].yyyymm.substring(0,4);
+        var month = response.data[0].yyyymm.substring(4,6);
+        var calcAmt = response.data[0].calcAmt;
+        console.log(year+'.'+month);
+        $('#minYyyymm').text(year+'.'+month);
+        $('#maxYyyymm').text(year+'.'+month);
+        $('#setDateInfo2').text(year+'년 '+month+'월 데이터 기준');
+        $('#calcAmt').text(calcAmt+'%');
+        $('#calcAmt').parent().addClass(common.upAndDownClass(calcAmt));
+        $('#calcDateType').text('전월')
+    }
+
     // 전지역 업종 증감률 리스트
     function fn_eatoutDiff(id, response, param){
 
@@ -924,9 +958,9 @@ class = "login_none" 제거 및 추가
         var returnHtml2 = '';
         var date = new Date();
         returnHtml = date.getFullYear()+'. ' + date.getMonth()+'. '+ date.getDate();
-        returnHtml2 = date.getFullYear()+'년 ' + (date.getMonth() - 2) + '월 데이터 기준'
+        // returnHtml2 = date.getFullYear()+'년 ' + (date.getMonth() - 2) + '월 데이터 기준'
         $('#setDateInfo').text(returnHtml);
-        $('#setDateInfo2').text(returnHtml2);
+        // $('#setDateInfo2').text(returnHtml2);
     }
 
 
