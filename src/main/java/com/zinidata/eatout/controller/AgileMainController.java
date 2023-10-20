@@ -34,4 +34,10 @@ public class AgileMainController {
 //        comLogService.setServiceLog(request, response, 0);
         return "eatout/store";
     }
+
+    @GetMapping("/calculator")
+    public String calculator(HttpServletRequest request, HttpServletResponse response){
+//        comLogService.setServiceLog(request, response, 0);
+        return "eatout/calculator";
+    }
 }

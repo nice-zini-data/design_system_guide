@@ -10,8 +10,8 @@
     <%@ include file="/WEB-INF/views/eatout/include/navbar.jsp" %>
     <script>
         $(function(){
-            $('.navList li:first-child').addClass('active');
-            $('.navList li:first-child img').attr({src:'/eatout/assets/eatout/images/icon/tab01_icon_on.svg'})
+            $('.navList li:nth-child(3)').addClass('active');
+            $('.navList li:nth-child(3) img').attr({src:'/eatout/assets/eatout/images/icon/tab03_icon_on.svg'})
         });
     </script>
 <!--
