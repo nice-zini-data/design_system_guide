@@ -152,6 +152,7 @@
             , ROUND(sum(gnsl),2) as gnsl
             , ROUND(sum(rent_pyn),2) as rent_pyn
             , ROUND(sum(cst_pyn),2) as cst_pyn
+            , ROUND(sum(deposit),2) as deposit
         from(
             select
                 *

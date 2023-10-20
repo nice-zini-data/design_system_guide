@@ -10,7 +10,7 @@ public class AgileMarketMainOutVO {
     private String  upjong3Cd;
     private String  megaNm;
     private String  megaCd;
-    private int     calcSaleAmt;
+    private double     calcSaleAmt;
     private double  salePer;
     private double  storePer;
     private double  calcPer;
