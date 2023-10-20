@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  eatout:
-    container_name: eatout
+  agile_outeat:
+    container_name: agile_outeat
     build: .
     restart: always
     extra_hosts:
