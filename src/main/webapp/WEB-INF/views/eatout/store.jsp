@@ -604,5 +604,4 @@ class = "login_none" 제거 및 추가
         </tr>
         {{/each}}
     </table>
-
 </script>

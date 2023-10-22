@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/agile")
+@RequestMapping("/")
 public class AgileMainController {
 
     private final ComLogService comLogService;

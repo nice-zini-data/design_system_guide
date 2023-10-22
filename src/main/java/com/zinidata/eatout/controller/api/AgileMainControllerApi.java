@@ -106,6 +106,7 @@ public class AgileMainControllerApi {
     })
     public String getFoundationCalc(AgileFoundationCalcVO agileFoundationCalcVO){
         System.err.println("getFoundationCalc");
+        System.err.println(agileFoundationCalcVO);
         String result = agileMainService.getFoundationCalc(agileFoundationCalcVO);
         return result;
     }

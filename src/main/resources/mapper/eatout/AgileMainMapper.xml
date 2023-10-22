@@ -288,9 +288,9 @@
             ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.03+tmp.total1)/0.93/30) as cost10
             ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.03+tmp.total1)/0.93/30*10000/${dangaCost}) as cost11
             --	사업타당성 지표(투자비 대비월 3% 수익률)
-            ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.042+tmp.total1)/0.93) as cost9
-            ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.042+tmp.total1)/0.93/30) as cost10
-            ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.042+tmp.total1)/0.93/30*10000/${dangaCost}) as cost11
+            ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.042+tmp.total1)/0.93) as cost12
+            ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.042+tmp.total1)/0.93/30) as cost13
+            ,ROUND(((${toojaCost1}+${toojaCost2}+${toojaCost5})*0.042+tmp.total1)/0.93/30*10000/${dangaCost}) as cost14
         from(
                 select
                     cost1,cost2,cost3,cost4
