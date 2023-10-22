@@ -90,6 +90,9 @@ function setAreaList(admGb,areaCd,typeCd){
 function fn_setArea(id, response, param) {
     var html = '';
 
+    $('#area_mega option:eq(0)').prop('selected',true);
+    $('#area_cty').children('option:not(:first)').remove();
+    $('#area_admi').children('option:not(:first)').remove();
     response.data.forEach(function (val, idx){
         html += '<option value="' + val.areaCd + '" data-areaCd="'+val.areaCd+'">' + val.areaNm + '</option>';
     });
@@ -114,6 +117,10 @@ function setUpjongList(upjongType,upjongCd){
 }
 function fn_setUpjong(id, response, param) {
     var html = '';
+
+    // $('#upjong2').children('option:not(:first)').remove();
+    $('#upjong2 option:eq(0)').prop('selected',true);
+    $('#upjong3').children('option:not(:first)').remove();
 
     response.data.forEach(function (val, idx){
         html += '<option value="' + val.upjongCd + '" data-areaCd="'+val.upjongCd+'">' + val.upjongNm + '</option>';
@@ -184,6 +191,11 @@ function setAreaList_sub(admGb,areaCd,typeCd){
 function fn_setArea_sub(id, response, param) {
     var html = '';
 
+
+    $('#area_mega_2 option:eq(0)').prop('selected',true);
+    $('#area_cty_2').children('option:not(:first)').remove();
+    $('#area_admi_2').children('option:not(:first)').remove();
+
     response.data.forEach(function (val, idx){
         html += '<option value="' + val.areaCd + '" data-areaCd="'+val.areaCd+'">' + val.areaNm + '</option>';
     });
@@ -208,6 +220,10 @@ function setUpjongList_sub(upjongType,upjongCd){
 }
 function fn_setUpjong_sub(id, response, param) {
     var html = '';
+
+    // $('#upjong2_2').children('option:not(:first)').remove();
+    $('#upjong2_2 option:eq(0)').prop('selected',true);
+    $('#upjong3_2').children('option:not(:first)').remove();
 
     response.data.forEach(function (val, idx){
         html += '<option value="' + val.upjongCd + '" data-areaCd="'+val.upjongCd+'">' + val.upjongNm + '</option>';
