@@ -519,6 +519,7 @@ class = "login_none" 제거 및 추가
             $("#type_nm").text($('#dataType option:selected').text())
             dataTypeNum = $(this).val();
             console.log($('#dateType').children('option:last').val())
+            selectReset();
             if(dataTypeNum == 1){
                 console.log('외식 데이터 선택');
                 setDateList(1);
@@ -594,6 +595,25 @@ class = "login_none" 제거 및 추가
 
             }
         });
+
+        function selectReset(){
+
+
+            $('#area_mega option:eq(0)').prop('selected',true);
+            $('#area_cty').children('option:not(:first)').remove();
+            $('#area_admi').children('option:not(:first)').remove();
+
+            $('#upjong2 option:eq(0)').prop('selected',true);
+            $('#upjong3').children('option:not(:first)').remove();
+        }
+        function selectReset_sub(){
+            $('#area_mega_2 option:eq(0)').prop('selected',true);
+            $('#area_cty_2').children('option:not(:first)').remove();
+            $('#area_admi_2').children('option:not(:first)').remove();
+
+            $('#upjong2_2 option:eq(0)').prop('selected',true);
+            $('#upjong3_2').children('option:not(:first)').remove();
+        }
         // 지역 선택 이벤트
         $("#area_mega").on("change", function(){
             $('#area_cty').children('option:not(:first)').remove();
@@ -684,6 +704,7 @@ class = "login_none" 제거 및 추가
         $("#dataType_2").on("change", function(){
             //selected value
             dataTypeNum_sub = $(this).val();
+            selectReset_sub();
             if(dataTypeNum_sub == 1){
                 reset_select(0);
                 console.log('외식 데이터 선택');
