@@ -23,8 +23,45 @@
                 param.operCost3 = $('#oper_cost3').val();
                 param.operCost4 = $('#oper_cost4').val();
                 param.dangaCost = $('#danga_cost').val();
+                if($('#tooja_cost1').val() == 0){
+                    alert('권리금이 입력되지 않았습니다.\n금액을 입력해주시기 바랍니다.');
+                    return;
+                }else if($('#tooja_cost2').val() == 0){
+                    alert('보증금이 입력되지 않았습니다.\n금액을 입력해주시기 바랍니다.');
+                    return;
+                }else if($('#tooja_cost3').val() == 0){
+                    alert('대출금이 입력되지 않았습니다.\n금액을 입력해주시기 바랍니다.');
+                    return;
+                }else if($('#tooja_cost4').val() == 0){
+                    alert('이자율이 입력되지 않았습니다.\n금액을 입력해주시기 바랍니다.');
+                    return;
+                }else if($('#tooja_cost5').val() == 0){
+                    alert('기타 투자비가 입력되지 않았습니다.\n금액을 입력해주시기 바랍니다.');
+                    return;
+                }else if($('#tooja_cost6').val() == 0){
+                    alert('리뉴얼예상기간이 입력되지 않았습니다.\n금액을 입력해주시기 바랍니다.');
+                    return;
+                }else if($('#oper_cost1').val() == 0){
+                    alert('월세가 입력되지 않았습니다.\n금액을 입력해주시기 바랍니다.');
+                    return;
+                }else if($('#oper_cost2').val() == 0){
+                    alert('인건비가 입력되지 않았습니다.\n금액을 입력해주시기 바랍니다.');
+                    return;
+                }else if($('#oper_cost3').val() == 0){
+                    alert('재료비가 입력되지 않았습니다.\n금액을 입력해주시기 바랍니다.');
+                    return;
+                }else if($('#oper_cost4').val() == 0){
+                    alert('기타비용이 입력되지 않았습니다.\n금액을 입력해주시기 바랍니다.');
+                    return;
+                }else if($('#danga_cost').val() == 0){
+                    alert('객단가가 입력되지 않았습니다.\n금액을 입력해주시기 바랍니다.');
+                    return;
+                }
                 console.log(param)
                 getAjax("getVacancyList", "/agile/main/getFoundationCalc",param, fn_calcInfo, fn_error);
+            })
+            $('#btn_clear').click(function(){
+                clearVal();
             })
 
             $('#rent_area1').keyup(function(){
@@ -45,8 +82,35 @@
                 var context = response.data[0];
                 var html = templateScript(context);
                 $('#calc_diff').html(html);
-            }
 
+                $('#btn_success').text("수정");
+                $('.calc_section02').removeClass('disabled');
+                $('.calc_section02').addClass('active');
+
+                if($('.calc_section02').hasClass('active')){
+                    $('.calc_tab02 img').attr('src','/eatout/assets/eatout/images/icon/calc_tab_icon02_on.svg')
+                }else{
+                    $('.calc_tab02 img').attr('src','/eatout/assets/eatout/images/icon/calc_tab_icon02_bk.svg')
+                }
+            }
+            function clearVal(){
+                console.log('초기화 실행');
+                $('#tooja_cost1').val(0);
+                $('#tooja_cost2').val(0);
+                $('#tooja_cost3').val(0);
+                $('#tooja_cost4').val(0);
+                $('#tooja_cost5').val(0);
+                $('#tooja_cost6').val(0);
+                $('#oper_cost1').val(0);
+                $('#oper_cost2').val(0);
+                $('#oper_cost3').val(0);
+                $('#oper_cost4').val(0);
+                $('#danga_cost').val(0);
+                $('#btn_success').text("입력 완료")
+                $('#calc_diff').remove();
+                $('.calc_section02').removeClass('active');
+                $('.calc_section01').addClass('active');
+            }
 
 
             $('.navList li:nth-child(4)').addClass('active');
@@ -70,16 +134,16 @@
 
             });
 
-            $('.calc_section01 .calc_btnBox button').click(function(){
-                $('.calc_section02').removeClass('disabled');
-                $('.calc_section02').addClass('active');
-
-                if($('.calc_section02').hasClass('active')){
-                    $('.calc_tab02 img').attr('src','/eatout/assets/eatout/images/icon/calc_tab_icon02_on.svg')
-                }else{
-                    $('.calc_tab02 img').attr('src','/eatout/assets/eatout/images/icon/calc_tab_icon02_bk.svg')
-                }
-            });
+            // $('.calc_section01 .calc_btnBox button').click(function(){
+            //     // $('.calc_section02').removeClass('disabled');
+            //     // $('.calc_section02').addClass('active');
+            //
+            //     if($('.calc_section02').hasClass('active')){
+            //         $('.calc_tab02 img').attr('src','/eatout/assets/eatout/images/icon/calc_tab_icon02_on.svg')
+            //     }else{
+            //         $('.calc_tab02 img').attr('src','/eatout/assets/eatout/images/icon/calc_tab_icon02_bk.svg')
+            //     }
+            // });
 
 
         });
@@ -96,30 +160,30 @@ class = "login_none" 제거 및 추가
                 <p class="calcTit">창업 비용 계산기</p>
                 <p class="calc_sText">세부 정보를 정확하게 입력할수록 더 정확한 결과 값을 얻을 수 있습니다.</p>
 
-                <section class="calc_content calc_section01">
+                <section class="calc_content calc_section01 active">
                     <div class="calc_tab01 calc_com_tab">
                         <img src="/eatout/assets/eatout/images/icon/calc_tab_icon01_off.svg" alt="비용 입력 아이콘"/>
                         <p class="calc_tab_text">비용 입력</p>
                     </div>
 
                     <div class="calc_inner">
-                        <div class="calc_inner_cont">
-                            <p class="calc_in_tit01">물건정보</p>
-                            <table class="w4_table">
-                                <tr>
-                                    <th>임대 면적</th>
-                                    <td>
-                                        <input type="text" class="calc_input" placeholder="0" id="rent_area1"/> <span>평</span>
-                                        <input type="text" class="calc_input disabled" placeholder="0" id="rent_area2"/> <span>m²</span>
-                                    </td>
-                                    <th>실 면적</th>
-                                    <td>
-                                        <input type="text" class="calc_input" placeholder="0" id="area1"/> <span>평</span>
-                                        <input type="text" class="calc_input disabled" placeholder="0" id="area2"/> <span>m²</span>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+<%--                        <div class="calc_inner_cont">--%>
+<%--                            <p class="calc_in_tit01">물건정보</p>--%>
+<%--                            <table class="w4_table">--%>
+<%--                                <tr>--%>
+<%--                                    <th>임대 면적</th>--%>
+<%--                                    <td>--%>
+<%--                                        <input type="text" class="calc_input" placeholder="0" id="rent_area1"/> <span>평</span>--%>
+<%--                                        <input type="text" class="calc_input disabled" placeholder="0" id="rent_area2"/> <span>m²</span>--%>
+<%--                                    </td>--%>
+<%--                                    <th>실 면적</th>--%>
+<%--                                    <td>--%>
+<%--                                        <input type="text" class="calc_input" placeholder="0" id="area1"/> <span>평</span>--%>
+<%--                                        <input type="text" class="calc_input disabled" placeholder="0" id="area2"/> <span>m²</span>--%>
+<%--                                    </td>--%>
+<%--                                </tr>--%>
+<%--                            </table>--%>
+<%--                        </div>--%>
                         <div class="calc_inner_cont">
                             <p class="calc_in_tit01">초기 투자비용</p>
                             <table class="w4_table">
@@ -192,19 +256,20 @@ class = "login_none" 제거 및 추가
 
                         <div class="calc_btnBox">
                             <div>
-                                <button type="reset" class="wh_btn">입력 초기화</button>
+                                <button type="reset" class="wh_btn" id="btn_clear">입력 초기화</button>
                             </div>
                             <div>
                                 <button type="submit" class="bk_btn" id="btn_success">입력 완료</button>
-
+                            </div>
+<%--                            <div>--%>
                                 <!--수정 버튼-->
-<%--                                <button type="button" class="bk_btn">수정</button>--%>
+<%--                                <button type="button" class="bk_btn" id="btn_success">수정</button>--%>
 
                                 <!--수정 완료 버튼-->
-<%--                                <button type="reset" class="wh_btn">취소</button>--%>
-<%--                                <button type="button" class="pr_btn">수정 완료</button>--%>
+                                <%--                                <button type="reset" class="wh_btn">취소</button>--%>
+                                <%--                                <button type="button" class="pr_btn">수정 완료</button>--%>
 
-                            </div>
+<%--                            </div>--%>
                         </div>
 
                     </div>
