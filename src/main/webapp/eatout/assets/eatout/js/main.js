@@ -150,8 +150,10 @@ function fn_setDate(id, response, param) {
     response.data.forEach(function (val, idx){
         var tmpdate = '';
         if(dateTypeNum != 1) {
-            if(typeCdTmp == 'vacancy' || dataTypeNum == '3'){
+            if(typeCdTmp == 'vacancy' || dataTypeNum == '3') {
                 tmpdate = val.date
+            // }else if(dataTypeNum == '4'){
+            //     tmpdate = val.dateNm.substring(0, 4) +'년'+ val.date + '월'
             }else{
                 tmpdate = val.dateNm.substring(0, 4) + val.date
             }
@@ -316,13 +318,13 @@ function reset_select(type){
         if(searchType==0){
             $('#startDate').children('option:not(:first)').remove();
             $('#endDate').children('option:not(:first)').remove();
-            startDate = null;
-            endDate = null;
+            startDate = 0;
+            endDate = 0;
         }else{
             $('#startDate_2').children('option:not(:first)').remove();
             $('#endDate_2').children('option:not(:first)').remove();
-            startDate_sub = null;
-            endDate_sub = null;
+            startDate_sub = 0;
+            endDate_sub = 0;
         }
     }else if(type == 0){
         if(!settingCheck){

@@ -150,7 +150,7 @@
             </if>
             <if test='dateType == "4"'>
                 month as date,
-                yyyymm as date_nm
+                concat(substring(yyyymm,1,4),'년 ',substring(yyyymm,5,2),'월') as date_nm
             </if>
             from(
                 select
@@ -159,7 +159,7 @@
                     , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then 1 else 2 end half
                 ]]>
                 , date_part('QUARTER',yyyymm::timestamp) as quarter
-                , to_char(yyyymm,'MM')::numeric as month
+                , to_char(yyyymm,'MM') as month
                 , to_char(yyyymm,'YYYYMM') as yyyymm
             from
                 generate_series(to_date(((select min(yyyymm) from tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm

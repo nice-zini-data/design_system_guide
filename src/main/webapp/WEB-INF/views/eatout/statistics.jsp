@@ -485,10 +485,10 @@ class = "login_none" 제거 및 추가
     var admiCd_sub = '';
     var upjongCd = '';
     var upjongCd_sub = '';
-    var startDate = '';
-    var startDate_sub = '';
-    var endDate = '';
-    var endDate_sub = '';
+    var startDate = 0;
+    var startDate_sub = 0;
+    var endDate = 0;
+    var endDate_sub = 0;
     var searchBtnNum = 0;
     var settingCheck = true;
 
@@ -668,11 +668,45 @@ class = "login_none" 제거 및 추가
         });
         $("#startDate").on("change", function(){
             //selected value
+            // console.log("======================startDate start======================");
+            // console.log($(this).val());
+            // console.log(startDate);
+            // console.log(endDate);
+            if((startDate == 0 && endDate == 0) || (startDate == null && endDate == null)) {
+                // 양쪽 다 선택되지 않았을 경우
+            }else if(startDate == 0 && endDate != 0){
+                // console.log('테스트1');
+            }else if(startDate != 0 && endDate == 0){
+                // console.log('테스트2');
+            }else{
+                if($(this).val() > endDate ){
+                    alert("시작일을 종료일 이전으로 선택해주시기 바랍니다.");
+                    return;
+                }
+            }
             startDate = $(this).val();
+            // console.log("======================startDate end======================");
         });
         $("#endDate").on("change", function(){
             //selected value
+            // console.log("======================startDate start======================");
+            // console.log($(this).val());
+            // console.log(startDate);
+            // console.log(endDate);
+            if((startDate == 0 && endDate == 0) || (startDate == null && endDate == null)) {
+                // 양쪽 다 선택되지 않았을 경우
+            }else if(startDate == 0 && endDate != 0){
+                // console.log('테스트')
+            }else if(startDate != 0 && endDate == 0){
+            //
+            }else{
+                if($(this).val() < startDate){
+                    alert("종료일을 시작일 이후으로 선택해주시기 바랍니다.");
+                    return;
+                }
+            }
             endDate = $(this).val();
+            // console.log("======================startDate end======================");
         });
         $("#search").on("click", function(){
             searchType = 0;
