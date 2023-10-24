@@ -485,10 +485,10 @@ class = "login_none" 제거 및 추가
     var admiCd_sub = '';
     var upjongCd = '';
     var upjongCd_sub = '';
-    var startDate = '';
-    var startDate_sub = '';
-    var endDate = '';
-    var endDate_sub = '';
+    var startDate = 0;
+    var startDate_sub = 0;
+    var endDate = 0;
+    var endDate_sub = 0;
     var searchBtnNum = 0;
     var settingCheck = true;
 
@@ -514,11 +514,12 @@ class = "login_none" 제거 및 추가
         //-------------------------------------------- 상단 선택 항목
         // 주제 선택 이벤트
         $("#dataType").on("change", function(){
-            console.log($('#dataType option:selected').text());
+            // console.log($('#dataType option:selected').text());
             //selected value
             $("#type_nm").text($('#dataType option:selected').text())
             dataTypeNum = $(this).val();
-            console.log($('#dateType').children('option:last').val())
+            // console.log($('#dateType').children('option:last').val())
+            selectReset();
             if(dataTypeNum == 1){
                 console.log('외식 데이터 선택');
                 setDateList(1);
@@ -594,6 +595,25 @@ class = "login_none" 제거 및 추가
 
             }
         });
+
+        function selectReset(){
+
+
+            $('#area_mega option:eq(0)').prop('selected',true);
+            $('#area_cty').children('option:not(:first)').remove();
+            $('#area_admi').children('option:not(:first)').remove();
+
+            $('#upjong2 option:eq(0)').prop('selected',true);
+            $('#upjong3').children('option:not(:first)').remove();
+        }
+        function selectReset_sub(){
+            $('#area_mega_2 option:eq(0)').prop('selected',true);
+            $('#area_cty_2').children('option:not(:first)').remove();
+            $('#area_admi_2').children('option:not(:first)').remove();
+
+            $('#upjong2_2 option:eq(0)').prop('selected',true);
+            $('#upjong3_2').children('option:not(:first)').remove();
+        }
         // 지역 선택 이벤트
         $("#area_mega").on("change", function(){
             $('#area_cty').children('option:not(:first)').remove();
@@ -642,23 +662,60 @@ class = "login_none" 제거 및 추가
         //날짜 선택 이벤트
         $("#dateType").on("change", function(){
             //selected value
+            searchType = 0;
             reset_select(3);
             setDateList($(this).val());
             dateTypeNum = $(this).val();
         });
         $("#startDate").on("change", function(){
             //selected value
+            // console.log("======================startDate start======================");
+            // console.log($(this).val());
+            // console.log(startDate);
+            // console.log(endDate);
+            if((startDate == 0 && endDate == 0) || (startDate == null && endDate == null)) {
+                // 양쪽 다 선택되지 않았을 경우
+            }else if(startDate == 0 && endDate != 0){
+                // console.log('테스트1');
+            }else if(startDate != 0 && endDate == 0){
+                // console.log('테스트2');
+            }else{
+                if($(this).val() > endDate ){
+                    alert("시작일을 종료일 이전으로 선택해주시기 바랍니다.");
+                    $("#startDate option:eq(0)").prop("selected", true); //첫번째 option 선택
+                    return;
+                }
+            }
             startDate = $(this).val();
+            // console.log("======================startDate end======================");
         });
         $("#endDate").on("change", function(){
             //selected value
+            // console.log("======================startDate start======================");
+            // console.log($(this).val());
+            // console.log(startDate);
+            // console.log(endDate);
+            if((startDate == 0 && endDate == 0) || (startDate == null && endDate == null)) {
+                // 양쪽 다 선택되지 않았을 경우
+            }else if(startDate == 0 && endDate != 0){
+                // console.log('테스트')
+            }else if(startDate != 0 && endDate == 0){
+            //
+            }else{
+                if($(this).val() < startDate){
+                    alert("종료일을 시작일 이후으로 선택해주시기 바랍니다.");
+                    $("#endDate option:eq(0)").prop("selected", true); //첫번째 option 선택
+                    return;
+                }
+            }
             endDate = $(this).val();
+            // console.log("======================startDate end======================");
         });
         $("#search").on("click", function(){
             searchType = 0;
             var param = {};
-            console.log(dataTypeNum);
-            console.log($("#colType"+dataTypeNum+" option:selected").val());
+            // console.log(dataTypeNum);
+            // console.log($("#colType"+dataTypeNum+" option:selected").val());
             if($("#colType"+dataTypeNum+" option:selected").val() == 0){
                 alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
                 return;
@@ -671,8 +728,8 @@ class = "login_none" 제거 및 추가
             if(!(startDate == '' || startDate == 0 || startDate == null)) param.dateStart = startDate;
             if(!(endDate == '' || endDate == 0 || endDate == null)) param.dateEnd = endDate;
 
-            console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum+')');
-            console.log(param);
+            // console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum+')');
+            // console.log(param);
             searchBtnNum = 1;
 
             main_search(dataTypeNum,param);
@@ -684,7 +741,11 @@ class = "login_none" 제거 및 추가
         $("#dataType_2").on("change", function(){
             //selected value
             dataTypeNum_sub = $(this).val();
+            selectReset_sub();
             if(dataTypeNum_sub == 1){
+                setDateList_sub(1);
+                setAreaList_sub(1);
+                setUpjongList_sub(2);
                 reset_select(0);
                 console.log('외식 데이터 선택');
                 $("#area_admi_2").attr('disabled',false);
@@ -693,6 +754,9 @@ class = "login_none" 제거 및 추가
                 change_colType($(this).val(),false);
             }else if(dataTypeNum_sub == 2){
                 console.log('배달 데이터 선택');
+                setDateList_sub(1);
+                setAreaList_sub(1);
+                setUpjongList_sub(2);
                 reset_select(0);
                 $("#area_admi_2").attr('disabled',true);
                 $("#upjong2_2").attr('disabled',false);
@@ -700,6 +764,9 @@ class = "login_none" 제거 및 추가
                 change_colType($(this).val(),false);
             }else if(dataTypeNum_sub == 3){
                 console.log('메뉴 데이터 선택');
+                setDateList_sub(1);
+                setAreaList_sub(1);
+                setUpjongList_sub(2);
                 reset_select(0);
                 $("#area_admi_2").attr('disabled',false);
                 $("#upjong2_2").attr('disabled',false);
@@ -707,6 +774,9 @@ class = "login_none" 제거 및 추가
                 change_colType($(this).val(),false);
             }else if(dataTypeNum_sub == 4){
                 console.log('생활 인구 데이터 선택');
+                setDateList_sub(1);
+                setAreaList_sub(1);
+                setUpjongList_sub(2);
                 reset_select(0);
                 $("#area_admi_2").attr('disabled',false);
                 $("#upjong2_2").attr('disabled',true);
@@ -714,6 +784,9 @@ class = "login_none" 제거 및 추가
                 change_colType($(this).val(),false);
             }else if(dataTypeNum_sub == 5){
                 console.log('주거 인구 데이터 선택');
+                setDateList_sub(1);
+                setAreaList_sub(1);
+                setUpjongList_sub(2);
                 reset_select(0);
                 $("#area_admi_2").attr('disabled',false);
                 $("#upjong2_2").attr('disabled',true);
@@ -765,16 +838,54 @@ class = "login_none" 제거 및 추가
         //날짜 선택 이벤트
         $("#dateType_2").on("change", function(){
             //selected value
+            searchType = 1;
+            reset_select(3);
             setDateList_sub($(this).val());
             dateTypeNum_sub = $(this).val();
         });
         $("#startDate_2").on("change", function(){
             //selected value
+            // console.log("======================startDate start======================");
+            // console.log($(this).val());
+            // console.log(startDate);
+            // console.log(endDate);
+            if((startDate_sub == 0 && endDate_sub == 0) || (startDate_sub == null && endDate_sub == null)) {
+                // 양쪽 다 선택되지 않았을 경우
+            }else if(startDate_sub == 0 && endDate_sub != 0){
+                // console.log('테스트1');
+            }else if(startDate_sub != 0 && endDate_sub == 0){
+                // console.log('테스트2');
+            }else{
+                if($(this).val() > endDate_sub ){
+                    alert("시작일을 종료일 이전으로 선택해주시기 바랍니다.");
+                    $("#startDate_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+                    return;
+                }
+            }
             startDate_sub = $(this).val();
+            // console.log("======================startDate end======================");
         });
         $("#endDate_2").on("change", function(){
             //selected value
+            // console.log("======================startDate start======================");
+            // console.log($(this).val());
+            // console.log(startDate);
+            // console.log(endDate);
+            if((startDate_sub == 0 && endDate_sub == 0) || (startDate_sub == null && endDate_sub == null)) {
+                // 양쪽 다 선택되지 않았을 경우
+            }else if(startDate_sub == 0 && endDate_sub != 0){
+                // console.log('테스트')
+            }else if(startDate_sub != 0 && endDate_sub == 0){
+                //
+            }else{
+                if($(this).val() < startDate_sub){
+                    alert("종료일을 시작일 이후으로 선택해주시기 바랍니다.");
+                    $("#endDate_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+                    return;
+                }
+            }
             endDate_sub = $(this).val();
+            // console.log("======================startDate end======================");
         });
         $("#search_2").on("click", function(){
             searchType = 1;

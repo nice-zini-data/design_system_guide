@@ -14,8 +14,8 @@
 <script type="text/javascript" src="/eatout/assets/eatout/js/swiper-bundle.min.js"></script>
 <script>
 	$(function(){
-		$('.navList li:last-child').addClass('active');
-		$('.navList li:last-child img').attr({src:'/eatout/assets/eatout/images/icon/tab02_icon_on.svg'})
+		$('.navList li:nth-child(2)').addClass('active');
+		$('.navList li:nth-child(2) img').attr({src:'/eatout/assets/eatout/images/icon/tab02_icon_on.svg'})
 	});
 </script>
 

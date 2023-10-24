@@ -11,4 +11,5 @@ public class AgileVacancyOutVO {
     private double  gnsl;       //전월대비 퍼센트
     private double  rentPyn;    //전월대비 퍼센트
     private double  cstPyn;     //전월대비 퍼센트
+    private double  deposit;     //
 }

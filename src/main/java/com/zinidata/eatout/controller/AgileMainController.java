@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/agile")
+@RequestMapping("/")
 public class AgileMainController {
 
     private final ComLogService comLogService;
@@ -33,5 +33,11 @@ public class AgileMainController {
     public String store(HttpServletRequest request, HttpServletResponse response){
 //        comLogService.setServiceLog(request, response, 0);
         return "eatout/store";
+    }
+
+    @GetMapping("/calculator")
+    public String calculator(HttpServletRequest request, HttpServletResponse response){
+//        comLogService.setServiceLog(request, response, 0);
+        return "eatout/calculator";
     }
 }
