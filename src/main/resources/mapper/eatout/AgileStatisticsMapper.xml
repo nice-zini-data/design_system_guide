@@ -154,9 +154,9 @@
         <if test='dateType == "4"'>
             b.yyyymm
         </if>
-            , ROUND((sum(sale_amt)/100000000),0) as sale_amt, sum(store_cnt) as store_cnt, sum(use_cnt) as use_cnt, sum(cust_cnt) as cust_cnt
+            , ROUND((sum(sale_amt)/100000000),0) as sale_amt, sum(store_cnt) as store_cnt, sum(use_cnt) as use_cnt--, sum(cust_cnt) as cust_cnt
             , ROUND(sum(sale_amt) / sum(store_cnt),0) as store_amt, ROUND(sum(sale_amt) / sum(use_cnt),0) as use_amt
-            ,sum(cnt_m_10under + cnt_w_10under + cnt_m_1014 + cnt_w_1014 + cnt_m_1519 + cnt_w_1519 + cnt_m_2024 + cnt_w_2024 + cnt_m_2529 + cnt_w_2529) as cnt_20under
+            ,sum(cnt_m_20under + cnt_w_20under + cnt_m_2024 + cnt_w_2024 + cnt_m_2529 + cnt_w_2529) as cnt_20under
             ,sum(cnt_m_3034 + cnt_w_3034 + cnt_m_3539 + cnt_w_3539) as cnt_30
             ,sum(cnt_m_4044 + cnt_w_4044 + cnt_m_4549 + cnt_w_4549) as cnt_40
             ,sum(cnt_m_5054 + cnt_w_5054 + cnt_m_5559 + cnt_w_5559) as cnt_50
