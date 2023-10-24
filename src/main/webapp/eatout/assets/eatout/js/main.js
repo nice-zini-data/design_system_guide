@@ -1,6 +1,7 @@
 
 var strMenuGubun = "1"; // 1: 요약, 2: 인구, 3:소득,4:대출,5:산업,6:지역경제,7:부동산,8:인프라
 var typeCdTmp = '';
+var typeCdSubTmp = '';
 var pageHistory = [];
 var objPage = {
     navbar : "elecmap"
@@ -28,8 +29,8 @@ function menuActive(navbar, side, url){
 }
 
 function fn_error(response) {
-    console.log(response);
-    console.log('error');
+    // console.log(response);
+    // console.log('error');
     loadingBar(false);
 
     $(".mem_nm").text("로그인");
@@ -133,7 +134,7 @@ function setDateList(dateType,typeCd){
     param.dateType = dateType;
     dateTypeNum = dateType;
     typeCdTmp = typeCd;
-    console.log('dataTypeNum : '+dataTypeNum);
+    // console.log('dataTypeNum : '+dataTypeNum);
     param.dataType = dataTypeNum;
     if(typeCd == undefined){
         typeCd = 'main'
@@ -145,8 +146,8 @@ function fn_setDate(id, response, param) {
     //화면 초기화
     $('#startDate').children('option:not(:first)').remove();
     $('#endDate').children('option:not(:first)').remove();
-    console.log('fn_setDate');
-    console.log(response);
+    // console.log('fn_setDate');
+    // console.log(response);
     response.data.forEach(function (val, idx){
         var tmpdate = '';
         if(dateTypeNum != 1) {
@@ -227,9 +228,10 @@ function fn_setUpjong_sub(id, response, param) {
 function setDateList_sub(dateType,typeCd){
     var param = {};
     param.dateType = dateType;
-    dateTypeNum = dateType;
-    console.log('dataTypeNum : '+dataTypeNum);
-    param.dataType = dataTypeNum;
+    dateTypeNum_sub = dateType;
+    typeCdSubTmp = typeCd
+    // console.log('dataTypeNum_sub : '+dateTypeNum_sub);
+    param.dataType = dataTypeNum_sub;
     if(typeCd == undefined){
         typeCd = 'main'
     }
@@ -243,8 +245,8 @@ function fn_setDate_sub(id, response, param) {
 
     response.data.forEach(function (val, idx){
         var tmpdate = '';
-        if(dateTypeNum != 1) {
-            if(typeCdTmp == 'vacancy' || dataTypeNum == '3'){
+        if(dateTypeNum_sub != 1) {
+            if(typeCdSubTmp == 'vacancy' || dateTypeNum_sub == '3'){
                 tmpdate = val.date
             }else{
                 tmpdate = val.dateNm.substring(0, 4) + val.date
@@ -348,6 +350,64 @@ function reset_select(type){
         }
     }
 }
+function reset_select(type){
+    if(type == 1){
+        if(searchType==0){
+            $('#area_cty').children('option:not(:first)').remove();
+            $('#area_admi').children('option:not(:first)').remove();
+            admiCd = null;
+            // areaCd = null;
+        }else{
+            $('#area_cty_2').children('option:not(:first)').remove();
+            $('#area_admi_2').children('option:not(:first)').remove();
+            admiCd_sub = null;
+            // areaCd = null;
+        }
+    }else if(type == 2){
+        // $('#upjong2').children('option:not(:first)').remove();
+        if(searchType==0){
+            $("#upjong2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+            $('#upjong3').children('option:not(:first)').remove();
+            upjongCd = null;
+        }else{
+            $("#upjong2_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+            $('#upjong3_2').children('option:not(:first)').remove();
+            upjongCd_sub = null;
+        }
+    }else if(type == 3){
+        if(searchType==0){
+            $('#startDate').children('option:not(:first)').remove();
+            $('#endDate').children('option:not(:first)').remove();
+            startDate = 0;
+            endDate = 0;
+        }else{
+            $('#startDate_2').children('option:not(:first)').remove();
+            $('#endDate_2').children('option:not(:first)').remove();
+            startDate_sub = 0;
+            endDate_sub = 0;
+        }
+    }else if(type == 0){
+        if(!settingCheck){
+            if(searchType == 0){
+                $('#area_cty').children('option:not(:first)').remove();
+                $('#area_admi').children('option:not(:first)').remove();
+                // $('#upjong2').children('option:not(:first)').remove();
+                $("#upjong2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+                $('#upjong3').children('option:not(:first)').remove();
+                $('#startDate').children('option:not(:first)').remove();
+                $('#endDate').children('option:not(:first)').remove();
+            }else{
+                $('#area_cty_2').children('option:not(:first)').remove();
+                $('#area_admi_2').children('option:not(:first)').remove();
+                // $('#upjong2').children('option:not(:first)').remove();
+                $("#upjong2_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+                $('#upjong3_2').children('option:not(:first)').remove();
+                $('#startDate_2').children('option:not(:first)').remove();
+                $('#endDate_2').children('option:not(:first)').remove();
+            }
+        }
+    }
+}
 
 function change_colType(type,check){
     var lng = [1,2,3,4,5];
@@ -372,7 +432,7 @@ function change_colType(type,check){
 
 // 메인화면 그래프 생성
 function fn_makechart(id, response, param){
-    console.log(response);
+    // console.log(response);
     var maxVal = 0;
     var minVal = 0;
     var tmpVal = 0;
@@ -388,7 +448,7 @@ function fn_makechart(id, response, param){
     var resultName = [];
     if(!common.isEmpty(response.data[0])) {
         $.each(response.data,function(index,item){
-            console.log(item);
+            // console.log(item);
             $.each(item,function(key,value) {
                 // console.log(key);
                 // console.log(tmpSel);
@@ -421,7 +481,7 @@ function fn_makechart(id, response, param){
                 }
             });
         });
-        console.log(resultName);
+        // console.log(resultName);
 
         $('#calcAmt').parent().removeClass('down');
         $('#calcAmt').parent().removeClass('up');
@@ -436,10 +496,10 @@ function fn_makechart(id, response, param){
             $('#calcDateType').text('전기')
         }
         if(searchType == 0){
-            console.log(maxYyyymm + ' : ' +maxVal);
+            // console.log(maxYyyymm + ' : ' +maxVal);
             $('#maxYyyymm').text(maxYyyymm);
             $('#maxVal').text(common.addComma(maxVal));
-            console.log(minYyyymm + ' : ' +minVal);
+            // console.log(minYyyymm + ' : ' +minVal);
             $('#minYyyymm').text(minYyyymm);
             $('#minVal').text(common.addComma(minVal));
         }
@@ -518,7 +578,7 @@ function fn_makechart(id, response, param){
                     textBorderColor:'#fff',
                     fontFamily: 'Pretendard',
                     formatter: function(c){
-                        console.log(c.data)
+                        // console.log(c.data)
                         return  common.addComma(c.data);
                     }
                 },
