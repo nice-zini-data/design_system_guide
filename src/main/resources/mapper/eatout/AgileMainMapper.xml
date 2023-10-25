@@ -2,69 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zinidata.eatout.mapper.AgileMainMapper">
 
-    <select id="getCertCnt" resultType="integer">
-    </select>
 
-<!--    <select id="getCertSeqNo" resultType="com.zinidata.eatout.vo.AgileCertVO">-->
-<!--        select nextval('em_tran_pr') as seqNo-->
-<!--    </select>-->
-
-    <insert id="setCert">
-        insert into em_tran (tran_pr, tran_phone, tran_callback, tran_status, tran_date, tran_msg, tran_type)
-        values(#{seqNo}, #{mobileNo}, #{tranCallback}, '1', now(), #{tranMsg}, 4)
-    </insert>
-
-    <insert id="setCellPhoneCert">
-        insert into tb_cellphone_cert (seq, name, mobile_no, cert_no, ip_addr)
-        values(#{seqNo}, #{memNm}, #{mobileNo}, #{randomStr}, #{ipAddr})
-    </insert>
-
-    <update id="setCertCrtDateUpdate">
-        update tb_cellphone_cert
-        set cert_dt = now()
-        where seq = #{seqNo}
-    </update>
-
-<!--    <select id="getCertInfo" resultType="com.zinidata.eatout.vo.AgileCertVO">-->
-<!--        select name as mem_nm-->
-<!--            , mobile_no-->
-<!--            , cert_no-->
-<!--        from tb_cellphone_cert-->
-<!--        where seq = #{seqNo}-->
-<!--    </select>-->
-    <select id="getSubscribe" resultType="integer">
-        select count(*) as cnt
-        from tb_subscribe_info
-        where mobile_no =#{mobileNo} and mem_nm=#{memNm}
-    </select>
     <select id="getYyyymm" resultType="String">
-        select max(yyyymm) as yyyymm from tbss_sum_sales_mega_his
-    </select>
-
-    <insert id="setSubscribeIns">
-        insert into tb_subscribe_info
-            (mobile_no,mem_nm,mem_type,interest_areacd,interest_upjong,personal_info,marketing_info)
-        values (#{mobileNo},#{memNm},#{memType},#{interestAreacd},#{interestUpjong},#{personalInfo},#{marketingInfo})
-    </insert>
-
-    <update id="setSubscribeUpd">
-        update tb_subscribe_info
-        set mem_type = #{memType}
-        , interest_areacd = #{interestAreacd}
-        , interest_upjong = #{interestUpjong}
-        , update_date = now()
-        , personal_info = #{personalInfo}
-        , marketing_info = #{marketingInfo}
-    </update>
-
-    <select id="getDataUpdateYn" resultType="com.zinidata.eatout.vo.DataUpdateVO">
-        --         !!BigMainMapper.getDataUpdateYn!! --
-            select
-                    pop_status
-                    ,pop_date_s
-                    ,pop_date_e
-            from tb_update_info
-            where pop_gubun = 'nbigeye'
+        select max(yyyymm) as yyyymm from cmapap.tbss_sum_sales_mega_his
     </select>
 
     <select id="getAdmiList" resultType="com.zinidata.eatout.vo.output.AgileAdmiOutVO">
@@ -79,7 +19,7 @@
             c.admi_cd as area_cd, c.admi_nm as area_nm
         </if>
         from
-            tbadm_mega a,tbadm_cty b, tbadm_admi c
+            cmapap.tbadm_mega a, cmapap.tbadm_cty b, cmapap.tbadm_admi c
         where 1=1
             and a.mega_cd = b.mega_cd
             and b.cty_cd = c.cty_cd
@@ -111,7 +51,7 @@
             c.upjong3_cd as upjong_cd, c.upjong3_nm as upjong_nm
         </if>
         from
-        tb_upjong1 a, tb_upjong2 b, tb_upjong3 c
+            cmapap.tb_upjong1 a, cmapap.tb_upjong2 b, cmapap.tb_upjong3 c
         where 1=1
             and a.upjong1_cd = b.upjong1_cd
             and b.upjong2_cd = c.upjong2_cd
@@ -162,7 +102,7 @@
                 , to_char(yyyymm,'MM') as month
                 , to_char(yyyymm,'YYYYMM') as yyyymm
             from
-                generate_series(to_date(((select min(yyyymm) from tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+                generate_series(to_date(((select min(yyyymm) from cmapap.tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
             order by
                 yyyymm desc
             ) tmp
@@ -206,7 +146,7 @@
                     ,concat(substring(a.sale_mm,1,4),'년',substring(a.sale_mm,5,6),'월', a.week,'주차') as date_nm
                 </if>
             from
-                tbagile_pos_info a
+                cmapap.tbagile_pos_info a
             group by
                 1,2
             order by
@@ -224,7 +164,7 @@
             <if test='menuType == "3"'>
                 c.menu3_cd, c.menu3_nm
             </if>
-        from tb_menu1 a, tb_menu2 b, tb_menu3 c
+        from cmapap.tb_menu1 a, cmapap.tb_menu2 b, cmapap.tb_menu3 c
         where 1=1
             and a.menu1_cd = b.menu1_cd
             and b.menu2_cd = c.menu2_cd
@@ -268,7 +208,7 @@
                     row_number() over(order by year desc, quarter desc) as row, year, quarter
                     ,sum(a.sale_amt) as sale_amt
                 from
-                    tbss_sum_sales_mega_his a, tmp_date b
+                    cmapap.tbss_sum_sales_mega_his a, tmp_date b
                 where 1=1
                     and a.yyyymm = b.yyyymm
                 group by

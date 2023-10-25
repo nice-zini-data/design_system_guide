@@ -19,7 +19,7 @@
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
                 from
-                    generate_series(to_date(((select min(yyyymm) from tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
@@ -65,13 +65,13 @@
             ,sum(cnt_mon) as mon , sum(cnt_tue) as tue, sum(cnt_wed) as wed, sum(cnt_thu) as thu, sum(cnt_fri) as fri, sum(cnt_sat) as sat, sum(cnt_sun) as sun
         from
         <if test='admGb == "1"'>
-            tbss_sum_sales_mega_his a, tmp_date b, tb_upjong3 c
+            cmapap.tbss_sum_sales_mega_his a, tmp_date b, cmapap.tb_upjong3 c
         </if>
         <if test='admGb == "2"'>
-            tbss_sum_sales_cty_his a, tmp_date b, tb_upjong3 c
+            cmapap.tbss_sum_sales_cty_his a, tmp_date b, cmapap.tb_upjong3 c
         </if>
         <if test='admGb == "3"'>
-            tbss_sum_sales_admi_his a, tmp_date b, tb_upjong3 c
+            cmapap.tbss_sum_sales_admi_his a, tmp_date b, cmapap.tb_upjong3 c
         </if>
         where 1=1
             and a.yyyymm = b.yyyymm
@@ -120,7 +120,7 @@
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
                 from
-                    generate_series(to_date(((select min(yyyymm) from tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
@@ -166,10 +166,10 @@
             ,sum(cnt_mon) as mon , sum(cnt_tue) as tue, sum(cnt_wed) as wed, sum(cnt_thu) as thu, sum(cnt_fri) as fri, sum(cnt_sat) as sat, sum(cnt_sun) as sun
         from
         <if test='admGb == "1"'>
-            tbkb_sum_sales_mega_his a, tmp_date b, tb_upjong3 c
+            cmapap.tbkb_sum_sales_mega_his a, tmp_date b, cmapap.tb_upjong3 c
         </if>
         <if test='admGb == "2"'>
-            tbkb_sum_sales_cty_his a, tmp_date b, tb_upjong3 c
+            cmapap.tbkb_sum_sales_cty_his a, tmp_date b, cmapap.tb_upjong3 c
         </if>
         where 1=1
             and a.yyyymm = b.yyyymm
@@ -211,7 +211,7 @@
                     ,sale_mm as yyyymm
                     ,sale_mm || week as week
                 from
-                    tbagile_pos_info a
+                    cmapap.tbagile_pos_info a
                 group by
                     1,2,3,4,5
             ) tmp
@@ -253,7 +253,7 @@
             ,sum(store_cnt) as store_cnt, sum(sale_qty) sale_qty, sum(tot_sale_amt) tot_sale_amt
             ,ROUND(sum(tot_sale_amt) / sum(sale_qty),0) as sale_amt
         from
-            tbagile_pos_info a,tmp_date b, tb_upjong3 c
+            cmapap.tbagile_pos_info a,tmp_date b, cmapap.tb_upjong3 c
         where 1=1
             and a.sale_mm = b.yyyymm
             and a.upjong3_cd = c.upjong3_cd
@@ -299,7 +299,7 @@
                             , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                         ]]>
             from
-            generate_series(to_date(((select min(yyyymm) from tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+            generate_series(to_date(((select min(yyyymm) from cmapap.tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
@@ -341,13 +341,13 @@
         , sum(pop_mon) as pop_mon, sum(pop_tue) as pop_tue, sum(pop_wed) as pop_wed, sum(pop_thu) as pop_thu, sum(pop_fri) as pop_fri, sum(pop_sat) as pop_sat, sum(pop_sun) as pop_sun
         from
         <if test='admGb == "1"'>
-            tbpop_livi_mega_his a, tmp_date b
+            cmapap.tbpop_livi_mega_his a, tmp_date b
         </if>
         <if test='admGb == "2"'>
-            tbpop_livi_cty_his a, tmp_date b
+            cmapap.tbpop_livi_cty_his a, tmp_date b
         </if>
         <if test='admGb == "3"'>
-            tbpop_livi_admi_his a, tmp_date b
+            cmapap.tbpop_livi_admi_his a, tmp_date b
         </if>
         where 1=1
             and a.yyyymm = b.yyyymm
@@ -383,7 +383,7 @@
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
                 from
-                    generate_series(to_date(((select min(yyyymm) from tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
@@ -422,13 +422,13 @@
         , sum(pop_w_20under) as w_20_under, sum(pop_w_20s) as w_20,sum(pop_w_30s) as w_30,sum(pop_w_40s) as w_40,sum(pop_w_50s) as w_50, sum(pop_w_60over) as w_60_over
         from
         <if test='admGb == "1"'>
-            tbpop_hous_mega_his a, tmp_date b
+            cmapap.tbpop_hous_mega_his a, tmp_date b
         </if>
         <if test='admGb == "2"'>
-            tbpop_hous_cty_his a, tmp_date b
+            cmapap.tbpop_hous_cty_his a, tmp_date b
         </if>
         <if test='admGb == "3"'>
-            tbpop_hous_admi_his a, tmp_date b
+            cmapap.tbpop_hous_admi_his a, tmp_date b
         </if>
         where 1=1
         and a.yyyymm = b.yyyymm
@@ -459,10 +459,10 @@
                         select
                             yyyymm,b.upjong3_nm, a.upjong3_cd, sum(sale_amt) as sale_amt
                         from
-                            tbss_sum_sales_mega_his a, tb_upjong3 b
+                            cmapap.tbss_sum_sales_mega_his a, cmapap.tb_upjong3 b
                         where 1=1
                             and a.upjong3_cd = b.upjong3_cd
-                            and yyyymm = to_char(to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM') + interval '-1 month','YYYYMM')
+                            and yyyymm = to_char(to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his),'YYYYMM') + interval '-1 month','YYYYMM')
                             and a.upjong3_cd like 'Q%'
                             and b.svc_yn = 'Y'
                         group by
@@ -471,10 +471,10 @@
                         select
                             yyyymm,b.upjong3_nm, a.upjong3_cd, sum(sale_amt) as sale_amt
                         from
-                            tbss_sum_sales_mega_his a, tb_upjong3 b
+                            cmapap.tbss_sum_sales_mega_his a, cmapap.tb_upjong3 b
                         where 1=1
                             and a.upjong3_cd = b.upjong3_cd
-                            and yyyymm = (select max(yyyymm) from tbss_sum_sales_mega_his)
+                            and yyyymm = (select max(yyyymm) from cmapap.tbss_sum_sales_mega_his)
                             and a.upjong3_cd like 'Q%'
                             and b.svc_yn = 'Y'
                         group by
