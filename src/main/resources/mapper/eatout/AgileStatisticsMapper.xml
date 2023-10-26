@@ -122,7 +122,7 @@
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
                 from
-                    generate_series(to_date(((select min(yyyymm) from cmapap.tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbkb_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbkb_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
@@ -305,7 +305,7 @@
                             , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                         ]]>
             from
-            generate_series(to_date(((select min(yyyymm) from cmapap.tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+            generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_livi_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_livi_mega_his),'YYYYMM'),'1 week') yyyymm
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
@@ -391,7 +391,7 @@
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
                 from
-                    generate_series(to_date(((select min(yyyymm) from cmapap.tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_hous_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_hous_mega_his),'YYYYMM'),'1 week') yyyymm
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
