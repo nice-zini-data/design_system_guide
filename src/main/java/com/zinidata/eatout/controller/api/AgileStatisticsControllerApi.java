@@ -83,7 +83,7 @@ public class AgileStatisticsControllerApi {
     })
     public String getLiviList(AgileStatisticsVO agileStatisticsVO) throws Exception {
         System.out.println(agileStatisticsVO);
-        String result = agileStatisticsService.getHousList(agileStatisticsVO);
+        String result = agileStatisticsService.getLiviList(agileStatisticsVO);
         return result;
     }
 
