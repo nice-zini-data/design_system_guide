@@ -102,7 +102,18 @@
                 , to_char(yyyymm,'MM') as month
                 , to_char(yyyymm,'YYYYMM') as yyyymm
             from
-                generate_series(to_date(((select min(yyyymm) from cmapap.tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+                <if test='dataType == "1"'>
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbss_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+               </if>
+                <if test='dataType == "2"'>
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbkb_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbkb_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+                </if>
+                <if test='dataType == "4"'>
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_livi_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_livi_mega_his),'YYYYMM'),'1 week') yyyymm
+                </if>
+                <if test='dataType == "5"'>
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_hous_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_hous_mega_his),'YYYYMM'),'1 week') yyyymm
+                </if>
             order by
                 yyyymm desc
             ) tmp
