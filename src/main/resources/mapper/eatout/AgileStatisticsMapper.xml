@@ -19,7 +19,7 @@
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
                 from
-                    generate_series(to_date(((select min(yyyymm) from cmapap.tbss_sum_sales_mega_his_v3)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his_v3),'YYYYMM'),'1 week') yyyymm
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbss_sum_mega_his_v3)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_sum_mega_his_v3),'YYYYMM'),'1 week') yyyymm
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
@@ -67,13 +67,13 @@
             ,sum(cnt_mon) as mon , sum(cnt_tue) as tue, sum(cnt_wed) as wed, sum(cnt_thu) as thu, sum(cnt_fri) as fri, sum(cnt_sat) as sat, sum(cnt_sun) as sun
         from
         <if test='admGb == "1"'>
-            cmapap.tbss_sum_sales_mega_his_v3 a, tmp_date b, cmapap.tb_upjong3 c
+            cmapap.tbss_sum_mega_his_v3 a, tmp_date b, cmapap.tb_upjong3 c
         </if>
         <if test='admGb == "2"'>
-            cmapap.tbss_sum_sales_cty_his_v3 a, tmp_date b, cmapap.tb_upjong3 c
+            cmapap.tbss_sum_cty_his_v3_v3 a, tmp_date b, cmapap.tb_upjong3 c
         </if>
         <if test='admGb == "3"'>
-            cmapap.tbss_sum_sales_admi_his_v3 a, tmp_date b, cmapap.tb_upjong3 c
+            cmapap.tbss_sum_admi_his_v3 a, tmp_date b, cmapap.tb_upjong3 c
         </if>
         where 1=1
             and a.yyyymm = b.yyyymm
@@ -469,10 +469,10 @@
                         select
                             yyyymm,b.upjong3_nm, a.upjong3_cd, sum(sale_amt) as sale_amt
                         from
-                            cmapap.tbss_sum_sales_mega_his_v3 a, cmapap.tb_upjong3 b
+                            cmapap.tbss_sum_mega_his_v3 a, cmapap.tb_upjong3 b
                         where 1=1
                             and a.upjong3_cd = b.upjong3_cd
-                            and yyyymm = to_char(to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his_v3),'YYYYMM') + interval '-1 month','YYYYMM')
+                            and yyyymm = to_char(to_date((select max(yyyymm) from cmapap.tbss_sum_mega_his_v3),'YYYYMM') + interval '-1 month','YYYYMM')
                             and a.upjong3_cd like 'Q%'
                             and b.svc_yn = 'Y'
                         group by
@@ -481,10 +481,10 @@
                         select
                             yyyymm,b.upjong3_nm, a.upjong3_cd, sum(sale_amt) as sale_amt
                         from
-                            cmapap.tbss_sum_sales_mega_his_v3 a, cmapap.tb_upjong3 b
+                            cmapap.tbss_sum_mega_his_v3 a, cmapap.tb_upjong3 b
                         where 1=1
                             and a.upjong3_cd = b.upjong3_cd
-                            and yyyymm = (select max(yyyymm) from cmapap.tbss_sum_sales_mega_his_v3)
+                            and yyyymm = (select max(yyyymm) from cmapap.tbss_sum_mega_his_v3)
                             and a.upjong3_cd like 'Q%'
                             and b.svc_yn = 'Y'
                         group by

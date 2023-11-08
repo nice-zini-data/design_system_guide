@@ -10,12 +10,12 @@
         from(
                 select
                     yyyymm, a.upjong3_cd, b.upjong3_nm
-                     , case when yyyymm = (select max(yyyymm) from cmapap.tbss_sum_sales_mega_his_v3) then sum(sale_amt) end as this_sale_amt
-                     , case when yyyymm != (select max(yyyymm) from cmapap.tbss_sum_sales_mega_his_v3) then sum(sale_amt) end as before_sale_amt
-                from cmapap.tbss_sum_sales_mega_his_v3 a, cmapap.tb_upjong3 b
+                     , case when yyyymm = (select max(yyyymm) from cmapap.tbss_sum_mega_his_v3) then sum(sale_amt) end as this_sale_amt
+                     , case when yyyymm != (select max(yyyymm) from cmapap.tbss_sum_mega_his_v3) then sum(sale_amt) end as before_sale_amt
+                from cmapap.tbss_sum_mega_his_v3 a, cmapap.tb_upjong3 b
                 where 1=1
                   and a.upjong3_cd = b.upjong3_cd
-                  and yyyymm between to_char(to_date((select max(yyyymm) from cmapap.tbss_sum_sales_mega_his_v3),'YYYYMM') + interval '-1 month','YYYYMM') and (select max(yyyymm) from cmapap.tbss_sum_sales_mega_his)
+                  and yyyymm between to_char(to_date((select max(yyyymm) from cmapap.tbss_sum_mega_his_v3),'YYYYMM') + interval '-1 month','YYYYMM') and (select max(yyyymm) from cmapap.tbss_sum_mega_his_v3)
                   and b.upjong3_cd like 'Q%'
                 group by
                     1,2,3
