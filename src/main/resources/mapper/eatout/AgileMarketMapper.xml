@@ -167,7 +167,7 @@
             and a.yyyymm = b.yyyymm
             and a.upjong3_cd = b.upjong3_cd
             and a.mega_cd = b.mega_cd
-            and a.bupin_gb = b.bupin_gb
+            and a.bupin_gb = 1
             and a.yyyymm between to_char(
                 to_date((select max(yyyymm) from tbss_sum_sales_mega_his),'YYYYMM') + interval '-12 month','YYYYMM')
                 and (select max(yyyymm) from tbss_sum_sales_mega_his
