@@ -4,7 +4,7 @@
 
 
     <select id="getYyyymm" resultType="String">
-        select max(yyyymm) as yyyymm from tbss_sum_mega_his_v3
+        select max(yyyymm) as yyyymm from tbss_ag_sum_sales_mega_his
     </select>
 
     <select id="getAdmiList" resultType="com.zinidata.eatout.vo.output.AgileAdmiOutVO">
@@ -103,7 +103,7 @@
                 , to_char(yyyymm,'YYYYMM') as yyyymm
             from
                 <if test='dataType == "1"'>
-                    generate_series(to_date(((select min(yyyymm) from tbss_sum_mega_his_v3)),'YYYYMM'), to_date((select max(yyyymm) from tbss_sum_mega_his_v3),'YYYYMM'),'1 week') yyyymm
+                    generate_series(to_date(((select min(yyyymm) from tbss_ag_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_ag_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
                </if>
                 <if test='dataType == "2"'>
                     generate_series(to_date(((select min(yyyymm) from tbkb_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbkb_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
@@ -219,7 +219,7 @@
                     row_number() over(order by year desc, quarter desc) as row, year, quarter
                     ,sum(a.sale_amt) as sale_amt
                 from
-                    tbss_sum_mega_his_v3 a, tmp_date b
+                    tbss_ag_sum_sales_mega_his a, tmp_date b
                 where 1=1
                     and a.yyyymm = b.yyyymm
                 group by

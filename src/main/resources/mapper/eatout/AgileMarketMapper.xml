@@ -9,12 +9,12 @@
         from(
                 select
                     yyyymm, a.upjong3_cd, b.upjong3_nm
-                     , case when yyyymm = (select max(yyyymm) from tbss_sum_mega_his_v3) then sum(sale_amt) end as this_sale_amt
-                     , case when yyyymm != (select max(yyyymm) from tbss_sum_mega_his_v3) then sum(sale_amt) end as before_sale_amt
-                from tbss_sum_mega_his_v3 a, tb_upjong3 b
+                     , case when yyyymm = (select max(yyyymm) from tbss_ag_sum_sales_mega_his) then sum(sale_amt) end as this_sale_amt
+                     , case when yyyymm != (select max(yyyymm) from tbss_ag_sum_sales_mega_his) then sum(sale_amt) end as before_sale_amt
+                from tbss_ag_sum_sales_mega_his a, tb_upjong3 b
                 where 1=1
                   and a.upjong3_cd = b.upjong3_cd
-                  and yyyymm between to_char(to_date((select max(yyyymm) from tbss_sum_mega_his_v3),'YYYYMM') + interval '-1 month','YYYYMM') and (select max(yyyymm) from tbss_sum_mega_his_v3)
+                  and yyyymm between to_char(to_date((select max(yyyymm) from tbss_ag_sum_sales_mega_his),'YYYYMM') + interval '-1 month','YYYYMM') and (select max(yyyymm) from tbss_ag_sum_sales_mega_his)
                   and b.upjong3_cd like 'Q%'
                 group by
                     1,2,3
@@ -80,17 +80,17 @@
                 from(
                     select
                         a.mega_cd, c.mega_nm, a.upjong3_cd, b.upjong3_nm
-                        , case when yyyymm = (select max(yyyymm) from tbss_sum_mega_his_v3) then sum(sale_amt) end as this_sale_amt
-                        , case when yyyymm != (select max(yyyymm) from tbss_sum_mega_his_v3) then sum(sale_amt) end as before_sale_amt
-                        , case when yyyymm = (select max(yyyymm) from tbss_sum_mega_his_v3) then sum(store_cnt) end as this_store_cnt
-                        , case when yyyymm != (select max(yyyymm) from tbss_sum_mega_his_v3) then sum(store_cnt) end as before_store_cnt
-                    from tbss_sum_mega_his_v3 a, tb_upjong3 b, tbadm_mega c
+                        , case when yyyymm = (select max(yyyymm) from tbss_ag_sum_sales_mega_his) then sum(sale_amt) end as this_sale_amt
+                        , case when yyyymm != (select max(yyyymm) from tbss_ag_sum_sales_mega_his) then sum(sale_amt) end as before_sale_amt
+                        , case when yyyymm = (select max(yyyymm) from tbss_ag_sum_sales_mega_his) then sum(store_cnt) end as this_store_cnt
+                        , case when yyyymm != (select max(yyyymm) from tbss_ag_sum_sales_mega_his) then sum(store_cnt) end as before_store_cnt
+                    from tbss_ag_sum_sales_mega_his a, tb_upjong3 b, tbadm_mega c
                     where 1=1
                         and a.upjong3_cd = b.upjong3_cd
                         and a.mega_cd = c.mega_cd
                         and yyyymm in (
-                            to_char(to_date((select max(yyyymm) from tbss_sum_mega_his_v3),'YYYYMM') + interval '-${outeatDateType} month','YYYYMM')
-                            ,(select max(yyyymm) from tbss_sum_mega_his_v3)
+                            to_char(to_date((select max(yyyymm) from tbss_ag_sum_sales_mega_his),'YYYYMM') + interval '-${outeatDateType} month','YYYYMM')
+                            ,(select max(yyyymm) from tbss_ag_sum_sales_mega_his)
                         )
                         and b.upjong3_cd like 'Q%'
                         and b.svc_yn = 'Y'
@@ -135,15 +135,15 @@
             from(
                     select
                         a.upjong3_cd, b.upjong3_nm
-                         , case when yyyymm = (select max(yyyymm) from tbss_sum_mega_his_v3) then sum(sale_amt) end as this_sale_amt
-                         , case when yyyymm != (select max(yyyymm) from tbss_sum_mega_his_v3) then sum(sale_amt) end as before_sale_amt
-                    from tbss_sum_mega_his_v3 a, tb_upjong3 b, tbadm_mega c
+                         , case when yyyymm = (select max(yyyymm) from tbss_ag_sum_sales_mega_his) then sum(sale_amt) end as this_sale_amt
+                         , case when yyyymm != (select max(yyyymm) from tbss_ag_sum_sales_mega_his) then sum(sale_amt) end as before_sale_amt
+                    from tbss_ag_sum_sales_mega_his a, tb_upjong3 b, tbadm_mega c
                     where 1=1
                         and a.upjong3_cd = b.upjong3_cd
                         and a.mega_cd = c.mega_cd
                         and yyyymm in (
-                            to_char(to_date((select max(yyyymm) from tbss_sum_mega_his_v3),'YYYYMM') + interval '-${outeatDateType} month','YYYYMM')
-                            ,(select max(yyyymm) from tbss_sum_mega_his_v3)
+                            to_char(to_date((select max(yyyymm) from tbss_ag_sum_sales_mega_his),'YYYYMM') + interval '-${outeatDateType} month','YYYYMM')
+                            ,(select max(yyyymm) from tbss_ag_sum_sales_mega_his)
                         )
                         and b.upjong3_cd like 'Q%'
                         and b.svc_yn = 'Y'
@@ -162,15 +162,15 @@
     <select id="getUpjongDetail" resultType="com.zinidata.eatout.vo.output.AgileMarketMainOutVO">
         select
             a.yyyymm, sum(a.sale_amt) as e_sale_amt, sum(b.sale_amt)  as d_sale_amt, sum(a.store_cnt) as store_cnt, ROUND(((sum(a.sale_amt) + sum(b.sale_amt))/sum(a.store_cnt)),0) as store_amt
-        from tbss_sum_mega_his_v3 a, tbkb_sum_sales_mega_his b, tb_upjong3 c
+        from tbss_ag_sum_sales_mega_his a, tbkb_sum_sales_mega_his b, tb_upjong3 c
         where 1=1
             and a.yyyymm = b.yyyymm
             and a.upjong3_cd = b.upjong3_cd
             and a.mega_cd = b.mega_cd
             and a.bupin_gb = 1
             and a.yyyymm between to_char(
-                to_date((select max(yyyymm) from tbss_sum_mega_his_v3),'YYYYMM') + interval '-12 month','YYYYMM')
-                and (select max(yyyymm) from tbss_sum_mega_his_v3
+                to_date((select max(yyyymm) from tbss_ag_sum_sales_mega_his),'YYYYMM') + interval '-12 month','YYYYMM')
+                and (select max(yyyymm) from tbss_ag_sum_sales_mega_his
             )
             and a.upjong3_cd = #{upjong3Cd}
             and c.svc_yn = 'Y'
