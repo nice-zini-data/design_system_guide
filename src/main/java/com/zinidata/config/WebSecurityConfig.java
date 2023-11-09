@@ -27,7 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
             .headers()
-                .frameOptions().sameOrigin()
+//                .frameOptions().sameOrigin()
+                .frameOptions().disable()
                 .and()
                 .csrf().disable()	// csrf 토큰을 비활성화
                 .authorizeRequests() // 요청 URL에 따라 접근 권한을 설정
