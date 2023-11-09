@@ -26,6 +26,7 @@ public class ApiFilter implements Filter {
         log.info("=====================Filter TEST  : doFilter=====================");
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader("X-Frame-Options", "ALLOW-FROM https://www.atfis.or.kr/");
+        log.info("doFilter ApiFilter, X-Frame-Options : {}", ((HttpServletRequest)servletRequest).getHeader("X-Frame-Options"));
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
