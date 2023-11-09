@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
@@ -21,7 +22,10 @@ public class ApiFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         log.info("=====================Filter TEST  : doFilter=====================");
         log.info("doFilter ApiFilter, uri : {}", ((HttpServletRequest)servletRequest).getRequestURI());
+        log.info("doFilter ApiFilter, uri : {}", ((HttpServletRequest)servletRequest).getRequestURI());
         log.info("=====================Filter TEST  : doFilter=====================");
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        response.setHeader("X-Frame-Options", "ALLOW-FROM https://www.atfis.or.kr/");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
