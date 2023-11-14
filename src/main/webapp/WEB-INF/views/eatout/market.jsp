@@ -108,14 +108,14 @@
 								<p class="popupChart_tit">
 									<img src="/eatout/assets/eatout/images/icon/s_mart.svg" alt=""/>
 									점포 수</p>
-								<span class="popup_sTxt">[단위 : 억 원/월]</span>
+								<span class="popup_sTxt">[단위 : 개소]</span>
 								<div id="market_chart03" class="popupChart"></div>
 							</div>
 							<div class="col-6">
 								<p class="popupChart_tit">
 									<img src="/eatout/assets/eatout/images/icon/s_coin.svg" alt=""/>
 									점포당 매출액</p>
-								<span class="popup_sTxt">[단위 : 억 원/월]</span>
+								<span class="popup_sTxt">[단위 : 만 원/월]</span>
 								<div id="market_chart04" class="popupChart"></div>
 							</div>
 						</div>
