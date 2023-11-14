@@ -62,6 +62,7 @@
             and c.upjong2_cd = #{upjongCd}
         </if>
             and c.svc_yn = 'Y'
+            and c.upjong3_cd not in ('Q02004')
         group by
         1,2
         order by
@@ -167,24 +168,26 @@
     <select id="getMenuList" resultType="com.zinidata.eatout.vo.output.AgileMenuOutVO">
         select
             <if test='menuType == "1"'>
-                a.menu1_cd,a.menu1_nm
+                a.menu1_cd as menu_cd,a.menu1_nm as menu_nm
             </if>
             <if test='menuType == "2"'>
-                b.menu2_cd, b.menu2_nm
+                b.menu2_cd as menu_cd, b.menu2_nm as menu_nm
              </if>
             <if test='menuType == "3"'>
-                c.menu3_cd, c.menu3_nm
+                c.menu3_cd as menu_cd, c.menu3_nm as menu_nm
             </if>
         from cmapap.tb_menu1 a, cmapap.tb_menu2 b, cmapap.tb_menu3 c
         where 1=1
             and a.menu1_cd = b.menu1_cd
             and b.menu2_cd = c.menu2_cd
-            <if test='menuType == "1"'>
-                a.menu1_cd = #{menuCd}
-            </if>
             <if test='menuType == "2"'>
-                b.menu2_cd = #{menuCd}
+            and a.menu1_cd = #{menuCd}
             </if>
+            <if test='menuType == "3"'>
+            and b.menu2_cd = #{menuCd}
+            </if>
+        group by
+            1,2
     </select>
     <select id="getMainInfo" resultType="com.zinidata.eatout.vo.output.AgileMainOutVO">
         with tmp_date as(

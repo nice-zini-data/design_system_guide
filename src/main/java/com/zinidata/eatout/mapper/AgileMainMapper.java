@@ -15,6 +15,7 @@ public interface AgileMainMapper {
     ArrayList<AgileAdmiOutVO> getAdmiList(AgileStatisticsVO agileStatisticsVO);
     ArrayList<AgileDateOutVO> getDateList(AgileStatisticsVO agileStatisticsVO);
     ArrayList<AgileUpjongOutVO> getUpjongList(AgileStatisticsVO agileStatisticsVO);
+    ArrayList<AgileMenuOutVO> getMenuList(AgileStatisticsVO agileStatisticsVO);
     ArrayList<AgileMainOutVO> getMainInfo(String yyyymm);
     ArrayList<AgileFoundationCalcOutVO> getFoundationCalc(AgileFoundationCalcVO agileFoundationCalcVO);
 

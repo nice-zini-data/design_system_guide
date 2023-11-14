@@ -63,6 +63,23 @@ public class AgileMainControllerApi {
      * @throws IOException
      */
     @ResponseBody
+    @PostMapping(value="/getMenuList")
+    @ApiOperation(value="메뉴정보 가져오기")
+    @ApiResponses(value = {
+            @ApiResponse(code=200, message = "메뉴정보 가져오기")
+    })
+    public String getMenuList(AgileStatisticsVO agileStatisticsVO){
+        String result = agileMainService.getMenuList(agileStatisticsVO);
+        return result;
+    }
+
+    /***
+     * 소비정보
+     * @param agileStatisticsVO
+     * @return
+     * @throws IOException
+     */
+    @ResponseBody
     @PostMapping(value="/getDateList")
     @ApiOperation(value="업정정보 가져오기")
     @ApiResponses(value = {

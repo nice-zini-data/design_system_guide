@@ -128,6 +128,31 @@ function fn_setUpjong(id, response, param) {
     }
 }
 //------------------------ 업종 선택 리스트 기능 END ----------------------------------------
+//------------------------ 메뉴 선택 리스트 기능 START ----------------------------------------
+var tmpMenuVal = 1;
+function setMenuList(menuType,menuCd){
+    var param = {};
+    param.MenuType = menuType;
+    tmpMenuVal = menuType;
+    param.MenuCd = menuCd;
+    getAjax("getMenuList", "/agile/main/getMenuList",param, fn_setMenu, fn_error);
+}
+function fn_setMenu(id, response, param) {
+    var html = '';
+
+    response.data.forEach(function (val, idx){
+        html += '<option value="' + val.menuCd + '" data-areaCd="'+val.menuCd+'">' + val.menuNm + '</option>';
+    });
+
+    if(tmpMenuVal == 2){
+        $("#menu2").append(html);
+    }else if(tmpMenuVal == 3){
+        $("#menu3").append(html);
+    }else{
+        $("#menu1").append(html);
+    }
+}
+//------------------------ 메뉴 선택 리스트 기능 END ----------------------------------------
 //------------------------ 날짜 선택 리스트 기능 START ----------------------------------------
 function setDateList(dateType,typeCd){
     var param = {};

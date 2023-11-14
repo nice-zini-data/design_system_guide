@@ -270,13 +270,13 @@
             and cty_cd like #{areaCd}||'%'
         </if>
         <if test='upjongType == "1"'>
-            and a.upjong3_cd like 'Q%'
+            and a.menu3_cd like 'Q%'
         </if>
         <if test='upjongType == "2"'>
-            and a.upjong3_cd like #{upjongCd}||'%'
+            and a.menu3_cd like #{menuCd}||'%'
         </if>
         <if test='upjongType == "3"'>
-            and a.upjong3_cd like #{upjongCd}||'%'
+            and a.menu3_cd like #{menuCd}||'%'
         </if>
         <if test='dateType == "5"'>
             and concat(a.sale_mm,a.week) = b.week

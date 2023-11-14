@@ -73,6 +73,19 @@ public class AgileMainService {
         return result;
     }
 
+    public String getMenuList(AgileStatisticsVO agileStatisticsVO){
+        String result = "";
+
+        ArrayList<AgileMenuOutVO> outVo = agileMainMapper.getMenuList(agileStatisticsVO);
+
+        if (!ZiniUtil.isEmpty(outVo)) {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.조회, outVo));
+        } else {
+            result = gsonUtil.toJson(new JsonOutputVo(Status.실패));
+        }
+        return result;
+    }
+
     public String getMainInfo(){
         String result = "";
         String yyyymm = agileMainMapper.getYyyymm();

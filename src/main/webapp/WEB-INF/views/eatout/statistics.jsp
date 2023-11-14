@@ -102,8 +102,8 @@ class = "login_none" 제거 및 추가
                                 </div>
                             </div>
                             <div class="col-2 st_box03">
-                                <p class="selectText">업종</p>
-                                <div class="selectWrap">
+                                <p class="selectText" id="box3Text">업종</p>
+                                <div class="selectWrap" id="upjong">
                                     <select id="upjong1">
                                         <option name="0" value="0">외식업</option>
                                     </select>
@@ -111,6 +111,17 @@ class = "login_none" 제거 및 추가
                                         <option name="0" value="0">중분류</option>
                                     </select>
                                     <select id="upjong3">
+                                        <option name="0" value="0">소분류</option>
+                                    </select>
+                                </div>
+                                <div class="selectWrap" id="menu" style="display: none">
+                                    <select id="menu1">
+                                        <option name="0" value="0">대분류</option>
+                                    </select>
+                                    <select id="menu2">
+                                        <option name="0" value="0">중분류</option>
+                                    </select>
+                                    <select id="menu3">
                                         <option name="0" value="0">소분류</option>
                                     </select>
                                 </div>
@@ -477,14 +488,18 @@ class = "login_none" 제거 및 추가
     var dataTypeNum_sub = 1;
     var admGbNum = 1;
     var admGbNum_sub = 1;
-    var upjongGbNum = 1;
-    var upjongGbNum_sub = 1;
     var dateTypeNum = 1;
     var dateTypeNum_sub = 1;
     var admiCd = '';
     var admiCd_sub = '';
     var upjongCd = '';
     var upjongCd_sub = '';
+    var upjongGbNum = 1;
+    var upjongGbNum_sub = 1;
+    var menuCd = '';
+    var menuCd_sub = '';
+    var menuGbNum = 1;
+    var menuGbNum_sub = 1;
     var startDate = 0;
     var startDate_sub = 0;
     var endDate = 0;
@@ -529,6 +544,9 @@ class = "login_none" 제거 및 추가
                 if($('#dateType').children('option:last').val() == 5){
                     $('#dateType').children('option:last').remove();
                 }
+                $("#box3Text").text("업종");
+                $("#upjong").css('display','block')
+                $("#menu").css('display','none')
                 $("#area_admi").attr('disabled',false);
                 $("#upjong2").attr('disabled',false);
                 $("#upjong3").attr('disabled',false);
@@ -544,6 +562,9 @@ class = "login_none" 제거 및 추가
                     $('#dateType').children('option:last').remove();
                 }
                 reset_select(0);
+                $("#box3Text").text("업종");
+                $("#upjong").css('display','block')
+                $("#menu").css('display','none')
                 $("#area_admi").attr('disabled',true);
                 $("#upjong2").attr('disabled',false);
                 $("#upjong3").attr('disabled',false);
@@ -554,8 +575,11 @@ class = "login_none" 제거 및 추가
                 console.log('메뉴 데이터 선택');
                 setDateList(1);
                 setAreaList(1);
-                setUpjongList(2);
+                setMenuList(1);
                 reset_select(0);
+                $("#box3Text").text("메뉴");
+                $("#upjong").css('display','none')
+                $("#menu").css('display','block')
                 $("#area_admi").attr('disabled',false);
                 $("#upjong2").attr('disabled',false);
                 $("#upjong3").attr('disabled',false);
@@ -572,6 +596,9 @@ class = "login_none" 제거 및 추가
                     $('#dateType').children('option:last').remove();
                 }
                 reset_select(0);
+                $("#box3Text").text("업종");
+                $("#upjong").css('display','block')
+                $("#menu").css('display','none')
                 $("#area_admi").attr('disabled',false);
                 $("#upjong2").attr('disabled',true);
                 $("#upjong3").attr('disabled',true);
@@ -587,6 +614,9 @@ class = "login_none" 제거 및 추가
                     $('#dateType').children('option:last').remove();
                 }
                 reset_select(0);
+                $("#box3Text").text("업종");
+                $("#upjong").css('display','block')
+                $("#menu").css('display','none')
                 $("#area_admi").attr('disabled',false);
                 $("#upjong2").attr('disabled',true);
                 $("#upjong3").attr('disabled',true);
@@ -654,6 +684,31 @@ class = "login_none" 제거 및 추가
         });
         $("#upjong3").on("change", function(){
             $("#upjong_nm").text($('#upjong3 option:selected').text())
+            // 마지막 업종 선택시 데이터 출력
+            upjongCd = $(this).val();
+            upjongGbNum = 3;
+        });
+
+        //메뉴 선택 이벤트
+        $("#menu1").on("change", function(){
+            $("#upjong_nm").text($('#menu1 option:selected').text())
+            $('#menu2').children('option:not(:first)').remove();
+            $('#menu3').children('option:not(:first)').remove();
+            //selected value
+            setMenuList(2,$(this).val());
+            menuCd = $(this).val();
+            menuGbNum = 1;
+        });
+        $("#menu2").on("change", function(){
+            $("#upjong_nm").text($('#menu2 option:selected').text())
+            $('#upjong3').children('option:not(:first)').remove();
+            //selected value
+            setMenuList(3,$(this).val());
+            upjongCd = $(this).val();
+            upjongGbNum = 2;
+        });
+        $("#menu3").on("change", function(){
+            $("#upjong_nm").text($('#menu3 option:selected').text())
             // 마지막 업종 선택시 데이터 출력
             upjongCd = $(this).val();
             upjongGbNum = 3;
