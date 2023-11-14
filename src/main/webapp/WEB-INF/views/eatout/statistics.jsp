@@ -890,6 +890,29 @@ class = "login_none" 제거 및 추가
             upjongGbNum_sub = 3;
         });
 
+        //메뉴 선택 이벤트
+        $("#menu1_2").on("change", function(){
+            $('#menu2_2').children('option:not(:first)').remove();
+            $('#menu3_2').children('option:not(:first)').remove();
+            //selected value
+            setMenuList_sub(2,$(this).val());
+            menuCd_sub = $(this).val();
+            menuGbNum_sub = 1;
+        });
+        $("#menu2_2").on("change", function(){
+            $('#menu3_2').children('option:not(:first)').remove();
+            //selected value
+            setMenuList_sub(3,$(this).val());
+            menuCd_sub = $(this).val();
+            menuGbNum_sub = 2;
+        });
+        $("#menu3_2").on("change", function(){
+            $("#upjong_nm").text($('#menu3_2 option:selected').text())
+            // 마지막 업종 선택시 데이터 출력
+            menuCd_sub = $(this).val();
+            menuGbNum_sub = 3;
+        });
+
         //날짜 선택 이벤트
         $("#dateType_2").on("change", function(){
             //selected value
@@ -1047,6 +1070,8 @@ class = "login_none" 제거 및 추가
             }else if($("#dataType option").index($("#dataType option:selected")) == 4){
                 $("#colType5_2").val($('#colType5').val()).trigger("change");
             }
+
+            if()
         })
         //-------------------------------------------- 설정 동기화 항목
     });

@@ -249,6 +249,31 @@ function fn_setUpjong_sub(id, response, param) {
     }
 }
 //------------------------ 업종 선택 리스트 기능 END ----------------------------------------
+//------------------------ 메뉴 선택 리스트 기능 START ----------------------------------------
+var tmpMenuVal = 1;
+function setMenuList_sub(menuType,menuCd){
+    var param = {};
+    param.MenuType = menuType;
+    tmpMenuVal = menuType;
+    param.MenuCd = menuCd;
+    getAjax("getMenuList", "/agile/main/getMenuList",param, fn_setMenu_sub, fn_error);
+}
+function fn_setMenu_sub(id, response, param) {
+    var html = '';
+
+    response.data.forEach(function (val, idx){
+        html += '<option value="' + val.menuCd + '" data-areaCd="'+val.menuCd+'">' + val.menuNm + '</option>';
+    });
+
+    if(tmpMenuVal == 2){
+        $("#menu2_2").append(html);
+    }else if(tmpMenuVal == 3){
+        $("#menu3_2").append(html);
+    }else{
+        $("#menu1_2").append(html);
+    }
+}
+//------------------------ 메뉴 선택 리스트 기능 END ----------------------------------------
 //------------------------ 날짜 선택 리스트 기능 START ----------------------------------------
 function setDateList_sub(dateType,typeCd){
     var param = {};
