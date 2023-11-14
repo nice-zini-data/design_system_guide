@@ -301,8 +301,8 @@ class = "login_none" 제거 및 추가
                                 </div>
                             </div>
                             <div class="col-2 st_box03">
-                                <p class="selectText">업종</p>
-                                <div class="selectWrap">
+                                <p class="selectText" id="box3Text_2">업종</p>
+                                <div class="selectWrap" id="upjong_2">
                                     <select id="upjong1_2">
                                         <option name="0" value="0">외식업</option>
                                     </select>
@@ -310,6 +310,17 @@ class = "login_none" 제거 및 추가
                                         <option name="0" value="0">중분류</option>
                                     </select>
                                     <select id="upjong3_2">
+                                        <option name="0" value="0">소분류</option>
+                                    </select>
+                                </div>
+                                <div class="selectWrap" id="menu_2" style="display: none">
+                                    <select id="menu1_2">
+                                        <option name="0" value="0">대분류</option>
+                                    </select>
+                                    <select id="menu2_2">
+                                        <option name="0" value="0">중분류</option>
+                                    </select>
+                                    <select id="menu3_2">
                                         <option name="0" value="0">소분류</option>
                                     </select>
                                 </div>
@@ -777,9 +788,11 @@ class = "login_none" 제거 및 추가
             }
             param.admGb = admGbNum;
             param.upjongType = upjongGbNum;
+            param.menuType = menuGbNum;
             param.dateType = dateTypeNum;
             if(!(admiCd == '' || admiCd == 0 || admiCd == null)) param.areaCd = admiCd;
             if(!(upjongCd == '' || upjongCd == 0 || upjongCd == null)) param.upjongCd = upjongCd;
+            if(!(menuCd == '' || menuCd == 0 || menuCd == null)) param.menuCd = menuCd;
             if(!(startDate == '' || startDate == 0 || startDate == null)) param.dateStart = startDate;
             if(!(endDate == '' || endDate == 0 || endDate == null)) param.dateEnd = endDate;
 
@@ -823,6 +836,9 @@ class = "login_none" 제거 및 추가
                 setAreaList_sub(1);
                 setUpjongList_sub(2);
                 reset_select(0);
+                $("#box3Text").text("메뉴");
+                $("#upjong_2").css('display','none')
+                $("#menu_2").css('display','block')
                 $("#area_admi_2").attr('disabled',false);
                 $("#upjong2_2").attr('disabled',false);
                 $("#upjong3_2").attr('disabled',false);
@@ -975,9 +991,11 @@ class = "login_none" 제거 및 추가
 
             param.admGb = admGbNum_sub;
             param.upjongType = upjongGbNum_sub;
+            param.menuType = menuGbNum_sub;
             param.dateType = dateTypeNum_sub;
             if(!(admiCd_sub == '' || admiCd_sub == 0 || admiCd_sub == null)) param.areaCd = admiCd_sub;
             if(!(upjongCd_sub == '' || upjongCd_sub == 0 || upjongCd_sub == null)) param.upjongCd = upjongCd_sub;
+            if(!(menuCd_sub == '' || menuCd_sub == 0 || menuCd_sub == null)) param.menuCd = menuCd_sub;
             if(!(startDate_sub == '' || startDate_sub == 0 || startDate_sub == null)) param.dateStart = startDate_sub;
             if(!(endDate_sub == '' || endDate_sub == 0 || endDate_sub == null)) param.dateEnd = endDate_sub;
 
@@ -1071,7 +1089,6 @@ class = "login_none" 제거 및 추가
                 $("#colType5_2").val($('#colType5').val()).trigger("change");
             }
 
-            if()
         })
         //-------------------------------------------- 설정 동기화 항목
     });

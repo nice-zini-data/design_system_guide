@@ -136,29 +136,29 @@
         <if test='dataType == "3"'>
             select
                 <if test='dateType == "1"'>
-                    substring(a.sale_mm,1,4) as date
-                    ,concat(substring(a.sale_mm,1,4),'년') as date_nm
+                    year as date
+                    ,concat(year,'년') as date_nm
                 </if>
                 <if test='dateType == "2"'>
                 <![CDATA[
-                    concat(substring(a.sale_mm,1,4),case when date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp) <= 2 then 1 else 2 end) as date
-                    ,concat(substring(a.sale_mm,1,4),'년',case when date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp) <= 2 then '전' else '후' end,'반기') as date_nm
+                    concat(year,case when date_part('QUARTER',to_date(yyyymm,'YYYYMM')::timestamp) <= 2 then 1 else 2 end) as date
+                    ,concat(year,'년',case when date_part('QUARTER',to_date(yyyymm,'YYYYMM')::timestamp) <= 2 then '전' else '후' end,'반기') as date_nm
                 ]]>
                 </if>
                 <if test='dateType == "3"'>
-                    concat(substring(a.sale_mm,1,4),date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp)) as date
-                    ,concat(substring(a.sale_mm,1,4),'년',date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp),'분기') as date_nm
+                    concat(year,date_part('QUARTER',to_date(yyyymm,'YYYYMM')::timestamp)) as date
+                    ,concat(year,'년',date_part('QUARTER',to_date(yyyymm,'YYYYMM')::timestamp),'분기') as date_nm
                 </if>
                 <if test='dateType == "4"'>
-                    sale_mm as date
-                    ,concat(substring(a.sale_mm,1,4),'년',substring(a.sale_mm,5,6),'월') as date_nm
+                    yyyymm as date
+                    ,concat(substring(a.yyyymm,1,4),'년',substring(a.yyyymm,5,6),'월') as date_nm
                 </if>
                 <if test='dateType == "5"'>
-                    sale_mm || week as date
-                    ,concat(substring(a.sale_mm,1,4),'년',substring(a.sale_mm,5,6),'월', a.week,'주차') as date_nm
+                    week as date
+                    ,concat(substring(a.yyyymm,1,4),'년',substring(a.yyyymm,5,2),'월', substring(a.week,7,1),'주차') as date_nm
                 </if>
             from
-                cmapap.tbagile_pos_info a
+                cmapap.tbagile_pos_date a
             group by
                 1,2
             order by
@@ -188,6 +188,8 @@
             </if>
         group by
             1,2
+        order by
+            1
     </select>
     <select id="getMainInfo" resultType="com.zinidata.eatout.vo.output.AgileMainOutVO">
         with tmp_date as(
