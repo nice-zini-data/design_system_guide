@@ -238,7 +238,7 @@
             </if>
         </if>
             group by
-                1,2,3,4,5,6,7
+                1,2,3,4,5
         )
         select
         <if test='dateType == "1"'>
@@ -259,10 +259,10 @@
             ,sum(store_cnt) as store_cnt, sum(sale_qty) sale_qty, sum(tot_sale_amt) tot_sale_amt
             ,ROUND(sum(tot_sale_amt) / sum(sale_qty),0) as sale_amt
         from
-            cmapap.tbagile_pos_info a,tmp_date b, cmapap.tb_upjong3 c
+            cmapap.tbagile_pos_info a,tmp_date b, cmapap.tb_menu3 c
         where 1=1
             and a.sale_mm = b.yyyymm
-            and a.upjong3_cd = c.upjong3_cd
+            and a.menu3_cd = c.menu3_cd
         <if test='admGb == "1"'>
             and mega_cd like #{areaCd}||'%'
         </if>
