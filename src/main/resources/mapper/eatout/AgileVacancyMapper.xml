@@ -149,10 +149,18 @@
                    when quarter = 'Q4' then '4분기' end
                    as label
             </if>
-            , ROUND(sum(gnsl),2) as gnsl
-            , ROUND(sum(rent_pyn),2) as rent_pyn
-            , ROUND(sum(cst_pyn),2) as cst_pyn
-            , ROUND(sum(deposit),2) as deposit
+            <if test='dateType == "3"'>
+                , ROUND(sum(gnsl),2) as gnsl
+                , ROUND(sum(rent_pyn),2) as rent_pyn
+                , ROUND(sum(cst_pyn),2) as cst_pyn
+                , ROUND(sum(deposit),2) as deposit
+            </if>
+            <if test='dateType != "3"'>
+                , ROUND(avg(gnsl),2) as gnsl
+                , ROUND(avg(rent_pyn),2) as rent_pyn
+                , ROUND(avg(cst_pyn),2) as cst_pyn
+                , ROUND(avg(deposit),2) as deposit
+            </if>
         from(
             select
                 *

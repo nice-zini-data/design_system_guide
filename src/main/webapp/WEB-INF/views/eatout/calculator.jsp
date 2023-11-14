@@ -204,7 +204,7 @@ class = "login_none" 제거 및 추가
                                     </td>
                                     <th>리뉴얼 예상기간 <span>감가상각</span></th>
                                     <td>
-                                        <input type="text" class="calc_input" placeholder="0" id="tooja_cost6"/> <span>만원</span>
+                                        <input type="text" class="calc_input" placeholder="0" id="tooja_cost6"/> <span>년</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -248,7 +248,7 @@ class = "login_none" 제거 및 추가
                                 <tr>
                                     <th>객단가</th>
                                     <td>
-                                        <input type="text" class="calc_input" placeholder="0" id="danga_cost"/> <span>만원</span>
+                                        <input type="text" class="calc_input" placeholder="0" id="danga_cost"/> <span>원</span>
                                     </td>
                                 </tr>
                             </table>

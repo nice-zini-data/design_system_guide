@@ -560,7 +560,6 @@ function fn_makechart(id, response, param){
         chartDom = document.getElementById("main_chart1");
     }else{
         chartDom = document.getElementById("main_chart2");
-
     }
     var rpt_chart1 = echarts.init(chartDom);
 
@@ -629,7 +628,7 @@ function fn_makechart(id, response, param){
                     fontFamily: 'Pretendard',
                     formatter: function(c){
                         // console.log(c.data)
-                        return  common.addComma(c.data);
+                        return  c.data;
                     }
                 },
                 itemStyle:{
