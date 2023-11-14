@@ -811,11 +811,14 @@ class = "login_none" 제거 및 추가
             dataTypeNum_sub = $(this).val();
             selectReset_sub();
             if(dataTypeNum_sub == 1){
+                console.log('외식 데이터 선택');
                 setDateList_sub(1);
                 setAreaList_sub(1);
                 setUpjongList_sub(2);
                 reset_select(0);
-                console.log('외식 데이터 선택');
+                $("#box3Text").text("업종");
+                $("#upjong_2").css('display','block');
+                $("#menu_2").css('display','none');
                 $("#area_admi_2").attr('disabled',false);
                 $("#upjong2_2").attr('disabled',false);
                 $("#upjong3_2").attr('disabled',false);
@@ -826,6 +829,9 @@ class = "login_none" 제거 및 추가
                 setAreaList_sub(1);
                 setUpjongList_sub(2);
                 reset_select(0);
+                $("#box3Text").text("업종");
+                $("#upjong_2").css('display','block');
+                $("#menu_2").css('display','none');
                 $("#area_admi_2").attr('disabled',true);
                 $("#upjong2_2").attr('disabled',false);
                 $("#upjong3_2").attr('disabled',false);
@@ -834,7 +840,7 @@ class = "login_none" 제거 및 추가
                 console.log('메뉴 데이터 선택');
                 setDateList_sub(1);
                 setAreaList_sub(1);
-                setUpjongList_sub(2);
+                setMenuList_sub(1);
                 reset_select(0);
                 $("#box3Text").text("메뉴");
                 $("#upjong_2").css('display','none')
@@ -849,6 +855,9 @@ class = "login_none" 제거 및 추가
                 setAreaList_sub(1);
                 setUpjongList_sub(2);
                 reset_select(0);
+                $("#box3Text").text("업종");
+                $("#upjong_2").css('display','block');
+                $("#menu_2").css('display','none');
                 $("#area_admi_2").attr('disabled',false);
                 $("#upjong2_2").attr('disabled',true);
                 $("#upjong3_2").attr('disabled',true);
@@ -859,6 +868,9 @@ class = "login_none" 제거 및 추가
                 setAreaList_sub(1);
                 setUpjongList_sub(2);
                 reset_select(0);
+                $("#box3Text").text("업종");
+                $("#upjong_2").css('display','block');
+                $("#menu_2").css('display','none');
                 $("#area_admi_2").attr('disabled',false);
                 $("#upjong2_2").attr('disabled',true);
                 $("#upjong3_2").attr('disabled',true);
@@ -1068,6 +1080,28 @@ class = "login_none" 제거 및 추가
                     },600);
                 }
             }
+
+            //메뉴 동기화
+            if(dataTypeNum_sub == 3){
+                // $("#upjong1_2").val($('#upjong1').val()).trigger("change");
+
+                if($('#menu1').val() != 0){
+                    setTimeout(function(){
+                        $("#menu1_2").val($('#menu1').val()).trigger("change");
+                    },300);
+                }
+                if($('#menu2').val() != 0){
+                    setTimeout(function(){
+                        $("#menu2_2").val($('#menu2').val()).trigger("change");
+                    },600);
+                }
+                if($('#menu3').val() != 0){
+                    setTimeout(function(){
+                        $("#menu3_2").val($('#menu3').val()).trigger("change");
+                    },900);
+                }
+            }
+
 
             //기간 동기화
             $("#dateType_2").val($('#dateType').val()).trigger("change");
