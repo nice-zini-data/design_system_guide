@@ -6,20 +6,32 @@
     <select id="getOuteatList" resultType="com.zinidata.eatout.vo.output.AgileEatoutOutVO">
         with tmp_date as(
             select
-                *
+            <if test='dateType == "1"'>
+                year,count(month) as cnt
+            </if>
+            <if test='dateType == "2"'>
+                year,half,count(month) as cnt
+            </if>
+            <if test='dateType == "3"'>
+                year,quarter,count(month) as cnt
+            </if>
+            <if test='dateType == "4"'>
+                yyyymm,count(month) as cnt
+            </if>
             from(
                 select
-                    to_char(yyyymm,'YYYYMM') as yyyymm
-                    , substring(yyyymm::varchar,1,4) as year
+                    substring(yyyymm::varchar,1,4) as year
                     , to_char(yyyymm,'MM')::numeric as month
+                    ,to_char(yyyymm,'YYYYMM') as yyyymm
                     , date_part('QUARTER',yyyymm::timestamp) as quarter
                     , concat(substring(yyyymm::varchar,1,4),date_part('QUARTER',yyyymm::timestamp)) as check_quarter
                     <![CDATA[
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then 1 else 2 end half
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
-                from
-                    generate_series(to_date(((select min(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+                from(
+                    select to_date(yyyymm,'YYYYMM') as yyyymm from cmapap.tbss_ag_sum_sales_mega_his where 1=1 group by 1
+                ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
@@ -35,36 +47,47 @@
                 <if test='dateType == "4"'>
                     yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
                 </if>
-                <if test='dateType == "5"'>
-                    check_quarter between #{dateStart} and #{dateEnd}
-                </if>
             </if>
             group by
-                1,2,3,4,5,6,7
+            <if test='dateType == "1"'>
+                1
+            </if>
+            <if test='dateType == "2" || dateType == "3"'>
+                1,2
+            </if>
+            <if test='dateType == "4"'>
+                1
+            </if>
         )
         select
         <if test='dateType == "1"'>
             concat(year,'년') as yyyymm
         </if>
         <if test='dateType == "2"'>
-            concat(year,'년',b.half,'분기') as yyyymm
+            concat(b.year,'년 ',
+            case when b.half = '1' then '전반기' else '후반기' end
+            ) as yyyymm
         </if>
         <if test='dateType == "3"'>
-            concat(year,'.',b.quarter,'Q') as yyyymm
+            concat(year,'년 ',b.quarter,'분기') as yyyymm
         </if>
         <if test='dateType == "4"'>
             b.yyyymm
         </if>
-            , ROUND((sum(sale_amt)/10000),0) as sale_amt, sum(store_cnt) as store_cnt, sum(use_cnt) as use_cnt, sum(cust_cnt) as cust_cnt
-            , ROUND(sum(sale_amt) / sum(store_cnt),0) as store_amt, ROUND(sum(sale_amt) / sum(use_cnt),0) as use_amt
-            ,sum(cnt_m_10under + cnt_w_10under + cnt_m_1014 + cnt_w_1014 + cnt_m_1519 + cnt_w_1519 + cnt_m_2024 + cnt_w_2024 + cnt_m_2529 + cnt_w_2529) as cnt_20under
-            ,sum(cnt_m_3034 + cnt_w_3034 + cnt_m_3539 + cnt_w_3539) as cnt_30
-            ,sum(cnt_m_4044 + cnt_w_4044 + cnt_m_4549 + cnt_w_4549) as cnt_40
-            ,sum(cnt_m_5054 + cnt_w_5054 + cnt_m_5559 + cnt_w_5559) as cnt_50
-            ,sum(cnt_m_6064 + cnt_w_6064 + cnt_m_6569 + cnt_w_6569 + cnt_m_7074 + cnt_w_7074 + cnt_m_7579 + cnt_w_7579 + cnt_m_8084 + cnt_w_8084 + cnt_m_8589 + cnt_w_8589+cnt_m_90over + cnt_w_90over) as cnt_60over
-            ,sum(cnt_time_0609) as time_0609, sum(cnt_time_0912) as time_0912, sum(cnt_time_1215) as time_1215, sum(cnt_time_1518) as time_1518
-            ,sum(cnt_time_1821) as time_1821, sum(cnt_time_2124) as time_2124, sum(cnt_time_2406) as time_2406
-            ,sum(cnt_mon) as mon , sum(cnt_tue) as tue, sum(cnt_wed) as wed, sum(cnt_thu) as thu, sum(cnt_fri) as fri, sum(cnt_sat) as sat, sum(cnt_sun) as sun
+            , ROUND(((sum(sale_amt)/cnt)/10000),0) as sale_amt
+            , ROUND(sum(store_cnt)/cnt,0) as store_cnt
+            , ROUND(sum(use_cnt)/cnt,0) as use_cnt
+            , ROUND(sum(cust_cnt)/cnt,0) as cust_cnt
+            , ROUND((sum(sale_amt) / sum(store_cnt))/10000,0) as store_amt
+            , ROUND(sum(sale_amt) / sum(use_cnt),0) as use_amt
+            , ROUND(sum(cnt_m_10under + cnt_w_10under + cnt_m_1014 + cnt_w_1014 + cnt_m_1519 + cnt_w_1519 + cnt_m_2024 + cnt_w_2024 + cnt_m_2529 + cnt_w_2529)/cnt,0) as cnt_20under
+            , ROUND(sum(cnt_m_3034 + cnt_w_3034 + cnt_m_3539 + cnt_w_3539)/cnt,0) as  cnt_30
+            , ROUND(sum(cnt_m_4044 + cnt_w_4044 + cnt_m_4549 + cnt_w_4549)/cnt,0) as  cnt_40
+            , ROUND(sum(cnt_m_5054 + cnt_w_5054 + cnt_m_5559 + cnt_w_5559)/cnt,0) as  cnt_50
+            , ROUND(sum(cnt_m_6064 + cnt_w_6064 + cnt_m_6569 + cnt_w_6569 + cnt_m_7074 + cnt_w_7074 + cnt_m_7579 + cnt_w_7579 + cnt_m_8084 + cnt_w_8084 + cnt_m_8589 + cnt_w_8589+cnt_m_90over + cnt_w_90over)/cnt,0) as  cnt_60over
+            , ROUND(sum(cnt_time_0609)/cnt,0) as  time_0609, ROUND(sum(cnt_time_0912)/cnt,0) as  time_0912, ROUND(sum(cnt_time_1215)/cnt,0) as  time_1215, ROUND(sum(cnt_time_1518)/cnt,0) as  time_1518
+            , ROUND(sum(cnt_time_1821)/cnt,0) as  time_1821, ROUND(sum(cnt_time_2124)/cnt,0) as  time_2124, ROUND(sum(cnt_time_2406)/cnt,0) as  time_2406
+            , ROUND(sum(cnt_mon)/cnt,0) as  mon , ROUND(sum(cnt_tue)/cnt,0) as  tue, ROUND(sum(cnt_wed)/cnt,0) as  wed, ROUND(sum(cnt_thu)/cnt,0) as  thu, ROUND(sum(cnt_fri)/cnt,0) as  fri, ROUND(sum(cnt_sat)/cnt,0) as  sat, ROUND(sum(cnt_sun)/cnt,0) as  sun
         from
         <if test='admGb == "1"'>
             cmapap.tbss_ag_sum_sales_mega_his a, tmp_date b, cmapap.tb_upjong3 c
@@ -76,8 +99,24 @@
             cmapap.tbss_ag_sum_sales_admi_his a, tmp_date b, cmapap.tb_upjong3 c
         </if>
         where 1=1
+        <if test='dateType == "1"'>
+            and substring(a.yyyymm::varchar,1,4) = b.year
+        </if>
+        <if test='dateType == "2"'>
+            and substring(a.yyyymm::varchar,1,4) = b.year
+            <![CDATA[
+                and (case when date_part('QUARTER',to_date(a.yyyymm,'YYYYMM')::timestamp) <= 2 then 1 else 2 end) = b.half
+            ]]>
+        </if>
+        <if test='dateType == "3"'>
+            and substring(a.yyyymm::varchar,1,4) = b.year
+            and date_part('QUARTER',to_date(a.yyyymm,'YYYYMM')::timestamp) = b.quarter
+        </if>
+        <if test='dateType == "4"'>
             and a.yyyymm = b.yyyymm
+        </if>
             and a.upjong3_cd = c.upjong3_cd
+            and c.upjong3_cd not in ('Q02004','Q08002','Q08004')
         <if test='admGb == "1"'>
             <if test='areaCd != null'>
                 and mega_cd like #{areaCd}||'%'
@@ -100,7 +139,7 @@
         </if>
             and c.svc_yn = 'Y'
         group by
-            1
+            1,cnt
         order by
             1
     </select>
@@ -109,20 +148,32 @@
     <select id="getDeliveryList" resultType="com.zinidata.eatout.vo.output.AgileDeliveryOutVO">
         with tmp_date as(
             select
-                *
+            <if test='dateType == "1"'>
+                year,count(month) as cnt
+            </if>
+            <if test='dateType == "2"'>
+                year,half,count(month) as cnt
+            </if>
+            <if test='dateType == "3"'>
+                year,quarter,count(month) as cnt
+            </if>
+            <if test='dateType == "4"'>
+                yyyymm,count(month) as cnt
+            </if>
             from(
                 select
-                    to_char(yyyymm,'YYYYMM') as yyyymm
-                    , substring(yyyymm::varchar,1,4) as year
+                    substring(yyyymm::varchar,1,4) as year
                     , to_char(yyyymm,'MM')::numeric as month
+                    ,to_char(yyyymm,'YYYYMM') as yyyymm
                     , date_part('QUARTER',yyyymm::timestamp) as quarter
                     , concat(substring(yyyymm::varchar,1,4),date_part('QUARTER',yyyymm::timestamp)) as check_quarter
                     <![CDATA[
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then 1 else 2 end half
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
-                from
-                    generate_series(to_date(((select min(yyyymm) from cmapap.tbkb_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbkb_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+                from(
+                    select to_date(yyyymm,'YYYYMM') as yyyymm from cmapap.tbkb_sum_sales_mega_his where 1=1 group by 1
+                ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
@@ -138,36 +189,46 @@
                 <if test='dateType == "4"'>
                     yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
                 </if>
-                <if test='dateType == "5"'>
-                    check_quarter between #{dateStart} and #{dateEnd}
-                </if>
             </if>
             group by
-                1,2,3,4,5,6,7
+            <if test='dateType == "1"'>
+                1
+            </if>
+            <if test='dateType == "2" || dateType == "3"'>
+                1,2
+            </if>
+            <if test='dateType == "4"'>
+                1
+            </if>
         )
         select
         <if test='dateType == "1"'>
             concat(year,'년') as yyyymm
         </if>
         <if test='dateType == "2"'>
-            concat(year,'년',b.half,'분기') as yyyymm
+            concat(b.year,'년 ',
+                case when b.half = '1' then '전반기' else '후반기' end
+            ) as yyyymm
         </if>
         <if test='dateType == "3"'>
-            concat(year,'.',b.quarter,'Q') as yyyymm
+            concat(year,'년 ',b.quarter,'분기') as yyyymm
         </if>
         <if test='dateType == "4"'>
             b.yyyymm
         </if>
-            , ROUND((sum(sale_amt)/10000),0) as sale_amt, sum(store_cnt) as store_cnt, sum(use_cnt) as use_cnt--, sum(cust_cnt) as cust_cnt
-            , ROUND((sum(sale_amt) / sum(store_cnt))/10000,0) as store_amt, ROUND(sum(sale_amt) / sum(use_cnt),0) as use_amt
-            ,sum(cnt_m_20under + cnt_w_20under + cnt_m_2024 + cnt_w_2024 + cnt_m_2529 + cnt_w_2529) as cnt_20under
-            ,sum(cnt_m_3034 + cnt_w_3034 + cnt_m_3539 + cnt_w_3539) as cnt_30
-            ,sum(cnt_m_4044 + cnt_w_4044 + cnt_m_4549 + cnt_w_4549) as cnt_40
-            ,sum(cnt_m_5054 + cnt_w_5054 + cnt_m_5559 + cnt_w_5559) as cnt_50
-            ,sum(cnt_m_60over + cnt_w_60over) as cnt_60over
-            ,sum(cnt_time_0609) as time_0609, sum(cnt_time_0912) as time_0912, sum(cnt_time_1215) as time_1215, sum(cnt_time_1518) as time_1518
-            ,sum(cnt_time_1821) as time_1821, sum(cnt_time_2124) as time_2124, sum(cnt_time_2406) as time_2406
-            ,sum(cnt_mon) as mon , sum(cnt_tue) as tue, sum(cnt_wed) as wed, sum(cnt_thu) as thu, sum(cnt_fri) as fri, sum(cnt_sat) as sat, sum(cnt_sun) as sun
+            , ROUND(((sum(sale_amt)/cnt)/10000),0) as sale_amt
+            , ROUND(sum(store_cnt)/cnt,0) as store_cnt
+            , ROUND(sum(use_cnt)/cnt,0) as use_cnt--, sum(cust_cnt) as cust_cnt
+            , ROUND(((sum(sale_amt)/cnt) / (sum(store_cnt)/cnt))/10000,0) as store_amt
+            , ROUND((sum(sale_amt)/cnt) / (sum(use_cnt)/cnt),0) as use_amt
+            , ROUND(sum(cnt_m_20under + cnt_w_20under + cnt_m_2024 + cnt_w_2024 + cnt_m_2529 + cnt_w_2529)/cnt,0) as cnt_20under
+            , ROUND(sum(cnt_m_3034 + cnt_w_3034 + cnt_m_3539 + cnt_w_3539)/cnt,0) as cnt_30
+            , ROUND(sum(cnt_m_4044 + cnt_w_4044 + cnt_m_4549 + cnt_w_4549)/cnt,0) as cnt_40
+            , ROUND(sum(cnt_m_5054 + cnt_w_5054 + cnt_m_5559 + cnt_w_5559)/cnt,0) as cnt_50
+            , ROUND(sum(cnt_m_60over + cnt_w_60over)/cnt,0) as cnt_60over
+            , ROUND(sum(cnt_time_0609)/cnt,0) as time_0609, ROUND(sum(cnt_time_0912)/cnt,0) as time_0912, ROUND(sum(cnt_time_1215)/cnt,0) as time_1215, ROUND(sum(cnt_time_1518)/cnt,0) as time_1518
+            , ROUND(sum(cnt_time_1821)/cnt,0) as time_1821, ROUND(sum(cnt_time_2124)/cnt,0) as time_2124, ROUND(sum(cnt_time_2406)/cnt,0) as time_2406
+            , ROUND(sum(cnt_mon)/cnt,0) as mon , ROUND(sum(cnt_tue)/cnt,0) as tue, ROUND(sum(cnt_wed)/cnt,0) as wed, ROUND(sum(cnt_thu)/cnt,0) as thu, ROUND(sum(cnt_fri)/cnt,0) as fri, ROUND(sum(cnt_sat)/cnt,0) as sat, ROUND(sum(cnt_sun)/cnt,0) as sun
         from
         <if test='admGb == "1"'>
             cmapap.tbkb_sum_sales_mega_his a, tmp_date b, cmapap.tb_upjong3 c
@@ -176,10 +237,28 @@
             cmapap.tbkb_sum_sales_cty_his a, tmp_date b, cmapap.tb_upjong3 c
         </if>
         where 1=1
-            and a.yyyymm = b.yyyymm
+            <if test='dateType == "1"'>
+                and substring(a.yyyymm::varchar,1,4) = b.year
+            </if>
+            <if test='dateType == "2"'>
+                and substring(a.yyyymm::varchar,1,4) = b.year
+                <![CDATA[
+                    and (case when date_part('QUARTER',to_date(a.yyyymm,'YYYYMM')::timestamp) <= 2 then 1 else 2 end) = b.half
+                ]]>
+            </if>
+            <if test='dateType == "3"'>
+                and substring(a.yyyymm::varchar,1,4) = b.year
+                and date_part('QUARTER',to_date(a.yyyymm,'YYYYMM')::timestamp) = b.quarter
+            </if>
+            <if test='dateType == "4"'>
+                and a.yyyymm = b.yyyymm
+            </if>
             and a.upjong3_cd = c.upjong3_cd
+            and c.upjong3_cd not in ('Q02004','Q08002','Q08004')
         <if test='admGb == "1"'>
+            <if test='areaCd != null'>
             and mega_cd like #{areaCd}||'%'
+            </if>
         </if>
         <if test='admGb == "2"'>
             and cty_cd like #{areaCd}||'%'
@@ -195,7 +274,7 @@
         </if>
             and svc_yn = 'Y'
         group by
-            1
+            1,cnt
         order by
             1
     </select>
@@ -203,75 +282,121 @@
     <!--  Pos데이터 정보 호출  -->
     <select id="getPosList" resultType="com.zinidata.eatout.vo.output.AgilePosOutVO">
         with tmp_date as(
-            select
-                *
-            from cmapap.tbagile_pos_date
-        <if test='dateStart != null and dateEnd != null'>
-            where
+        select
             <if test='dateType == "1"'>
-                year between #{dateStart} and #{dateEnd}
+                year,count(yyyymm) as cnt
             </if>
             <if test='dateType == "2"'>
-                half between #{dateStart} and #{dateEnd}
+                year,half,count(yyyymm) as cnt
             </if>
             <if test='dateType == "3"'>
-                quarter between #{dateStart} and #{dateEnd}
+                year,quarter,count(yyyymm) as cnt
             </if>
             <if test='dateType == "4"'>
-                yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
+                yyyymm,count(yyyymm) as cnt
             </if>
             <if test='dateType == "5"'>
-                week between #{dateStart} and #{dateEnd}
+                yyyymm,week,count(yyyymm) as cnt
+            </if>
+        from(
+            select
+                year,half,quarter,yyyymm,week
+                ,concat(year,half) as check_half
+                ,concat(year,quarter) as check_quarter
+                ,concat(yyyymm,week) as check_week
+            from cmapap.tbagile_pos_date
+        ) tmp
+        <if test='dateStart != null and dateEnd != null'>
+            where 1=1
+            <if test='dateType == "1"'>
+                and year between #{dateStart} and #{dateEnd}
+            </if>
+            <if test='dateType == "2"'>
+                and check_half between #{dateStart} and #{dateEnd}
+            </if>
+            <if test='dateType == "3"'>
+                and check_quarter between #{dateStart} and #{dateEnd}
+            </if>
+            <if test='dateType == "4"'>
+                and yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
+            </if>
+            <if test='dateType == "5"'>
+                and check_week between #{dateStart} and #{dateEnd}
             </if>
         </if>
             group by
-                1,2,3,4,5
+            <if test='dateType == "1" || dateType == "4"'>
+               1
+            </if>
+            <if test='dateType == "2" || dateType == "3" || dateType == "5"'>
+                1,2
+            </if>
         )
         select
         <if test='dateType == "1"'>
             concat(year,'년') as yyyymm
         </if>
         <if test='dateType == "2"'>
-            concat(year,'년',b.half,'분기') as yyyymm
+            concat(b.year,'년 ',
+                case when b.half = '1' then '전반기' else '후반기' end
+            ) as yyyymm,cnt
         </if>
         <if test='dateType == "3"'>
-            concat(year,'.',b.quarter,'Q') as yyyymm
+            concat(b.year,'년 ',quarter,'분기') as yyyymm
         </if>
         <if test='dateType == "4"'>
-            b.yyyymm
+            concat(substring(b.yyyymm,1,4),'년 ',substring(b.yyyymm,5,2),'월') as yyyymm
         </if>
         <if test='dateType == "5"'>
-            concat(substring(b.week,1,4),'년',substring(b.week,5,2),'월',substring(b.week,7,1),'주차') as yyyymm
+            concat(substring(b.yyyymm,1,4),'년',substring(b.yyyymm,5,2),'월 ',b.week,'주차') as yyyymm
         </if>
-            ,sum(store_cnt) as store_cnt, sum(sale_qty) sale_qty, ROUND(sum(tot_sale_amt)/100000000,0) tot_sale_amt
-            ,ROUND(sum(tot_sale_amt) / sum(sale_qty),0) as sale_amt
+            , ROUND(sum(store_cnt)/cnt,0) as store_cnt
+            , ROUND(sum(sale_qty)/cnt,0) as sale_qty
+            , ROUND((sum(tot_sale_amt)/cnt)/10000,0) tot_sale_amt
+            , ROUND((sum(tot_sale_amt)/cnt)/(sum(sale_qty)/cnt),0) as sale_amt
         from
             cmapap.tbagile_pos_info a,tmp_date b, cmapap.tb_menu3 c
         where 1=1
-            and a.sale_mm = b.yyyymm
+            <if test='dateType == "1"'>
+                and substring(a.sale_mm,1,4) = b.year
+            </if>
+            <if test='dateType == "2"'>
+                and substring(a.sale_mm,1,4) = b.year
+                <![CDATA[
+                    and (case when date_part('QUARTER',to_date(a.sale_mm,'YYYYMM')::timestamp) <= 2 then '1' else '2' end) = b.half
+                ]]>
+            </if>
+            <if test='dateType == "3"'>
+                and substring(a.sale_mm,1,4) = b.year
+                and date_part('QUARTER',to_date(a.sale_mm,'YYYYMM')::timestamp)||'' = b.quarter
+            </if>
+            <if test='dateType == "4"'>
+                and a.sale_mm = b.yyyymm
+            </if>
+            <if test='dateType == "5"'>
+               and a.sale_mm = b.yyyymm
+               and a.week||'' = b.week
+            </if>
             and a.menu3_cd = c.menu3_cd
-        <if test='areaCd != null'>
-            <if test='admGb == "1"'>
-                and a.admi_cd like #{areaCd}||'%'
+            <if test='areaCd != null'>
+                <if test='admGb == "1"'>
+                    and a.admi_cd like #{areaCd}||'%'
+                </if>
+                <if test='admGb == "2"'>
+                    and a.admi_cd like #{areaCd}||'%'
+                </if>
             </if>
-            <if test='admGb == "2"'>
-                and a.admi_cd like #{areaCd}||'%'
+            <if test='menuType == "1"'>
+                and a.menu3_cd like #{menuCd}||'%'
             </if>
-        </if>
-        <if test='upjongType == "1"'>
-            and a.menu3_cd like 'Q%'
-        </if>
-        <if test='upjongType == "2"'>
-            and a.menu3_cd like #{menuCd}||'%'
-        </if>
-        <if test='upjongType == "3"'>
-            and a.menu3_cd like #{menuCd}||'%'
-        </if>
-        <if test='dateType == "5"'>
-            and concat(a.sale_mm,a.week) = b.week
-        </if>
+            <if test='menuType == "2"'>
+                and a.menu3_cd like #{menuCd}||'%'
+            </if>
+            <if test='menuType == "3"'>
+                and a.menu3_cd like #{menuCd}||'%'
+            </if>
         group by
-            1
+            1,cnt
         order by
             1
     </select>
@@ -280,20 +405,31 @@
     <select id="getLiviList" resultType="com.zinidata.eatout.vo.output.AgileLiviOutVO">
         with tmp_date as(
             select
-                *
+                <if test='dateType == "1"'>
+                    year,count(month) as cnt
+                </if>
+                <if test='dateType == "2"'>
+                    year,quarter,count(month) as cnt
+                </if>
+                <if test='dateType == "3"'>
+                    year,quarter,count(month) as cnt
+                </if>
+                <if test='dateType == "4"'>
+                    yyyymm,count(month) as cnt
+                </if>
             from(
                 select
-                    to_char(yyyymm,'YYYYMM') as yyyymm
-                    , substring(yyyymm::varchar,1,4) as year
+                    substring(yyyymm::varchar,1,4) as year
                     , to_char(yyyymm,'MM')::numeric as month
+                    ,to_char(yyyymm,'YYYYMM') as yyyymm
                     , date_part('QUARTER',yyyymm::timestamp) as quarter
                     , concat(substring(yyyymm::varchar,1,4),date_part('QUARTER',yyyymm::timestamp)) as check_quarter
                     <![CDATA[
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then 1 else 2 end half
-                        , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
-                from
-                    generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_livi_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_livi_mega_his),'YYYYMM'),'1 week') yyyymm
+                from(
+                    select to_date(yyyymm,'YYYYMM') as yyyymm from cmapap.tbpop_livi_mega_his where 1=1 group by 1
+                ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
@@ -309,32 +445,47 @@
                 <if test='dateType == "4"'>
                     yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
                 </if>
-                <if test='dateType == "5"'>
-                    check_quarter between #{dateStart} and #{dateEnd}
-                </if>
             </if>
             group by
-                1,2,3,4,5,6,7
+            <if test='dateType == "1"'>
+                1
+            </if>
+            <if test='dateType == "2" || dateType == "3"'>
+                1,2
+            </if>
+            <if test='dateType == "4"'>
+                1
+            </if>
         )
         select
         <if test='dateType == "1"'>
             concat(year,'년') as yyyymm
         </if>
         <if test='dateType == "2"'>
-            concat(year,'년',b.half,'분기') as yyyymm
+            concat(b.year,'년 ',
+                case when b.half = '1' then '전반기' else '후반기' end
+            ) as yyyymm
         </if>
         <if test='dateType == "3"'>
-            concat(year,'.',b.quarter,'Q') as yyyymm
+            concat(year,'년 ',b.quarter,'분기') as yyyymm
         </if>
         <if test='dateType == "4"'>
             b.yyyymm
         </if>
-        , sum(pop) as pop
-        , sum(pop_m_20s_under) as m_20_under, sum(pop_m_30s) as m_30,sum(pop_m_40s) as m_40,sum(pop_m_50s) as m_50, sum(pop_m_60s_over) as m_60_over
-        , sum(pop_w_20s_under) as w_20_under, sum(pop_w_30s) as w_30,sum(pop_w_40s) as w_40,sum(pop_w_50s) as w_50, sum(pop_w_60s_over) as w_60_over
-        , sum(pop_time_0006) as time_0006, sum(pop_time_0609) as time_0609, sum(pop_time_0912) as time_0912,sum(pop_time_1215) as time_1215
-        , sum(pop_time_1518) as time_1518, sum(pop_time_1821) as time_1821, sum(pop_time_2124) as time_2124
-        , sum(pop_mon) as pop_mon, sum(pop_tue) as pop_tue, sum(pop_wed) as pop_wed, sum(pop_thu) as pop_thu, sum(pop_fri) as pop_fri, sum(pop_sat) as pop_sat, sum(pop_sun) as pop_sun
+            , ROUND(sum(pop)/cnt) as pop
+            , ROUND(sum(pop_m_20s_under)/cnt,0) as m_20_under
+            , ROUND(sum(pop_m_30s)/cnt,0) as m_30
+            , ROUND(sum(pop_m_40s)/cnt,0) as m_40
+            , ROUND(sum(pop_m_50s)/cnt,0) as m_50
+            , ROUND(sum(pop_m_60s_over)/cnt,0) as m_60_over
+            , ROUND(sum(pop_w_20s_under)/cnt,0) as w_20_under
+            , ROUND(sum(pop_w_30s)/cnt,0) as w_30
+            , ROUND(sum(pop_w_40s)/cnt,0) as w_40
+            , ROUND(sum(pop_w_50s)/cnt,0) as w_50
+            , ROUND(sum(pop_w_60s_over)/cnt,0) as w_60_over
+            , ROUND(sum(pop_time_0006)/cnt,0) as time_0006, ROUND(sum(pop_time_0609)/cnt,0) as time_0609, ROUND(sum(pop_time_0912)/cnt,0) as time_0912,ROUND(sum(pop_time_1215)/cnt,0) as time_1215
+            , ROUND(sum(pop_time_1518)/cnt,0) as time_1518, ROUND(sum(pop_time_1821)/cnt,0) as time_1821, ROUND(sum(pop_time_2124)/cnt,0) as time_2124
+            , ROUND(sum(pop_mon)/cnt,0) as pop_mon, ROUND(sum(pop_tue)/cnt,0) as pop_tue, ROUND(sum(pop_wed)/cnt,0) as pop_wed, ROUND(sum(pop_thu)/cnt,0) as pop_thu, ROUND(sum(pop_fri)/cnt,0) as pop_fri, ROUND(sum(pop_sat)/cnt,0) as pop_sat, ROUND(sum(pop_sun)/cnt,0) as pop_sun
         from
         <if test='admGb == "1"'>
             cmapap.tbpop_livi_mega_his a, tmp_date b
@@ -346,7 +497,22 @@
             cmapap.tbpop_livi_admi_his a, tmp_date b
         </if>
         where 1=1
+        <if test='dateType == "1"'>
+            and substring(a.yyyymm::varchar,1,4) = b.year
+        </if>
+        <if test='dateType == "2"'>
+            and substring(a.yyyymm::varchar,1,4) = b.year
+            <![CDATA[
+            and (case when date_part('QUARTER',to_date(a.yyyymm,'YYYYMM')::timestamp) <= 2 then 1 else 2 end) = b.half
+            ]]>
+        </if>
+        <if test='dateType == "3"'>
+            and substring(a.yyyymm::varchar,1,4) = b.year
+            and date_part('QUARTER',to_date(a.yyyymm,'YYYYMM')::timestamp) = b.quarter
+        </if>
+        <if test='dateType == "4"'>
             and a.yyyymm = b.yyyymm
+        </if>
         <if test='admGb == "1"'>
             and mega_cd like #{areaCd}||'%'
         </if>
@@ -357,29 +523,25 @@
             and admi_cd like #{areaCd}||'%'
         </if>
         group by
-        1
+            1,cnt
         order by
-        1
+            1
     </select>
 
     <!--  주거인구데이터 정보 호출  -->
     <select id="getHousList" resultType="com.zinidata.eatout.vo.output.AgileHousOutVO">
         with tmp_date as(
             select
-                *
+                year,max(half) as half
             from(
                 select
-                    to_char(yyyymm,'YYYYMM') as yyyymm
-                    , substring(yyyymm::varchar,1,4) as year
-                    , to_char(yyyymm,'MM')::numeric as month
-                    , date_part('QUARTER',yyyymm::timestamp) as quarter
-                    , concat(substring(yyyymm::varchar,1,4),date_part('QUARTER',yyyymm::timestamp)) as check_quarter
+                    substring(yyyymm::varchar,1,4) as year
                     <![CDATA[
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then 1 else 2 end half
-                        , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
-                from
-                    generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_hous_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_hous_mega_his),'YYYYMM'),'1 week') yyyymm
+                from(
+                    select to_date(yyyymm,'YYYYMM') as yyyymm from cmapap.tbpop_hous_mega_his where 1=1 group by 1
+                ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
                 where
@@ -400,24 +562,36 @@
                 </if>
             </if>
             group by
-                1,2,3,4,5,6,7
+                1
         )
         select
         <if test='dateType == "1"'>
             concat(year,'년') as yyyymm
         </if>
         <if test='dateType == "2"'>
-            concat(year,'년',b.half,'분기') as yyyymm
+            concat(b.year,'년 ',
+                case when b.half = '1' then '전반기' else '후반기' end
+            ) as yyyymm
         </if>
         <if test='dateType == "3"'>
-            concat(year,'.',b.quarter,'Q') as yyyymm
+            concat(year,'년 ',b.quarter,'분기') as yyyymm
         </if>
         <if test='dateType == "4"'>
             b.yyyymm
         </if>
-        , sum(pop) as pop
-        , sum(pop_m_20under) as m_20_under, sum(pop_m_20s) as m_20,sum(pop_m_30s) as m_30,sum(pop_m_40s) as m_40,sum(pop_m_50s) as m_50, sum(pop_m_60over) as m_60_over
-        , sum(pop_w_20under) as w_20_under, sum(pop_w_20s) as w_20,sum(pop_w_30s) as w_30,sum(pop_w_40s) as w_40,sum(pop_w_50s) as w_50, sum(pop_w_60over) as w_60_over
+            , ROUND(sum(pop)/max(b.half),0) as pop
+            , ROUND(sum(pop_m_20under)/max(b.half),0) as m_20_under
+            , ROUND(sum(pop_m_20s)/max(b.half),0) as m_20
+            , ROUND(sum(pop_m_30s)/max(b.half),0) as m_30
+            , ROUND(sum(pop_m_40s)/max(b.half),0) as m_40
+            , ROUND(sum(pop_m_50s)/max(b.half),0) as m_50
+            , ROUND(sum(pop_m_60over)/max(b.half),0) as m_60_over
+            , ROUND(sum(pop_w_20under)/max(b.half),0) as w_20_under
+            , ROUND(sum(pop_w_20s)/max(b.half),0) as w_20
+            , ROUND(sum(pop_w_30s)/max(b.half),0) as w_30
+            , ROUND(sum(pop_w_40s)/max(b.half),0) as w_40
+            , ROUND(sum(pop_w_50s)/max(b.half),0) as w_50
+            , ROUND(sum(pop_w_60over)/max(b.half),0) as w_60_over
         from
         <if test='admGb == "1"'>
             cmapap.tbpop_hous_mega_his a, tmp_date b
@@ -429,20 +603,22 @@
             cmapap.tbpop_hous_admi_his a, tmp_date b
         </if>
         where 1=1
-        and a.yyyymm = b.yyyymm
-        <if test='admGb == "1"'>
-            and mega_cd like #{areaCd}||'%'
-        </if>
-        <if test='admGb == "2"'>
-            and cty_cd like #{areaCd}||'%'
-        </if>
-        <if test='admGb == "3"'>
-            and admi_cd like #{areaCd}||'%'
+        and substring(a.yyyymm,1,4) = b.year
+        <if test='areaCd != null'>
+            <if test='admGb == "1"'>
+                    and mega_cd like #{areaCd}||'%'
+            </if>
+            <if test='admGb == "2"'>
+                and cty_cd like #{areaCd}||'%'
+            </if>
+            <if test='admGb == "3"'>
+                and admi_cd like #{areaCd}||'%'
+            </if>
         </if>
         group by
-        1
+            1
         order by
-        1
+            1
     </select>
 
     <!--  생활인구데이터 정보 호출  -->

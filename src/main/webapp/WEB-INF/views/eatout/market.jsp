@@ -200,13 +200,13 @@
 		var param ={};
 		param.admGb = '1';
 		param.dateType = '1';
-		getAjax("getTotUpjongInfo", "/agile/market/getTotUpjongInfo",param, fn_upjongInfo, fn_error);
+		getAjax("getTotUpjongInfo", "/agile/market/getTotUpjongInfo",param, fn_upjongInfo, fn_error,null,null,true);
 
 		param ={};
 		param.outeatType = 'sales';
 		param.outeatDateType = '1';
 		param.outeatOrderType = 'desc';
-		getAjax("getAdmiUpjongInfo", "/agile/market/getAdmiUpjongInfo",param, fn_admiUpjongInfo, fn_error);
+		getAjax("getAdmiUpjongInfo", "/agile/market/getAdmiUpjongInfo",param, fn_admiUpjongInfo, fn_error,null,null,true);
 		$('#typeChk1').prop('checked',true);
 		$('#dateChk1').prop('checked',true);
 		$('#orderChk1').prop('checked',true);
@@ -248,7 +248,7 @@
 					param.outeatOrderType = $(this).val();
 				}
 			})
-			getAjax("getAdmiUpjongInfo", "/agile/market/getAdmiUpjongInfo",param, fn_admiUpjongInfo, fn_error);
+			getAjax("getAdmiUpjongInfo", "/agile/market/getAdmiUpjongInfo",param, fn_admiUpjongInfo, fn_error,null,null,true);
 
 		});
 		$('input[name="dateChk"]').change(function(){
@@ -267,7 +267,7 @@
 					param.outeatOrderType = $(this).val();
 				}
 			})
-			getAjax("getAdmiUpjongInfo", "/agile/market/getAdmiUpjongInfo",param, fn_admiUpjongInfo, fn_error);
+			getAjax("getAdmiUpjongInfo", "/agile/market/getAdmiUpjongInfo",param, fn_admiUpjongInfo, fn_error,null,null,true);
 		});
 		$('input[name="orderChk"]').change(function(){
 			console.log('click dateChk : '+$(this).val());
@@ -285,7 +285,7 @@
 					param.outeatType = $(this).val();
 				}
 			})
-			getAjax("getAdmiUpjongInfo", "/agile/market/getAdmiUpjongInfo",param, fn_admiUpjongInfo, fn_error);
+			getAjax("getAdmiUpjongInfo", "/agile/market/getAdmiUpjongInfo",param, fn_admiUpjongInfo, fn_error,null,null,true);
 
 
 
@@ -293,12 +293,12 @@
 
 		param ={};
 		param.outeatDateType = '1';
-		getAjax("getUpjongGrowth", "/agile/market/getUpjongGrowth",param, fn_upjongGrowth, fn_error);
+		getAjax("getUpjongGrowth", "/agile/market/getUpjongGrowth",param, fn_upjongGrowth, fn_error,null,null,true);
 
 		$('input[name="dateChk_2"]').change(function(){
 			console.log('click dateChk : '+$(this).val());
 			param.outeatDateType = $(this).val();
-			getAjax("getUpjongGrowth", "/agile/market/getUpjongGrowth",param, fn_upjongGrowth, fn_error);
+			getAjax("getUpjongGrowth", "/agile/market/getUpjongGrowth",param, fn_upjongGrowth, fn_error,null,null,true);
 		});
 		list();
 
@@ -385,11 +385,6 @@
 		var context = upjongGrowthResp;
 		var html = templateScript(context);
 		$('#upjongGrowth').html(html);
-
-		// $(".ed1").find('.label_m').text($(".selectTit.cty.cty1 > span").text());
-		// $(".ed2").find('.label_m').text($(".selectTit.cty.cty2 > span").text());
-
-
 	}
 	//
 	function makeChart(upjongCd,upjongNm){
@@ -401,7 +396,7 @@
 		$('#chartTitle').text(upjongNm);
 
 		param.upjong3Cd = upjongCd;
-		getAjax("getUpjongDetail", "/agile/market/getUpjongDetail",param, fn_UpjongDetail, fn_error);
+		getAjax("getUpjongDetail", "/agile/market/getUpjongDetail",param, fn_UpjongDetail, fn_error,null,null,true);
 
 		$('#chartList').addClass('active');
 		$('.bk_bg').addClass('active');
@@ -436,7 +431,7 @@
 		// data.cjCode = strCjCode;
 
 		// console.log(data);
-		getAjax("getFileList", "/getFileList", data, fn_list,fn_error);
+		getAjax("getFileList", "/getFileList", data, fn_list,fn_error,null,null,true);
 
 	}
 

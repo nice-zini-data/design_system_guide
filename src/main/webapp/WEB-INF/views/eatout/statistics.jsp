@@ -136,6 +136,7 @@ class = "login_none" 제거 및 추가
                                         <option name="2" value="2">반기 데이터</option>
                                         <option name="3" value="3">분기 데이터</option>
                                         <option name="4" value="4">월별 데이터</option>
+                                        <option name="5" value="5">주간 데이터</option>
                                     </select>
                                     <select id="startDate">
                                         <option name="0" value="0">시작일</option>
@@ -264,7 +265,7 @@ class = "login_none" 제거 및 추가
                     <div class="row">
                         <!-- 상단 선택지 항목 -->
                         <div class="col-12 chart_box">
-                            <span class="chart_text" id="chartText1">[단위 : 억 원]</span>
+                            <span class="chart_text" id="chartText1">[단위 : 만 원]</span>
                             <div id="main_chart1" class="chart"></div>
                         </div>
                     </div>
@@ -463,7 +464,7 @@ class = "login_none" 제거 및 추가
                     </div>
                     <div class="row">
                         <div class="col-12 chart_box">
-                            <span class="chart_text" id="chartText2">[단위 : 억 원]</span>
+                            <span class="chart_text" id="chartText2">[단위 : 만 원]</span>
                             <div id="main_chart2" class="chart"></div>
                         </div>
                     </div>
@@ -520,8 +521,8 @@ class = "login_none" 제거 및 추가
 
     $(function() {
         var param = {};
-        getAjax("getMainInfo", "/agile/main/getMainInfo",param, fn_mainInfo, fn_error);
-        getAjax("getUpjongChgRate", "/agile/statistics/getUpjongChgRate",param, fn_eatoutDiff, fn_error);
+        getAjax("getMainInfo", "/agile/main/getMainInfo",param, fn_mainInfo, fn_error,null,null,true);
+        getAjax("getUpjongChgRate", "/agile/statistics/getUpjongChgRate",param, fn_eatoutDiff, fn_error,null,null,true);
         setAreaList(1);
         setUpjongList(2);
         setDateList(1);
@@ -531,6 +532,11 @@ class = "login_none" 제거 및 추가
         setDateInfo();
         $("#upjong1").attr('disabled',true);
         $("#upjong1_2").attr('disabled',true);
+        $('#dateType').children('option').show();
+        $('#dateType').children('option:last').hide();
+
+        $('#dateType_2').children('option').show();
+        $('#dateType_2').children('option:last').hide();
 
         //초기 상단문구 세팅
         $("#type_nm").text($('#dataType option:selected').text())
@@ -540,21 +546,23 @@ class = "login_none" 제거 및 추가
         //-------------------------------------------- 상단 선택 항목
         // 주제 선택 이벤트
         $("#dataType").on("change", function(){
-            // console.log($('#dataType option:selected').text());
+            // $('#dateType').children('option:last').hide();
+            console.log($('#dateType').children('option:last').css('display'));
             //selected value
-            $("#type_nm").text($('#dataType option:selected').text())
+            $("#type_nm").text($('#dataType option:last').text())
             dataTypeNum = $(this).val();
             // console.log($('#dateType').children('option:last').val())
             selectReset();
             if(dataTypeNum == 1){
                 console.log('외식 데이터 선택');
-                setDateList(1);
                 setAreaList(1);
                 setUpjongList(2);
+                setDateList(1);
                 reset_select(0);
-                if($('#dateType').children('option:last').val() == 5){
-                    $('#dateType').children('option:last').remove();
-                }
+                // if($('#dateType').children('option:last').css('display') == 'block'){
+                $('#dateType').children('option').show();
+                $('#dateType').children('option:last').hide();
+                // }
                 $("#box3Text").text("업종");
                 $("#upjong").css('display','block')
                 $("#menu").css('display','none')
@@ -566,12 +574,13 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 2){
                 console.log('배달 데이터 선택');
-                setDateList(1);
                 setAreaList(1);
                 setUpjongList(2);
-                if($('#dateType').children('option:last').val() == 5){
-                    $('#dateType').children('option:last').remove();
-                }
+                setDateList(1);
+                // if($('#dateType').children('option:last').css('display') == 'none'){
+                $('#dateType').children('option').show();
+                $('#dateType').children('option:last').hide();
+                // }
                 reset_select(0);
                 $("#box3Text").text("업종");
                 $("#upjong").css('display','block')
@@ -584,10 +593,13 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 3){
                 console.log('메뉴 데이터 선택');
-                setDateList(1);
                 setAreaList(1);
                 setMenuList(1);
+                setDateList(1);
                 reset_select(0);
+                // if($('#dataType option:selected').css('display') == 'block'){
+                $('#dateType').children('option').show();
+                // }
                 $("#box3Text").text("메뉴");
                 $("#upjong").css('display','none')
                 $("#menu").css('display','block')
@@ -596,16 +608,16 @@ class = "login_none" 제거 및 추가
                 $("#upjong3").attr('disabled',false);
                 change_colType($(this).val(),true);
                 $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon04.svg'});
-                $('#dateType').append('<option name="5" value="5">주간 데이터</option>');
-
+                // $('#dateType').append('<option name="5" value="5">주간 데이터</option>');
             }else if(dataTypeNum == 4){
                 console.log('생활 인구 데이터 선택');
-                setDateList(1);
                 setAreaList(1);
                 setUpjongList(2);
-                if($('#dateType').children('option:last').val() == 5){
-                    $('#dateType').children('option:last').remove();
-                }
+                setDateList(1);
+                // if($('#dateType').children('option:last').css('display') == 'none'){
+                    $('#dateType').children('option').show();
+                    $('#dateType').children('option:last').hide();
+                // }
                 reset_select(0);
                 $("#box3Text").text("업종");
                 $("#upjong").css('display','block')
@@ -618,12 +630,12 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 5){
                 console.log('주거 인구 데이터 선택');
-                setDateList(1);
                 setAreaList(1);
                 setUpjongList(2);
-                if($('#dateType').children('option:last').val() == 5){
-                    $('#dateType').children('option:last').remove();
-                }
+                setDateList(1);
+                // if($('#dateType').children('option:not(:first)').css('display') == 'block'){
+                    $('#dateType').children('option:not(:first)').hide();
+                // }
                 reset_select(0);
                 $("#box3Text").text("업종");
                 $("#upjong").css('display','block')
@@ -640,6 +652,7 @@ class = "login_none" 제거 및 추가
         function selectReset(){
 
 
+            $('#dateType option:eq(0)').prop('selected',true);
             $('#area_mega option:eq(0)').prop('selected',true);
             $('#area_cty').children('option:not(:first)').remove();
             $('#area_admi').children('option:not(:first)').remove();
@@ -648,6 +661,7 @@ class = "login_none" 제거 및 추가
             $('#upjong3').children('option:not(:first)').remove();
         }
         function selectReset_sub(){
+            $('#dateType_2 option:eq(0)').prop('selected',true);
             $('#area_mega_2 option:eq(0)').prop('selected',true);
             $('#area_cty_2').children('option:not(:first)').remove();
             $('#area_admi_2').children('option:not(:first)').remove();
@@ -816,6 +830,9 @@ class = "login_none" 제거 및 추가
                 setAreaList_sub(1);
                 setUpjongList_sub(2);
                 reset_select(0);
+                if($('#dateType_2').children('option:last').css('display') == 'none'){
+                    $('#dateType_2').children('option:not(:last)').show();
+                }
                 $("#box3Text").text("업종");
                 $("#upjong_2").css('display','block');
                 $("#menu_2").css('display','none');
@@ -829,6 +846,9 @@ class = "login_none" 제거 및 추가
                 setAreaList_sub(1);
                 setUpjongList_sub(2);
                 reset_select(0);
+                if($('#dateType_2').children('option:last').css('display') == 'none'){
+                    $('#dateType_2').children('option:not(:last)').show();
+                }
                 $("#box3Text").text("업종");
                 $("#upjong_2").css('display','block');
                 $("#menu_2").css('display','none');
@@ -842,6 +862,9 @@ class = "login_none" 제거 및 추가
                 setAreaList_sub(1);
                 setMenuList_sub(1);
                 reset_select(0);
+                if($('#dateType_2 option:selected').css('display') == 'block'){
+                    $('#dateType_2').children('option:last').show();
+                }
                 $("#box3Text").text("메뉴");
                 $("#upjong_2").css('display','none')
                 $("#menu_2").css('display','block')
@@ -855,6 +878,9 @@ class = "login_none" 제거 및 추가
                 setAreaList_sub(1);
                 setUpjongList_sub(2);
                 reset_select(0);
+                if($('#dateType_2').children('option:last').css('display') == 'none'){
+                    $('#dateType_2').children('option:not(:last)').show();
+                }
                 $("#box3Text").text("업종");
                 $("#upjong_2").css('display','block');
                 $("#menu_2").css('display','none');
@@ -868,6 +894,9 @@ class = "login_none" 제거 및 추가
                 setAreaList_sub(1);
                 setUpjongList_sub(2);
                 reset_select(0);
+                if($('#dateType_2').children('option:not(:first)').css('display') == 'block'){
+                    $('#dateType_2').children('option:not(:first)').hide();
+                }
                 $("#box3Text").text("업종");
                 $("#upjong_2").css('display','block');
                 $("#menu_2").css('display','none');
@@ -1211,9 +1240,9 @@ class = "login_none" 제거 및 추가
         if($(this).attr('id') == 'colType3' || $(this).attr('id') == 'colType3_2'){
             if($(this).val() == 'totSaleAmt'){
                 if($(this).attr('id').length == 8){
-                    $('#chartText1').text('[단위 : 억 원]');
+                    $('#chartText1').text('[단위 : 만 원]');
                 }else{
-                    $('#chartText2').text('[단위 : 억 원]');
+                    $('#chartText2').text('[단위 : 만 원]');
                 }
             }else if($(this).val() == 'storeCnt'){
                 if($(this).attr('id').length == 8){
@@ -1326,7 +1355,7 @@ class = "login_none" 제거 및 추가
         <tr>
             <th>업종</th>
             <th>전월대비<br>증감율</th>
-            <th>최근시점<br>시장규모<br><span>억 원/월</span></th>
+            <th>최근시점<br>시장규모<br><span>만 원/월</span></th>
         </tr>
         {{#each this}}
         <tr>

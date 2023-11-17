@@ -290,7 +290,7 @@ class = "login_none" 제거 및 추가
 
     $(function() {
         var param = {};
-        getAjax("getUpjongChgRate", "/agile/vacancy/getDepositList",param, fn_depositDiff, fn_error);
+        getAjax("getUpjongChgRate", "/agile/vacancy/getDepositList",param, fn_depositDiff, fn_error,null,null,true);
         setAreaList(1,null,'vacancy');
         setUpjongList(2);
         setDateList(1,'vacancy');

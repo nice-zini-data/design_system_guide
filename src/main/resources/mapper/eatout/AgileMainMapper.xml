@@ -62,7 +62,7 @@
             and c.upjong2_cd = #{upjongCd}
         </if>
             and c.svc_yn = 'Y'
-            and c.upjong3_cd not in ('Q02004')
+            and c.upjong3_cd not in ('Q02004','Q08002','Q08004')
         group by
         1,2
         order by
@@ -154,15 +154,15 @@
                     ,concat(substring(a.yyyymm,1,4),'년',substring(a.yyyymm,5,6),'월') as date_nm
                 </if>
                 <if test='dateType == "5"'>
-                    week as date
-                    ,concat(substring(a.yyyymm,1,4),'년',substring(a.yyyymm,5,2),'월', substring(a.week,7,1),'주차') as date_nm
+                    concat(yyyymm,week) as date
+                    ,concat(substring(a.yyyymm,1,4),'년 ',substring(a.yyyymm,5,2),'월 ', week,'주차') as date_nm
                 </if>
             from
                 cmapap.tbagile_pos_date a
             group by
                 1,2
             order by
-                1 desc
+                1
         </if>
     </select>
     <select id="getMenuList" resultType="com.zinidata.eatout.vo.output.AgileMenuOutVO">

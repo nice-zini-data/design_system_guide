@@ -79,14 +79,16 @@ function setAreaList(admGb,areaCd,typeCd){
     var param = {};
     param.admGb = admGb;
     tmpadmiVal = admGb;
-    param.areaCd = areaCd;
+    if(areaCd != null){
+        param.areaCd = areaCd;
+    }
     // console.log(typeCd);
     if(typeCd == undefined){
         typeCd = 'main'
     }
     typeCdTmp = typeCd;
     // console.log(typeCd);
-    getAjax("getAdmiList", "/agile/"+typeCd+"/getAdmiList",param, fn_setArea, fn_error);
+    getAjax("getAdmiList", "/agile/"+typeCd+"/getAdmiList",param, fn_setArea, fn_error,null,null,true);
 }
 function fn_setArea(id, response, param) {
     var html = '';
@@ -111,7 +113,7 @@ function setUpjongList(upjongType,upjongCd){
     param.upjongType = upjongType;
     tmpupjongVal = upjongType;
     param.upjongCd = upjongCd;
-    getAjax("getUpjongList", "/agile/main/getUpjongList",param, fn_setUpjong, fn_error);
+    getAjax("getUpjongList", "/agile/main/getUpjongList",param, fn_setUpjong, fn_error,null,null,true);
 }
 function fn_setUpjong(id, response, param) {
     var html = '';
@@ -135,7 +137,7 @@ function setMenuList(menuType,menuCd){
     param.MenuType = menuType;
     tmpMenuVal = menuType;
     param.MenuCd = menuCd;
-    getAjax("getMenuList", "/agile/main/getMenuList",param, fn_setMenu, fn_error);
+    getAjax("getMenuList", "/agile/main/getMenuList",param, fn_setMenu, fn_error,null,null,true);
 }
 function fn_setMenu(id, response, param) {
     var html = '';
@@ -164,7 +166,7 @@ function setDateList(dateType,typeCd){
     if(typeCd == undefined){
         typeCd = 'main'
     }
-    getAjax("getUpjongList", "/agile/"+typeCd+"/getDateList",param, fn_setDate, fn_error);
+    getAjax("getUpjongList", "/agile/"+typeCd+"/getDateList",param, fn_setDate, fn_error,null,null,true);
 }
 function fn_setDate(id, response, param) {
     var html = '';
@@ -208,7 +210,7 @@ function setAreaList_sub(admGb,areaCd,typeCd){
     param.admGb = admGb;
     tmpadmiVal = admGb;
     param.areaCd = areaCd;
-    getAjax("getAdmiList", "/agile/"+typeCd+"/getAdmiList",param, fn_setArea_sub, fn_error);
+    getAjax("getAdmiList", "/agile/"+typeCd+"/getAdmiList",param, fn_setArea_sub, fn_error,null,null,true);
 }
 function fn_setArea_sub(id, response, param) {
     var html = '';
@@ -233,7 +235,7 @@ function setUpjongList_sub(upjongType,upjongCd){
     param.upjongType = upjongType;
     tmpupjongVal = upjongType;
     param.upjongCd = upjongCd;
-    getAjax("getUpjongList", "/agile/main/getUpjongList",param, fn_setUpjong_sub, fn_error);
+    getAjax("getUpjongList", "/agile/main/getUpjongList",param, fn_setUpjong_sub, fn_error,null,null,true);
 }
 function fn_setUpjong_sub(id, response, param) {
     var html = '';
@@ -256,7 +258,7 @@ function setMenuList_sub(menuType,menuCd){
     param.MenuType = menuType;
     tmpMenuVal = menuType;
     param.MenuCd = menuCd;
-    getAjax("getMenuList", "/agile/main/getMenuList",param, fn_setMenu_sub, fn_error);
+    getAjax("getMenuList", "/agile/main/getMenuList",param, fn_setMenu_sub, fn_error,null,null,true);
 }
 function fn_setMenu_sub(id, response, param) {
     var html = '';
@@ -285,7 +287,7 @@ function setDateList_sub(dateType,typeCd){
     if(typeCd == undefined){
         typeCd = 'main'
     }
-    getAjax("getUpjongList", "/agile/"+typeCd+"/getDateList",param, fn_setDate_sub, fn_error);
+    getAjax("getUpjongList", "/agile/"+typeCd+"/getDateList",param, fn_setDate_sub, fn_error,null,null,true);
 }
 function fn_setDate_sub(id, response, param) {
     var html = '';
@@ -324,17 +326,17 @@ function main_search(dataType,param){
     // }
     // 파라메터 정상입력되었을 경우 데이터 URL 호출
     if(dataType == 1){
-        getAjax("getUpjongList", "/agile/statistics/getOuteatList",param, fn_makechart, fn_error);
+        getAjax("getUpjongList", "/agile/statistics/getOuteatList",param, fn_makechart, fn_error,null,null,true);
     }else if(dataType == 2){
-        getAjax("getUpjongList", "/agile/statistics/getDeliveryList",param, fn_makechart, fn_error);
+        getAjax("getUpjongList", "/agile/statistics/getDeliveryList",param, fn_makechart, fn_error,null,null,true);
     }else if(dataType == 3){
-        getAjax("getPosList", "/agile/statistics/getPosList",param, fn_makechart, fn_error);
+        getAjax("getPosList", "/agile/statistics/getPosList",param, fn_makechart, fn_error,null,null,true);
     }else if(dataType == 4){
-        getAjax("getUpjongList", "/agile/statistics/getLiviList",param, fn_makechart, fn_error);
+        getAjax("getUpjongList", "/agile/statistics/getLiviList",param, fn_makechart, fn_error,null,null,true);
     }else if(dataType == 5){
-        getAjax("getUpjongList", "/agile/statistics/getHousList",param, fn_makechart, fn_error);
+        getAjax("getUpjongList", "/agile/statistics/getHousList",param, fn_makechart, fn_error,null,null,true);
     }else if(dataType == 6){
-        getAjax("getVacancyList", "/agile/vacancy/getVacancyList",param, fn_makechart, fn_error);
+        getAjax("getVacancyList", "/agile/vacancy/getVacancyList",param, fn_makechart, fn_error,null,null,true);
     }else{
         alert('주제가 잘못 선택되었습니다. \n관리자에게 문의하시기 바랍니다.')
     }
@@ -400,64 +402,64 @@ function reset_select(type){
         }
     }
 }
-function reset_select(type){
-    if(type == 1){
-        if(searchType==0){
-            $('#area_cty').children('option:not(:first)').remove();
-            $('#area_admi').children('option:not(:first)').remove();
-            admiCd = null;
-            // areaCd = null;
-        }else{
-            $('#area_cty_2').children('option:not(:first)').remove();
-            $('#area_admi_2').children('option:not(:first)').remove();
-            admiCd_sub = null;
-            // areaCd = null;
-        }
-    }else if(type == 2){
-        // $('#upjong2').children('option:not(:first)').remove();
-        if(searchType==0){
-            $("#upjong2 option:eq(0)").prop("selected", true); //첫번째 option 선택
-            $('#upjong3').children('option:not(:first)').remove();
-            upjongCd = null;
-        }else{
-            $("#upjong2_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
-            $('#upjong3_2').children('option:not(:first)').remove();
-            upjongCd_sub = null;
-        }
-    }else if(type == 3){
-        if(searchType==0){
-            $('#startDate').children('option:not(:first)').remove();
-            $('#endDate').children('option:not(:first)').remove();
-            startDate = 0;
-            endDate = 0;
-        }else{
-            $('#startDate_2').children('option:not(:first)').remove();
-            $('#endDate_2').children('option:not(:first)').remove();
-            startDate_sub = 0;
-            endDate_sub = 0;
-        }
-    }else if(type == 0){
-        if(!settingCheck){
-            if(searchType == 0){
-                $('#area_cty').children('option:not(:first)').remove();
-                $('#area_admi').children('option:not(:first)').remove();
-                // $('#upjong2').children('option:not(:first)').remove();
-                $("#upjong2 option:eq(0)").prop("selected", true); //첫번째 option 선택
-                $('#upjong3').children('option:not(:first)').remove();
-                $('#startDate').children('option:not(:first)').remove();
-                $('#endDate').children('option:not(:first)').remove();
-            }else{
-                $('#area_cty_2').children('option:not(:first)').remove();
-                $('#area_admi_2').children('option:not(:first)').remove();
-                // $('#upjong2').children('option:not(:first)').remove();
-                $("#upjong2_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
-                $('#upjong3_2').children('option:not(:first)').remove();
-                $('#startDate_2').children('option:not(:first)').remove();
-                $('#endDate_2').children('option:not(:first)').remove();
-            }
-        }
-    }
-}
+// function reset_select(type){
+//     if(type == 1){
+//         if(searchType==0){
+//             $('#area_cty').children('option:not(:first)').remove();
+//             $('#area_admi').children('option:not(:first)').remove();
+//             admiCd = null;
+//             // areaCd = null;
+//         }else{
+//             $('#area_cty_2').children('option:not(:first)').remove();
+//             $('#area_admi_2').children('option:not(:first)').remove();
+//             admiCd_sub = null;
+//             // areaCd = null;
+//         }
+//     }else if(type == 2){
+//         // $('#upjong2').children('option:not(:first)').remove();
+//         if(searchType==0){
+//             $("#upjong2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+//             $('#upjong3').children('option:not(:first)').remove();
+//             upjongCd = null;
+//         }else{
+//             $("#upjong2_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+//             $('#upjong3_2').children('option:not(:first)').remove();
+//             upjongCd_sub = null;
+//         }
+//     }else if(type == 3){
+//         if(searchType==0){
+//             $('#startDate').children('option:not(:first)').remove();
+//             $('#endDate').children('option:not(:first)').remove();
+//             startDate = 0;
+//             endDate = 0;
+//         }else{
+//             $('#startDate_2').children('option:not(:first)').remove();
+//             $('#endDate_2').children('option:not(:first)').remove();
+//             startDate_sub = 0;
+//             endDate_sub = 0;
+//         }
+//     }else if(type == 0){
+//         if(!settingCheck){
+//             if(searchType == 0){
+//                 $('#area_cty').children('option:not(:first)').remove();
+//                 $('#area_admi').children('option:not(:first)').remove();
+//                 // $('#upjong2').children('option:not(:first)').remove();
+//                 $("#upjong2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+//                 $('#upjong3').children('option:not(:first)').remove();
+//                 $('#startDate').children('option:not(:first)').remove();
+//                 $('#endDate').children('option:not(:first)').remove();
+//             }else{
+//                 $('#area_cty_2').children('option:not(:first)').remove();
+//                 $('#area_admi_2').children('option:not(:first)').remove();
+//                 // $('#upjong2').children('option:not(:first)').remove();
+//                 $("#upjong2_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+//                 $('#upjong3_2').children('option:not(:first)').remove();
+//                 $('#startDate_2').children('option:not(:first)').remove();
+//                 $('#endDate_2').children('option:not(:first)').remove();
+//             }
+//         }
+//     }
+// }
 
 function change_colType(type,check){
     var lng = [1,2,3,4,5];
@@ -482,6 +484,7 @@ function change_colType(type,check){
 
 // 메인화면 그래프 생성
 function fn_makechart(id, response, param){
+
     // console.log(response);
     var maxVal = 0;
     var minVal = 0;
@@ -496,6 +499,7 @@ function fn_makechart(id, response, param){
     //rpt_chart1
     var resultData = [];
     var resultName = [];
+
     if(!common.isEmpty(response.data[0])) {
         $.each(response.data,function(index,item){
             // console.log(item);
@@ -627,8 +631,11 @@ function fn_makechart(id, response, param){
                     textBorderColor:'#fff',
                     fontFamily: 'Pretendard',
                     formatter: function(c){
-                        // console.log(c.data)
-                        return  c.data;
+                        if(Number.isInteger(c.data)){
+                            return  common.addComma(c.data);
+                        }else{
+                            return c.data;
+                        }
                     }
                 },
                 itemStyle:{
@@ -744,7 +751,12 @@ function fn_UpjongDetail(id, response, param){
                     textBorderColor:'#fff',
                     fontFamily: 'Pretendard',
                     formatter: function(c){
-                        return  common.addComma(c.data);
+                        if(Number.isInteger(c.data)){
+                            return  common.addComma(c.data);
+                        }else{
+                            return c.data;
+                        }
+                        // return  common.addComma(c.data);
                     }
                 },
                 itemStyle:{
@@ -828,7 +840,12 @@ function fn_UpjongDetail(id, response, param){
                     textBorderColor:'#fff',
                     fontFamily: 'Pretendard',
                     formatter: function(c){
-                        return  common.addComma(c.data);
+                        if(Number.isInteger(c.data)){
+                            return  common.addComma(c.data);
+                        }else{
+                            return c.data;
+                        }
+                        // return  common.addComma(c.data);
                     }
                 },
                 itemStyle:{
@@ -912,7 +929,12 @@ function fn_UpjongDetail(id, response, param){
                     textBorderColor:'#fff',
                     fontFamily: 'Pretendard',
                     formatter: function(c){
-                        return  common.addComma(c.data);
+                        if(Number.isInteger(c.data)){
+                            return  common.addComma(c.data);
+                        }else{
+                            return c.data;
+                        }
+                        // return  common.addComma(c.data);
                     }
                 },
                 itemStyle:{
@@ -996,7 +1018,12 @@ function fn_UpjongDetail(id, response, param){
                     textBorderColor:'#fff',
                     fontFamily: 'Pretendard',
                     formatter: function(c){
-                        return  common.addComma(c.data);
+                        if(Number.isInteger(c.data)){
+                            return  common.addComma(c.data);
+                        }else{
+                            return c.data;
+                        }
+                        // return  common.addComma(c.data);
                     }
                 },
                 itemStyle:{
