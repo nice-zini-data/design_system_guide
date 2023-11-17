@@ -409,7 +409,7 @@
                     year,count(month) as cnt
                 </if>
                 <if test='dateType == "2"'>
-                    year,quarter,count(month) as cnt
+                    year,half,count(month) as cnt
                 </if>
                 <if test='dateType == "3"'>
                     year,quarter,count(month) as cnt
