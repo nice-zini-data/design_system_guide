@@ -34,18 +34,18 @@
                 ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
-                where
+                where 1=1
                 <if test='dateType == "1"'>
-                    year between #{dateStart} and #{dateEnd}
+                    and  year between #{dateStart} and #{dateEnd}
                 </if>
                 <if test='dateType == "2"'>
-                    check_half between #{dateStart} and #{dateEnd}
+                    and check_half between #{dateStart} and #{dateEnd}
                 </if>
                 <if test='dateType == "3"'>
-                    check_quarter between #{dateStart} and #{dateEnd}
+                    and check_quarter between #{dateStart} and #{dateEnd}
                 </if>
                 <if test='dateType == "4"'>
-                    yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
+                    and yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
                 </if>
             </if>
             group by
@@ -176,18 +176,18 @@
                 ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
-                where
+                where 1=1
                 <if test='dateType == "1"'>
-                    year between #{dateStart} and #{dateEnd}
+                    and year between #{dateStart} and #{dateEnd}
                 </if>
                 <if test='dateType == "2"'>
-                    check_half between #{dateStart} and #{dateEnd}
+                    and check_half between #{dateStart} and #{dateEnd}
                 </if>
                 <if test='dateType == "3"'>
-                    check_quarter between #{dateStart} and #{dateEnd}
+                    and check_quarter between #{dateStart} and #{dateEnd}
                 </if>
                 <if test='dateType == "4"'>
-                    yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
+                    and yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
                 </if>
             </if>
             group by
@@ -426,24 +426,25 @@
                     , concat(substring(yyyymm::varchar,1,4),date_part('QUARTER',yyyymm::timestamp)) as check_quarter
                     <![CDATA[
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then 1 else 2 end half
+                        , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
                 from(
                     select to_date(yyyymm,'YYYYMM') as yyyymm from cmapap.tbpop_livi_mega_his where 1=1 group by 1
                 ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
-                where
+                where 1=1
                 <if test='dateType == "1"'>
-                    year between #{dateStart} and #{dateEnd}
+                    and year between #{dateStart} and #{dateEnd}
                 </if>
                 <if test='dateType == "2"'>
-                    check_half between #{dateStart} and #{dateEnd}
+                    and check_half between #{dateStart} and #{dateEnd}
                 </if>
                 <if test='dateType == "3"'>
-                    check_quarter between #{dateStart} and #{dateEnd}
+                    and check_quarter between #{dateStart} and #{dateEnd}
                 </if>
                 <if test='dateType == "4"'>
-                    yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
+                    and yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
                 </if>
             </if>
             group by
@@ -544,21 +545,21 @@
                 ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
-                where
+                where 1=1
                 <if test='dateType == "1"'>
-                    year between #{dateStart} and #{dateEnd}
+                    and year between #{dateStart} and #{dateEnd}
                 </if>
                 <if test='dateType == "2"'>
-                    check_half between #{dateStart} and #{dateEnd}
+                    and check_half between #{dateStart} and #{dateEnd}
                 </if>
                 <if test='dateType == "3"'>
-                    check_quarter between #{dateStart} and #{dateEnd}
+                    and check_quarter between #{dateStart} and #{dateEnd}
                 </if>
                 <if test='dateType == "4"'>
-                    yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
+                    and yyyymm between to_char(to_date(#{dateStart},'YYYYMM'),'YYYYMM') and to_char(to_date(#{dateEnd},'YYYYMM'),'YYYYMM')
                 </if>
                 <if test='dateType == "5"'>
-                    check_quarter between #{dateStart} and #{dateEnd}
+                    and check_quarter between #{dateStart} and #{dateEnd}
                 </if>
             </if>
             group by
