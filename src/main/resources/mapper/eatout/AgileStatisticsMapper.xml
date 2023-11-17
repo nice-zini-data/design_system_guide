@@ -515,7 +515,9 @@
             and a.yyyymm = b.yyyymm
         </if>
         <if test='admGb == "1"'>
-            and mega_cd like #{areaCd}||'%'
+            <if test='areaCd != null'>
+                and mega_cd like #{areaCd}||'%'
+            </if>
         </if>
         <if test='admGb == "2"'>
             and cty_cd like #{areaCd}||'%'

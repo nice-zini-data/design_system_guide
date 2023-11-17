@@ -98,6 +98,7 @@ function fn_setArea(id, response, param) {
     });
 
     if(tmpadmiVal == 1){
+        $("#area_mega").append("");
         $("#area_mega").append(html);
     }else if(tmpadmiVal == 2){
         $("#area_cty").append(html);
@@ -344,28 +345,44 @@ function main_search(dataType,param){
 //------------------------ 메인 화면 검색 -----------------------------------------
 
 //------------------------ 메뉴초기화 ---------------------------------------
-function reset_select(type){
+function reset_select(type,subType){
     if(type == 1){
         if(searchType==0){
-            $('#area_cty').children('option:not(:first)').remove();
-            $('#area_admi').children('option:not(:first)').remove();
+            if(subType == 1){
+                $('#area_cty').children('option:not(:first)').remove();
+            }else if(subType == 2){
+                $('#area_admi').children('option:not(:first)').remove();
+            }else{
+            }
             admiCd = null;
             // areaCd = null;
         }else{
-            $('#area_cty_2').children('option:not(:first)').remove();
-            $('#area_admi_2').children('option:not(:first)').remove();
+            if(subType == 1){
+                $('#area_cty_2').children('option:not(:first)').remove();
+            }else if(subType == 2){
+                $('#area_admi_2').children('option:not(:first)').remove();
+            }else{
+            }
             admiCd_sub = null;
             // areaCd = null;
         }
     }else if(type == 2){
         // $('#upjong2').children('option:not(:first)').remove();
         if(searchType==0){
-            $("#upjong2 option:eq(0)").prop("selected", true); //첫번째 option 선택
-            $('#upjong3').children('option:not(:first)').remove();
+            if(subType == 1){
+                $("#upjong2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+            }else if(subType == 2){
+                $('#upjong3').children('option:not(:first)').remove();
+            }else{
+            }
             upjongCd = null;
         }else{
-            $("#upjong2_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
-            $('#upjong3_2').children('option:not(:first)').remove();
+            if(subType == 1){
+                $("#upjong2_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+            }else if(subType == 2){
+                $('#upjong3_2').children('option:not(:first)').remove();
+            }else{
+            }
             upjongCd_sub = null;
         }
     }else if(type == 3){
@@ -379,6 +396,22 @@ function reset_select(type){
             $('#endDate_2').children('option:not(:first)').remove();
             startDate_sub = 0;
             endDate_sub = 0;
+        }
+    }else if(type == 4){
+        if(searchType==0){
+            if(subType == 1){
+                $('#menu2').children('option:not(:first)').remove();
+            }else if(subType == 2){
+                $('#menu3').children('option:not(:first)').remove();
+            }else{
+            }
+        }else{
+            if(subType == 1){
+                $('#menu2_2').children('option:not(:first)').remove();
+            }else if(subType == 2){
+                $('#menu3_2').children('option:not(:first)').remove();
+            }else{
+            }
         }
     }else if(type == 0){
         if(!settingCheck){

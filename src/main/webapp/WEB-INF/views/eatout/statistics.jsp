@@ -503,13 +503,19 @@ class = "login_none" 제거 및 추가
     var dateTypeNum = 1;
     var dateTypeNum_sub = 1;
     var admiCd = '';
+    var tmpAdmiCd = '';
     var admiCd_sub = '';
+    var tmpAdmiCd_sub = '';
     var upjongCd = '';
+    var tmpUpjongCd = '';
     var upjongCd_sub = '';
+    var tmpUpjongCd_sub = '';
     var upjongGbNum = 1;
     var upjongGbNum_sub = 1;
     var menuCd = '';
+    var tmpMenuCd = '';
     var menuCd_sub = '';
+    var tmpMenuCd_sub = '';
     var menuGbNum = 1;
     var menuGbNum_sub = 1;
     var startDate = 0;
@@ -677,6 +683,7 @@ class = "login_none" 제거 및 추가
             if($(this).val() != 0){
                 setAreaList(2,$(this).val());
                 admiCd = $(this).val();
+                admGbNum = 1;
             }else{
                 reset_select(1);
                 admiCd = '';
@@ -687,15 +694,37 @@ class = "login_none" 제거 및 추가
             $('#area_admi').children('option:not(:first)').remove();
             $("#admi_nm").text($('#area_cty option:selected').text());
             //selected value
-            setAreaList(3,$(this).val());
-            admiCd = $(this).val();
-            admGbNum = 2;
+            if($(this).val() != 0){
+                setAreaList(3,$(this).val());
+                admiCd = $(this).val();
+                tmpAdmiCd = $(this).val().substring(0,2);
+                admGbNum = 2;
+            }else{
+                console.log(tmpAdmiCd);
+                reset_select(1,1);
+                console.log(tmpAdmiCd.length);
+                if(tmpAdmiCd.length == 4){
+                    tmpAdmiCd = tmpAdmiCd.substring(0,2);
+                }
+                setAreaList(2,tmpAdmiCd);
+                admiCd = tmpAdmiCd;
+                admGbNum = 2;
+            }
         });
         $("#area_admi").on("change", function(){
             $("#admi_nm").text($('#area_admi option:selected').text());
             //selected value
-            admiCd = $(this).val();
-            admGbNum = 3;
+            if($(this).val() != 0){
+                admiCd = $(this).val();
+                tmpAdmiCd = $(this).val().substring(0,4);
+                admGbNum = 3;
+            }else{
+                console.log(tmpAdmiCd);
+                reset_select(1,2);
+                setAreaList(3,tmpAdmiCd);
+                admiCd = tmpAdmiCd;
+                admGbNum = 2;
+            }
         });
 
         //업종 선택 이벤트
@@ -703,15 +732,30 @@ class = "login_none" 제거 및 추가
             $("#upjong_nm").text($('#upjong2 option:selected').text())
             $('#upjong3').children('option:not(:first)').remove();
             //selected value
-            setUpjongList(3,$(this).val());
-            upjongCd = $(this).val();
-            upjongGbNum = 2;
+            if($(this).val() != 0){
+                setUpjongList(3,$(this).val());
+                upjongCd = $(this).val();
+                tmpUpjongCd = $(this).val().substring(0,3);
+                upjongGbNum = 2;
+            }else{
+                reset_select(2);
+                setUpjongList(1);
+                upjongGbNum = 1;
+            }
         });
         $("#upjong3").on("change", function(){
             $("#upjong_nm").text($('#upjong3 option:selected').text())
             // 마지막 업종 선택시 데이터 출력
-            upjongCd = $(this).val();
-            upjongGbNum = 3;
+            if($(this).val() != 0){
+                upjongCd = $(this).val();
+                tmpUpjongCd = $(this).val().substring(0,3);
+                upjongGbNum = 3;
+            }else{
+                reset_select(2);
+                setUpjongList(2,tmpUpjongCd);
+                upjongCd = tmpUpjongCd;
+                upjongGbNum = 2;
+            }
         });
 
         //메뉴 선택 이벤트
@@ -720,23 +764,48 @@ class = "login_none" 제거 및 추가
             $('#menu2').children('option:not(:first)').remove();
             $('#menu3').children('option:not(:first)').remove();
             //selected value
-            setMenuList(2,$(this).val());
-            menuCd = $(this).val();
-            menuGbNum = 1;
+            if($(this).val() != 0){
+                setMenuList(2,$(this).val());
+                menuCd = $(this).val();
+                tmpMenuCd = $(this).val().substring(0,2);
+                menuGbNum = 1;
+            }else{
+                reset_select(4);
+                menuCd = $(this).val();
+            }
         });
         $("#menu2").on("change", function(){
             $("#upjong_nm").text($('#menu2 option:selected').text())
-            $('#upjong3').children('option:not(:first)').remove();
+            $('#menu3').children('option:not(:first)').remove();
             //selected value
-            setMenuList(3,$(this).val());
-            upjongCd = $(this).val();
-            upjongGbNum = 2;
+            if($(this).val() != 0){
+                setMenuList(3,$(this).val());
+                menuCd = $(this).val();
+                tmpMenuCd = $(this).val().substring(0,1);
+                menuGbNum = 2;
+            }else{
+                reset_select(4,1);
+                if(tmpMenuCd.length == 3){
+                    tmpMenuCd = tmpMenuCd.substring(0,1);
+                }
+                setMenuList(2,tmpMenuCd);
+                menuCd = tmpMenuCd;
+                menuGbNum = 1;
+            }
         });
         $("#menu3").on("change", function(){
             $("#upjong_nm").text($('#menu3 option:selected').text())
             // 마지막 업종 선택시 데이터 출력
-            upjongCd = $(this).val();
-            upjongGbNum = 3;
+            if($(this).val() != 0){
+                menuCd = $(this).val();
+                tmpMenuCd = $(this).val().substring(0,3);
+                upjongGbNum = 3;
+            }else{
+                reset_select(4,2);
+                setMenuList(3,tmpMenuCd);
+                menuCd = tmpMenuCd;
+                menuGbNum = 2;
+            }
         });
 
         //날짜 선택 이벤트
@@ -750,16 +819,8 @@ class = "login_none" 제거 및 추가
         $("#startDate").on("change", function(){
             //selected value
             // console.log("======================startDate start======================");
-            // console.log($(this).val());
-            // console.log(startDate);
-            // console.log(endDate);
-            if((startDate == 0 && endDate == 0) || (startDate == null && endDate == null)) {
-                // 양쪽 다 선택되지 않았을 경우
-            }else if(startDate == 0 && endDate != 0){
-                // console.log('테스트1');
-            }else if(startDate != 0 && endDate == 0){
-                // console.log('테스트2');
-            }else{
+            console.log(endDate);
+            if(endDate != 0){
                 if($(this).val() > endDate ){
                     alert("시작일을 종료일 이전으로 선택해주시기 바랍니다.");
                     $("#startDate option:eq(0)").prop("selected", true); //첫번째 option 선택
@@ -772,16 +833,7 @@ class = "login_none" 제거 및 추가
         $("#endDate").on("change", function(){
             //selected value
             // console.log("======================startDate start======================");
-            // console.log($(this).val());
-            // console.log(startDate);
-            // console.log(endDate);
-            if((startDate == 0 && endDate == 0) || (startDate == null && endDate == null)) {
-                // 양쪽 다 선택되지 않았을 경우
-            }else if(startDate == 0 && endDate != 0){
-                // console.log('테스트')
-            }else if(startDate != 0 && endDate == 0){
-            //
-            }else{
+            if(startDate != 0){
                 if($(this).val() < startDate){
                     alert("종료일을 시작일 이후으로 선택해주시기 바랍니다.");
                     $("#endDate option:eq(0)").prop("selected", true); //첫번째 option 선택
@@ -794,8 +846,26 @@ class = "login_none" 제거 및 추가
         $("#search").on("click", function(){
             searchType = 0;
             var param = {};
-            // console.log(dataTypeNum);
+            console.log(dataTypeNum);
             // console.log($("#colType"+dataTypeNum+" option:selected").val());
+
+            // if(dataTypeNum == 3) {
+            //     if($("#menu option:selected").val() == 0){
+            //         alert('메뉴가 선택되지 않았습니다.\n메뉴를 선택후 검색해주시기 바랍니다.');
+            //         return;
+            //     }
+            // }else if(dataTypeNum == 1 || dataTypeNum == 2){
+            //     // if($("#upjong2 option:selected").val() == 0){
+            //     //     alert('업종이 선택되지 않았습니다.\n업종을 선택후 검색해주시기 바랍니다.');
+            //     //     return;
+            //     // }
+            // }else{
+            //     console.log('메뉴 업종을 선택하지 않았습니다.')
+            // }
+            if($("#startDate option:selected").val() == 0 || $("#startDate option:selected").val() == 0){
+                alert('검색일자가 제대로 선택되지 않았습니다.\n검색일자를 선택후 검색해주시기 바랍니다.');
+                return;
+            }
             if($("#colType"+dataTypeNum+" option:selected").val() == 0){
                 alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
                 return;
@@ -913,6 +983,7 @@ class = "login_none" 제거 및 추가
             if($(this).val() != 0){
                 setAreaList_sub(2,$(this).val());
                 admiCd_sub = $(this).val();
+                admGbNum_sub = 1;
             }else{
                 reset_select(1);
                 admiCd_sub = '';
@@ -921,30 +992,66 @@ class = "login_none" 제거 및 추가
         });
         $("#area_cty_2").on("change", function(){
             $('#area_admi_2').children('option:not(:first)').remove();
-            console.log('#area_cty_2 : '+$(this).val())
             //selected value
-            setAreaList_sub(3,$(this).val());
-            admiCd_sub = $(this).val();
-            admGbNum_sub = 2;
+            if($(this).val() != 0){
+                setAreaList_sub(3,$(this).val());
+                admiCd_sub = $(this).val();
+                tmpAdmiCd_sub = $(this).val().substring(0,2);
+                admGbNum_sub = 3;
+            }else{
+                console.log(tmpAdmiCd_sub);
+                reset_select(1,1);
+                if(tmpAdmiCd_sub.length == 4){
+                    tmpAdmiCd_sub = tmpAdmiCd_sub.substring(0,2);
+                }
+                setAreaList_sub(1,tmpAdmiCd_sub);
+                admiCd_sub = tmpAdmiCd_sub;
+                admGbNum_sub = 2;
+            }
         });
         $("#area_admi_2").on("change", function(){
             //selected value
-            admiCd_sub = $(this).val();
-            admGbNum_sub = 3;
+            if($(this).val() != 0){
+                admiCd_sub = $(this).val();
+                tmpAdmiCd_sub = $(this).val().substring(0,4);
+                admGbNum_sub = 3;
+            }else{
+                console.log(tmpAdmiCd_sub);
+                reset_select(1,2);
+                setAreaList_sub(2,tmpAdmiCd_sub);
+                admiCd_sub = tmpAdmiCd_sub;
+                admGbNum_sub = 2;
+            }
         });
 
         //업종 선택 이벤트
         $("#upjong2_2").on("change", function(){
             $('#upjong3_2').children('option:not(:first)').remove();
             //selected value
-            setUpjongList_sub(3,$(this).val());
-            upjongCd_sub = $(this).val();
-            upjongGbNum_sub = 2;
+            //selected value
+            if($(this).val() != 0){
+                setUpjongList_sub(3,$(this).val());
+                upjongCd_sub = $(this).val();
+                tmpUpjongCd_sub = $(this).val().substring(0,3);
+                upjongGbNum_sub = 2;
+            }else{
+                reset_select(2);
+                setUpjongList_sub(1);
+                upjongGbNum_sub = 1;
+            }
         });
         $("#upjong3_2").on("change", function(){
             // 마지막 업종 선택시 데이터 출력
-            upjongCd_sub = $(this).val();
-            upjongGbNum_sub = 3;
+            if($(this).val() != 0){
+                upjongCd = $(this).val();
+                tmpUpjongCd = $(this).val().substring(0,3);
+                upjongGbNum = 3;
+            }else{
+                reset_select(2);
+                setUpjongList(2,tmpUpjongCd);
+                upjongCd = tmpUpjongCd;
+                upjongGbNum = 2;
+            }
         });
 
         //메뉴 선택 이벤트
@@ -952,22 +1059,46 @@ class = "login_none" 제거 및 추가
             $('#menu2_2').children('option:not(:first)').remove();
             $('#menu3_2').children('option:not(:first)').remove();
             //selected value
-            setMenuList_sub(2,$(this).val());
-            menuCd_sub = $(this).val();
-            menuGbNum_sub = 1;
+            if($(this).val() != 0){
+                setMenuList_sub(2,$(this).val());
+                menuCd_sub = $(this).val();
+                tmpMenuCd_sub = $(this).val().substring(0,2);
+                menuGbNum_sub = 1;
+            }else{
+                reset_select(4);
+                menuCd_sub = $(this).val();
+            }
         });
         $("#menu2_2").on("change", function(){
             $('#menu3_2').children('option:not(:first)').remove();
             //selected value
-            setMenuList_sub(3,$(this).val());
-            menuCd_sub = $(this).val();
-            menuGbNum_sub = 2;
+            if($(this).val() != 0){
+                setMenuList_sub(3,$(this).val());
+                menuCd_sub = $(this).val();
+                tmpMenuCd_sub = $(this).val().substring(0,1);
+                menuGbNum_sub = 2;
+            }else{
+                reset_select(4,1);
+                if(tmpMenuCd_sub.length == 3){
+                    tmpMenuCd_sub = tmpMenuCd_sub.substring(0,1);
+                }
+                setMenuList_sub(2,tmpMenuCd_sub);
+                menuCd_sub = tmpMenuCd_sub;
+                menuGbNum_sub = 1;
+            }
         });
         $("#menu3_2").on("change", function(){
-            $("#upjong_nm").text($('#menu3_2 option:selected').text())
             // 마지막 업종 선택시 데이터 출력
-            menuCd_sub = $(this).val();
-            menuGbNum_sub = 3;
+            if($(this).val() != 0){
+                menuCd_sub = $(this).val();
+                tmpMenuCd_sub = $(this).val().substring(0,3);
+                menuGbNum_sub = 3;
+            }else{
+                reset_select(4,2);
+                setMenuList(3,tmpMenuCd_sub);
+                menuCd_sub = tmpMenuCd_sub;
+                menuGbNum_sub = 2;
+            }
         });
 
         //날짜 선택 이벤트
@@ -1025,6 +1156,23 @@ class = "login_none" 제거 및 추가
         $("#search_2").on("click", function(){
             searchType = 1;
             var param = {};
+
+            // if(dataTypeNum_sub == 3) {
+            //     if ($("#menu_2 option:selected").val() == 0) {
+            //         alert('메뉴가 선택되지 않았습니다.\n메뉴를 선택후 검색해주시기 바랍니다.');
+            //         return;
+            //     }
+            // }else if(dataTypeNum_sub == 1 || dataTypeNum_sub == 2){
+            //     if($("#upjong2_2 option:selected").val() == 0){
+            //         alert('업종이 선택되지 않았습니다.\n업종을 선택후 검색해주시기 바랍니다.');
+            //         return;
+            //     }
+            // }else{
+            // }
+            if($("#startDate_2 option:selected").val() == 0 || $("#startDate_2 option:selected").val() == 0){
+                alert('검색일자가 제대로 선택되지 않았습니다.\n검색일자를 선택후 검색해주시기 바랍니다.');
+                return;
+            }
             if($("#colType"+dataTypeNum+"_2 option:selected").val() == 0){
                 alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
                 return;
