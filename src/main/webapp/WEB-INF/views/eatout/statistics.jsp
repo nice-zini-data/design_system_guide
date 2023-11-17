@@ -56,8 +56,8 @@ class = "login_none" 제거 및 추가
                                     <div class="flex">
                                         <span class="trt_txt">기간</span>
                                         <span id="maxYyyymm"></span>
-                                        <span class="trt_txt">총매출</span>
-                                        <span id="maxVal">0 억원</span>
+                                        <span class="trt_txt" id="upText">총매출</span>
+                                        <span id="maxVal">0</span><span id="maxText">만원</span>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -65,8 +65,8 @@ class = "login_none" 제거 및 추가
                                     <div class="flex">
                                         <span class="trt_txt">기간</span>
                                         <span id="minYyyymm"></span>
-                                        <span class="trt_txt">총매출</span>
-                                        <span id="minVal">0 억원</span>
+                                        <span class="trt_txt" id="downText">총매출</span>
+                                        <span id="minVal">0</span><span id="minText">만원</span>
                                     </div>
                                 </div>
                             </div>
@@ -656,8 +656,6 @@ class = "login_none" 제거 및 추가
         });
 
         function selectReset(){
-
-
             $('#dateType option:eq(0)').prop('selected',true);
             $('#area_mega option:eq(0)').prop('selected',true);
             $('#area_cty').children('option:not(:first)').remove();
@@ -1382,31 +1380,46 @@ class = "login_none" 제거 및 추가
     }
 
     $("select[id^='colType']").on("change", function(){
-        console.log($(this).attr('id'));
-        console.log($(this).val());
+        // console.log($(this).attr('id'));
+        // console.log($(this).val());
+        if($(this).attr('id').length == 8){
+            var tmpId = $(this).attr('id');
+            // console.log($(this).option('selected').text());
+            // console.log($('#'+tmpId+' option:selected').text());
+            $('#upText').text($('#'+tmpId+' option:selected').text());
+            $('#downText').text($('#'+tmpId+' option:selected').text());
+        }
         //---------------------상단
         if($(this).attr('id') == 'colType3' || $(this).attr('id') == 'colType3_2'){
             if($(this).val() == 'totSaleAmt'){
                 if($(this).attr('id').length == 8){
                     $('#chartText1').text('[단위 : 만 원]');
+                    $('#maxText').text('만원')
+                    $('#minText').text('만원')
                 }else{
                     $('#chartText2').text('[단위 : 만 원]');
                 }
             }else if($(this).val() == 'storeCnt'){
                 if($(this).attr('id').length == 8){
                     $('#chartText1').text('[단위 : 개소]');
+                    $('#maxText').text('개소')
+                    $('#minText').text('개소')
                 }else{
                     $('#chartText2').text('[단위 : 개소]');
                 }
             }else if($(this).val() == 'saleQty'){
                 if($(this).attr('id').length == 8){
                     $('#chartText1').text('[단위 : 개]');
+                    $('#maxText').text('개')
+                    $('#minText').text('개')
                 }else{
                     $('#chartText2').text('[단위 : 개]');
                 }
             }else{
                 if($(this).attr('id').length == 8){
                     $('#chartText1').text('[단위 : 원]');
+                    $('#maxText').text('원')
+                    $('#minText').text('원')
                 }else{
                     $('#chartText2').text('[단위 : 원]');
                 }
@@ -1415,23 +1428,31 @@ class = "login_none" 제거 및 추가
             if($(this).val() == 'saleAmt' || $(this).val() == 'storeAmt'){
                 if($(this).attr('id').length == 8){
                     $('#chartText1').text('[단위 : 만 원]');
+                    $('#maxText').text('만원')
+                    $('#minText').text('만원')
                 }else{
                     $('#chartText2').text('[단위 : 만 원]');
                 }
             }else if($(this).val() == 'storeCnt'){
                 if($(this).attr('id').length == 8){
                     $('#chartText1').text('[단위 : 개소]');
+                    $('#maxText').text('개소')
+                    $('#minText').text('개소')
                 }else{
                     $('#chartText2').text('[단위 : 개소]');
                 }
             }else if($(this).val() == 'useCnt'){
                 if($(this).attr('id').length == 8){
                     $('#chartText1').text('[단위 : 건]');
+                    $('#maxText').text('건')
+                    $('#minText').text('건')
                 }else{
                     $('#chartText2').text('[단위 : 건]');
                 }
             }else if($(this).val() == 'useAmt'){
                 if($(this).attr('id').length == 8){
+                    $('#maxText').text('원')
+                    $('#minText').text('원')
                     $('#chartText1').text('[단위 : 원]');
                 }else{
                     $('#chartText2').text('[단위 : 원]');
@@ -1439,35 +1460,13 @@ class = "login_none" 제거 및 추가
             }else{
                 if($(this).attr('id').length == 8){
                     $('#chartText1').text('[단위 : 명]');
+                    $('#maxText').text('명')
+                    $('#minText').text('명')
                 }else{
                     $('#chartText2').text('[단위 : 명]');
                 }
             }
         }
-        //---------------------하단
-        // if(){
-        //     if($(this).val() == 'saleAmt' || $(this).val() == 'storeAmt'){
-        //         $('#chartText1').text('[단위 : 만 원]');
-        //     }else if($(this).val() == 'storeCnt'){
-        //         $('#chartText1').text('[단위 : 개소]');
-        //     }else if($(this).val() == 'useCnt'){
-        //         $('#chartText1').text('[단위 : 건]');
-        //     }else if($(this).val() == 'useAmt'){
-        //         $('#chartText1').text('[단위 : 원]');
-        //     }else{
-        //         $('#chartText1').text('[단위 : 명]');
-        //     }
-        // }else{
-        //     if($(this).val() == 'totSaleAmt'){
-        //         $('#chartText1').text('[단위 : 억 원]');
-        //     }else if($(this).val() == 'storeCnt'){
-        //         $('#chartText1').text('[단위 : 개소]');
-        //     }else if($(this).val() == 'saleQty'){
-        //         $('#chartText1').text('[단위 : 개]');
-        //     }else{
-        //         $('#chartText1').text('[단위 : 원]');
-        //     }
-        // }
     });
 
 </script>
