@@ -162,7 +162,7 @@
     <select id="getUpjongDetail" resultType="com.zinidata.eatout.vo.output.AgileMarketMainOutVO">
         select
             a.yyyymm, ROUND(sum(a.sale_amt)/100000000,0) as e_sale_amt, ROUND(sum(b.sale_amt)/100000000,0)  as d_sale_amt
-             , sum(b.store_cnt) as store_cnt
+             , sum(a.store_cnt) as store_cnt
              , ROUND(((sum(a.sale_amt) + sum(b.sale_amt))/sum(a.store_cnt))/10000 ,0) as store_amt
         from cmapap.tbss_ag_sum_sales_mega_his a, cmapap.tbkb_sum_sales_mega_his b, cmapap.tb_upjong3 c
         where 1=1
