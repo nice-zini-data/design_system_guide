@@ -132,6 +132,46 @@
             2 desc
     </select>
     <select id="getVacancyList" resultType="com.zinidata.eatout.vo.output.AgileVacancyOutVO">
+        with tmp_date as(
+            select
+                <if test='dateType == "1"'>
+                    year as date,count(month) as cnt
+                </if>
+                <if test='dateType == "2"'>
+                    check_half as date, count(month) as cnt
+                </if>
+                <if test='dateType == "3"'>
+                    check_quarter as date, count(month) as cnt
+                </if>
+            from(
+                select
+                    year
+                    , quarter as quarter
+                    , concat(year,quarter) as check_quarter
+                    <![CDATA[
+                        , case when quarter::numeric <= 2 then 1 else 2 end half
+                        , case when quarter::numeric <= 2 then concat(year,1) else concat(year,2) end check_half
+                    ]]>
+                from(
+                    select year,substring(quarter,2,1) as quarter from cmapap.tb_agile_vacancyrate where 1=1 group by 1,2
+                ) tmp
+            ) tmp
+            where 1=1
+                <if test='dateStart != null and dateEnd != null'>
+                    where 1=1
+                    <if test='dateType == "1"'>
+                        and year between #{dateStart} and #{dateEnd}
+                    </if>
+                    <if test='dateType == "2"'>
+                        and check_half between #{dateStart} and #{dateEnd}
+                    </if>
+                    <if test='dateType == "3"'>
+                        and check_quarter between #{dateStart} and #{dateEnd}
+                    </if>
+                </if>
+            group by
+                1
+        )
         select
             year
             <if test='dateType == "1"'>
@@ -149,18 +189,10 @@
                    when quarter = 'Q4' then '4분기' end
                    as label
             </if>
-            <if test='dateType == "3"'>
-                , ROUND(sum(gnsl),2) as gnsl
-                , ROUND(sum(rent_pyn),2) as rent_pyn
-                , ROUND(sum(cst_pyn),2) as cst_pyn
-                , ROUND(sum(deposit),2) as deposit
-            </if>
-            <if test='dateType != "3"'>
-                , ROUND(avg(gnsl),2) as gnsl
-                , ROUND(avg(rent_pyn),2) as rent_pyn
-                , ROUND(avg(cst_pyn),2) as cst_pyn
-                , ROUND(avg(deposit),2) as deposit
-            </if>
+            , ROUND(sum(gnsl)/b.cnt,2) as gnsl
+            , ROUND(sum(rent_pyn)/b.cnt,2) as rent_pyn
+            , ROUND(sum(cst_pyn)/b.cnt,2) as cst_pyn
+            , ROUND(sum(deposit)/b.cnt,2) as deposit
         from(
             select
                 *
@@ -171,13 +203,13 @@
         ) tav
         where 1=1
         <if test='dateType == "1"'>
-            and year between #{dateStart} and #{dateEnd}
+            and a.year = b.date
         </if>
         <if test='dateType == "2"'>
-            and half_cd between #{dateStart} and #{dateEnd}
+            and a.half_cd = b.date
         </if>
         <if test='dateType == "3"'>
-            and quarter_cd between #{dateStart} and #{dateEnd}
+            and a.quarter_cd = b.date
         </if>
         <if test='admGb == "1"'>
             and mega_cd = #{areaCd}
