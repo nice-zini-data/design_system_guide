@@ -135,13 +135,13 @@
         with tmp_date as(
             select
                 <if test='dateType == "1"'>
-                    year as date,count(month) as cnt
+                    year as date,count(quarter) as cnt
                 </if>
                 <if test='dateType == "2"'>
-                    check_half as date, count(month) as cnt
+                    check_half as date, count(quarter) as cnt
                 </if>
                 <if test='dateType == "3"'>
-                    check_quarter as date, count(month) as cnt
+                    check_quarter as date, count(quarter) as cnt
                 </if>
             from(
                 select
@@ -156,19 +156,18 @@
                     select year,substring(quarter,2,1) as quarter from cmapap.tb_agile_vacancyrate where 1=1 group by 1,2
                 ) tmp
             ) tmp
-            where 1=1
-                <if test='dateStart != null and dateEnd != null'>
-                    where 1=1
-                    <if test='dateType == "1"'>
-                        and year between #{dateStart} and #{dateEnd}
-                    </if>
-                    <if test='dateType == "2"'>
-                        and check_half between #{dateStart} and #{dateEnd}
-                    </if>
-                    <if test='dateType == "3"'>
-                        and check_quarter between #{dateStart} and #{dateEnd}
-                    </if>
+            <if test='dateStart != null and dateEnd != null'>
+                where 1=1
+                <if test='dateType == "1"'>
+                    and year between #{dateStart} and #{dateEnd}
                 </if>
+                <if test='dateType == "2"'>
+                    and check_half between #{dateStart} and #{dateEnd}
+                </if>
+                <if test='dateType == "3"'>
+                    and check_quarter between #{dateStart} and #{dateEnd}
+                </if>
+            </if>
             group by
                 1
         )
@@ -190,9 +189,9 @@
                    as label
             </if>
             , ROUND(sum(gnsl)/b.cnt,2) as gnsl
-            , ROUND(sum(rent_pyn)/b.cnt,2) as rent_pyn
-            , ROUND(sum(cst_pyn)/b.cnt,2) as cst_pyn
-            , ROUND(sum(deposit)/b.cnt,2) as deposit
+            , ROUND(sum(rent_pyn)/b.cnt,0) as rent_pyn
+            , ROUND(sum(cst_pyn)/b.cnt,0) as cst_pyn
+            , ROUND(sum(deposit)/b.cnt,0) as deposit
         from(
             select
                 *
@@ -200,7 +199,7 @@
                     when quarter = 'Q3' or quarter = 'Q4' then '2' end as half_cd
                 ,year || substring(quarter,2,1) as quarter_cd
             from cmapap.tb_agile_vacancyrate
-        ) tav
+        ) a, tmp_date b
         where 1=1
         <if test='dateType == "1"'>
             and a.year = b.date
@@ -218,7 +217,7 @@
             and cty_cd = #{areaCd}
         </if>
         group by
-            1,2
+            1,2,cnt
     </select>
 
 </mapper>
