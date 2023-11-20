@@ -1049,14 +1049,14 @@ class = "login_none" 제거 및 추가
         $("#upjong3_2").on("change", function(){
             // 마지막 업종 선택시 데이터 출력
             if($(this).val() != 0){
-                upjongCd = $(this).val();
-                tmpUpjongCd = $(this).val().substring(0,3);
-                upjongGbNum = 3;
+                upjongCd_sub = $(this).val();
+                tmpUpjongCd_sub = $(this).val().substring(0,3);
+                upjongGbNum_sub = 3;
             }else{
                 reset_select(2);
-                setUpjongList(2,tmpUpjongCd);
-                upjongCd = tmpUpjongCd;
-                upjongGbNum = 2;
+                setUpjongList(2,tmpUpjongCd_sub);
+                upjongCd_sub = tmpUpjongCd_sub;
+                upjongGbNum_sub = 2;
             }
         });
 

@@ -547,7 +547,20 @@ function fn_makechart(id, response, param){
                 }
                 if(searchType == 0){
                     if(key == tmpSel){
-                        tmpVal = value;
+
+                        if(key == 'storeCnt'){
+                            if(value == 1 || value == 2){
+                                resultData.push(value+1);
+                                tmpVal = value+1;
+                            }else{
+                                resultData.push(value);
+                                tmpVal = value;
+                            }
+                        }else{
+                            resultData.push(value);
+                            tmpVal = value;
+                        }
+
                         //결과 최대,최소값 데이터 추출
                         maxVal = Math.max(maxVal,tmpVal);
                         if(maxVal <= value){
@@ -559,11 +572,19 @@ function fn_makechart(id, response, param){
                             minYyyymm = tmpYyyymm;
                         }
                         //-----------------------
-                        resultData.push(value);
+                        // resultData.push(value);
                     }
                 }else{
                     if(key == tmpSel_sub){
-                        resultData.push(value);
+                        if(key == 'storeCnt'){
+                            if(value == 1 || value == 2){
+                                resultData.push(value+1);
+                            }else{
+                                resultData.push(value);
+                            }
+                        }else{
+                           resultData.push(value);
+                        }
                     }
                 }
             });
