@@ -500,7 +500,20 @@ input[type="radio"] + label span img {margin-right:8px}
 .pr_table.prt_v2 td:first-child{text-align:left;}
 .pr_table.prt_v2 td span {color:var(--gray_60);font-size:14px;display:block;font-weight:500;line-height:140%}
 
+/*수정 1120*/
 
+.reTop1120 {display:flex;align-items: start;}
+.reTop1120 .col-12:first-child{margin-right:24px;padding-right:24px;border-right:1px solid #EDEDED}
+
+.topRightTextBox .reTop1120 #maxYyyymm, .line1120_red{position:relative;}
+.topRightTextBox .reTop1120 #maxYyyymm:after, .line1120_red:after {content:'';display:inline-block;width:calc(100% + 4px);height:10px;position:absolute;bottom:0;left:-2px;background:var(--red);opacity:.1}
+.topRightTextBox .reTop1120 #minYyyymm, .line1120_blue{position:relative;}
+.topRightTextBox .reTop1120 #minYyyymm:after, .line1120_blue:after {content:'';display:inline-block;width:calc(100% + 4px);height:10px;position:absolute;bottom:0;left:-2px;background:var(--blue_100);opacity:.1}
+.line1120_red span:first-child, .line1120_blue span:first-child{margin-right:4px}
+.re_br1120 > span {display:block;}
+.re_br1120 .trt_txt{font-size:14px;margin-bottom:4px}
+.re_br1120 {margin-right:16px;}
+.re_br1120:last-child {margin-right:0 !important;}
 
 @media screen and (max-width:1900px){
     .left_top_box {display:block;}
@@ -514,5 +527,5 @@ input[type="radio"] + label span img {margin-right:8px}
     #chartList {width:95%;overflow-y:scroll}
     .market .right_box {overflow-y:scroll}
     .rt_bottomBox {height:auto;}
-
+    .reTop_com1120 {display:flex;justify-content: start;}
 }

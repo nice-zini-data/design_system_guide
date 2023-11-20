@@ -49,24 +49,32 @@ class = "login_none" 제거 및 추가
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4 topRightTextBox">
-                            <div class="row flex">
+                        <div class="col-4 topRightTextBox reTop_com1120">
+                            <div class="row reTop1120">
                                 <div class="col-12">
                                     <p class="txt_n_sb tr_up"><img src="/eatout/assets/eatout/images/icon/up_arrow_red.svg" alt=""/>고가</p>
                                     <div class="flex">
-                                        <span class="trt_txt">기간</span>
-                                        <span id="maxYyyymm"></span>
-                                        <span class="trt_txt" id="upText">총매출</span>
-                                        <span id="maxVal">0</span><span id="maxText">만원</span>
+                                        <div class="re_br1120">
+                                            <span class="trt_txt">기간</span>
+                                            <span id="maxYyyymm"></span>
+                                        </div>
+                                        <div class="re_br1120">
+                                            <span class="trt_txt" id="upText">총매출</span>
+                                            <p class="line1120_red"><span id="maxVal">0</span><span id="maxText">만원</span></p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <p class="txt_n_sb tr_dw"><img src="/eatout/assets/eatout/images/icon/down_arrow_mt.svg" alt=""/>저가</p>
                                     <div class="flex">
-                                        <span class="trt_txt">기간</span>
-                                        <span id="minYyyymm"></span>
-                                        <span class="trt_txt" id="downText">총매출</span>
-                                        <span id="minVal">0</span><span id="minText">만원</span>
+                                        <div class="re_br1120">
+                                            <span class="trt_txt">기간</span>
+                                            <span id="minYyyymm"></span>
+                                        </div>
+                                        <div class="re_br1120">
+                                            <span class="trt_txt" id="downText">총매출</span>
+                                            <p class="line1120_blue"><span id="minVal">0</span><span id="minText">만원</span></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
