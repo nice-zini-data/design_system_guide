@@ -58,6 +58,15 @@
         }
     }
 
+    function loadingBar2(gubun){
+        if(gubun) {
+            $(".loading2").show();
+            $('html, body').css({'overflow': 'hidden'});
+        } else {
+            $(".loading2").hide();
+            $('html, body').css({'overflow': ''});
+        }
+    }
 </script>
 
 

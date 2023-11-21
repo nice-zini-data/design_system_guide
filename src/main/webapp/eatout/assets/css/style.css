@@ -110,7 +110,9 @@ p {margin:0}
 
 /*로딩*/
 .loading{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:999;background:rgba(0,0,0,.2);}
+.loading2{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:999;background:rgba(0,0,0,.2);}
 .loading .loadingIcon {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+.loading2 .loadingIcon {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
 
 .loadingIcon div {box-sizing: border-box;display: block;position: absolute;width: 50px;height: 50px;border:8px solid var(--pri_5);border-radius: 50%;animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;border-color: var(--pri_5) transparent transparent transparent;}
 .loadingIcon div:nth-child(1) {animation-delay: -0.45s;}

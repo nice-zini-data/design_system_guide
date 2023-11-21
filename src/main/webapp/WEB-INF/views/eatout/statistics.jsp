@@ -1207,7 +1207,7 @@ class = "login_none" 제거 및 추가
 
         //-------------------------------------------- 설정 동기화 항목
         $('#setting_btn').on("click",function(){
-
+            loadingBar2(true);
             //주제 동기화
             // $("#dataType_2 option:eq("+$("#dataType option").index($("#dataType option:selected"))+")").prop("selected", true); //첫번째 option 선택
             $("#dataType_2").val($('#dataType').val()).trigger("change");
@@ -1268,12 +1268,13 @@ class = "login_none" 제거 및 추가
 
 
             //기간 동기화
-            $("#dateType_2").val($('#dateType').val()).trigger("change");
-
+            setTimeout(function(){
+                $("#dateType_2").val($('#dateType').val()).trigger("change");
+            },500);
             setTimeout(function(){
                 $("#startDate_2").val($('#startDate').val()).trigger("change");
                 $("#endDate_2").val($('#endDate').val()).trigger("change");
-            },3000);
+            },1500);
 
             //항목 동기화
             if($("#dataType option").index($("#dataType option:selected")) == 0){
@@ -1287,6 +1288,11 @@ class = "login_none" 제거 및 추가
             }else if($("#dataType option").index($("#dataType option:selected")) == 4){
                 $("#colType5_2").val($('#colType5').val()).trigger("change");
             }
+
+            setTimeout(function(){
+                loadingBar2(false);
+            },3500);
+
 
         })
         //-------------------------------------------- 설정 동기화 항목
