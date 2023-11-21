@@ -49,6 +49,14 @@
         <div></div>
     </div>
 </div>
+<div class="loading2" style="display: none">
+    <div class="loadingIcon">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
 
 <body id="top">
 
