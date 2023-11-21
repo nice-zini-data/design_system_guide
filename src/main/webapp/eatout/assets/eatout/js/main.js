@@ -518,7 +518,12 @@ function change_colType(type,check){
 // 메인화면 그래프 생성
 function fn_makechart(id, response, param){
 
-    // console.log(response);
+    // console.log(response.data.length);
+    // console.log(typeof response.data.length);
+    if(response.data.length < 1){
+        alert('선택하신 조건에 데이터가 없습니다. \n조건을 상위지역 혹은 상위 업종으로\n 선택 후 다시 진행해주시기 바랍니다.');
+    }
+
     var maxVal = 0;
     var minVal = 0;
     var tmpVal = 0;
