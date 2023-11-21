@@ -562,11 +562,18 @@ class = "login_none" 제거 및 추가
         $("#dataType").on("change", function(){
             // $('#dateType').children('option:last').hide();
             //selected value
-            $("#type_nm").text($('#dataType option:last').text())
+            $('#calcDateType').text('')
+            $('#calcAmt').text('0%')
+            // console.log($('#calcAmt').parent().class)
+            // $('#calcAmt').parent().addClass(common.upAndDownClass(0));
+            $('#calcAmt').parent().removeClass($('#calcAmt').parent().attr('class').split(' ')[2]);
+            $("#type_nm").text($('#dataType option:last').text());
             dataTypeNum = $(this).val();
             selectReset();
             if(dataTypeNum == 1){
                 console.log('외식 데이터 선택');
+                $('#admi_nm').text('전국');
+                $('#upjong_nm').text('');
                 setAreaList(1);
                 setUpjongList(2);
                 setDateList(1);
@@ -586,6 +593,8 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 2){
                 console.log('배달 데이터 선택');
+                $('#admi_nm').text('전국');
+                $('#upjong_nm').text('외식업');
                 setAreaList(1);
                 setUpjongList(2);
                 setDateList(1);
@@ -605,6 +614,8 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 3){
                 console.log('메뉴 데이터 선택');
+                $('#admi_nm').text('전국');
+                $('#upjong_nm').text('');
                 setAreaList(1);
                 setMenuList(1);
                 setDateList(1);
@@ -631,6 +642,8 @@ class = "login_none" 제거 및 추가
                     $('#dateType').children('option:last').hide();
                 // }
                 reset_select(0);
+                $('#admi_nm').text('전국');
+                $('#upjong_nm').text('');
                 $("#box3Text").text("업종");
                 $("#upjong").css('display','block')
                 $("#menu").css('display','none')
@@ -649,6 +662,8 @@ class = "login_none" 제거 및 추가
                     $('#dateType').children('option:not(:first)').hide();
                 // }
                 reset_select(0);
+                $('#admi_nm').text('전국');
+                $('#upjong_nm').text('');
                 $("#box3Text").text("업종");
                 $("#upjong").css('display','block')
                 $("#menu").css('display','none')
@@ -1370,89 +1385,90 @@ class = "login_none" 제거 및 추가
     }
 
     $("select[id^='colType']").on("change", function(){
+
         if($(this).attr('id').length == 8){
             var tmpId = $(this).attr('id');
             $('#upText').text($('#'+tmpId+' option:selected').text());
             $('#downText').text($('#'+tmpId+' option:selected').text());
         }
-        //---------------------상단
-        if($(this).attr('id') == 'colType3' || $(this).attr('id') == 'colType3_2'){
-            if($(this).val() == 'totSaleAmt'){
-                if($(this).attr('id').length == 8){
-                    $('#chartText1').text('[단위 : 만 원]');
-                    $('#maxText').text('만원')
-                    $('#minText').text('만원')
-                }else{
-                    $('#chartText2').text('[단위 : 만 원]');
-                }
-            }else if($(this).val() == 'storeCnt'){
-                if($(this).attr('id').length == 8){
-                    $('#chartText1').text('[단위 : 개소]');
-                    $('#maxText').text('개소')
-                    $('#minText').text('개소')
-                }else{
-                    $('#chartText2').text('[단위 : 개소]');
-                }
-            }else if($(this).val() == 'saleQty'){
-                if($(this).attr('id').length == 8){
-                    $('#chartText1').text('[단위 : 개]');
-                    $('#maxText').text('개')
-                    $('#minText').text('개')
-                }else{
-                    $('#chartText2').text('[단위 : 개]');
-                }
-            }else{
-                if($(this).attr('id').length == 8){
-                    $('#chartText1').text('[단위 : 원]');
-                    $('#maxText').text('원')
-                    $('#minText').text('원')
-                }else{
-                    $('#chartText2').text('[단위 : 원]');
-                }
-            }
-        }else{
-            if($(this).val() == 'saleAmt' || $(this).val() == 'storeAmt'){
-                if($(this).attr('id').length == 8){
-                    $('#chartText1').text('[단위 : 만 원]');
-                    $('#maxText').text('만원')
-                    $('#minText').text('만원')
-                }else{
-                    $('#chartText2').text('[단위 : 만 원]');
-                }
-            }else if($(this).val() == 'storeCnt'){
-                if($(this).attr('id').length == 8){
-                    $('#chartText1').text('[단위 : 개소]');
-                    $('#maxText').text('개소')
-                    $('#minText').text('개소')
-                }else{
-                    $('#chartText2').text('[단위 : 개소]');
-                }
-            }else if($(this).val() == 'useCnt'){
-                if($(this).attr('id').length == 8){
-                    $('#chartText1').text('[단위 : 건]');
-                    $('#maxText').text('건')
-                    $('#minText').text('건')
-                }else{
-                    $('#chartText2').text('[단위 : 건]');
-                }
-            }else if($(this).val() == 'useAmt'){
-                if($(this).attr('id').length == 8){
-                    $('#maxText').text('원')
-                    $('#minText').text('원')
-                    $('#chartText1').text('[단위 : 원]');
-                }else{
-                    $('#chartText2').text('[단위 : 원]');
-                }
-            }else{
-                if($(this).attr('id').length == 8){
-                    $('#chartText1').text('[단위 : 명]');
-                    $('#maxText').text('명')
-                    $('#minText').text('명')
-                }else{
-                    $('#chartText2').text('[단위 : 명]');
-                }
-            }
-        }
+        // //---------------------상단
+        // if($(this).attr('id') == 'colType3' || $(this).attr('id') == 'colType3_2'){
+        //     if($(this).val() == 'totSaleAmt'){
+        //         if($(this).attr('id').length == 8){
+        //             $('#chartText1').text('[단위 : 만 원]');
+        //             $('#maxText').text('만원')
+        //             $('#minText').text('만원')
+        //         }else{
+        //             $('#chartText2').text('[단위 : 만 원]');
+        //         }
+        //     }else if($(this).val() == 'storeCnt'){
+        //         if($(this).attr('id').length == 8){
+        //             $('#chartText1').text('[단위 : 개소]');
+        //             $('#maxText').text('개소')
+        //             $('#minText').text('개소')
+        //         }else{
+        //             $('#chartText2').text('[단위 : 개소]');
+        //         }
+        //     }else if($(this).val() == 'saleQty'){
+        //         if($(this).attr('id').length == 8){
+        //             $('#chartText1').text('[단위 : 개]');
+        //             $('#maxText').text('개')
+        //             $('#minText').text('개')
+        //         }else{
+        //             $('#chartText2').text('[단위 : 개]');
+        //         }
+        //     }else{
+        //         if($(this).attr('id').length == 8){
+        //             $('#chartText1').text('[단위 : 원]');
+        //             $('#maxText').text('원')
+        //             $('#minText').text('원')
+        //         }else{
+        //             $('#chartText2').text('[단위 : 원]');
+        //         }
+        //     }
+        // }else{
+        //     if($(this).val() == 'saleAmt' || $(this).val() == 'storeAmt'){
+        //         if($(this).attr('id').length == 8){
+        //             $('#chartText1').text('[단위 : 만 원]');
+        //             $('#maxText').text('만원')
+        //             $('#minText').text('만원')
+        //         }else{
+        //             $('#chartText2').text('[단위 : 만 원]');
+        //         }
+        //     }else if($(this).val() == 'storeCnt'){
+        //         if($(this).attr('id').length == 8){
+        //             $('#chartText1').text('[단위 : 개소]');
+        //             $('#maxText').text('개소')
+        //             $('#minText').text('개소')
+        //         }else{
+        //             $('#chartText2').text('[단위 : 개소]');
+        //         }
+        //     }else if($(this).val() == 'useCnt'){
+        //         if($(this).attr('id').length == 8){
+        //             $('#chartText1').text('[단위 : 건]');
+        //             $('#maxText').text('건')
+        //             $('#minText').text('건')
+        //         }else{
+        //             $('#chartText2').text('[단위 : 건]');
+        //         }
+        //     }else if($(this).val() == 'useAmt'){
+        //         if($(this).attr('id').length == 8){
+        //             $('#maxText').text('원')
+        //             $('#minText').text('원')
+        //             $('#chartText1').text('[단위 : 원]');
+        //         }else{
+        //             $('#chartText2').text('[단위 : 원]');
+        //         }
+        //     }else{
+        //         if($(this).attr('id').length == 8){
+        //             $('#chartText1').text('[단위 : 명]');
+        //             $('#maxText').text('명')
+        //             $('#minText').text('명')
+        //         }else{
+        //             $('#chartText2').text('[단위 : 명]');
+        //         }
+        //     }
+        // }
     });
 
 </script>
