@@ -460,6 +460,7 @@ class = "login_none" 제거 및 추가
 
         //-------------------------------------------- 설정 동기화 항목
         $('#setting_btn').on("click",function(){
+            loadingBar2(true);
 
             //주제 동기화
             // $("#dataType_2 option:eq("+$("#dataType option").index($("#dataType option:selected"))+")").prop("selected", true); //첫번째 option 선택
@@ -488,6 +489,9 @@ class = "login_none" 제거 및 추가
             if($("#dataType option").index($("#dataType option:selected")) == 0){
                 $("#colType6_2").val($('#colType6').val()).trigger("change");
             }
+            setTimeout(function(){
+                loadingBar2(false);
+            },3500);
         })
         //-------------------------------------------- 설정 동기화 항목
     });
