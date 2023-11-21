@@ -561,11 +561,9 @@ class = "login_none" 제거 및 추가
         // 주제 선택 이벤트
         $("#dataType").on("change", function(){
             // $('#dateType').children('option:last').hide();
-            console.log($('#dateType').children('option:last').css('display'));
             //selected value
             $("#type_nm").text($('#dataType option:last').text())
             dataTypeNum = $(this).val();
-            // console.log($('#dateType').children('option:last').val())
             selectReset();
             if(dataTypeNum == 1){
                 console.log('외식 데이터 선택');
@@ -706,9 +704,7 @@ class = "login_none" 제거 및 추가
                 tmpAdmiCd = $(this).val().substring(0,2);
                 admGbNum = 2;
             }else{
-                console.log(tmpAdmiCd);
                 reset_select(1,1);
-                console.log(tmpAdmiCd.length);
                 if(tmpAdmiCd.length == 4){
                     tmpAdmiCd = tmpAdmiCd.substring(0,2);
                 }
@@ -725,7 +721,6 @@ class = "login_none" 제거 및 추가
                 tmpAdmiCd = $(this).val().substring(0,4);
                 admGbNum = 3;
             }else{
-                console.log(tmpAdmiCd);
                 reset_select(1,2);
                 setAreaList(3,tmpAdmiCd);
                 admiCd = tmpAdmiCd;
@@ -825,7 +820,6 @@ class = "login_none" 제거 및 추가
         $("#startDate").on("change", function(){
             //selected value
             // console.log("======================startDate start======================");
-            console.log(endDate);
             if(endDate != 0){
                 if($(this).val() > endDate ){
                     alert("시작일을 종료일 이전으로 선택해주시기 바랍니다.");
@@ -852,8 +846,6 @@ class = "login_none" 제거 및 추가
         $("#search").on("click", function(){
             searchType = 0;
             var param = {};
-            console.log(dataTypeNum);
-            // console.log($("#colType"+dataTypeNum+" option:selected").val());
 
             // if(dataTypeNum == 3) {
             //     if($("#menu option:selected").val() == 0){
@@ -886,8 +878,6 @@ class = "login_none" 제거 및 추가
             if(!(startDate == '' || startDate == 0 || startDate == null)) param.dateStart = startDate;
             if(!(endDate == '' || endDate == 0 || endDate == null)) param.dateEnd = endDate;
 
-            // console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum+')');
-            // console.log(param);
             searchBtnNum = 1;
 
             main_search(dataTypeNum,param);
@@ -1005,7 +995,6 @@ class = "login_none" 제거 및 추가
                 tmpAdmiCd_sub = $(this).val().substring(0,2);
                 admGbNum_sub = 3;
             }else{
-                console.log(tmpAdmiCd_sub);
                 reset_select(1,1);
                 if(tmpAdmiCd_sub.length == 4){
                     tmpAdmiCd_sub = tmpAdmiCd_sub.substring(0,2);
@@ -1022,7 +1011,6 @@ class = "login_none" 제거 및 추가
                 tmpAdmiCd_sub = $(this).val().substring(0,4);
                 admGbNum_sub = 3;
             }else{
-                console.log(tmpAdmiCd_sub);
                 reset_select(1,2);
                 setAreaList_sub(2,tmpAdmiCd_sub);
                 admiCd_sub = tmpAdmiCd_sub;
@@ -1118,15 +1106,10 @@ class = "login_none" 제거 및 추가
         $("#startDate_2").on("change", function(){
             //selected value
             // console.log("======================startDate start======================");
-            // console.log($(this).val());
-            // console.log(startDate);
-            // console.log(endDate);
             if((startDate_sub == 0 && endDate_sub == 0) || (startDate_sub == null && endDate_sub == null)) {
                 // 양쪽 다 선택되지 않았을 경우
             }else if(startDate_sub == 0 && endDate_sub != 0){
-                // console.log('테스트1');
             }else if(startDate_sub != 0 && endDate_sub == 0){
-                // console.log('테스트2');
             }else{
                 if($(this).val() > endDate_sub ){
                     alert("시작일을 종료일 이전으로 선택해주시기 바랍니다.");
@@ -1140,15 +1123,10 @@ class = "login_none" 제거 및 추가
         $("#endDate_2").on("change", function(){
             //selected value
             // console.log("======================startDate start======================");
-            // console.log($(this).val());
-            // console.log(startDate);
-            // console.log(endDate);
             if((startDate_sub == 0 && endDate_sub == 0) || (startDate_sub == null && endDate_sub == null)) {
                 // 양쪽 다 선택되지 않았을 경우
             }else if(startDate_sub == 0 && endDate_sub != 0){
-                // console.log('테스트')
             }else if(startDate_sub != 0 && endDate_sub == 0){
-                //
             }else{
                 if($(this).val() < startDate_sub){
                     alert("종료일을 시작일 이후으로 선택해주시기 바랍니다.");
@@ -1194,8 +1172,7 @@ class = "login_none" 제거 및 추가
             if(!(startDate_sub == '' || startDate_sub == 0 || startDate_sub == null)) param.dateStart = startDate_sub;
             if(!(endDate_sub == '' || endDate_sub == 0 || endDate_sub == null)) param.dateEnd = endDate_sub;
 
-            console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum_sub+')');
-            console.log(param);
+            // // console.log(param);
             searchBtnNum = 2;
             main_search(dataTypeNum_sub,param);
         });
@@ -1236,16 +1213,20 @@ class = "login_none" 제거 및 추가
             $("#dataType_2").val($('#dataType').val()).trigger("change");
 
             //지역 동기화
-            $("#area_mega_2").val($('#area_mega').val()).trigger("change");
+            if($('#area_cty').val() != 0) {
+                setTimeout(function () {
+                    $("#area_mega_2").val($('#area_mega').val()).trigger("change");
+                }, 1000);
+            }
             if($('#area_cty').val() != 0) {
                 setTimeout(function () {
                     $("#area_cty_2").val($('#area_cty').val()).trigger("change");
-                }, 100);
+                }, 1500);
             }
             if($('#area_admi').val() != 0){
                 setTimeout(function(){
                     $("#area_admi_2").val($('#area_admi').val()).trigger("change");
-                },200);
+                },2000);
             }
 
             //업종 동기화
@@ -1255,12 +1236,12 @@ class = "login_none" 제거 및 추가
                 if($('#upjong2').val() != 0){
                     setTimeout(function(){
                         $("#upjong2_2").val($('#upjong2').val()).trigger("change");
-                    },300);
+                    },1000);
                 }
                 if($('#upjong3').val() != 0){
                     setTimeout(function(){
                         $("#upjong3_2").val($('#upjong3').val()).trigger("change");
-                    },600);
+                    },2000);
                 }
             }
 
@@ -1271,27 +1252,28 @@ class = "login_none" 제거 및 추가
                 if($('#menu1').val() != 0){
                     setTimeout(function(){
                         $("#menu1_2").val($('#menu1').val()).trigger("change");
-                    },300);
+                    },1000);
                 }
                 if($('#menu2').val() != 0){
                     setTimeout(function(){
                         $("#menu2_2").val($('#menu2').val()).trigger("change");
-                    },600);
+                    },1500);
                 }
                 if($('#menu3').val() != 0){
                     setTimeout(function(){
                         $("#menu3_2").val($('#menu3').val()).trigger("change");
-                    },900);
+                    },2000);
                 }
             }
 
 
             //기간 동기화
             $("#dateType_2").val($('#dateType').val()).trigger("change");
+
             setTimeout(function(){
                 $("#startDate_2").val($('#startDate').val()).trigger("change");
                 $("#endDate_2").val($('#endDate').val()).trigger("change");
-            },500);
+            },3000);
 
             //항목 동기화
             if($("#dataType option").index($("#dataType option:selected")) == 0){
@@ -1310,8 +1292,6 @@ class = "login_none" 제거 및 추가
         //-------------------------------------------- 설정 동기화 항목
     });
     function upjongNmClick(upjongCd){
-        console.log('upjongNmClick start2');
-        console.log(upjongCd);
 
         searchType = 0;
         var param = {};
@@ -1329,11 +1309,10 @@ class = "login_none" 제거 및 추가
         // if(!(startDate == '' || startDate == 0 || startDate == null)) param.dateStart = startDate;
         // if(!(endDate == '' || endDate == 0 || endDate == null)) param.dateEnd = endDate;
         //
-        // console.log('검색시작 : 선택된 검색데이터는('+dataTypeNum_sub+')');
         // console.log(param);
         // searchBtnNum = 1;
         // main_search(dataTypeNum_sub,param);
-        console.log(upjongCd.substring(0,3));
+        // console.log(upjongCd.substring(0,3));
         $("#upjong2").val(upjongCd.substring(0,3)).trigger("change");
         // $("#upjong3").val(upjongCd).trigger("change");
         // $('#upjong2').val(upjongCd.substring(0,3)).prop("selected",true);
@@ -1343,11 +1322,9 @@ class = "login_none" 제거 및 추가
     }
     // 메인화면 최초 데이터 세팅
     function fn_mainInfo(id, response, param){
-        console.log(response.data);
         var year = response.data[0].yyyymm.substring(0,4);
         var month = response.data[0].yyyymm.substring(4,6);
         var calcAmt = response.data[0].calcAmt;
-        console.log(year+'.'+month);
         $('#minYyyymm').text(year+'.'+month);
         $('#maxYyyymm').text(year+'.'+month);
         $('#setDateInfo2').text(year+'년 '+month+'월 데이터 기준');
@@ -1361,7 +1338,6 @@ class = "login_none" 제거 및 추가
 
         eatoutDiffResponse.diff = response.data;
 
-        // console.log(eatoutDiffResponse);
         var template = $('#tmp_eatout_diff').html();
         var templateScript = Handlebars.compile(template);
         var context = eatoutDiffResponse.diff;
@@ -1388,12 +1364,8 @@ class = "login_none" 제거 및 추가
     }
 
     $("select[id^='colType']").on("change", function(){
-        // console.log($(this).attr('id'));
-        // console.log($(this).val());
         if($(this).attr('id').length == 8){
             var tmpId = $(this).attr('id');
-            // console.log($(this).option('selected').text());
-            // console.log($('#'+tmpId+' option:selected').text());
             $('#upText').text($('#'+tmpId+' option:selected').text());
             $('#downText').text($('#'+tmpId+' option:selected').text());
         }

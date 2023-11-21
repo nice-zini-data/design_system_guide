@@ -29,8 +29,6 @@ function menuActive(navbar, side, url){
 }
 
 function fn_error(response) {
-    // console.log(response);
-    // console.log('error');
     loadingBar(false);
 
     $(".mem_nm").text("로그인");
@@ -82,12 +80,10 @@ function setAreaList(admGb,areaCd,typeCd){
     if(areaCd != null){
         param.areaCd = areaCd;
     }
-    // console.log(typeCd);
     if(typeCd == undefined){
         typeCd = 'main'
     }
     typeCdTmp = typeCd;
-    // console.log(typeCd);
     getAjax("getAdmiList", "/agile/"+typeCd+"/getAdmiList",param, fn_setArea, fn_error,null,null,true);
 }
 function fn_setArea(id, response, param) {
@@ -162,7 +158,6 @@ function setDateList(dateType,typeCd){
     param.dateType = dateType;
     dateTypeNum = dateType;
     typeCdTmp = typeCd;
-    // console.log('dataTypeNum : '+dataTypeNum);
     param.dataType = dataTypeNum;
     if(typeCd == undefined){
         typeCd = 'main'
@@ -174,8 +169,6 @@ function fn_setDate(id, response, param) {
     //화면 초기화
     $('#startDate').children('option:not(:first)').remove();
     $('#endDate').children('option:not(:first)').remove();
-    // console.log('fn_setDate');
-    // console.log(response);
     response.data.forEach(function (val, idx){
         var tmpdate = '';
         if(dateTypeNum != 1) {
@@ -223,8 +216,10 @@ function fn_setArea_sub(id, response, param) {
     if(tmpadmiVal == 1){
         $("#area_mega_2").append(html);
     }else if(tmpadmiVal == 2){
+        $('#area_cty_2').children('option:not(:first)').remove();
         $("#area_cty_2").append(html);
     }else if(tmpadmiVal == 3){
+        $('#area_admi_2').children('option:not(:first)').remove();
         $("#area_admi_2").append(html);
     }
 }
@@ -248,6 +243,7 @@ function fn_setUpjong_sub(id, response, param) {
     if(tmpupjongVal == 2){
         $("#upjong2_2").append(html);
     }else if(tmpupjongVal == 3){
+        $('#upjong3_2').children('option:not(:first)').remove();
         $("#upjong3_2").append(html);
     }
 }
@@ -283,7 +279,6 @@ function setDateList_sub(dateType,typeCd){
     param.dateType = dateType;
     dateTypeNum_sub = dateType;
     typeCdSubTmp = typeCd
-    // console.log('dataTypeNum_sub : '+dateTypeNum_sub);
     param.dataType = dataTypeNum_sub;
     if(typeCd == undefined){
         typeCd = 'main'
@@ -518,8 +513,6 @@ function change_colType(type,check){
 // 메인화면 그래프 생성
 function fn_makechart(id, response, param){
 
-    // console.log(response.data.length);
-    // console.log(typeof response.data.length);
     if(response.data.length < 1){
         alert('선택하신 조건에 데이터가 없습니다. \n조건을 상위지역 혹은 상위 업종으로\n 선택 후 다시 진행해주시기 바랍니다.');
     }
@@ -540,10 +533,7 @@ function fn_makechart(id, response, param){
 
     if(!common.isEmpty(response.data[0])) {
         $.each(response.data,function(index,item){
-            // console.log(item);
             $.each(item,function(key,value) {
-                // console.log(key);
-                // console.log(tmpSel);
                 if(index == (response.data.length -1) && key == tmpSel) tmpThisVal = value;
                 if(index == (response.data.length -2) && key == tmpSel) tmpLastVal = value;
                 if(key == 'yyyymm' || key == 'label'){
@@ -594,7 +584,6 @@ function fn_makechart(id, response, param){
                 }
             });
         });
-        // console.log(resultName);
 
         $('#calcAmt').parent().removeClass('down');
         $('#calcAmt').parent().removeClass('up');
@@ -609,10 +598,8 @@ function fn_makechart(id, response, param){
             $('#calcDateType').text('전기')
         }
         if(searchType == 0){
-            // console.log(maxYyyymm + ' : ' +maxVal);
             $('#maxYyyymm').text(maxYyyymm);
             $('#maxVal').text(common.addComma(maxVal));
-            // console.log(minYyyymm + ' : ' +minVal);
             $('#minYyyymm').text(minYyyymm);
             $('#minVal').text(common.addComma(minVal));
         }
@@ -732,8 +719,6 @@ function fn_makechart(id, response, param){
 // 시장동향 > 업종선택 시 그래프 생성
 function fn_UpjongDetail(id, response, param){
 
-    // console.log(response);
-
     //rpt_chart1(외식 총매출)
     var resultLabel = [];
     var resultData1 = [];
@@ -743,9 +728,6 @@ function fn_UpjongDetail(id, response, param){
 
     if(!common.isEmpty(response.data[0])) {
         $.each(response.data,function(index,item){
-            // console.log(index);
-            // console.log(item.yyyymm);
-            // console.log(item.eSaleAmt);
             resultLabel.push(item.yyyymm);
             resultData1.push(item.eSaleAmt);
             resultData2.push(item.dSaleAmt);
