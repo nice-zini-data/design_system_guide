@@ -697,6 +697,7 @@ class = "login_none" 제거 및 추가
         // 지역 선택 이벤트
         $("#area_mega").on("change", function(){
             $('#area_cty').children('option:not(:first)').remove();
+            $('#area_admi').children('option:not(:first)').remove();
             $("#admi_nm").text($('#area_mega option:selected').text());
             //selected value
             if($(this).val() != 0){
@@ -990,6 +991,7 @@ class = "login_none" 제거 및 추가
         // 지역 선택 이벤트
         $("#area_mega_2").on("change", function(){
             $('#area_cty_2').children('option:not(:first)').remove();
+            $('#area_admi_2').children('option:not(:first)').remove();
             //selected value
             if($(this).val() != 0){
                 setAreaList_sub(2,$(this).val());
