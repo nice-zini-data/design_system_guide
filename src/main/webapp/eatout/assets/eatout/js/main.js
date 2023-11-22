@@ -99,11 +99,13 @@ function fn_setArea(id, response, param) {
     });
 
     if(tmpadmiVal == 1){
-        $("#area_mega").append("");
+        $("#area_mega").children('option:not(:first)').remove();
         $("#area_mega").append(html);
     }else if(tmpadmiVal == 2){
+        $("#area_cty").children('option:not(:first)').remove();
         $("#area_cty").append(html);
     }else if(tmpadmiVal == 3){
+        $("#area_admi").children('option:not(:first)').remove();
         $("#area_admi").append(html);
     }
 }
@@ -126,8 +128,10 @@ function fn_setUpjong(id, response, param) {
     });
 
     if(tmpupjongVal == 2){
+        $("#upjong2").children('option:not(:first)').remove();
         $("#upjong2").append(html);
     }else if(tmpupjongVal == 3){
+        $("#upjong3").children('option:not(:first)').remove();
         $("#upjong3").append(html);
     }
 }
@@ -149,10 +153,13 @@ function fn_setMenu(id, response, param) {
     });
 
     if(tmpMenuVal == 2){
+        $('#menu2').children('option:not(:first)').remove();
         $("#menu2").append(html);
     }else if(tmpMenuVal == 3){
+        $('#menu3').children('option:not(:first)').remove();
         $("#menu3").append(html);
     }else{
+        $('#menu1').children('option:not(:first)').remove();
         $("#menu1").append(html);
     }
 }
@@ -246,6 +253,7 @@ function fn_setUpjong_sub(id, response, param) {
     });
 
     if(tmpupjongVal == 2){
+        $("#upjong2_2").children('option:not(:first)').remove();
         $("#upjong2_2").append(html);
     }else if(tmpupjongVal == 3){
         $('#upjong3_2').children('option:not(:first)').remove();
@@ -270,10 +278,13 @@ function fn_setMenu_sub(id, response, param) {
     });
 
     if(tmpMenuVal == 2){
+        $("#menu2_2").children('option:not(:first)').remove();
         $("#menu2_2").append(html);
     }else if(tmpMenuVal == 3){
+        $("#menu3_2").children('option:not(:first)').remove();
         $("#menu3_2").append(html);
     }else{
+        $("#menu1_2").children('option:not(:first)').remove();
         $("#menu1_2").append(html);
     }
 }
