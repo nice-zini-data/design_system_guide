@@ -755,7 +755,7 @@ class = "login_none" 제거 및 추가
                 upjongGbNum = 2;
             }else{
                 reset_select(2);
-                setUpjongList(1);
+                setUpjongList(2);
                 upjongGbNum = 1;
             }
         });
@@ -768,7 +768,7 @@ class = "login_none" 제거 및 추가
                 upjongGbNum = 3;
             }else{
                 reset_select(2);
-                setUpjongList(2,tmpUpjongCd);
+                setUpjongList(3,tmpUpjongCd);
                 upjongCd = tmpUpjongCd;
                 upjongGbNum = 2;
             }
@@ -1045,7 +1045,7 @@ class = "login_none" 제거 및 추가
                 upjongGbNum_sub = 2;
             }else{
                 reset_select(2);
-                setUpjongList_sub(1);
+                setUpjongList_sub(2);
                 upjongGbNum_sub = 1;
             }
         });
@@ -1057,7 +1057,7 @@ class = "login_none" 제거 및 추가
                 upjongGbNum_sub = 3;
             }else{
                 reset_select(2);
-                setUpjongList(2,tmpUpjongCd_sub);
+                setUpjongList(3,tmpUpjongCd_sub);
                 upjongCd_sub = tmpUpjongCd_sub;
                 upjongGbNum_sub = 2;
             }
