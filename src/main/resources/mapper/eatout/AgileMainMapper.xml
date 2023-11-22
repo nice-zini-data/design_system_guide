@@ -28,6 +28,7 @@
         </if>
         <if test='admGb == "3"'>
             and b.cty_cd = #{areaCd}
+            and c.admi_cd not like '%0000'
         </if>
         group by
             1,2
