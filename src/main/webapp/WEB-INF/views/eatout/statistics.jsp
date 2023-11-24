@@ -567,7 +567,7 @@ class = "login_none" 제거 및 추가
             // console.log($('#calcAmt').parent().class)
             // $('#calcAmt').parent().addClass(common.upAndDownClass(0));
             $('#calcAmt').parent().removeClass($('#calcAmt').parent().attr('class').split(' ')[2]);
-            $("#type_nm").text($('#dataType option:last').text());
+            $("#type_nm").text($('#dataType option:selected').text());
             dataTypeNum = $(this).val();
             selectReset();
             if(dataTypeNum == 1){
