@@ -23,7 +23,7 @@ request.setCharacterEncoding("euc-kr");
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>Kingmaker</title>
+<title>외식통계조회 시스템</title>
 
 <!-- css 모음 -->
 <%@ include file="/WEB-INF/views/eatout/include/head.jsp"%>
