@@ -585,6 +585,8 @@ class = "login_none" 제거 및 추가
                 setUpjongList(2);
                 setDateList(1);
                 reset_select(0);
+                $("#calcView").hide();
+                $(".row .reTop1120").hide();
                 // if($('#dateType').children('option:last').css('display') == 'block'){
                 $('#dateType').children('option').show();
                 $('#dateType').children('option:last').hide();
@@ -610,6 +612,8 @@ class = "login_none" 제거 및 추가
                 $('#dateType').children('option:last').hide();
                 // }
                 reset_select(0);
+                $("#calcView").hide();
+                $(".row .reTop1120").hide();
                 $("#box3Text").text("업종");
                 $("#upjong").css('display','block')
                 $("#menu").css('display','none')
@@ -627,6 +631,8 @@ class = "login_none" 제거 및 추가
                 setMenuList(1);
                 setDateList(1);
                 reset_select(0);
+                $("#calcView").hide();
+                $(".row .reTop1120").hide();
                 // if($('#dataType option:selected').css('display') == 'block'){
                 $('#dateType').children('option').show();
                 // }
@@ -649,6 +655,8 @@ class = "login_none" 제거 및 추가
                     $('#dateType').children('option:last').hide();
                 // }
                 reset_select(0);
+                $("#calcView").hide();
+                $(".row .reTop1120").hide();
                 $('#admi_nm').text('전국');
                 $('#upjong_nm').text('');
                 $("#box3Text").text("업종");
@@ -669,6 +677,8 @@ class = "login_none" 제거 및 추가
                     $('#dateType').children('option:not(:first)').hide();
                 // }
                 reset_select(0);
+                $("#calcView").hide();
+                $(".row .reTop1120").hide();
                 $('#admi_nm').text('전국');
                 $('#upjong_nm').text('');
                 $("#box3Text").text("업종");
