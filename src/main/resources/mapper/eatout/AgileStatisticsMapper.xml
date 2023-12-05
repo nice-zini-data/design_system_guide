@@ -334,7 +334,7 @@
         )
         select
         <if test='dateType == "1"'>
-            concat(year,'년') as yyyymm
+            concat(b.year,'년') as yyyymm
         </if>
         <if test='dateType == "2"'>
             concat(b.year,'년 ',
@@ -429,7 +429,19 @@
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
                 from(
-                    select to_date(yyyymm,'YYYYMM') as yyyymm from cmapap.tbpop_livi_mega_his where 1=1 group by 1
+                    select to_date(yyyymm,'YYYYMM') as yyyymm from cmapap.tbpop_livi_mega_his where 1=1
+                    <if test='admGb == "1"'>
+                        <if test='areaCd != null'>
+                            and mega_cd like #{areaCd}||'%'
+                        </if>
+                    </if>
+                    <if test='admGb == "2"'>
+                        and cty_cd like #{areaCd}||'%'
+                    </if>
+                    <if test='admGb == "3"'>
+                        and admi_cd like #{areaCd}||'%'
+                    </if>
+                    group by 1
                 ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
@@ -543,7 +555,19 @@
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then 1 else 2 end half
                     ]]>
                 from(
-                    select to_date(yyyymm,'YYYYMM') as yyyymm from cmapap.tbpop_hous_mega_his where 1=1 group by 1
+                    select to_date(yyyymm,'YYYYMM') as yyyymm from cmapap.tbpop_hous_mega_his where 1=1
+                    <if test='areaCd != null'>
+                        <if test='admGb == "1"'>
+                            and mega_cd like #{areaCd}||'%'
+                        </if>
+                        <if test='admGb == "2"'>
+                            and cty_cd like #{areaCd}||'%'
+                        </if>
+                        <if test='admGb == "3"'>
+                            and admi_cd like #{areaCd}||'%'
+                        </if>
+                    </if>
+                    group by 1
                 ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>

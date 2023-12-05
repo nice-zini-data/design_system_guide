@@ -23,6 +23,9 @@
         where 1=1
             and a.mega_cd = b.mega_cd
             and b.cty_cd = c.cty_cd
+            and a.scss_date is null
+            and c.scss_date is null
+            and b.scss_date is null
         <if test='admGb == "2"'>
             and a.mega_cd = #{areaCd}
         </if>
