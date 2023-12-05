@@ -35,10 +35,12 @@ class = "login_none" 제거 및 추가
                                         <div class="col-3" id="admi_nm"></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-12 redText down">
-                                            전기 대비
-                                            <span id="calcAmt">0% </span>
-                                            <span class="img"></span>
+                                        <div id="calcView">
+                                            <div class="col-12 redText down">
+                                                전기 대비
+                                                <span id="calcAmt">0% </span>
+                                                <span class="img"></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -293,6 +295,7 @@ class = "login_none" 제거 및 추가
         setAreaList_sub(1,null,'vacancy');
         setDateList_sub(1,'vacancy');
         setDateInfo();
+        $("#calcView").hide();
         //초기 상단문구 세팅
         $("#type_nm").text($('#dataType option:selected').text())
         $("#admi_nm").text('전국')

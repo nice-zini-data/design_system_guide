@@ -4,6 +4,7 @@
 
     <!--  외식데이터 정보 호출  -->
     <select id="getOuteatList" resultType="com.zinidata.eatout.vo.output.AgileEatoutOutVO">
+        --getOuteatList
         with tmp_date as(
             select
             <if test='dateType == "1"'>
@@ -146,6 +147,7 @@
 
     <!--  배달데이터 정보 호출  -->
     <select id="getDeliveryList" resultType="com.zinidata.eatout.vo.output.AgileDeliveryOutVO">
+        --getDeliveryList
         with tmp_date as(
             select
             <if test='dateType == "1"'>
@@ -281,6 +283,7 @@
 
     <!--  Pos데이터 정보 호출  -->
     <select id="getPosList" resultType="com.zinidata.eatout.vo.output.AgilePosOutVO">
+        --getPosList
         with tmp_date as(
         select
             <if test='dateType == "1"'>
@@ -403,6 +406,7 @@
 
     <!--  생활인구데이터 정보 호출  -->
     <select id="getLiviList" resultType="com.zinidata.eatout.vo.output.AgileLiviOutVO">
+        --getLiviList
         with tmp_date as(
             select
                 <if test='dateType == "1"'>
@@ -545,6 +549,7 @@
 
     <!--  주거인구데이터 정보 호출  -->
     <select id="getHousList" resultType="com.zinidata.eatout.vo.output.AgileHousOutVO">
+        --getHousList
         with tmp_date as(
             select
                 year,max(half) as half
@@ -650,6 +655,7 @@
 
     <!--  생활인구데이터 정보 호출  -->
     <select id="getUpjongChgRate" resultType="com.zinidata.eatout.vo.output.AgileUpjongChgRateOutVO">
+        --getUpjongChgRate
         select
             upjong3_nm,upjong3_cd, ROUND(((sale_amt_to - sale_amt_be)/sale_amt_to *100),2) as calc_per
              ,ROUND((sale_amt_to / 10000),0) as sale_amt

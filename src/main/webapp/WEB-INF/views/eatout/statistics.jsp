@@ -36,10 +36,12 @@ class = "login_none" 제거 및 추가
                                         <div class="col-4" id="upjong_nm"></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-12 redText">
-                                            <span id="calcDateType"></span>대비
-                                            <span id="calcAmt">0.0% </span>
-                                            <span class="img"></span>
+                                        <div id="calcView">
+                                            <div class="col-12 redText">
+                                                <span id="calcDateType"></span>대비
+                                                <span id="calcAmt">0.0% </span>
+                                                <span class="img"></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -532,6 +534,9 @@ class = "login_none" 제거 및 추가
     var endDate_sub = 0;
     var searchBtnNum = 0;
     var settingCheck = true;
+    var tmpUpText = '';
+    var tmpDownText = '';
+
 
     $(function() {
         var param = {};
@@ -544,6 +549,8 @@ class = "login_none" 제거 및 추가
         setUpjongList_sub(2);
         setDateList_sub(1);
         setDateInfo();
+        $("#calcView").hide();
+        $(".row .reTop1120").hide();
         $("#upjong1").attr('disabled',true);
         $("#upjong1_2").attr('disabled',true);
         $('#dateType').children('option').show();
@@ -1387,11 +1394,12 @@ class = "login_none" 제거 및 추가
     }
 
     $("select[id^='colType']").on("change", function(){
-
         if($(this).attr('id').length == 8){
             var tmpId = $(this).attr('id');
-            $('#upText').text($('#'+tmpId+' option:selected').text());
-            $('#downText').text($('#'+tmpId+' option:selected').text());
+            tmpUpText = $('#'+tmpId+' option:selected').text();
+            tmpDownText = $('#'+tmpId+' option:selected').text();
+            // $('#upText').text($('#'+tmpId+' option:selected').text());
+            // $('#downText').text($('#'+tmpId+' option:selected').text());
         }
     });
 

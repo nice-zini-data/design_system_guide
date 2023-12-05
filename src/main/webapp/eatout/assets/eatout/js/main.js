@@ -607,6 +607,7 @@ function fn_makechart(id, response, param) {
     var resultData = [];
     var resultName = [];
 
+    console.log(tmpSel);
     if(!common.isEmpty(response.data[0])) {
         $.each(response.data,function(index,item){
             $.each(item,function(key,value) {
@@ -680,6 +681,15 @@ function fn_makechart(id, response, param) {
             $('#maxVal').text(common.addComma(maxVal));
             $('#minYyyymm').text(minYyyymm);
             $('#minVal').text(common.addComma(minVal));
+
+        }
+
+        $("#calcView").show();
+        $(".row .reTop1120").show();
+
+        if(dataTypeNum != 6){
+            $('#upText').text(tmpUpText);
+            $('#downText').text(tmpDownText);
         }
     }
     // rpt_chart1
@@ -791,7 +801,6 @@ function fn_makechart(id, response, param) {
 
     rpt_chart1.setOption(option);
     rpt_chart1.resize();
-
 }
 
 // 시장동향 > 업종선택 시 그래프 생성

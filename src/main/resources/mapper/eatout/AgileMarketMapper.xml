@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zinidata.eatout.mapper.AgileMarketMapper">
     <select id="getTotUpjongInfo" resultType="com.zinidata.eatout.vo.output.AgileMarketMainOutVO">
+        --getTotUpjongInfo
         select
             upjong3_cd, upjong3_nm, sum(before_sale_amt) as before_sale_amt, sum(this_sale_amt) as this_sale_amt,
             (sum(this_sale_amt) - sum(before_sale_amt)) as calc_sale_amt,
@@ -23,6 +24,7 @@
             1,2
     </select>
     <select id="getAdmiUpjongInfo" resultType="com.zinidata.eatout.vo.output.AgileMarketMainOutVO">
+        --getAdmiUpjongInfo
         select
             *
         from(
@@ -112,6 +114,7 @@
             ]]>
     </select>
     <select id="getUpjongGrowth" resultType="com.zinidata.eatout.vo.output.AgileMarketMainOutVO">
+        --getUpjongGrowth
         select
             upjong3_cd,upjong3_nm
             ,before_sale_amt, this_sale_amt
@@ -160,6 +163,7 @@
             limit 10
     </select>
     <select id="getUpjongDetail" resultType="com.zinidata.eatout.vo.output.AgileMarketMainOutVO">
+        --getUpjongDetail
         select
             a.yyyymm, ROUND(sum(a.sale_amt)/100000000,0) as e_sale_amt, ROUND(sum(b.sale_amt)/100000000,0)  as d_sale_amt
              , sum(a.store_cnt) as store_cnt
@@ -176,16 +180,17 @@
                 and (select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his
             )
             and a.upjong3_cd = #{upjong3Cd}
-            and c.svc_yn = 'Y'
         group by
             1
     </select>
     <insert id="setFileInfo">
+        --setFileInfo
         insert into cmapap.tbagile_filelist (file_ori_nm,file_nm,file_info,reg_date)
         values(#{fileOriName},#{fileName},#{fileInfo},now());
         commit;
     </insert>
     <select id="getFileInfo" resultType="com.zinidata.eatout.vo.AgileFileVO">
+        --getFileInfo
         select
             file_no, file_ori_nm, file_nm,file_info,reg_date
         from
