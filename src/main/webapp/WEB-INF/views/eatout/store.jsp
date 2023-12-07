@@ -585,7 +585,7 @@ class = "login_none" 제거 및 추가
         <tr>
             <th>행정동</th>
             <th>전월대비<br>증감율</th>
-            <th>평균 보증금<br><span>천 원/월</span></th>
+            <th>평균 보증금<br><span>천원/평</span></th>
         </tr>
         {{#each this}}
         <tr>

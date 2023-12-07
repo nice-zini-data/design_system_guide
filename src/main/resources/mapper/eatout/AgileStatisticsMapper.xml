@@ -353,7 +353,7 @@
         <if test='dateType == "5"'>
             concat(substring(b.yyyymm,1,4),'년',substring(b.yyyymm,5,2),'월 ',b.week,'주차') as yyyymm
         </if>
-            , ROUND(sum(store_cnt)/cnt,0) as store_cnt
+            , ROUND(count(shop_cd)/cnt,0) as store_cnt
             , ROUND(sum(sale_qty)/cnt,0) as sale_qty
             , ROUND((sum(tot_sale_amt)/cnt)/10000,0) tot_sale_amt
             , ROUND((sum(tot_sale_amt)/cnt)/(sum(sale_qty)/cnt),0) as sale_amt
@@ -389,14 +389,16 @@
                     and a.admi_cd like #{areaCd}||'%'
                 </if>
             </if>
-            <if test='menuType == "1"'>
-                and a.menu3_cd like #{menuCd}||'%'
-            </if>
-            <if test='menuType == "2"'>
-                and a.menu3_cd like #{menuCd}||'%'
-            </if>
-            <if test='menuType == "3"'>
-                and a.menu3_cd like #{menuCd}||'%'
+            <if test='menuCd != null'>
+                <if test='menuType == "1"'>
+                    and a.menu3_cd like #{menuCd}||'%'
+                </if>
+                <if test='menuType == "2"'>
+                    and a.menu3_cd like #{menuCd}||'%'
+                </if>
+                <if test='menuType == "3"'>
+                    and a.menu3_cd like #{menuCd}||'%'
+                </if>
             </if>
         group by
             1,cnt

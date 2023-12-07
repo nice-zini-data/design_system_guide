@@ -188,10 +188,10 @@
                    when quarter = 'Q4' then '4분기' end
                    as label
             </if>
-            , ROUND(sum(gnsl)/b.cnt,2) as gnsl
-            , ROUND(sum(rent_pyn)/b.cnt,0) as rent_pyn
-            , ROUND(sum(cst_pyn)/b.cnt,0) as cst_pyn
-            , ROUND(sum(deposit)/b.cnt,0) as deposit
+            , ROUND(avg(gnsl)/b.cnt,2) as gnsl
+            , ROUND(avg(rent_pyn)/b.cnt,0) as rent_pyn
+            , ROUND(avg(cst_pyn)/b.cnt,0) as cst_pyn
+            , ROUND(avg(deposit)/b.cnt,0) as deposit
         from(
             select
                 *
