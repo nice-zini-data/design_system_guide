@@ -325,7 +325,7 @@
                 <![CDATA[
                         case when date_part('QUARTER',to_date(a.sale_mm,'YYYYMM')::timestamp) <= 2 then '전반기' else '후반기' end
                     ]]>
-                ) as yyyymm,cnt
+                ) as yyyymm
             </if>
             <if test='dateType == "3"'>
                 concat(substring(a.sale_mm,1,4),'년 ',date_part('QUARTER',to_date(a.sale_mm,'YYYYMM')::timestamp),'분기') as yyyymm
