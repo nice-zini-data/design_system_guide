@@ -297,7 +297,6 @@
             ) tmp
             where 1=1
                 <if test='dateStart != null and dateEnd != null'>
-                    where 1=1
                     <if test='dateType == "1"'>
                         and year between #{dateStart} and #{dateEnd}
                     </if>
@@ -319,23 +318,23 @@
         )
         select
             <if test='dateType == "1"'>
-                concat(substring(sale_mm,1,4),'년') as yyyymm
+                concat(substring(a.sale_mm,1,4),'년') as yyyymm
             </if>
             <if test='dateType == "2"'>
-                concat(substring(sale_mm,1,4),'년 ',
+                concat(substring(a.sale_mm,1,4),'년 ',
                 <![CDATA[
-                        case when date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp) <= 2 then '전반기' else '후반기' end
+                        case when date_part('QUARTER',to_date(a.sale_mm,'YYYYMM')::timestamp) <= 2 then '전반기' else '후반기' end
                     ]]>
                 ) as yyyymm,cnt
             </if>
             <if test='dateType == "3"'>
-                concat(substring(sale_mm,1,4),'년 ',date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp),'분기') as yyyymm
+                concat(substring(a.sale_mm,1,4),'년 ',date_part('QUARTER',to_date(a.sale_mm,'YYYYMM')::timestamp),'분기') as yyyymm
             </if>
             <if test='dateType == "4"'>
-                concat(substring(sale_mm,1,4),'년 ',substring(sale_mm,5,2),'월') as yyyymm
+                concat(substring(a.sale_mm,1,4),'년 ',substring(a.sale_mm,5,2),'월') as yyyymm
             </if>
             <if test='dateType == "5"'>
-                concat(substring(sale_mm,1,4),'년',substring(sale_mm,5,2),'월 ',week,'주차') as yyyymm
+                concat(substring(a.sale_mm,1,4),'년',substring(a.sale_mm,5,2),'월 ',week,'주차') as yyyymm
             </if>
             ,ROUND(avg(sale_qty),0) as sale_qty, ROUND(avg(tot_sale_amt)/10000,0) as tot_sale_amt
             ,ROUND(avg(b.store_cnt),0) as store_cnt
@@ -390,19 +389,19 @@
         ) a,(
             select
             <if test='dateType != "5"'>
-                a.sale_mm
+                sale_mm
             </if>
             <if test='dateType == "5"'>
-                a.sale_mm,a.week
+                sale_mm,week
             </if>
                  ,count(shop_cd) as store_cnt
             from(
                 select
                 <if test='dateType != "5"'>
-                    a.sale_mm
+                    sale_mm
                 </if>
                 <if test='dateType == "5"'>
-                    a.sale_mm,a.week
+                    sale_mm,week
                 </if>
                     ,shop_cd
                 from(
@@ -415,9 +414,9 @@
                     </if>
                         ,shop_cd
                     from
-                        cmapap.tbadile_pos_info a, tmp_date b
+                        cmapap.tbagile_pos_info a, tmp_date b
                     where
-                        a.salee_mm = b.yyyymm
+                        a.sale_mm = b.yyyymm
                          <if test='dateType == "5"'>
                          and a.week = b.week
                          </if>
@@ -455,7 +454,7 @@
                 <if test='dateType == "5"'>
                     1,2,3
                 </if>
-            )
+            ) as tmp
             group by
             <if test='dateType != "5"'>
                 1
