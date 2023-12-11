@@ -348,7 +348,12 @@
                     a.sale_mm,a.week
                 </if>
                 ,count(1) as cnt
-                ,sum(sale_qty) as sale_qty,sum(tot_sale_amt) as tot_sale_amt
+                <if test='dateType != "5"'>
+                    ,sum(sale_qty)/x.cnt as sale_qty,sum(tot_sale_amt)/x.cnt as tot_sale_amt
+                </if>
+                <if test='dateType == "5"'>
+                    ,sum(sale_qty) as sale_qty,sum(tot_sale_amt) as tot_sale_amt
+                </if>
             from
                 cmapap.tbagile_pos_info a, tmp_date x
             where 1=1
@@ -377,7 +382,7 @@
                 </if>
             group by
             <if test='dateType != "5"'>
-                1
+                1,x.cnt
             </if>
             <if test='dateType == "5"'>
                 1,2
