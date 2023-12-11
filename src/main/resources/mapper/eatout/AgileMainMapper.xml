@@ -52,7 +52,13 @@
             b.upjong2_cd as upjong_cd, b.upjong2_nm as upjong_nm
         </if>
         <if test='upjongType == "3"'>
-            c.upjong3_cd as upjong_cd, c.upjong3_nm as upjong_nm
+            c.upjong3_cd as upjong_cd,
+            case when upjong3_cd = 'Q01004' then '포장마차'
+                when upjong3_cd = 'Q04006' then '일본식 양고기'
+                when upjong3_cd = 'Q08001' then '기타 유흥주점'
+                when upjong3_cd = 'Q08002' then '단란주점'
+                when upjong3_cd = 'Q08003' then 'Bar/카페'
+                else c.upjong3_nm end as upjong_nm
         </if>
         from
             cmapap.tb_upjong1 a, cmapap.tb_upjong2 b, cmapap.tb_upjong3 c
@@ -68,7 +74,7 @@
             and c.svc_yn = 'Y'
             and c.upjong3_cd not in ('Q02004','Q08002','Q08004')
         group by
-        1,2
+            1,2
         order by
         <if test='upjongType == "2"'>
             b.upjong2_cd

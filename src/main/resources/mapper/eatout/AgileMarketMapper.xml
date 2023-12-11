@@ -4,7 +4,14 @@
     <select id="getTotUpjongInfo" resultType="com.zinidata.eatout.vo.output.AgileMarketMainOutVO">
         --getTotUpjongInfo
         select
-            upjong3_cd, upjong3_nm, sum(before_sale_amt) as before_sale_amt, sum(this_sale_amt) as this_sale_amt,
+            upjong3_cd,
+            case when upjong3_cd = 'Q01004' then '포장마차'
+                 when upjong3_cd = 'Q04006' then '일본식 양고기'
+                 when upjong3_cd = 'Q08001' then '기타 유흥주점'
+                 when upjong3_cd = 'Q08002' then '단란주점'
+                 when upjong3_cd = 'Q08003' then 'Bar/카페'
+                 else upjong3_nm end as upjong3_nm
+            , sum(before_sale_amt) as before_sale_amt, sum(this_sale_amt) as this_sale_amt,
             (sum(this_sale_amt) - sum(before_sale_amt)) as calc_sale_amt,
             round((sum(this_sale_amt) - sum(before_sale_amt) )/ sum(this_sale_amt) * 100,2) as sale_per
         from(
@@ -17,6 +24,7 @@
                   and a.upjong3_cd = b.upjong3_cd
                   and yyyymm between to_char(to_date((select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his),'YYYYMM') + interval '-1 month','YYYYMM') and (select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his)
                   and b.upjong3_cd like 'Q%'
+                  and b.upjong3_cd not in ('Q02004')
                 group by
                     1,2,3
         ) tmp
@@ -29,7 +37,13 @@
             *
         from(
             select
-                mega_cd,mega_nm,upjong3_cd,upjong3_nm
+                mega_cd,mega_nm,upjong3_cd,
+                case when upjong3_cd = 'Q01004' then '포장마차'
+                    when upjong3_cd = 'Q04006' then '일본식 양고기'
+                    when upjong3_cd = 'Q08001' then '기타 유흥주점'
+                    when upjong3_cd = 'Q08002' then '단란주점'
+                    when upjong3_cd = 'Q08003' then 'Bar/카페'
+                    else upjong3_nm end as upjong3_nm
                 <if test='outeatType == "sales"'>
                     ,row_number() over(partition by mega_cd order by sale_per
                         <if test='outeatOrderType=="asc"'>
@@ -95,6 +109,7 @@
                             ,(select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his)
                         )
                         and b.upjong3_cd like 'Q%'
+                        and b.upjong3_cd not in ('Q02004')
                         and b.svc_yn = 'Y'
                     group by
                         1,2,3,4, yyyymm
@@ -116,7 +131,13 @@
     <select id="getUpjongGrowth" resultType="com.zinidata.eatout.vo.output.AgileMarketMainOutVO">
         --getUpjongGrowth
         select
-            upjong3_cd,upjong3_nm
+            upjong3_cd,
+            case when upjong3_cd = 'Q01004' then '포장마차'
+                 when upjong3_cd = 'Q04006' then '일본식 양고기'
+                 when upjong3_cd = 'Q08001' then '기타 유흥주점'
+                 when upjong3_cd = 'Q08002' then '단란주점'
+                 when upjong3_cd = 'Q08003' then 'Bar/카페'
+                 else upjong3_nm end as upjong3_nm
             ,before_sale_amt, this_sale_amt
             ,ROUND((this_sale_amt - before_sale_amt)/10000,0) as calc_sale_amt
             ,row_number() over(order by sale_per desc) as rnk
@@ -149,6 +170,7 @@
                             ,(select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his)
                         )
                         and b.upjong3_cd like 'Q%'
+                        and b.upjong3_cd not in ('Q02004')
                         and b.svc_yn = 'Y'
                     group by
                         1,2,yyyymm
