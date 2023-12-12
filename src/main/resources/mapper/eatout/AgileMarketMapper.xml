@@ -187,21 +187,28 @@
     <select id="getUpjongDetail" resultType="com.zinidata.eatout.vo.output.AgileMarketMainOutVO">
         --getUpjongDetail
         select
-            a.yyyymm, ROUND(sum(a.sale_amt)/100000000,0) as e_sale_amt, ROUND(sum(b.sale_amt)/100000000,0)  as d_sale_amt
-             , sum(a.store_cnt) as store_cnt
-             , ROUND(((sum(a.sale_amt) + sum(b.sale_amt))/sum(a.store_cnt))/10000 ,0) as store_amt
-        from cmapap.tbss_ag_sum_sales_mega_his a, cmapap.tbkb_sum_sales_mega_his b, cmapap.tb_upjong3 c
+            a.yyyymm, ROUND(sum(ss_sale_amt)/100000000,0) as e_sale_amt, ROUND(sum(kb_sale_amt)/100000000,0)  as d_sale_amt
+             , sum(store_cnt) as store_cnt
+             , ROUND(((sum(ss_sale_amt) + sum(kb_sale_amt))/sum(store_cnt))/10000 ,0) as store_amt
+        from (
+            select
+                a.yyyymm,a.upjong3_cd,a.sale_amt as ss_sale_amt, b.sale_amt as kb_sale_amt, a.store_cnt
+            from
+                cmapap.tbss_ag_sum_sales_mega_his a left join  cmapap.tbkb_sum_sales_mega_his b
+            on 1=1
+                and a.yyyymm = b.yyyymm
+                and a.upjong3_cd = b.upjong3_cd
+                and a.mega_cd = b.mega_cd
+            where 1=1
+                and a.bupin_gb = '1'
+                and a.yyyymm between
+                    to_char(to_date((select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his),'YYYYMM') + interval '-12 month','YYYYMM')
+                    and (select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his
+                )
+                and a.upjong3_cd = #{upjong3Cd}
+        ) a, cmapap.tb_upjong3 c
         where 1=1
-            and a.yyyymm = b.yyyymm
-            and a.upjong3_cd = b.upjong3_cd
             and a.upjong3_cd = c.upjong3_cd
-            and a.mega_cd = b.mega_cd
-            and a.bupin_gb = '1'
-            and a.yyyymm between to_char(
-                to_date((select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his),'YYYYMM') + interval '-12 month','YYYYMM')
-                and (select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his
-            )
-            and a.upjong3_cd = #{upjong3Cd}
         group by
             1
     </select>
