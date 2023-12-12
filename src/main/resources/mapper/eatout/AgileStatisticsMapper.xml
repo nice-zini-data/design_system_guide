@@ -286,7 +286,13 @@
         --getPosList
         with tmp_date as(
             select
-                yyyymm,week,count(yyyymm) as cnt
+                <if test='dateType != "5"'>
+                    yyyymm,
+                </if>
+                <if test='dateType == "5"'>
+                    yyyymm,week,
+                </if>
+                count(yyyymm) as cnt
             from(
                 select
                     year,half,quarter,yyyymm,week
@@ -314,7 +320,12 @@
                     </if>
                 </if>
             group by
-            1,2
+            <if test='dateType != "5"'>
+                1
+            </if>
+            <if test='dateType == "5"'>
+                1,2
+            </if>
         )
         select
             <if test='dateType == "1"'>
