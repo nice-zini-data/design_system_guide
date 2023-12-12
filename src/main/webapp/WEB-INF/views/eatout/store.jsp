@@ -348,10 +348,24 @@ class = "login_none" 제거 및 추가
         });
         $("#startDate").on("change", function(){
             //selected value
+            if(endDate != 0){
+                if($(this).val() > endDate ){
+                    alert("시작일을 종료일 이전으로 선택해주시기 바랍니다.");
+                    $("#startDate option:eq(0)").prop("selected", true); //첫번째 option 선택
+                    return;
+                }
+            }
             startDate = $(this).val();
         });
         $("#endDate").on("change", function(){
             //selected value
+            if(startDate != 0){
+                if($(this).val() < startDate){
+                    alert("종료일을 시작일 이후으로 선택해주시기 바랍니다.");
+                    $("#endDate option:eq(0)").prop("selected", true); //첫번째 option 선택
+                    return;
+                }
+            }
             endDate = $(this).val();
         });
         $("#search").on("click", function(){
@@ -427,10 +441,24 @@ class = "login_none" 제거 및 추가
         });
         $("#startDate_2").on("change", function(){
             //selected value
+            if(endDate_sub != 0){
+                if($(this).val() > endDate_sub ){
+                    alert("시작일을 종료일 이전으로 선택해주시기 바랍니다.");
+                    $("#startDate_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+                    return;
+                }
+            }
             startDate_sub = $(this).val();
         });
         $("#endDate_2").on("change", function(){
             //selected value
+            if(startDate_sub != 0){
+                if($(this).val() < startDate_sub){
+                    alert("종료일을 시작일 이후으로 선택해주시기 바랍니다.");
+                    $("#endDate_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+                    return;
+                }
+            }
             endDate_sub = $(this).val();
         });
         $("#search_2").on("click", function(){
