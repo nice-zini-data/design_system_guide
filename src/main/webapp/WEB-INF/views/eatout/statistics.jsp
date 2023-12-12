@@ -536,6 +536,8 @@ class = "login_none" 제거 및 추가
     var settingCheck = true;
     var tmpUpText = '';
     var tmpDownText = '';
+    var tmpPosType = '';
+    var tmpPosType_sub = '';
 
 
     $(function() {
@@ -876,6 +878,10 @@ class = "login_none" 제거 및 추가
             endDate = $(this).val();
             // console.log("======================startDate end======================");
         });
+        $("#colType3").on("change",function(){
+            tmpPosType = $(this).val();
+            console.log(tmpPosType);
+        })
         $("#search").on("click", function(){
             searchType = 0;
             var param = {};
@@ -905,6 +911,7 @@ class = "login_none" 제거 및 추가
             param.upjongType = upjongGbNum;
             param.menuType = menuGbNum;
             param.dateType = dateTypeNum;
+            param.posType = tmpPosType;
             if(!(admiCd == '' || admiCd == 0 || admiCd == null)) param.areaCd = admiCd;
             if(!(upjongCd == '' || upjongCd == 0 || upjongCd == null)) param.upjongCd = upjongCd;
             if(!(menuCd == '' || menuCd == 0 || menuCd == null)) param.menuCd = menuCd;
@@ -1171,6 +1178,10 @@ class = "login_none" 제거 및 추가
             endDate_sub = $(this).val();
             // console.log("======================startDate end======================");
         });
+        $("#colType3_2").on("change",function(){
+            tmpPosType_sub = $(this).val();
+            console.log(tmpPosType_sub);
+        })
         $("#search_2").on("click", function(){
             searchType = 1;
             var param = {};
@@ -1200,6 +1211,7 @@ class = "login_none" 제거 및 추가
             param.upjongType = upjongGbNum_sub;
             param.menuType = menuGbNum_sub;
             param.dateType = dateTypeNum_sub;
+            param.posType = tmpPosType_sub;
             if(!(admiCd_sub == '' || admiCd_sub == 0 || admiCd_sub == null)) param.areaCd = admiCd_sub;
             if(!(upjongCd_sub == '' || upjongCd_sub == 0 || upjongCd_sub == null)) param.upjongCd = upjongCd_sub;
             if(!(menuCd_sub == '' || menuCd_sub == 0 || menuCd_sub == null)) param.menuCd = menuCd_sub;

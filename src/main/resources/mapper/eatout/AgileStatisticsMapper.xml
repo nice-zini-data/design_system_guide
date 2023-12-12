@@ -329,45 +329,74 @@
         )
         select
             <if test='dateType == "1"'>
-                concat(substring(a.sale_mm,1,4),'년') as yyyymm
+                concat(substring(sale_mm,1,4),'년') as yyyymm
             </if>
             <if test='dateType == "2"'>
-                concat(substring(a.sale_mm,1,4),'년 ',
+                concat(substring(sale_mm,1,4),'년 ',
                 <![CDATA[
-                        case when date_part('QUARTER',to_date(a.sale_mm,'YYYYMM')::timestamp) <= 2 then '전반기' else '후반기' end
+                        case when date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp) <= 2 then '전반기' else '후반기' end
                     ]]>
                 ) as yyyymm
             </if>
             <if test='dateType == "3"'>
-                concat(substring(a.sale_mm,1,4),'년 ',date_part('QUARTER',to_date(a.sale_mm,'YYYYMM')::timestamp),'분기') as yyyymm
+                concat(substring(sale_mm,1,4),'년 ',date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp),'분기') as yyyymm
             </if>
             <if test='dateType == "4"'>
-                concat(substring(a.sale_mm,1,4),'년 ',substring(a.sale_mm,5,2),'월') as yyyymm
+                concat(substring(sale_mm,1,4),'년 ',substring(sale_mm,5,2),'월') as yyyymm
             </if>
             <if test='dateType == "5"'>
-                concat(substring(a.sale_mm,1,4),'년',substring(a.sale_mm,5,2),'월 ',a.week,'주차') as yyyymm
+                concat(substring(sale_mm,1,4),'년',substring(sale_mm,5,2),'월 ',week,'주차') as yyyymm
             </if>
-            ,ROUND(avg(sale_qty),0) as sale_qty, ROUND(avg(tot_sale_amt)/10000,0) as tot_sale_amt
-            ,ROUND(avg(b.store_cnt),0) as store_cnt
+            <if test='posType == "saleQty"'>
+                , ROUND(avg(sale_qty),0) as sale_qty
+            </if>
+            <if test='posType == "totSaleAmt"'>
+                , ROUND(avg(tot_sale_amt)/10000,0) as tot_sale_amt
+            </if>
+            <if test='posType == "storeCnt"'>
+                , ROUND(avg(store_cnt),0) as store_cnt
+            </if>
+            <if test='posType == "saleAmt"'>
+                , ROUND((sum(tot_sale_amt))/(sum(sale_qty)),0) as sale_amt
+            </if>
         from(
-            select
+            <if test='posType != "storeCnt"'>
+                select
                 <if test='dateType != "5"'>
                     a.sale_mm
                 </if>
                 <if test='dateType == "5"'>
                     a.sale_mm,a.week
                 </if>
-                ,count(1) as cnt
+--                 ,count(1) as cnt
                 <if test='dateType != "5"'>
-                    ,sum(sale_qty)/x.cnt as sale_qty,sum(tot_sale_amt)/x.cnt as tot_sale_amt
+                    <if test='posType == "saleQty"'>
+                        ,sum(sale_qty)/x.cnt as sale_qty
+                    </if>
+                    <if test='posType == "totSaleAmt"'>
+                        ,sum(tot_sale_amt)/x.cnt as tot_sale_amt
+                    </if>
+                    <if test='posType == "saleAmt"'>
+                        ,sum(sale_qty)/x.cnt as sale_qty
+                        ,sum(tot_sale_amt)/x.cnt as tot_sale_amt
+                    </if>
                 </if>
                 <if test='dateType == "5"'>
-                    ,sum(sale_qty) as sale_qty,sum(tot_sale_amt) as tot_sale_amt
+                    <if test='posType == "saleQty"'>
+                        ,sum(sale_qty) as sale_qty
+                    </if>
+                    <if test='posType == "totSaleAmt"'>
+                        ,sum(tot_sale_amt) as tot_sale_amt
+                    </if>
+                    <if test='posType == "saleAmt"'>
+                        ,sum(sale_qty) as sale_qty
+                        ,sum(tot_sale_amt) as tot_sale_amt
+                    </if>
                 </if>
-            from
-                cmapap.tbagile_pos_info a, tmp_date x
-            where 1=1
-                and a.sale_mm = x.yyyymm
+                from
+                    cmapap.tbagile_pos_info a, tmp_date x
+                where 1=1
+                    and a.sale_mm = x.yyyymm
                 <if test='dateType == "5"'>
                     and a.week = x.week::numeric
                 </if>
@@ -390,23 +419,15 @@
                         and a.menu3_cd like #{menuCd}||'%'
                     </if>
                 </if>
-            group by
-            <if test='dateType != "5"'>
-                1,x.cnt
+                group by
+                <if test='dateType != "5"'>
+                    1,x.cnt
+                </if>
+                <if test='dateType == "5"'>
+                    1,2
+                </if>
             </if>
-            <if test='dateType == "5"'>
-                1,2
-            </if>
-        ) a,(
-            select
-            <if test='dateType != "5"'>
-                sale_mm
-            </if>
-            <if test='dateType == "5"'>
-                sale_mm,week
-            </if>
-                 ,count(shop_cd) as store_cnt
-            from(
+            <if test = 'posType == "storeCnt"'>
                 select
                 <if test='dateType != "5"'>
                     sale_mm
@@ -414,42 +435,59 @@
                 <if test='dateType == "5"'>
                     sale_mm,week
                 </if>
-                    ,shop_cd
+                ,count(shop_cd) as store_cnt
                 from(
                     select
                     <if test='dateType != "5"'>
-                        a.sale_mm
+                        sale_mm
                     </if>
                     <if test='dateType == "5"'>
-                        a.sale_mm,a.week
+                        sale_mm,week
                     </if>
-                        ,shop_cd
-                    from
-                        cmapap.tbagile_pos_info a, tmp_date b
-                    where
-                        a.sale_mm = b.yyyymm
-                         <if test='dateType == "5"'>
-                         and a.week = b.week
-                         </if>
-                    <if test='areaCd != null'>
-                         <if test='admGb == "1"'>
-                             and a.admi_cd like #{areaCd}||'%'
-                         </if>
-                         <if test='admGb == "2"'>
-                             and a.admi_cd like #{areaCd}||'%'
-                         </if>
-                    </if>
-                    <if test='menuCd != null'>
-                         <if test='menuType == "1"'>
-                             and a.menu3_cd like #{menuCd}||'%'
-                         </if>
-                         <if test='menuType == "2"'>
-                             and a.menu3_cd like #{menuCd}||'%'
-                         </if>
-                         <if test='menuType == "3"'>
-                             and a.menu3_cd like #{menuCd}||'%'
-                         </if>
-                    </if>
+                    ,shop_cd
+                    from(
+                        select
+                        <if test='dateType != "5"'>
+                            a.sale_mm
+                        </if>
+                        <if test='dateType == "5"'>
+                            a.sale_mm,a.week
+                        </if>
+                            ,shop_cd
+                        from
+                            cmapap.tbagile_pos_info a, tmp_date b
+                        where
+                            a.sale_mm = b.yyyymm
+                        <if test='dateType == "5"'>
+                            and a.week = b.week
+                        </if>
+                        <if test='areaCd != null'>
+                            <if test='admGb == "1"'>
+                                and a.admi_cd like #{areaCd}||'%'
+                            </if>
+                            <if test='admGb == "2"'>
+                                and a.admi_cd like #{areaCd}||'%'
+                            </if>
+                        </if>
+                        <if test='menuCd != null'>
+                            <if test='menuType == "1"'>
+                                and a.menu3_cd like #{menuCd}||'%'
+                            </if>
+                            <if test='menuType == "2"'>
+                                and a.menu3_cd like #{menuCd}||'%'
+                            </if>
+                            <if test='menuType == "3"'>
+                                and a.menu3_cd like #{menuCd}||'%'
+                            </if>
+                        </if>
+                        group by
+                        <if test='dateType != "5"'>
+                            1,2
+                        </if>
+                        <if test='dateType == "5"'>
+                            1,2,3
+                        </if>
+                    ) as tmp
                     group by
                     <if test='dateType != "5"'>
                         1,2
@@ -460,25 +498,14 @@
                 ) as tmp
                 group by
                 <if test='dateType != "5"'>
-                    1,2
+                    1
                 </if>
                 <if test='dateType == "5"'>
-                    1,2,3
+                    1,2
                 </if>
-            ) as tmp
-            group by
-            <if test='dateType != "5"'>
-                1
             </if>
-            <if test='dateType == "5"'>
-                1,2
-            </if>
-        ) b
+        ) tmp
         where 1=1
-            and a.sale_mm = b.sale_mm
-            <if test='dateType == "5"'>
-                and a.week = b.week
-            </if>
         group by
             1
    </select>
