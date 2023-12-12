@@ -189,7 +189,10 @@
         select
             a.yyyymm, ROUND(sum(ss_sale_amt)/100000000,0) as e_sale_amt, ROUND(sum(kb_sale_amt)/100000000,0)  as d_sale_amt
              , sum(store_cnt) as store_cnt
-             , ROUND(((sum(ss_sale_amt) + sum(kb_sale_amt))/sum(store_cnt))/10000 ,0) as store_amt
+             , ROUND(((
+                    case when sum(ss_sale_amt) is null then 0 else sum(ss_sale_amt) end  +
+                    case when sum(kb_sale_amt) is null then 0 else sum(kb_sale_amt) end
+             )/sum(store_cnt))/10000 ,0) as store_amt
         from (
             select
                 a.yyyymm,a.upjong3_cd,a.sale_amt as ss_sale_amt, b.sale_amt as kb_sale_amt, a.store_cnt

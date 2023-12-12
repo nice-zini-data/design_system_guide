@@ -345,7 +345,7 @@
                 concat(substring(a.sale_mm,1,4),'년 ',substring(a.sale_mm,5,2),'월') as yyyymm
             </if>
             <if test='dateType == "5"'>
-                concat(substring(a.sale_mm,1,4),'년',substring(a.sale_mm,5,2),'월 ',week,'주차') as yyyymm
+                concat(substring(a.sale_mm,1,4),'년',substring(a.sale_mm,5,2),'월 ',a.week,'주차') as yyyymm
             </if>
             ,ROUND(avg(sale_qty),0) as sale_qty, ROUND(avg(tot_sale_amt)/10000,0) as tot_sale_amt
             ,ROUND(avg(b.store_cnt),0) as store_cnt
