@@ -25,4 +25,5 @@ public class AgileStatisticsVO {
     private String menuType;    // 메뉴 타입선택(대분류 : 1 /중분류 : 2/소분류 : 3)
     private String menuCd;      // 선택메뉴 코드
     private String dataType;    // 선택 메뉴타입
+    private String posType;    // 선택 포스타입
 }

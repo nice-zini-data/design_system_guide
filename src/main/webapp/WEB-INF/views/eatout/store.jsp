@@ -33,13 +33,14 @@ class = "login_none" 제거 및 추가
                                     <div class="row flex leftTitleBox">
                                         <div class="col-5" aria-setsize="" id="type_nm"></div>
                                         <div class="col-3" id="admi_nm"></div>
-                                        <div class="col-4" id="upjong_nm"></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-12 redText down">
-                                            전기 대비
-                                            <span id="calcAmt">0% </span>
-                                            <span class="img"></span>
+                                        <div id="calcView">
+                                            <div class="col-12 redText down">
+                                                전기 대비
+                                                <span id="calcAmt">0% </span>
+                                                <span class="img"></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -273,14 +274,12 @@ class = "login_none" 제거 및 추가
     var dataTypeNum_sub = 1;
     var admGbNum = 1;
     var admGbNum_sub = 1;
-    var upjongGbNum = 1;
-    var upjongGbNum_sub = 1;
     var dateTypeNum = 1;
     var dateTypeNum_sub = 1;
     var admiCd = '';
+    var tmpAdmiCd = '';
     var admiCd_sub = '';
-    var upjongCd = '';
-    var upjongCd_sub = '';
+    var tmpAdmiCd_sub = '';
     var startDate = '';
     var startDate_sub = '';
     var endDate = '';
@@ -290,21 +289,16 @@ class = "login_none" 제거 및 추가
 
     $(function() {
         var param = {};
-        getAjax("getUpjongChgRate", "/agile/vacancy/getDepositList",param, fn_depositDiff, fn_error);
+        getAjax("getDepositList", "/agile/vacancy/getDepositList",param, fn_depositDiff, fn_error,null,null,true);
         setAreaList(1,null,'vacancy');
-        setUpjongList(2);
         setDateList(1,'vacancy');
         setAreaList_sub(1,null,'vacancy');
-        setUpjongList_sub(2);
         setDateList_sub(1,'vacancy');
         setDateInfo();
-        $("#upjong1").attr('disabled',true);
-        $("#upjong1_2").attr('disabled',true);
-
+        $("#calcView").hide();
         //초기 상단문구 세팅
         $("#type_nm").text($('#dataType option:selected').text())
         $("#admi_nm").text('전국')
-        $("#upjong_nm").text($('#upjong1 option:selected').text())
 
         //-------------------------------------------- 상단 선택 항목
         // 주제 선택 이벤트
@@ -315,19 +309,6 @@ class = "login_none" 제거 및 추가
             dataTypeNum = $(this).val();
             // console.log($('#dateType').children('option:last').val())
             // console.log(dataTypeNum);
-            // if(dataTypeNum == 1){
-            //     console.log('외식 데이터 선택');
-            //     reset_select(0);
-            //     if($('#dateType').children('option:last').val() == 5){
-            //         $('#dateType').children('option:last').remove();
-            //     }
-            //     $("#area_admi").attr('disabled',false);
-            //     $("#upjong2").attr('disabled',false);
-            //     $("#upjong3").attr('disabled',false);
-            //     change_colType($(this).val(),true);
-            //     $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon03.svg'});
-            //
-            // }
         });
         // 지역 선택 이벤트
         $("#area_mega").on("change", function(){
@@ -337,6 +318,7 @@ class = "login_none" 제거 및 추가
             if($(this).val() != 0){
                 setAreaList(2,$(this).val(),'vacancy');
                 admiCd = $(this).val();
+                tmpAdmiCd = $(this).val().substring(0,2);
             }else{
                 reset_select(1);
                 admiCd = '';
@@ -348,8 +330,13 @@ class = "login_none" 제거 및 추가
             // $("#admi_nm").text($('#area_cty option:selected').text());
             // //selected value
             // setAreaList(3,$(this).val(),'vacancy');
-            admiCd = $(this).val();
-            admGbNum = 2;
+            if($(this).val() != 0){
+                admiCd = $(this).val();
+                admGbNum = 2;
+            }else{
+                admiCd = tmpAdmiCd;
+                admGbNum = 1;
+            }
         });
 
         //날짜 선택 이벤트
@@ -361,10 +348,24 @@ class = "login_none" 제거 및 추가
         });
         $("#startDate").on("change", function(){
             //selected value
+            if(endDate != 0){
+                if($(this).val() > endDate ){
+                    alert("시작일을 종료일 이전으로 선택해주시기 바랍니다.");
+                    $("#startDate option:eq(0)").prop("selected", true); //첫번째 option 선택
+                    return;
+                }
+            }
             startDate = $(this).val();
         });
         $("#endDate").on("change", function(){
             //selected value
+            if(startDate != 0){
+                if($(this).val() < startDate){
+                    alert("종료일을 시작일 이후으로 선택해주시기 바랍니다.");
+                    $("#endDate option:eq(0)").prop("selected", true); //첫번째 option 선택
+                    return;
+                }
+            }
             endDate = $(this).val();
         });
         $("#search").on("click", function(){
@@ -379,10 +380,8 @@ class = "login_none" 제거 및 추가
                 return;
             }
             param.admGb = admGbNum;
-            param.upjongType = upjongGbNum;
             param.dateType = dateTypeNum;
             if(!(admiCd == '' || admiCd == 0 || admiCd == null)) param.areaCd = admiCd;
-            // if(!(upjongCd == '' || upjongCd == 0 || upjongCd == null)) param.upjongCd = upjongCd;
             if(!(startDate == '' || startDate == 0 || startDate == null)) param.dateStart = startDate;
             if(!(endDate == '' || endDate == 0 || endDate == null)) param.dateEnd = endDate;
             dataTypeNum = $("#dataType").val();
@@ -402,8 +401,6 @@ class = "login_none" 제거 및 추가
                 reset_select(0);
                 console.log('외식 데이터 선택');
                 $("#area_admi_2").attr('disabled',false);
-                $("#upjong2_2").attr('disabled',false);
-                $("#upjong3_2").attr('disabled',false);
                 change_colType($(this).val(),false);
             }
         });
@@ -414,6 +411,7 @@ class = "login_none" 제거 및 추가
             if($(this).val() != 0){
                 setAreaList_sub(2,$(this).val(),'vacancy');
                 admiCd_sub = $(this).val();
+                tmpAdmiCd_sub = $(this).val().substring(0,2);
             }else{
                 reset_select(1);
                 admiCd_sub = '';
@@ -425,8 +423,13 @@ class = "login_none" 제거 및 추가
             // console.log('#area_cty_2 : '+$(this).val())
             // //selected value
             // setAreaList_sub(3,$(this).val());
-            admiCd_sub = $(this).val();
-            admGbNum_sub = 2;
+            if($(this).val() != 0){
+                admiCd_sub = $(this).val();
+                admGbNum_sub = 2;
+            }else{
+                admiCd_sub = tmpAdmiCd_sub;
+                admGbNum_sub = 1;
+            }
         });
 
 
@@ -438,10 +441,24 @@ class = "login_none" 제거 및 추가
         });
         $("#startDate_2").on("change", function(){
             //selected value
+            if(endDate_sub != 0){
+                if($(this).val() > endDate_sub ){
+                    alert("시작일을 종료일 이전으로 선택해주시기 바랍니다.");
+                    $("#startDate_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+                    return;
+                }
+            }
             startDate_sub = $(this).val();
         });
         $("#endDate_2").on("change", function(){
             //selected value
+            if(startDate_sub != 0){
+                if($(this).val() < startDate_sub){
+                    alert("종료일을 시작일 이후으로 선택해주시기 바랍니다.");
+                    $("#endDate_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+                    return;
+                }
+            }
             endDate_sub = $(this).val();
         });
         $("#search_2").on("click", function(){
@@ -457,10 +474,8 @@ class = "login_none" 제거 및 추가
             }
 
             param.admGb = admGbNum_sub;
-            param.upjongType = upjongGbNum_sub;
             param.dateType = dateTypeNum_sub;
             if(!(admiCd_sub == '' || admiCd_sub == 0 || admiCd_sub == null)) param.areaCd = admiCd_sub;
-            // if(!(upjongCd_sub == '' || upjongCd_sub == 0 || upjongCd_sub == null)) param.upjongCd = upjongCd_sub;
             if(!(startDate_sub == '' || startDate_sub == 0 || startDate_sub == null)) param.dateStart = startDate_sub;
             if(!(endDate_sub == '' || endDate_sub == 0 || endDate_sub == null)) param.dateEnd = endDate_sub;
 
@@ -476,6 +491,7 @@ class = "login_none" 제거 및 추가
 
         //-------------------------------------------- 설정 동기화 항목
         $('#setting_btn').on("click",function(){
+            loadingBar2(true);
 
             //주제 동기화
             // $("#dataType_2 option:eq("+$("#dataType option").index($("#dataType option:selected"))+")").prop("selected", true); //첫번째 option 선택
@@ -504,6 +520,9 @@ class = "login_none" 제거 및 추가
             if($("#dataType option").index($("#dataType option:selected")) == 0){
                 $("#colType6_2").val($('#colType6').val()).trigger("change");
             }
+            setTimeout(function(){
+                loadingBar2(false);
+            },3500);
         })
         //-------------------------------------------- 설정 동기화 항목
     });
@@ -594,7 +613,7 @@ class = "login_none" 제거 및 추가
         <tr>
             <th>행정동</th>
             <th>전월대비<br>증감율</th>
-            <th>평균 보증금<br><span>천 원/월</span></th>
+            <th>평균 보증금<br><span>천원/평</span></th>
         </tr>
         {{#each this}}
         <tr>

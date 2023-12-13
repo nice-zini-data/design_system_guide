@@ -23,7 +23,7 @@ request.setCharacterEncoding("euc-kr");
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>Kingmaker</title>
+<title>외식통계조회 시스템</title>
 
 <!-- css 모음 -->
 <%@ include file="/WEB-INF/views/eatout/include/head.jsp"%>
@@ -170,7 +170,7 @@ html, body {
 						if(this.checked){//checked 처리된 항목의 값
 							// alert(this.value);
 							fileInfo.fileNo = this.value;
-							getAjax("setFileDelete", "/file/setFileDelete", fileInfo, fn_list,fn_error, null,false);
+							getAjax("setFileDelete", "/file/setFileDelete", fileInfo, fn_list,fn_error, null,false,true);
 						}
 					});
 					console.log('삭제 후 페이지 호출')
@@ -215,7 +215,7 @@ html, body {
 						uploadParam.filePath = tmpdata.filePath;
 						uploadParam.fileInfo = $('#fileInfoTxt').val();
 						console.log(uploadParam)
-						getAjax("setFileUpload", "/file/setFileUpload", uploadParam,fn_upload,fn_error,'POST');
+						getAjax("setFileUpload", "/file/setFileUpload", uploadParam,fn_upload,fn_error,'POST',true);
 						console.log('파일업로드 성공?')
 						console.log(response);
 					}
@@ -258,7 +258,7 @@ html, body {
 		// data.cjCode = strCjCode;
 
 		// console.log(data);
-		getAjax("getFileList", "/getFileList", data, fn_list,fn_error);
+		getAjax("getFileList", "/getFileList", data, fn_list,fn_error,null,null,true);
 
 	}
 

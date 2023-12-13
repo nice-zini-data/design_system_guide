@@ -268,6 +268,8 @@ common.upAndDownClass = function(value){
         result = 'up';
     }else if(Number(value) < 0){
         result = 'down';
+    }else{
+        result = '';
     }
     return result;
 }

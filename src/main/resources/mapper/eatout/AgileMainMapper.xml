@@ -4,7 +4,7 @@
 
 
     <select id="getYyyymm" resultType="String">
-        select max(yyyymm) as yyyymm from tbss_ag_sum_sales_mega_his
+        select max(yyyymm) as yyyymm from cmapap.tbss_ag_sum_sales_mega_his
     </select>
 
     <select id="getAdmiList" resultType="com.zinidata.eatout.vo.output.AgileAdmiOutVO">
@@ -19,15 +19,19 @@
             c.admi_cd as area_cd, c.admi_nm as area_nm
         </if>
         from
-            tbadm_mega a, tbadm_cty b, tbadm_admi c
+            cmapap.tbadm_mega a, cmapap.tbadm_cty b, cmapap.tbadm_admi c
         where 1=1
             and a.mega_cd = b.mega_cd
             and b.cty_cd = c.cty_cd
+            and a.scss_date is null
+            and c.scss_date is null
+            and b.scss_date is null
         <if test='admGb == "2"'>
             and a.mega_cd = #{areaCd}
         </if>
         <if test='admGb == "3"'>
             and b.cty_cd = #{areaCd}
+            and c.admi_cd not like '%0000'
         </if>
         group by
             1,2
@@ -48,10 +52,16 @@
             b.upjong2_cd as upjong_cd, b.upjong2_nm as upjong_nm
         </if>
         <if test='upjongType == "3"'>
-            c.upjong3_cd as upjong_cd, c.upjong3_nm as upjong_nm
+            c.upjong3_cd as upjong_cd,
+            case when upjong3_cd = 'Q01004' then '포장마차'
+                when upjong3_cd = 'Q04006' then '일본식 양고기'
+                when upjong3_cd = 'Q08001' then '기타 유흥주점'
+                when upjong3_cd = 'Q08002' then '단란주점'
+                when upjong3_cd = 'Q08003' then 'Bar/카페'
+                else c.upjong3_nm end as upjong_nm
         </if>
         from
-            tb_upjong1 a, tb_upjong2 b, tb_upjong3 c
+            cmapap.tb_upjong1 a, cmapap.tb_upjong2 b, cmapap.tb_upjong3 c
         where 1=1
             and a.upjong1_cd = b.upjong1_cd
             and b.upjong2_cd = c.upjong2_cd
@@ -62,8 +72,9 @@
             and c.upjong2_cd = #{upjongCd}
         </if>
             and c.svc_yn = 'Y'
+            and c.upjong3_cd not in ('Q02004','Q08002','Q08004')
         group by
-        1,2
+            1,2
         order by
         <if test='upjongType == "2"'>
             b.upjong2_cd
@@ -103,16 +114,16 @@
                 , to_char(yyyymm,'YYYYMM') as yyyymm
             from
                 <if test='dataType == "1"'>
-                    generate_series(to_date(((select min(yyyymm) from tbss_ag_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_ag_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his),'YYYYMM'),'1 month') yyyymm
                </if>
                 <if test='dataType == "2"'>
-                    generate_series(to_date(((select min(yyyymm) from tbkb_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbkb_sum_sales_mega_his),'YYYYMM'),'1 week') yyyymm
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbkb_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbkb_sum_sales_mega_his),'YYYYMM'),'1 month') yyyymm
                 </if>
                 <if test='dataType == "4"'>
-                    generate_series(to_date(((select min(yyyymm) from tbpop_livi_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbpop_livi_mega_his),'YYYYMM'),'1 week') yyyymm
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_livi_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_livi_mega_his),'YYYYMM'),'1 month') yyyymm
                 </if>
                 <if test='dataType == "5"'>
-                    generate_series(to_date(((select min(yyyymm) from tbpop_hous_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbpop_hous_mega_his),'YYYYMM'),'1 week') yyyymm
+                    generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_hous_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_hous_mega_his),'YYYYMM'),'1 month') yyyymm
                 </if>
             order by
                 yyyymm desc
@@ -135,56 +146,60 @@
         <if test='dataType == "3"'>
             select
                 <if test='dateType == "1"'>
-                    substring(a.sale_mm,1,4) as date
-                    ,concat(substring(a.sale_mm,1,4),'년') as date_nm
+                    year as date
+                    ,concat(year,'년') as date_nm
                 </if>
                 <if test='dateType == "2"'>
                 <![CDATA[
-                    concat(substring(a.sale_mm,1,4),case when date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp) <= 2 then 1 else 2 end) as date
-                    ,concat(substring(a.sale_mm,1,4),'년',case when date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp) <= 2 then '전' else '후' end,'반기') as date_nm
+                    concat(year,case when date_part('QUARTER',to_date(yyyymm,'YYYYMM')::timestamp) <= 2 then 1 else 2 end) as date
+                    ,concat(year,'년',case when date_part('QUARTER',to_date(yyyymm,'YYYYMM')::timestamp) <= 2 then '전' else '후' end,'반기') as date_nm
                 ]]>
                 </if>
                 <if test='dateType == "3"'>
-                    concat(substring(a.sale_mm,1,4),date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp)) as date
-                    ,concat(substring(a.sale_mm,1,4),'년',date_part('QUARTER',to_date(sale_mm,'YYYYMM')::timestamp),'분기') as date_nm
+                    concat(year,date_part('QUARTER',to_date(yyyymm,'YYYYMM')::timestamp)) as date
+                    ,concat(year,'년',date_part('QUARTER',to_date(yyyymm,'YYYYMM')::timestamp),'분기') as date_nm
                 </if>
                 <if test='dateType == "4"'>
-                    sale_mm as date
-                    ,concat(substring(a.sale_mm,1,4),'년',substring(a.sale_mm,5,6),'월') as date_nm
+                    yyyymm as date
+                    ,concat(substring(a.yyyymm,1,4),'년',substring(a.yyyymm,5,6),'월') as date_nm
                 </if>
                 <if test='dateType == "5"'>
-                    sale_mm || week as date
-                    ,concat(substring(a.sale_mm,1,4),'년',substring(a.sale_mm,5,6),'월', a.week,'주차') as date_nm
+                    concat(yyyymm,week) as date
+                    ,concat(substring(a.yyyymm,1,4),'년 ',substring(a.yyyymm,5,2),'월 ', week,'주차') as date_nm
                 </if>
             from
-                tbagile_pos_info a
+                cmapap.tbagile_pos_date a
             group by
                 1,2
             order by
-                1 desc
+                1
         </if>
     </select>
     <select id="getMenuList" resultType="com.zinidata.eatout.vo.output.AgileMenuOutVO">
         select
             <if test='menuType == "1"'>
-                a.menu1_cd,a.menu1_nm
+                a.menu1_cd as menu_cd,a.menu1_nm as menu_nm
             </if>
             <if test='menuType == "2"'>
-                b.menu2_cd, b.menu2_nm
+                b.menu2_cd as menu_cd, b.menu2_nm as menu_nm
              </if>
             <if test='menuType == "3"'>
-                c.menu3_cd, c.menu3_nm
+                c.menu3_cd as menu_cd, c.menu3_nm as menu_nm
             </if>
-        from tb_menu1 a, tb_menu2 b, tb_menu3 c
+        from cmapap.tb_menu1 a, cmapap.tb_menu2 b, cmapap.tb_menu3 c
         where 1=1
             and a.menu1_cd = b.menu1_cd
             and b.menu2_cd = c.menu2_cd
-            <if test='menuType == "1"'>
-                a.menu1_cd = #{menuCd}
-            </if>
             <if test='menuType == "2"'>
-                b.menu2_cd = #{menuCd}
+            and a.menu1_cd = #{menuCd}
             </if>
+            <if test='menuType == "3"'>
+            and b.menu2_cd = #{menuCd}
+            </if>
+        group by
+            1,2
+        order by
+            1
     </select>
     <select id="getMainInfo" resultType="com.zinidata.eatout.vo.output.AgileMainOutVO">
         with tmp_date as(
@@ -219,7 +234,7 @@
                     row_number() over(order by year desc, quarter desc) as row, year, quarter
                     ,sum(a.sale_amt) as sale_amt
                 from
-                    tbss_ag_sum_sales_mega_his a, tmp_date b
+                    cmapap.tbss_ag_sum_sales_mega_his a, tmp_date b
                 where 1=1
                     and a.yyyymm = b.yyyymm
                 group by

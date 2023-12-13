@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/eatout/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/eatout/include/script.jsp" %>
 <script>
-	document.title = "Kingmaker 로그인";
+	document.title = "외식통계조회 시스템";
 </script>
 
 <style type="text/css">

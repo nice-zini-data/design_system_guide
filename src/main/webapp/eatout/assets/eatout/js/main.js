@@ -29,10 +29,13 @@ function menuActive(navbar, side, url){
 }
 
 function fn_error(response) {
-    // console.log(response);
-    // console.log('error');
     loadingBar(false);
-
+    $('#maxYyyymm').text('');
+    $('#minYyyymm').text('');
+    $('#maxVal').text('0');
+    $('#minVal').text('0');
+    $('#maxText').text('원');
+    $('#minText').text('원');
     $(".mem_nm").text("로그인");
     if(response.status == 403){
         alert("로그인 정보가 없습니다");
@@ -79,14 +82,14 @@ function setAreaList(admGb,areaCd,typeCd){
     var param = {};
     param.admGb = admGb;
     tmpadmiVal = admGb;
-    param.areaCd = areaCd;
-    // console.log(typeCd);
+    if(areaCd != null){
+        param.areaCd = areaCd;
+    }
     if(typeCd == undefined){
         typeCd = 'main'
     }
     typeCdTmp = typeCd;
-    // console.log(typeCd);
-    getAjax("getAdmiList", "/agile/"+typeCd+"/getAdmiList",param, fn_setArea, fn_error);
+    getAjax("getAdmiList", "/agile/"+typeCd+"/getAdmiList",param, fn_setArea, fn_error,null,null,true);
 }
 function fn_setArea(id, response, param) {
     var html = '';
@@ -96,10 +99,13 @@ function fn_setArea(id, response, param) {
     });
 
     if(tmpadmiVal == 1){
+        $("#area_mega").children('option:not(:first)').remove();
         $("#area_mega").append(html);
     }else if(tmpadmiVal == 2){
+        $("#area_cty").children('option:not(:first)').remove();
         $("#area_cty").append(html);
     }else if(tmpadmiVal == 3){
+        $("#area_admi").children('option:not(:first)').remove();
         $("#area_admi").append(html);
     }
 }
@@ -111,7 +117,7 @@ function setUpjongList(upjongType,upjongCd){
     param.upjongType = upjongType;
     tmpupjongVal = upjongType;
     param.upjongCd = upjongCd;
-    getAjax("getUpjongList", "/agile/main/getUpjongList",param, fn_setUpjong, fn_error);
+    getAjax("getUpjongList", "/agile/main/getUpjongList",param, fn_setUpjong, fn_error,null,null,true);
 }
 function fn_setUpjong(id, response, param) {
     var html = '';
@@ -122,32 +128,59 @@ function fn_setUpjong(id, response, param) {
     });
 
     if(tmpupjongVal == 2){
+        $("#upjong2").children('option:not(:first)').remove();
         $("#upjong2").append(html);
     }else if(tmpupjongVal == 3){
+        $("#upjong3").children('option:not(:first)').remove();
         $("#upjong3").append(html);
     }
 }
 //------------------------ 업종 선택 리스트 기능 END ----------------------------------------
+//------------------------ 메뉴 선택 리스트 기능 START ----------------------------------------
+var tmpMenuVal = 1;
+function setMenuList(menuType,menuCd){
+    var param = {};
+    param.MenuType = menuType;
+    tmpMenuVal = menuType;
+    param.MenuCd = menuCd;
+    getAjax("getMenuList", "/agile/main/getMenuList",param, fn_setMenu, fn_error,null,null,true);
+}
+function fn_setMenu(id, response, param) {
+    var html = '';
+
+    response.data.forEach(function (val, idx){
+        html += '<option value="' + val.menuCd + '" data-areaCd="'+val.menuCd+'">' + val.menuNm + '</option>';
+    });
+
+    if(tmpMenuVal == 2){
+        $('#menu2').children('option:not(:first)').remove();
+        $("#menu2").append(html);
+    }else if(tmpMenuVal == 3){
+        $('#menu3').children('option:not(:first)').remove();
+        $("#menu3").append(html);
+    }else{
+        $('#menu1').children('option:not(:first)').remove();
+        $("#menu1").append(html);
+    }
+}
+//------------------------ 메뉴 선택 리스트 기능 END ----------------------------------------
 //------------------------ 날짜 선택 리스트 기능 START ----------------------------------------
 function setDateList(dateType,typeCd){
     var param = {};
     param.dateType = dateType;
     dateTypeNum = dateType;
     typeCdTmp = typeCd;
-    // console.log('dataTypeNum : '+dataTypeNum);
     param.dataType = dataTypeNum;
     if(typeCd == undefined){
         typeCd = 'main'
     }
-    getAjax("getUpjongList", "/agile/"+typeCd+"/getDateList",param, fn_setDate, fn_error);
+    getAjax("getUpjongList", "/agile/"+typeCd+"/getDateList",param, fn_setDate, fn_error,null,null,true);
 }
 function fn_setDate(id, response, param) {
     var html = '';
     //화면 초기화
     $('#startDate').children('option:not(:first)').remove();
     $('#endDate').children('option:not(:first)').remove();
-    // console.log('fn_setDate');
-    // console.log(response);
     response.data.forEach(function (val, idx){
         var tmpdate = '';
         if(dateTypeNum != 1) {
@@ -183,7 +216,7 @@ function setAreaList_sub(admGb,areaCd,typeCd){
     param.admGb = admGb;
     tmpadmiVal = admGb;
     param.areaCd = areaCd;
-    getAjax("getAdmiList", "/agile/"+typeCd+"/getAdmiList",param, fn_setArea_sub, fn_error);
+    getAjax("getAdmiList", "/agile/"+typeCd+"/getAdmiList",param, fn_setArea_sub, fn_error,null,null,true);
 }
 function fn_setArea_sub(id, response, param) {
     var html = '';
@@ -195,8 +228,10 @@ function fn_setArea_sub(id, response, param) {
     if(tmpadmiVal == 1){
         $("#area_mega_2").append(html);
     }else if(tmpadmiVal == 2){
+        $('#area_cty_2').children('option:not(:first)').remove();
         $("#area_cty_2").append(html);
     }else if(tmpadmiVal == 3){
+        $('#area_admi_2').children('option:not(:first)').remove();
         $("#area_admi_2").append(html);
     }
 }
@@ -208,7 +243,7 @@ function setUpjongList_sub(upjongType,upjongCd){
     param.upjongType = upjongType;
     tmpupjongVal = upjongType;
     param.upjongCd = upjongCd;
-    getAjax("getUpjongList", "/agile/main/getUpjongList",param, fn_setUpjong_sub, fn_error);
+    getAjax("getUpjongList", "/agile/main/getUpjongList",param, fn_setUpjong_sub, fn_error,null,null,true);
 }
 function fn_setUpjong_sub(id, response, param) {
     var html = '';
@@ -218,24 +253,53 @@ function fn_setUpjong_sub(id, response, param) {
     });
 
     if(tmpupjongVal == 2){
+        $("#upjong2_2").children('option:not(:first)').remove();
         $("#upjong2_2").append(html);
     }else if(tmpupjongVal == 3){
+        $('#upjong3_2').children('option:not(:first)').remove();
         $("#upjong3_2").append(html);
     }
 }
 //------------------------ 업종 선택 리스트 기능 END ----------------------------------------
+//------------------------ 메뉴 선택 리스트 기능 START ----------------------------------------
+var tmpMenuVal = 1;
+function setMenuList_sub(menuType,menuCd){
+    var param = {};
+    param.MenuType = menuType;
+    tmpMenuVal = menuType;
+    param.MenuCd = menuCd;
+    getAjax("getMenuList", "/agile/main/getMenuList",param, fn_setMenu_sub, fn_error,null,null,true);
+}
+function fn_setMenu_sub(id, response, param) {
+    var html = '';
+
+    response.data.forEach(function (val, idx){
+        html += '<option value="' + val.menuCd + '" data-areaCd="'+val.menuCd+'">' + val.menuNm + '</option>';
+    });
+
+    if(tmpMenuVal == 2){
+        $("#menu2_2").children('option:not(:first)').remove();
+        $("#menu2_2").append(html);
+    }else if(tmpMenuVal == 3){
+        $("#menu3_2").children('option:not(:first)').remove();
+        $("#menu3_2").append(html);
+    }else{
+        $("#menu1_2").children('option:not(:first)').remove();
+        $("#menu1_2").append(html);
+    }
+}
+//------------------------ 메뉴 선택 리스트 기능 END ----------------------------------------
 //------------------------ 날짜 선택 리스트 기능 START ----------------------------------------
 function setDateList_sub(dateType,typeCd){
     var param = {};
     param.dateType = dateType;
     dateTypeNum_sub = dateType;
     typeCdSubTmp = typeCd
-    // console.log('dataTypeNum_sub : '+dateTypeNum_sub);
     param.dataType = dataTypeNum_sub;
     if(typeCd == undefined){
         typeCd = 'main'
     }
-    getAjax("getUpjongList", "/agile/"+typeCd+"/getDateList",param, fn_setDate_sub, fn_error);
+    getAjax("getUpjongList", "/agile/"+typeCd+"/getDateList",param, fn_setDate_sub, fn_error,null,null,true);
 }
 function fn_setDate_sub(id, response, param) {
     var html = '';
@@ -246,7 +310,7 @@ function fn_setDate_sub(id, response, param) {
     response.data.forEach(function (val, idx){
         var tmpdate = '';
         if(dateTypeNum_sub != 1) {
-            if(typeCdSubTmp == 'vacancy' || dateTypeNum_sub == '3'){
+            if(typeCdSubTmp == 'vacancy' || dataTypeNum_sub == '3'){
                 tmpdate = val.date
             }else{
                 tmpdate = val.dateNm.substring(0, 4) + val.date
@@ -274,17 +338,17 @@ function main_search(dataType,param){
     // }
     // 파라메터 정상입력되었을 경우 데이터 URL 호출
     if(dataType == 1){
-        getAjax("getUpjongList", "/agile/statistics/getOuteatList",param, fn_makechart, fn_error);
+        getAjax("getUpjongList", "/agile/statistics/getOuteatList",param, fn_makechart, fn_error,null,null,true);
     }else if(dataType == 2){
-        getAjax("getUpjongList", "/agile/statistics/getDeliveryList",param, fn_makechart, fn_error);
+        getAjax("getUpjongList", "/agile/statistics/getDeliveryList",param, fn_makechart, fn_error,null,null,true);
     }else if(dataType == 3){
-        getAjax("getPosList", "/agile/statistics/getPosList",param, fn_makechart, fn_error);
+        getAjax("getPosList", "/agile/statistics/getPosList",param, fn_makechart, fn_error,null,null,true);
     }else if(dataType == 4){
-        getAjax("getUpjongList", "/agile/statistics/getLiviList",param, fn_makechart, fn_error);
+        getAjax("getUpjongList", "/agile/statistics/getLiviList",param, fn_makechart, fn_error,null,null,true);
     }else if(dataType == 5){
-        getAjax("getUpjongList", "/agile/statistics/getHousList",param, fn_makechart, fn_error);
+        getAjax("getUpjongList", "/agile/statistics/getHousList",param, fn_makechart, fn_error,null,null,true);
     }else if(dataType == 6){
-        getAjax("getVacancyList", "/agile/vacancy/getVacancyList",param, fn_makechart, fn_error);
+        getAjax("getVacancyList", "/agile/vacancy/getVacancyList",param, fn_makechart, fn_error,null,null,true);
     }else{
         alert('주제가 잘못 선택되었습니다. \n관리자에게 문의하시기 바랍니다.')
     }
@@ -292,86 +356,44 @@ function main_search(dataType,param){
 //------------------------ 메인 화면 검색 -----------------------------------------
 
 //------------------------ 메뉴초기화 ---------------------------------------
-function reset_select(type){
+function reset_select(type,subType){
     if(type == 1){
         if(searchType==0){
-            $('#area_cty').children('option:not(:first)').remove();
-            $('#area_admi').children('option:not(:first)').remove();
-            admiCd = null;
-            // areaCd = null;
-        }else{
-            $('#area_cty_2').children('option:not(:first)').remove();
-            $('#area_admi_2').children('option:not(:first)').remove();
-            admiCd_sub = null;
-            // areaCd = null;
-        }
-    }else if(type == 2){
-        // $('#upjong2').children('option:not(:first)').remove();
-        if(searchType==0){
-            $("#upjong2 option:eq(0)").prop("selected", true); //첫번째 option 선택
-            $('#upjong3').children('option:not(:first)').remove();
-            upjongCd = null;
-        }else{
-            $("#upjong2_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
-            $('#upjong3_2').children('option:not(:first)').remove();
-            upjongCd_sub = null;
-        }
-    }else if(type == 3){
-        if(searchType==0){
-            $('#startDate').children('option:not(:first)').remove();
-            $('#endDate').children('option:not(:first)').remove();
-            startDate = 0;
-            endDate = 0;
-        }else{
-            $('#startDate_2').children('option:not(:first)').remove();
-            $('#endDate_2').children('option:not(:first)').remove();
-            startDate_sub = 0;
-            endDate_sub = 0;
-        }
-    }else if(type == 0){
-        if(!settingCheck){
-            if(searchType == 0){
+            if(subType == 1){
                 $('#area_cty').children('option:not(:first)').remove();
+            }else if(subType == 2){
                 $('#area_admi').children('option:not(:first)').remove();
-                // $('#upjong2').children('option:not(:first)').remove();
-                $("#upjong2 option:eq(0)").prop("selected", true); //첫번째 option 선택
-                $('#upjong3').children('option:not(:first)').remove();
-                $('#startDate').children('option:not(:first)').remove();
-                $('#endDate').children('option:not(:first)').remove();
             }else{
-                $('#area_cty_2').children('option:not(:first)').remove();
-                $('#area_admi_2').children('option:not(:first)').remove();
-                // $('#upjong2').children('option:not(:first)').remove();
-                $("#upjong2_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
-                $('#upjong3_2').children('option:not(:first)').remove();
-                $('#startDate_2').children('option:not(:first)').remove();
-                $('#endDate_2').children('option:not(:first)').remove();
             }
-        }
-    }
-}
-function reset_select(type){
-    if(type == 1){
-        if(searchType==0){
-            $('#area_cty').children('option:not(:first)').remove();
-            $('#area_admi').children('option:not(:first)').remove();
             admiCd = null;
             // areaCd = null;
         }else{
-            $('#area_cty_2').children('option:not(:first)').remove();
-            $('#area_admi_2').children('option:not(:first)').remove();
+            if(subType == 1){
+                $('#area_cty_2').children('option:not(:first)').remove();
+            }else if(subType == 2){
+                $('#area_admi_2').children('option:not(:first)').remove();
+            }else{
+            }
             admiCd_sub = null;
             // areaCd = null;
         }
     }else if(type == 2){
         // $('#upjong2').children('option:not(:first)').remove();
         if(searchType==0){
-            $("#upjong2 option:eq(0)").prop("selected", true); //첫번째 option 선택
-            $('#upjong3').children('option:not(:first)').remove();
+            if(subType == 1){
+                $("#upjong2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+            }else if(subType == 2){
+                $('#upjong3').children('option:not(:first)').remove();
+            }else{
+            }
             upjongCd = null;
         }else{
-            $("#upjong2_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
-            $('#upjong3_2').children('option:not(:first)').remove();
+            if(subType == 1){
+                $("#upjong2_2 option:eq(0)").prop("selected", true); //첫번째 option 선택
+            }else if(subType == 2){
+                $('#upjong3_2').children('option:not(:first)').remove();
+            }else{
+            }
             upjongCd_sub = null;
         }
     }else if(type == 3){
@@ -385,6 +407,22 @@ function reset_select(type){
             $('#endDate_2').children('option:not(:first)').remove();
             startDate_sub = 0;
             endDate_sub = 0;
+        }
+    }else if(type == 4){
+        if(searchType==0){
+            if(subType == 1){
+                $('#menu2').children('option:not(:first)').remove();
+            }else if(subType == 2){
+                $('#menu3').children('option:not(:first)').remove();
+            }else{
+            }
+        }else{
+            if(subType == 1){
+                $('#menu2_2').children('option:not(:first)').remove();
+            }else if(subType == 2){
+                $('#menu3_2').children('option:not(:first)').remove();
+            }else{
+            }
         }
     }else if(type == 0){
         if(!settingCheck){
@@ -431,8 +469,130 @@ function change_colType(type,check){
 
 
 // 메인화면 그래프 생성
-function fn_makechart(id, response, param){
-    // console.log(response);
+function fn_makechart(id, response, param) {
+
+    if (response.data.length < 1) {
+        $('#maxYyyymm').text('');
+        $('#minYyyymm').text('');
+        $('#maxVal').text('0');
+        $('#minVal').text('0');
+        $('#maxText').text('원');
+        $('#minText').text('원');
+        $('#calcDateType').text('')
+        $('#calcAmt').text('0%')
+        $('#calcAmt').parent().removeClass($('#calcAmt').parent().attr('class').split(' ')[2]);
+        alert('선택하신 조건에 데이터가 없습니다. \n조건을 상위지역 혹은 상위 업종으로\n 선택 후 다시 진행해주시기 바랍니다.');
+    }
+
+    let tmpColIdVal = [];
+    let tmpColSelVal = [];
+    let list = $("select[id^='colType']").map( function() {
+        if(this.style.display == 'block'){
+            for(let i = 0; i < this.children.length; i++){
+                if(this.children[i].selected == true){
+                    tmpColIdVal.push(this.id);
+                    tmpColSelVal.push(this.children[i].value);
+                    return [this.id,this.children[i].value];
+                }
+            }
+        }
+    });
+    //     option:selected"
+    //     //---------------------상단
+        if(tmpColIdVal[0] == 'colType3' || tmpColIdVal[1] == 'colType3_2'){
+            switch (tmpColSelVal[0]) {
+                case 'totSaleAmt':
+                    $('#chartText1').text('[단위 : 만 원]');
+                    $('#maxText').text('만원');
+                    $('#minText').text('만원');
+                    break
+                case 'storeCnt':
+                    $('#chartText1').text('[단위 : 개소]');
+                    $('#maxText').text('개소')
+                    $('#minText').text('개소')
+                    break
+                case 'saleQty':
+                    $('#chartText1').text('[단위 : 개]');
+                    $('#maxText').text('개')
+                    $('#minText').text('개')
+                    break
+                default:
+                    $('#chartText1').text('[단위 : 원]');
+                    $('#maxText').text('원')
+                    $('#minText').text('원')
+                    break;
+            };
+            switch (tmpColSelVal[1]) {
+                case 'totSaleAmt':
+                    $('#chartText2').text('[단위 : 만 원]');
+                    break
+                case 'storeCnt':
+                    $('#chartText2').text('[단위 : 개소]');
+                    break
+                case 'saleQty':
+                    $('#chartText2').text('[단위 : 개]');
+                    break
+                default:
+                    $('#chartText2').text('[단위 : 원]');
+                    break;
+            };
+        }else{
+            switch (tmpColSelVal[0]) {
+                case 'saleAmt':
+                    $('#chartText1').text('[단위 : 만 원]');
+                    $('#maxText').text('만원');
+                    $('#minText').text('만원');
+                    break
+                case 'storeAmt':
+                    $('#chartText1').text('[단위 : 만 원]');
+                    $('#maxText').text('만원');
+                    $('#minText').text('만원');
+                    break
+                case 'storeCnt':
+                    $('#chartText1').text('[단위 : 개소]');
+                    $('#maxText').text('개소')
+                    $('#minText').text('개소')
+                    break
+                case 'useCnt':
+                    $('#chartText1').text('[단위 : 개]');
+                    $('#maxText').text('개')
+                    $('#minText').text('개')
+                    break
+                case 'useAmt':
+                    $('#chartText1').text('[단위 : 원]');
+                    $('#maxText').text('원')
+                    $('#minText').text('원')
+                    break
+                default:
+                    $('#chartText1').text('[단위 : 명]');
+                    $('#maxText').text('명')
+                    $('#minText').text('명')
+                    break;
+            };
+
+            switch (tmpColSelVal[1]) {
+                case 'saleAmt':
+                    $('#chartText2').text('[단위 : 만 원]');
+                    break
+                case 'storeAmt':
+                    $('#chartText2').text('[단위 : 만 원]');
+                    break
+                case 'storeCnt':
+                    $('#chartText2').text('[단위 : 개소]');
+                    break
+                case 'useCnt':
+                    $('#chartText2').text('[단위 : 개]');
+                    break
+                case 'useAmt':
+                    $('#chartText2').text('[단위 : 원]');
+                    break
+                default:
+                    $('#chartText2').text('[단위 : 명]');
+                    break;
+            };
+        }
+
+
     var maxVal = 0;
     var minVal = 0;
     var tmpVal = 0;
@@ -446,12 +606,11 @@ function fn_makechart(id, response, param){
     //rpt_chart1
     var resultData = [];
     var resultName = [];
+
+    console.log(tmpSel);
     if(!common.isEmpty(response.data[0])) {
         $.each(response.data,function(index,item){
-            // console.log(item);
             $.each(item,function(key,value) {
-                // console.log(key);
-                // console.log(tmpSel);
                 if(index == (response.data.length -1) && key == tmpSel) tmpThisVal = value;
                 if(index == (response.data.length -2) && key == tmpSel) tmpLastVal = value;
                 if(key == 'yyyymm' || key == 'label'){
@@ -460,7 +619,20 @@ function fn_makechart(id, response, param){
                 }
                 if(searchType == 0){
                     if(key == tmpSel){
-                        tmpVal = value;
+
+                        if(key == 'storeCnt'){
+                            if(value == 1 || value == 2){
+                                resultData.push(value+1);
+                                tmpVal = value+1;
+                            }else{
+                                resultData.push(value);
+                                tmpVal = value;
+                            }
+                        }else{
+                            resultData.push(value);
+                            tmpVal = value;
+                        }
+
                         //결과 최대,최소값 데이터 추출
                         maxVal = Math.max(maxVal,tmpVal);
                         if(maxVal <= value){
@@ -472,36 +644,52 @@ function fn_makechart(id, response, param){
                             minYyyymm = tmpYyyymm;
                         }
                         //-----------------------
-                        resultData.push(value);
+                        // resultData.push(value);
                     }
                 }else{
                     if(key == tmpSel_sub){
-                        resultData.push(value);
+                        if(key == 'storeCnt'){
+                            if(value == 1 || value == 2){
+                                resultData.push(value+1);
+                            }else{
+                                resultData.push(value);
+                            }
+                        }else{
+                           resultData.push(value);
+                        }
                     }
                 }
             });
         });
-        // console.log(resultName);
 
-        $('#calcAmt').parent().removeClass('down');
-        $('#calcAmt').parent().removeClass('up');
-        $('#calcAmt').parent().addClass(common.upAndDownClass(common.round(((tmpThisVal/tmpLastVal)*100)-100,2)));
-        $('#calcAmt').text(common.round(((tmpThisVal/tmpLastVal)*100)-100,2)+'%');
-        $('#calcDateType').text('')
-        if(dateTypeNum == 1){
-            $('#calcDateType').text('전년')
-        }else if(dateTypeNum == 4){
-            $('#calcDateType').text('전월')
-        }else{
-            $('#calcDateType').text('전기')
-        }
         if(searchType == 0){
-            // console.log(maxYyyymm + ' : ' +maxVal);
+            // $('#calcAmt').parent().removeClass('down');
+            // $('#calcAmt').parent().removeClass('up');
+            $('#calcAmt').parent().removeClass($('#calcAmt').parent().attr('class').split(' ')[2]);
+            $('#calcAmt').parent().addClass(common.upAndDownClass(common.round(((tmpThisVal/tmpLastVal)*100)-100,2)));
+            $('#calcAmt').text(common.round(((tmpThisVal/tmpLastVal)*100)-100,2)+'%');
+            $('#calcDateType').text('')
+            if(dateTypeNum == 1){
+                $('#calcDateType').text('전년')
+            }else if(dateTypeNum == 4){
+                $('#calcDateType').text('전월')
+            }else{
+                $('#calcDateType').text('전기')
+            }
+
             $('#maxYyyymm').text(maxYyyymm);
             $('#maxVal').text(common.addComma(maxVal));
-            // console.log(minYyyymm + ' : ' +minVal);
             $('#minYyyymm').text(minYyyymm);
             $('#minVal').text(common.addComma(minVal));
+
+        }
+
+        $("#calcView").show();
+        $(".row .reTop1120").show();
+
+        if(dataTypeNum != 6){
+            $('#upText').text(tmpUpText);
+            $('#downText').text(tmpDownText);
         }
     }
     // rpt_chart1
@@ -510,7 +698,6 @@ function fn_makechart(id, response, param){
         chartDom = document.getElementById("main_chart1");
     }else{
         chartDom = document.getElementById("main_chart2");
-
     }
     var rpt_chart1 = echarts.init(chartDom);
 
@@ -578,8 +765,11 @@ function fn_makechart(id, response, param){
                     textBorderColor:'#fff',
                     fontFamily: 'Pretendard',
                     formatter: function(c){
-                        // console.log(c.data)
-                        return  common.addComma(c.data);
+                        if(Number.isInteger(c.data)){
+                            return  common.addComma(c.data);
+                        }else{
+                            return c.data;
+                        }
                     }
                 },
                 itemStyle:{
@@ -611,13 +801,10 @@ function fn_makechart(id, response, param){
 
     rpt_chart1.setOption(option);
     rpt_chart1.resize();
-
 }
 
 // 시장동향 > 업종선택 시 그래프 생성
 function fn_UpjongDetail(id, response, param){
-
-    // console.log(response);
 
     //rpt_chart1(외식 총매출)
     var resultLabel = [];
@@ -628,9 +815,6 @@ function fn_UpjongDetail(id, response, param){
 
     if(!common.isEmpty(response.data[0])) {
         $.each(response.data,function(index,item){
-            // console.log(index);
-            // console.log(item.yyyymm);
-            // console.log(item.eSaleAmt);
             resultLabel.push(item.yyyymm);
             resultData1.push(item.eSaleAmt);
             resultData2.push(item.dSaleAmt);
@@ -695,7 +879,12 @@ function fn_UpjongDetail(id, response, param){
                     textBorderColor:'#fff',
                     fontFamily: 'Pretendard',
                     formatter: function(c){
-                        return  common.addComma(c.data);
+                        if(Number.isInteger(c.data)){
+                            return  common.addComma(c.data);
+                        }else{
+                            return c.data;
+                        }
+                        // return  common.addComma(c.data);
                     }
                 },
                 itemStyle:{
@@ -779,7 +968,12 @@ function fn_UpjongDetail(id, response, param){
                     textBorderColor:'#fff',
                     fontFamily: 'Pretendard',
                     formatter: function(c){
-                        return  common.addComma(c.data);
+                        if(Number.isInteger(c.data)){
+                            return  common.addComma(c.data);
+                        }else{
+                            return c.data;
+                        }
+                        // return  common.addComma(c.data);
                     }
                 },
                 itemStyle:{
@@ -863,7 +1057,12 @@ function fn_UpjongDetail(id, response, param){
                     textBorderColor:'#fff',
                     fontFamily: 'Pretendard',
                     formatter: function(c){
-                        return  common.addComma(c.data);
+                        if(Number.isInteger(c.data)){
+                            return  common.addComma(c.data);
+                        }else{
+                            return c.data;
+                        }
+                        // return  common.addComma(c.data);
                     }
                 },
                 itemStyle:{
@@ -947,7 +1146,12 @@ function fn_UpjongDetail(id, response, param){
                     textBorderColor:'#fff',
                     fontFamily: 'Pretendard',
                     formatter: function(c){
-                        return  common.addComma(c.data);
+                        if(Number.isInteger(c.data)){
+                            return  common.addComma(c.data);
+                        }else{
+                            return c.data;
+                        }
+                        // return  common.addComma(c.data);
                     }
                 },
                 itemStyle:{

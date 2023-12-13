@@ -58,7 +58,7 @@
                     return;
                 }
                 console.log(param)
-                getAjax("getVacancyList", "/agile/main/getFoundationCalc",param, fn_calcInfo, fn_error);
+                getAjax("getVacancyList", "/agile/main/getFoundationCalc",param, fn_calcInfo, fn_error,null,null,true);
             })
             $('#btn_clear').click(function(){
                 clearVal();
@@ -75,13 +75,15 @@
 
             // 전지역 업종 증감률 리스트
             function fn_calcInfo(id, response, param){
-
                 console.log(response);
                 var template = $('#tmp_calc_diff').html();
                 var templateScript = Handlebars.compile(template);
                 var context = response.data[0];
                 var html = templateScript(context);
                 $('#calc_diff').html(html);
+                $('#calc_diff').show();
+
+                console.log(html);
 
                 $('#btn_success').text("수정");
                 $('.calc_section02').removeClass('disabled');
@@ -107,7 +109,7 @@
                 $('#oper_cost4').val(0);
                 $('#danga_cost').val(0);
                 $('#btn_success').text("입력 완료")
-                $('#calc_diff').remove();
+                $('#calc_diff').hide();
                 $('.calc_section02').removeClass('active');
                 $('.calc_section01').addClass('active');
             }
@@ -133,6 +135,10 @@
                 }
 
             });
+
+            $('.calc_input').on('input',function(event){
+                $(this).val($(this).val().replace( /[^0-9]/g,""));
+           })
 
             // $('.calc_section01 .calc_btnBox button').click(function(){
             //     // $('.calc_section02').removeClass('disabled');
@@ -204,7 +210,7 @@ class = "login_none" 제거 및 추가
                                     </td>
                                     <th>리뉴얼 예상기간 <span>감가상각</span></th>
                                     <td>
-                                        <input type="text" class="calc_input" placeholder="0" id="tooja_cost6"/> <span>만원</span>
+                                        <input type="text" class="calc_input" placeholder="0" id="tooja_cost6"/> <span>년</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -248,7 +254,7 @@ class = "login_none" 제거 및 추가
                                 <tr>
                                     <th>객단가</th>
                                     <td>
-                                        <input type="text" class="calc_input" placeholder="0" id="danga_cost"/> <span>만원</span>
+                                        <input type="text" class="calc_input" placeholder="0" id="danga_cost"/> <span>원</span>
                                     </td>
                                 </tr>
                             </table>
