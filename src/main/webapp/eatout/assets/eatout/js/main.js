@@ -565,6 +565,11 @@ function fn_makechart(id, response, param) {
                     $('#maxText').text('원')
                     $('#minText').text('원')
                     break
+                case 'franPer':
+                    $('#chartText1').text('[단위 : %]');
+                    $('#maxText').text('%')
+                    $('#minText').text('%')
+                    break
                 default:
                     $('#chartText1').text('[단위 : 명]');
                     $('#maxText').text('명')
@@ -587,6 +592,9 @@ function fn_makechart(id, response, param) {
                     break
                 case 'useAmt':
                     $('#chartText2').text('[단위 : 원]');
+                    break
+                case 'franPer':
+                    $('#chartText2').text('[단위 : %]');
                     break
                 default:
                     $('#chartText2').text('[단위 : 명]');
