@@ -721,7 +721,7 @@ class = "login_none" 제거 및 추가
                 $("#upjong").css('display','block')
                 $("#menu").css('display','none')
                 change_colType($(this).val(),true);
-                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon05.svg'});
+                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon07.svg'});
             }
         });
 
