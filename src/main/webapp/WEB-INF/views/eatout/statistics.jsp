@@ -94,6 +94,7 @@ class = "login_none" 제거 및 추가
                                         <option name="3" value="3">메뉴 데이터(POS)</option>
                                         <option name="4" value="4">생활 인구 데이터(통신)</option>
                                         <option name="5" value="5">주거 인구 데이터(공공)</option>
+                                        <option name="5" value="7">프렌차이즈 데이터</option>
                                     </select>
                                 </div>
                             </div>
@@ -264,6 +265,10 @@ class = "login_none" 제거 및 추가
                                         <option value="w50">여성 50대</option>
                                         <option value="w60Over">여성 60대 이상</option>
                                     </select>
+                                    <select id="colType7" style="display:none;">
+                                        <option value="0">항목</option>
+                                        <option value="franPer">프렌차이즈 점유율</option>
+                                    </select>
                                     <div class="col-1 st_box06">
                                         <button id="search">조회</button>
                                     </div>
@@ -294,6 +299,7 @@ class = "login_none" 제거 및 추가
                                         <option name="3" value="3">메뉴 데이터(POS)</option>
                                         <option name="4" value="4">생활 인구 데이터(통신)</option>
                                         <option name="5" value="5">주거 인구 데이터(공공)</option>
+                                        <option name="5" value="7">프렌차이즈 데이터</option>
                                     </select>
                                 </div>
                             </div>
@@ -463,6 +469,10 @@ class = "login_none" 제거 및 추가
                                         <option value="w40">여성 40대</option>
                                         <option value="w50">여성 50대</option>
                                         <option value="w60Over">여성 60대 이상</option>
+                                    </select>
+                                    <select id="colType7_2" style="display:none;">
+                                        <option value="0">항목</option>
+                                        <option value="franPer">프렌차이즈 점유율</option>
                                     </select>
                                     <div class="col-1 st_box06">
                                         <button id="search_2">조회</button>
@@ -692,6 +702,28 @@ class = "login_none" 제거 및 추가
                 change_colType($(this).val(),true);
                 $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon05.svg'});
 
+            }else if(dataTypeNum == 7){
+                console.log('프렌차이즈 데이터 선택');
+                setAreaList(1);
+                setUpjongList(2);
+                setDateList(1);
+                // if($('#dateType').children('option:not(:first)').css('display') == 'block'){
+                $('#dateType').children('option').show();
+                $('#dateType').children('option:last').hide();
+                // }
+                reset_select(0);
+                $("#calcView").hide();
+                $(".row .reTop1120").hide();
+                $('#admi_nm').text('전국');
+                $('#upjong_nm').text('');
+                $("#box3Text").text("업종");
+                $("#upjong").css('display','block')
+                $("#menu").css('display','none')
+                // $("#area_admi").attr('disabled',false);
+                // $("#upjong2").attr('disabled',true);
+                // $("#upjong3").attr('disabled',true);
+                change_colType($(this).val(),true);
+                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon05.svg'});
             }
         });
 

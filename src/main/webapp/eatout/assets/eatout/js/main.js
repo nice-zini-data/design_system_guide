@@ -448,7 +448,7 @@ function reset_select(type,subType){
 }
 
 function change_colType(type,check){
-    var lng = [1,2,3,4,5];
+    var lng = [1,2,3,4,5,7];
 
     lng.forEach(function (val, idx){
         if(type == val){
