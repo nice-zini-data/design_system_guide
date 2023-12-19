@@ -407,6 +407,9 @@
                     <if test='admGb == "2"'>
                         and a.admi_cd like #{areaCd}||'%'
                     </if>
+                    <if test='admGb == "3"'>
+                        and a.admi_cd = #{areaCd}
+                    </if>
                 </if>
                 <if test='menuCd != null'>
                     <if test='menuType == "1"'>
@@ -467,6 +470,9 @@
                             </if>
                             <if test='admGb == "2"'>
                                 and a.admi_cd like #{areaCd}||'%'
+                            </if>
+                            <if test='admGb == "3"'>
+                                and a.admi_cd = #{areaCd}
                             </if>
                         </if>
                         <if test='menuCd != null'>
@@ -880,7 +886,7 @@
         <if test='dateType == "3"'>
             concat(b.year,'년 ',b.quarter,'분기') as yyyymm
         </if>
-            , ROUND(avg(fran_per)/cnt,0) as fran_per
+            , ROUND(avg(fran_per),0) as fran_per
         from(
             select
                 <![CDATA[
