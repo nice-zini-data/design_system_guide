@@ -710,6 +710,7 @@ class = "login_none" 제거 및 추가
                 // if($('#dateType').children('option:not(:first)').css('display') == 'block'){
                 $('#dateType').children('option').show();
                 $('#dateType').children('option:last').hide();
+                $('#dateType').children('option:eq(3)').hide();
                 // }
                 reset_select(0);
                 $("#calcView").hide();
@@ -1049,6 +1050,7 @@ class = "login_none" 제거 및 추가
                 // if($('#dateType').children('option:not(:first)').css('display') == 'block'){
                 $('#dateType_2').children('option').show();
                 $('#dateType_2').children('option:last').hide();
+                $('#dateType_2').children('option:eq(3)').hide();
                 // }
                 $("#box3Text").text("업종");
                 $("#upjong_2").css('display','block');
