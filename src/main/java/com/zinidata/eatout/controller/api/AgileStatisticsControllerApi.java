@@ -107,6 +107,24 @@ public class AgileStatisticsControllerApi {
 
     /***
      * 지역, 업종, 기간, 정보 리스트
+     * @param agileStatisticsVO
+     * @return
+     * @throws JsonProcessingException
+     */
+    @ResponseBody
+    @PostMapping(value="/getFranList")
+    @ApiOperation(value="프랜차이즈 점유율 결과 리스트 호출")
+    @ApiResponses(value = {
+            @ApiResponse(code=200, message = "프랜차이즈 점유율 결과 리스트 호출")
+    })
+    public String getFranList(AgileStatisticsVO agileStatisticsVO) throws Exception {
+        System.out.println(agileStatisticsVO);
+        String result = agileStatisticsService.getFranList(agileStatisticsVO);
+        return result;
+    }
+
+    /***
+     * 지역, 업종, 기간, 정보 리스트
      * @return
      * @throws JsonProcessingException
      */

@@ -719,9 +719,6 @@ class = "login_none" 제거 및 추가
                 $("#box3Text").text("업종");
                 $("#upjong").css('display','block')
                 $("#menu").css('display','none')
-                // $("#area_admi").attr('disabled',false);
-                // $("#upjong2").attr('disabled',true);
-                // $("#upjong3").attr('disabled',true);
                 change_colType($(this).val(),true);
                 $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon05.svg'});
             }
@@ -1042,6 +1039,21 @@ class = "login_none" 제거 및 추가
                 $("#upjong2_2").attr('disabled',true);
                 $("#upjong3_2").attr('disabled',true);
                 change_colType($(this).val(),false);
+
+            }else if(dataTypeNum_sub == 7){
+                console.log('프렌차이즈 데이터 선택');
+                setAreaList_sub(1);
+                setUpjongList_sub(2);
+                setDateList_sub(1);
+                reset_select(0);
+                // if($('#dateType').children('option:not(:first)').css('display') == 'block'){
+                $('#dateType_2').children('option').show();
+                $('#dateType_2').children('option:last').hide();
+                // }
+                $("#box3Text").text("업종");
+                $("#upjong_2").css('display','block');
+                $("#menu_2").css('display','none');
+                change_colType($(this).val(),false);
             }
         });
         // 지역 선택 이벤트
@@ -1234,7 +1246,7 @@ class = "login_none" 제거 및 추가
                 alert('검색일자가 제대로 선택되지 않았습니다.\n검색일자를 선택후 검색해주시기 바랍니다.');
                 return;
             }
-            if($("#colType"+dataTypeNum+"_2 option:selected").val() == 0){
+            if($("#colType"+dataTypeNum_sub+"_2 option:selected").val() == 0){
                 alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
                 return;
             }
@@ -1308,7 +1320,7 @@ class = "login_none" 제거 및 추가
             }
 
             //업종 동기화
-            if(dataTypeNum_sub == 1 || dataTypeNum_sub == 2 || dataTypeNum_sub == 3){
+            if(dataTypeNum == 1 || dataTypeNum == 2 || dataTypeNum == 3){
                 // $("#upjong1_2").val($('#upjong1').val()).trigger("change");
 
                 if($('#upjong2').val() != 0){
@@ -1324,7 +1336,7 @@ class = "login_none" 제거 및 추가
             }
 
             //메뉴 동기화
-            if(dataTypeNum_sub == 3){
+            if(dataTypeNum == 3){
                 // $("#upjong1_2").val($('#upjong1').val()).trigger("change");
 
                 if($('#menu1').val() != 0){
@@ -1365,6 +1377,8 @@ class = "login_none" 제거 및 추가
                 $("#colType4_2").val($('#colType4').val()).trigger("change");
             }else if($("#dataType option").index($("#dataType option:selected")) == 4){
                 $("#colType5_2").val($('#colType5').val()).trigger("change");
+            }else if($("#dataType option").index($("#dataType option:selected")) == 5){
+                $("#colType7_2").val($('#colType7').val()).trigger("change");
             }
 
             setTimeout(function(){

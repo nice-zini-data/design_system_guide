@@ -184,7 +184,7 @@ function fn_setDate(id, response, param) {
     response.data.forEach(function (val, idx){
         var tmpdate = '';
         if(dateTypeNum != 1) {
-            if(typeCdTmp == 'vacancy' || dataTypeNum == '3') {
+            if(typeCdTmp == 'vacancy' || dataTypeNum == '3' || dataTypeNum == '7') {
                 tmpdate = val.date
             // }else if(dataTypeNum == '4'){
             //     tmpdate = val.dateNm.substring(0, 4) +'년'+ val.date + '월'
@@ -349,6 +349,8 @@ function main_search(dataType,param){
         getAjax("getUpjongList", "/agile/statistics/getHousList",param, fn_makechart, fn_error,null,null,true);
     }else if(dataType == 6){
         getAjax("getVacancyList", "/agile/vacancy/getVacancyList",param, fn_makechart, fn_error,null,null,true);
+    }else if(dataType == 7){
+        getAjax("getFranList", "/agile/statistics/getFranList",param, fn_makechart, fn_error,null,null,true);
     }else{
         alert('주제가 잘못 선택되었습니다. \n관리자에게 문의하시기 바랍니다.')
     }

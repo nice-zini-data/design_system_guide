@@ -15,5 +15,6 @@ public interface AgileStatisticsMapper {
     ArrayList<AgilePosOutVO> getPosList(AgileStatisticsVO agileStatisticsVO);
     ArrayList<AgileLiviOutVO> getLiviList(AgileStatisticsVO agileStatisticsVO);
     ArrayList<AgileHousOutVO> getHousList(AgileStatisticsVO agileStatisticsVO);
+    ArrayList<AgileFranOutVO> getFranList(AgileStatisticsVO agileStatisticsVO);
     ArrayList<AgileUpjongChgRateOutVO> getUpjongChgRate();
 }
