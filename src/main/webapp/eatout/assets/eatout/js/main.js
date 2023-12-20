@@ -11,6 +11,8 @@ var objPage = {
 
 var loginCheckInterval;
 $(function() {
+    $('#chartText1').text('[단위 : ]');
+    $('#chartText2').text('[단위 : ]');
     $('html').removeClass('no-js');
 
     $(".navbar").click(function (){

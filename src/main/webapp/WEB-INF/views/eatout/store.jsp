@@ -300,6 +300,9 @@ class = "login_none" 제거 및 추가
         $("#type_nm").text($('#dataType option:selected').text())
         $("#admi_nm").text('전국')
 
+        $('#chart_text1').text('[단위 : ]');
+        $('#chart_text2').text('[단위 : ]');
+
         //-------------------------------------------- 상단 선택 항목
         // 주제 선택 이벤트
         $("#dataType").on("change", function(){
@@ -389,6 +392,11 @@ class = "login_none" 제거 및 추가
             // console.log(param);
             searchBtnNum = 1;
             main_search(dataTypeNum,param);
+
+            console.log($('#colType6').val())
+            if($('#colType6').val() == 'gnsl') $('#chart_text1').text('[단위 : %]');
+            if($('#colType6').val() == 'rentPyn') $('#chart_text1').text('[단위 : 천 원/평]');
+            if($('#colType6').val() == 'cstPyn') $('#chart_text1').text('[단위 : 천 원/평]');
         });
         //-------------------------------------------- 상단 선택 항목
 
@@ -484,6 +492,9 @@ class = "login_none" 제거 및 추가
             searchBtnNum = 2;
             dataTypeNum_sub = $("#dataType_2").val()
             // console.log(dataTypeNum_sub);
+            if($('#colType6_2').val() == 'gnsl') $('#chart_text2').text('[단위 : %]');
+            if($('#colType6_2').val() == 'rentPyn') $('#chart_text2').text('[단위 : 천 원/평]');
+            if($('#colType6_2').val() == 'cstPyn') $('#chart_text2').text('[단위 : 천 원/평]');
             main_search(dataTypeNum_sub,param);
         });
         //-------------------------------------------- 하단 선택 항목
@@ -565,20 +576,6 @@ class = "login_none" 제거 및 추가
             $("#area_cty").val(ctyCd).trigger("change");
         },400);
     }
-    $('#colType6').change(function(){
-        console.log($(this).val())
-        if($(this).val() == 'gnsl') $('#chart_text1').text('[단위 : %]');
-        if($(this).val() == 'rentPyn') $('#chart_text1').text('[단위 : 천 원/평]');
-        if($(this).val() == 'cstPyn') $('#chart_text1').text('[단위 : 천 원/평]');
-    })
-    $('#colType6_2').change(function(){
-        console.log($(this).val())
-        if($(this).val() == 'gnsl') {
-            if($(this).val() == 'gnsl') $('#chart_text2').text('[단위 : %]');
-            if($(this).val() == 'rentPyn') $('#chart_text2').text('[단위 : 천 원/평]');
-            if($(this).val() == 'cstPyn') $('#chart_text2').text('[단위 : 천 원/평]');
-        }
-    })
 
 </script>
 
