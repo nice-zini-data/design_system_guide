@@ -721,7 +721,7 @@ class = "login_none" 제거 및 추가
                 $("#upjong").css('display','block')
                 $("#menu").css('display','none')
                 change_colType($(this).val(),true);
-                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon07.svg'});
+                $('.type_nmImg img').attr({src:'/eatout/assets/eatout/images/icon/title_icon05.svg'});
             }
         });
 
@@ -1080,7 +1080,7 @@ class = "login_none" 제거 및 추가
                 setAreaList_sub(3,$(this).val());
                 admiCd_sub = $(this).val();
                 tmpAdmiCd_sub = $(this).val().substring(0,2);
-                admGbNum_sub = 3;
+                admGbNum_sub = 2;
             }else{
                 reset_select(1,1);
                 if(tmpAdmiCd_sub.length == 4){
@@ -1300,12 +1300,19 @@ class = "login_none" 제거 및 추가
         //-------------------------------------------- 설정 동기화 항목
         $('#setting_btn').on("click",function(){
             loadingBar2(true);
+            console.log('-----setting_btn-------------------------')
+            // console.log(admGbNum);
+            // console.log(admGbNum_sub);
+            // admGbNum_sub = admGbNum;
+            // console.log(admGbNum_sub);
+            console.log(dataTypeNum);
+            console.log(dataTypeNum_sub);
             //주제 동기화
             // $("#dataType_2 option:eq("+$("#dataType option").index($("#dataType option:selected"))+")").prop("selected", true); //첫번째 option 선택
             $("#dataType_2").val($('#dataType').val()).trigger("change");
 
             //지역 동기화
-            if($('#area_cty').val() != 0) {
+            if($('#area_mega').val() != 0) {
                 setTimeout(function () {
                     $("#area_mega_2").val($('#area_mega').val()).trigger("change");
                 }, 1000);
@@ -1315,14 +1322,18 @@ class = "login_none" 제거 및 추가
                     $("#area_cty_2").val($('#area_cty').val()).trigger("change");
                 }, 1500);
             }
-            if($('#area_admi').val() != 0){
-                setTimeout(function(){
-                    $("#area_admi_2").val($('#area_admi').val()).trigger("change");
-                },2000);
+
+            if(dataTypeNum == 2 || dataTypeNum_sub == 2){
+            }else{
+                if($('#area_admi').val() != 0){
+                    setTimeout(function(){
+                        $("#area_admi_2").val($('#area_admi').val()).trigger("change");
+                    },2000);
+                }
             }
 
             //업종 동기화
-            if(dataTypeNum == 1 || dataTypeNum == 2 || dataTypeNum == 3){
+            if(dataTypeNum == 1 || dataTypeNum == 2 || dataTypeNum == 3 || dataTypeNum == 7){
                 // $("#upjong1_2").val($('#upjong1').val()).trigger("change");
 
                 if($('#upjong2').val() != 0){

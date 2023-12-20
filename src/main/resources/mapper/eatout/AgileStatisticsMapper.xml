@@ -886,7 +886,7 @@
         <if test='dateType == "3"'>
             concat(b.year,'년 ',b.quarter,'분기') as yyyymm
         </if>
-            , ROUND(avg(fran_per),0) as fran_per
+            , ROUND(avg(fran_per),1) as fran_per
         from(
             select
                 <![CDATA[

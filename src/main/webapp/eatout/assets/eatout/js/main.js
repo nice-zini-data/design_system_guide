@@ -310,7 +310,7 @@ function fn_setDate_sub(id, response, param) {
     response.data.forEach(function (val, idx){
         var tmpdate = '';
         if(dateTypeNum_sub != 1) {
-            if(typeCdSubTmp == 'vacancy' || dataTypeNum_sub == '3'){
+            if(typeCdSubTmp == 'vacancy' || dataTypeNum_sub == '3' || dataTypeNum_sub == '7'){
                 tmpdate = val.date
             }else{
                 tmpdate = val.dateNm.substring(0, 4) + val.date
