@@ -280,7 +280,7 @@ class = "login_none" 제거 및 추가
                     <div class="row">
                         <!-- 상단 선택지 항목 -->
                         <div class="col-12 chart_box">
-                            <span class="chart_text" id="chartText1">[단위 : 만 원]</span>
+                            <span class="chart_text" id="chartText1">[단위 : ]</span>
                             <div id="main_chart1" class="chart"></div>
                         </div>
                     </div>
@@ -484,7 +484,7 @@ class = "login_none" 제거 및 추가
                     </div>
                     <div class="row">
                         <div class="col-12 chart_box">
-                            <span class="chart_text" id="chartText2">[단위 : 만 원]</span>
+                            <span class="chart_text" id="chartText2">[단위 : ]</span>
                             <div id="main_chart2" class="chart"></div>
                         </div>
                     </div>

@@ -504,104 +504,112 @@ function fn_makechart(id, response, param) {
     //     option:selected"
     //     //---------------------상단
         if(tmpColIdVal[0] == 'colType3' || tmpColIdVal[1] == 'colType3_2'){
-            switch (tmpColSelVal[0]) {
-                case 'totSaleAmt':
-                    $('#chartText1').text('[단위 : 만 원]');
-                    $('#maxText').text('만원');
-                    $('#minText').text('만원');
-                    break
-                case 'storeCnt':
-                    $('#chartText1').text('[단위 : 개소]');
-                    $('#maxText').text('개소')
-                    $('#minText').text('개소')
-                    break
-                case 'saleQty':
-                    $('#chartText1').text('[단위 : 개]');
-                    $('#maxText').text('개')
-                    $('#minText').text('개')
-                    break
-                default:
-                    $('#chartText1').text('[단위 : 원]');
-                    $('#maxText').text('원')
-                    $('#minText').text('원')
-                    break;
-            };
-            switch (tmpColSelVal[1]) {
-                case 'totSaleAmt':
-                    $('#chartText2').text('[단위 : 만 원]');
-                    break
-                case 'storeCnt':
-                    $('#chartText2').text('[단위 : 개소]');
-                    break
-                case 'saleQty':
-                    $('#chartText2').text('[단위 : 개]');
-                    break
-                default:
-                    $('#chartText2').text('[단위 : 원]');
-                    break;
-            };
+            if(searchType == 0){
+                switch (tmpColSelVal[0]) {
+                    case 'totSaleAmt':
+                        $('#chartText1').text('[단위 : 만 원]');
+                        $('#maxText').text('만원');
+                        $('#minText').text('만원');
+                        break
+                    case 'storeCnt':
+                        $('#chartText1').text('[단위 : 개소]');
+                        $('#maxText').text('개소')
+                        $('#minText').text('개소')
+                        break
+                    case 'saleQty':
+                        $('#chartText1').text('[단위 : 개]');
+                        $('#maxText').text('개')
+                        $('#minText').text('개')
+                        break
+                    default:
+                        $('#chartText1').text('[단위 : 원]');
+                        $('#maxText').text('원')
+                        $('#minText').text('원')
+                        break;
+                };
+            }else{
+                switch (tmpColSelVal[1]) {
+                    case 'totSaleAmt':
+                        $('#chartText2').text('[단위 : 만 원]');
+                        break
+                    case 'storeCnt':
+                        $('#chartText2').text('[단위 : 개소]');
+                        break
+                    case 'saleQty':
+                        $('#chartText2').text('[단위 : 개]');
+                        break
+                    default:
+                        $('#chartText2').text('[단위 : 원]');
+                        break;
+                };
+            }
         }else{
-            switch (tmpColSelVal[0]) {
-                case 'saleAmt':
-                    $('#chartText1').text('[단위 : 만 원]');
-                    $('#maxText').text('만원');
-                    $('#minText').text('만원');
-                    break
-                case 'storeAmt':
-                    $('#chartText1').text('[단위 : 만 원]');
-                    $('#maxText').text('만원');
-                    $('#minText').text('만원');
-                    break
-                case 'storeCnt':
-                    $('#chartText1').text('[단위 : 개소]');
-                    $('#maxText').text('개소')
-                    $('#minText').text('개소')
-                    break
-                case 'useCnt':
-                    $('#chartText1').text('[단위 : 개]');
-                    $('#maxText').text('개')
-                    $('#minText').text('개')
-                    break
-                case 'useAmt':
-                    $('#chartText1').text('[단위 : 원]');
-                    $('#maxText').text('원')
-                    $('#minText').text('원')
-                    break
-                case 'franPer':
-                    $('#chartText1').text('[단위 : %]');
-                    $('#maxText').text('%')
-                    $('#minText').text('%')
-                    break
-                default:
-                    $('#chartText1').text('[단위 : 명]');
-                    $('#maxText').text('명')
-                    $('#minText').text('명')
-                    break;
-            };
+            console.log(tmpColSelVal[0]);
+            console.log(tmpColSelVal[1]);
 
-            switch (tmpColSelVal[1]) {
-                case 'saleAmt':
-                    $('#chartText2').text('[단위 : 만 원]');
-                    break
-                case 'storeAmt':
-                    $('#chartText2').text('[단위 : 만 원]');
-                    break
-                case 'storeCnt':
-                    $('#chartText2').text('[단위 : 개소]');
-                    break
-                case 'useCnt':
-                    $('#chartText2').text('[단위 : 개]');
-                    break
-                case 'useAmt':
-                    $('#chartText2').text('[단위 : 원]');
-                    break
-                case 'franPer':
-                    $('#chartText2').text('[단위 : %]');
-                    break
-                default:
-                    $('#chartText2').text('[단위 : 명]');
-                    break;
-            };
+            if(searchType == 0){
+                switch (tmpColSelVal[0]) {
+                    case 'saleAmt':
+                        $('#chartText1').text('[단위 : 만 원]');
+                        $('#maxText').text('만원');
+                        $('#minText').text('만원');
+                        break
+                    case 'storeAmt':
+                        $('#chartText1').text('[단위 : 만 원]');
+                        $('#maxText').text('만원');
+                        $('#minText').text('만원');
+                        break
+                    case 'storeCnt':
+                        $('#chartText1').text('[단위 : 개소]');
+                        $('#maxText').text('개소')
+                        $('#minText').text('개소')
+                        break
+                    case 'useCnt':
+                        $('#chartText1').text('[단위 : 개]');
+                        $('#maxText').text('개')
+                        $('#minText').text('개')
+                        break
+                    case 'useAmt':
+                        $('#chartText1').text('[단위 : 원]');
+                        $('#maxText').text('원')
+                        $('#minText').text('원')
+                        break
+                    case 'franPer':
+                        $('#chartText1').text('[단위 : %]');
+                        $('#maxText').text('%')
+                        $('#minText').text('%')
+                        break
+                    default:
+                        $('#chartText1').text('[단위 : 명]');
+                        $('#maxText').text('명')
+                        $('#minText').text('명')
+                        break;
+                };
+            }else{
+                switch (tmpColSelVal[1]) {
+                    case 'saleAmt':
+                        $('#chartText2').text('[단위 : 만 원]');
+                        break
+                    case 'storeAmt':
+                        $('#chartText2').text('[단위 : 만 원]');
+                        break
+                    case 'storeCnt':
+                        $('#chartText2').text('[단위 : 개소]');
+                        break
+                    case 'useCnt':
+                        $('#chartText2').text('[단위 : 개]');
+                        break
+                    case 'useAmt':
+                        $('#chartText2').text('[단위 : 원]');
+                        break
+                    case 'franPer':
+                        $('#chartText2').text('[단위 : %]');
+                        break
+                    default:
+                        $('#chartText2').text('[단위 : 명]');
+                        break;
+                };
+            }
         }
 
 
