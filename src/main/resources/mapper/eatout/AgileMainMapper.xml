@@ -84,73 +84,74 @@
         </if>
     </select>
     <select id="getDateList" resultType="com.zinidata.eatout.vo.output.AgileDateOutVO">
-        <if test='dataType != "3"'>
-            select
-                year,
-            <if test='dateType == "1"'>
-                year as date,
-                concat(year,'년') as date_nm
-            </if>
-            <if test='dateType == "2"'>
-                half as date,
-                case when half = 1 then concat(year,'년 하반기') else concat(year,'년 상반기') end as date_nm
-            </if>
-            <if test='dateType == "3"'>
-                quarter as date,
-                concat(year,'년 ',quarter,'분기') as date_nm
-            </if>
-            <if test='dateType == "4"'>
-                month as date,
-                concat(substring(yyyymm,1,4),'년 ',substring(yyyymm,5,2),'월') as date_nm
-            </if>
-            from(
+        <if test='dataType != "7"'>
+            <if test='dataType != "3"'>
                 select
-                substring(yyyymm::varchar,1,4) as year
-                <![CDATA[
-                    , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then 1 else 2 end half
-                ]]>
-                , date_part('QUARTER',yyyymm::timestamp) as quarter
-                , to_char(yyyymm,'MM') as month
-                , to_char(yyyymm,'YYYYMM') as yyyymm
-            from
-                <if test='dataType == "1"'>
-                    generate_series(to_date(((select min(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his),'YYYYMM'),'1 month') yyyymm
-               </if>
-                <if test='dataType == "2"'>
-                    generate_series(to_date(((select min(yyyymm) from cmapap.tbkb_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbkb_sum_sales_mega_his),'YYYYMM'),'1 month') yyyymm
+                    year,
+                <if test='dateType == "1"'>
+                    year as date,
+                    concat(year,'년') as date_nm
                 </if>
-                <if test='dataType == "4"'>
-                    generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_livi_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_livi_mega_his),'YYYYMM'),'1 month') yyyymm
+                <if test='dateType == "2"'>
+                    half as date,
+                    case when half = 1 then concat(year,'년 하반기') else concat(year,'년 상반기') end as date_nm
                 </if>
-                <if test='dataType == "5"'>
-                    generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_hous_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_hous_mega_his),'YYYYMM'),'1 month') yyyymm
+                <if test='dateType == "3"'>
+                    quarter as date,
+                    concat(year,'년 ',quarter,'분기') as date_nm
                 </if>
-            order by
-                yyyymm desc
-            ) tmp
-            group by
-            <if test='dateType == "1"'>
-                1,2
+                <if test='dateType == "4"'>
+                    month as date,
+                    concat(substring(yyyymm,1,4),'년 ',substring(yyyymm,5,2),'월') as date_nm
+                </if>
+                from(
+                    select
+                    substring(yyyymm::varchar,1,4) as year
+                    <![CDATA[
+                        , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then 1 else 2 end half
+                    ]]>
+                    , date_part('QUARTER',yyyymm::timestamp) as quarter
+                    , to_char(yyyymm,'MM') as month
+                    , to_char(yyyymm,'YYYYMM') as yyyymm
+                from
+                    <if test='dataType == "1"'>
+                        generate_series(to_date(((select min(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his),'YYYYMM'),'1 month') yyyymm
+                   </if>
+                    <if test='dataType == "2"'>
+                        generate_series(to_date(((select min(yyyymm) from cmapap.tbkb_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbkb_sum_sales_mega_his),'YYYYMM'),'1 month') yyyymm
+                    </if>
+                    <if test='dataType == "4"'>
+                        generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_livi_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_livi_mega_his),'YYYYMM'),'1 month') yyyymm
+                    </if>
+                    <if test='dataType == "5"'>
+                        generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_hous_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_hous_mega_his),'YYYYMM'),'1 month') yyyymm
+                    </if>
+                order by
+                    yyyymm desc
+                ) tmp
+                group by
+                <if test='dateType == "1"'>
+                    1,2
+                </if>
+                <if test='dateType != "1"'>
+                    1,2,3
+                </if>
+                order by
+                <if test='dateType == "1"'>
+                    1,2
+                </if>
+                <if test='dateType != "1"'>
+                    1,2,3
+                </if>
             </if>
-            <if test='dateType != "1"'>
-                1,2,3
-            </if>
-            order by
-            <if test='dateType == "1"'>
-                1,2
-            </if>
-            <if test='dateType != "1"'>
-                1,2,3
-            </if>
-        </if>
-        <if test='dataType == "3"'>
-            select
+            <if test='dataType == "3"'>
+                select
                 <if test='dateType == "1"'>
                     year as date
                     ,concat(year,'년') as date_nm
                 </if>
                 <if test='dateType == "2"'>
-                <![CDATA[
+                    <![CDATA[
                     concat(year,case when date_part('QUARTER',to_date(yyyymm,'YYYYMM')::timestamp) <= 2 then 1 else 2 end) as date
                     ,concat(year,'년',case when date_part('QUARTER',to_date(yyyymm,'YYYYMM')::timestamp) <= 2 then '전' else '후' end,'반기') as date_nm
                 ]]>
@@ -167,8 +168,32 @@
                     concat(yyyymm,week) as date
                     ,concat(substring(a.yyyymm,1,4),'년 ',substring(a.yyyymm,5,2),'월 ', week,'주차') as date_nm
                 </if>
-            from
+                from
                 cmapap.tbagile_pos_date a
+                group by
+                1,2
+                order by
+                1
+            </if>
+        </if>
+        <if test='dataType == "7"'>
+            select
+            <if test='dateType == "1"'>
+                year as date
+                ,concat(year,'년') as date_nm
+            </if>
+            <if test='dateType == "2"'>
+                <![CDATA[
+                    concat(year,case when quarter <= '2' then '1' else '2' end) as date
+                    ,concat(year,'년',case when quarter <= '2' then '전' else '후' end,'반기') as date_nm
+                ]]>
+            </if>
+            <if test='dateType == "3"'>
+                concat(year,quarter) as date
+                ,concat(year,'년',quarter,'분기') as date_nm
+            </if>
+            from
+                cmapap.tbagile_fran_info a
             group by
                 1,2
             order by

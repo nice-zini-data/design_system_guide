@@ -407,6 +407,9 @@
                     <if test='admGb == "2"'>
                         and a.admi_cd like #{areaCd}||'%'
                     </if>
+                    <if test='admGb == "3"'>
+                        and a.admi_cd = #{areaCd}
+                    </if>
                 </if>
                 <if test='menuCd != null'>
                     <if test='menuType == "1"'>
@@ -467,6 +470,9 @@
                             </if>
                             <if test='admGb == "2"'>
                                 and a.admi_cd like #{areaCd}||'%'
+                            </if>
+                            <if test='admGb == "3"'>
+                                and a.admi_cd = #{areaCd}
                             </if>
                         </if>
                         <if test='menuCd != null'>
@@ -818,5 +824,101 @@
                   and a.upjong3_nm = b.upjong3_nm
             ) tmp
         order by sale_amt desc
+    </select>
+
+
+    <!--  생활인구데이터 정보 호출  -->
+    <select id="getFranList" resultType="com.zinidata.eatout.vo.output.AgileFranOutVO">
+        --getLiviList
+        with tmp_date as(
+            select
+            <if test='dateType == "1"'>
+                year,count(quarter) as cnt
+            </if>
+            <if test='dateType == "2"'>
+                year,half,count(quarter) as cnt
+            </if>
+            <if test='dateType == "3"'>
+                year,quarter,count(quarter) as cnt
+            </if>
+            from(
+                select
+                    <![CDATA[
+                    year
+                    ,case when quarter <= '2' then '1' else '2' end as half
+                    ,concat(year,case when quarter <= '2' then '1' else '2' end) as check_half
+                    ,quarter
+                    ,concat(year,quarter) as check_quarter
+                    ]]>
+                from(
+                    select year,quarter from cmapap.tbagile_fran_info where 1=1 group by 1,2
+                ) tmp
+            ) tmp
+        <if test='dateStart != null and dateEnd != null'>
+            where 1=1
+            <if test='dateType == "1"'>
+                and year between #{dateStart} and #{dateEnd}
+            </if>
+            <if test='dateType == "2"'>
+                and check_half between #{dateStart} and #{dateEnd}
+            </if>
+            <if test='dateType == "3"'>
+                and check_quarter between #{dateStart} and #{dateEnd}
+            </if>
+        </if>
+        group by
+        <if test='dateType == "1"'>
+            1
+        </if>
+        <if test='dateType == "2" || dateType == "3"'>
+            1,2
+        </if>
+        )
+        select
+        <if test='dateType == "1"'>
+            concat(a.year,'년') as yyyymm
+        </if>
+        <if test='dateType == "2"'>
+            concat(b.year,'년 ',
+                case when b.half = '1' then '전반기' else '후반기' end
+            ) as yyyymm
+        </if>
+        <if test='dateType == "3"'>
+            concat(b.year,'년 ',b.quarter,'분기') as yyyymm
+        </if>
+            , ROUND(avg(fran_per),1) as fran_per
+        from(
+            select
+                <![CDATA[
+                *
+                ,case when quarter <= '2' then '1' else '2' end as half
+                ]]>
+            from
+                cmapap.tbagile_fran_info
+            where 1=1
+                and upjong_cd not in ('Q02004','Q08002','Q08004')
+            <if test='areaCd != null'>
+                and admi_cd like #{areaCd}||'%'
+            </if>
+            <if test='upjongCd != null'>
+                and upjong_cd like #{upjongCd}||'%'
+            </if>
+        ) a, tmp_date b
+        where 1=1
+        <if test='dateType == "1"'>
+            and a.year = b.year
+        </if>
+        <if test='dateType == "2"'>
+            and a.year = b.year
+            and a.half = b.half
+        </if>
+        <if test='dateType == "3"'>
+            and a.year = b.year
+            and a.quarter = b.quarter
+        </if>
+        group by
+            1,cnt
+        order by
+            1
     </select>
 </mapper>
