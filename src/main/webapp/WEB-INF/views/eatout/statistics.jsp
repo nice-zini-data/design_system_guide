@@ -218,8 +218,8 @@ class = "login_none" 제거 및 추가
                                         <option value="0">항목</option>
                                         <option value="totSaleAmt">총 매출</option>
                                         <option value="storeCnt">표본점포 수</option>
-                                        <option value="saleQty">판매건수</option>
-                                        <option value="saleAmt">판매단가</option>
+<%--                                        <option value="saleQty">판매건수</option>--%>
+<%--                                        <option value="saleAmt">판매단가</option>--%>
                                     </select>
                                     <select id="colType4" style="display:none;">
                                         <option value="0">항목</option>
@@ -423,8 +423,8 @@ class = "login_none" 제거 및 추가
                                         <option value="0">항목</option>
                                         <option value="totSaleAmt">총 매출</option>
                                         <option value="storeCnt">표본점포 수</option>
-                                        <option value="saleQty">판매건수</option>
-                                        <option value="saleAmt">판매단가</option>
+<%--                                        <option value="saleQty">판매건수</option>--%>
+<%--                                        <option value="saleAmt">판매단가</option>--%>
                                     </select>
                                     <select id="colType4_2" style="display:none;">
                                         <option value="0">항목</option>
