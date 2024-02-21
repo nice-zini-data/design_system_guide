@@ -829,9 +829,39 @@ class = "login_none" 제거 및 추가
             $("#upjong_nm").text($('#menu1 option:selected').text())
             $('#menu2').children('option:not(:first)').remove();
             $('#menu3').children('option:not(:first)').remove();
+            var area_cd = '';
+            var sdate = '';
+            var edate = '';
+            var tmpdateType = '';
             //selected value
             if($(this).val() != 0){
-                setMenuList(2,$(this).val());
+                //지역 선택시
+                if($('#area_mega option:selected').val() == 0 && $('#area_cty option:selected').val() == 0 && $('#area_admi option:selected').val() == 0  ){
+                    //처리안함
+                }else{
+                    if($('#area_mega option:selected').val() != 0){
+                        area_cd = $('#area_mega option:selected').val();
+                    }
+                    if($('#area_cty option:selected').val() != 0){
+                        area_cd = $('#area_cty option:selected').val();
+                    }
+                    if($('#area_admi option:selected').val() != 0){
+                        area_cd = $('#area_admi option:selected').val();
+                    }
+                }
+                //
+                if($('#startDate option:selected').val() == 0 && $('#endDate option:selected').val() == 0){
+                    //처리안함
+                }else{
+                    tmpdateType = $('#dateType option:selected').val()
+                    if($('#startDate option:selected').val() != 0){
+                        sdate = $('#startDate option:selected').val();
+                    }
+                    if($('#endDate option:selected').val() != 0){
+                        edate = $('#endDate option:selected').val();
+                    }
+                }
+                setMenuList(2,$(this).val(),area_cd,sdate,edate,tmpdateType);
                 menuCd = $(this).val();
                 tmpMenuCd = $(this).val().substring(0,2);
                 menuGbNum = 1;
@@ -843,9 +873,40 @@ class = "login_none" 제거 및 추가
         $("#menu2").on("change", function(){
             $("#upjong_nm").text($('#menu2 option:selected').text())
             $('#menu3').children('option:not(:first)').remove();
+
+            var area_cd = '';
+            var sdate = '';
+            var edate = '';
+            var tmpdateType = '';
             //selected value
             if($(this).val() != 0){
-                setMenuList(3,$(this).val());
+                //지역 선택시
+                if($('#area_mega option:selected').val() == 0 && $('#area_cty option:selected').val() == 0 && $('#area_admi option:selected').val() == 0  ){
+                    //처리안함
+                }else{
+                    if($('#area_mega option:selected').val() != 0){
+                        area_cd = $('#area_mega option:selected').val();
+                    }
+                    if($('#area_cty option:selected').val() != 0){
+                        area_cd = $('#area_cty option:selected').val();
+                    }
+                    if($('#area_admi option:selected').val() != 0){
+                        area_cd = $('#area_admi option:selected').val();
+                    }
+                }
+                //
+                if($('#startDate option:selected').val() == 0 && $('#endDate option:selected').val() == 0){
+                    //처리안함
+                }else{
+                    tmpdateType = $('#dateType option:selected').val()
+                    if($('#startDate option:selected').val() != 0){
+                        sdate = $('#startDate option:selected').val();
+                    }
+                    if($('#endDate option:selected').val() != 0){
+                        edate = $('#endDate option:selected').val();
+                    }
+                }
+                setMenuList(3,$(this).val(),area_cd,sdate,edate,tmpdateType);
                 menuCd = $(this).val();
                 tmpMenuCd = $(this).val().substring(0,1);
                 menuGbNum = 2;
@@ -858,6 +919,22 @@ class = "login_none" 제거 및 추가
                 menuCd = tmpMenuCd;
                 menuGbNum = 1;
             }
+
+            // //selected value
+            // if($(this).val() != 0){
+            //     setMenuList(3,$(this).val());
+            //     menuCd = $(this).val();
+            //     tmpMenuCd = $(this).val().substring(0,1);
+            //     menuGbNum = 2;
+            // }else{
+            //     reset_select(4,1);
+            //     if(tmpMenuCd.length == 3){
+            //         tmpMenuCd = tmpMenuCd.substring(0,1);
+            //     }
+            //     setMenuList(2,tmpMenuCd);
+            //     menuCd = tmpMenuCd;
+            //     menuGbNum = 1;
+            // }
         });
         $("#menu3").on("change", function(){
             $("#upjong_nm").text($('#menu3 option:selected').text())

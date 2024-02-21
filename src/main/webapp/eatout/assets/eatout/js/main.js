@@ -140,15 +140,33 @@ function fn_setUpjong(id, response, param) {
 //------------------------ 업종 선택 리스트 기능 END ----------------------------------------
 //------------------------ 메뉴 선택 리스트 기능 START ----------------------------------------
 var tmpMenuVal = 1;
-function setMenuList(menuType,menuCd){
+function setMenuList(menuType,menuCd,areacd,sdate,edate,tmpdateType){
     var param = {};
     param.MenuType = menuType;
     tmpMenuVal = menuType;
     param.MenuCd = menuCd;
+    if(areacd != ''){
+        param.areaCd = areacd;
+    }
+    if(sdate != ''){
+        param.dateStart = sdate;
+    }
+    if(edate != ''){
+        param.dateEnd = edate;
+    }
+    if(tmpdateType != ''){
+        param.dateType = tmpdateType;
+    }
+    console.log(param);
     getAjax("getMenuList", "/agile/main/getMenuList",param, fn_setMenu, fn_error,null,null,true);
 }
 function fn_setMenu(id, response, param) {
     var html = '';
+
+    if(response.data == ''){
+        alert('데이터가 없습니다.');
+        return;
+    }
 
     response.data.forEach(function (val, idx){
         html += '<option value="' + val.menuCd + '" data-areaCd="'+val.menuCd+'">' + val.menuNm + '</option>';
