@@ -169,7 +169,7 @@
                     ,concat(substring(a.yyyymm,1,4),'년 ',substring(a.yyyymm,5,2),'월 ', week,'주차') as date_nm
                 </if>
                 from
-                    cmapap.tbagile_pos_date a
+                cmapap.tbagile_pos_date a
                 group by
                 1,2
                 order by
