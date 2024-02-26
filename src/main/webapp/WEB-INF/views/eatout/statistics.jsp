@@ -27,6 +27,7 @@ class = "login_none" 제거 및 추가
                         <div class="col-8 flex">
                             <div class="type_nmImg">
                                 <img src="/eatout/assets/eatout/images/icon/title_icon03.svg" alt=""/>
+
                             </div>
                             <div>
                                 <div class="leftTopInner">
@@ -48,6 +49,7 @@ class = "login_none" 제거 및 추가
                                 <div class="row flex">
                                     <div id="setDateInfo"></div>
                                     <div id="setDateInfo2"></div>
+                                    (<div id="setDateInfo3"></div>)
                                 </div>
                             </div>
                         </div>
@@ -593,6 +595,7 @@ class = "login_none" 제거 및 추가
                 console.log('외식 데이터 선택');
                 $('#admi_nm').text('전국');
                 $('#upjong_nm').text('');
+                $('#setDateInfo3').text('외식데이터 : 신용카드사');
                 setAreaList(1);
                 setUpjongList(2);
                 setDateList(1);
@@ -616,6 +619,7 @@ class = "login_none" 제거 및 추가
                 console.log('배달 데이터 선택');
                 $('#admi_nm').text('전국');
                 $('#upjong_nm').text('외식업');
+                $('#setDateInfo3').text('배달데이터 : 신용카드사');
                 setAreaList(1);
                 setUpjongList(2);
                 setDateList(1);
@@ -639,6 +643,7 @@ class = "login_none" 제거 및 추가
                 console.log('메뉴 데이터 선택');
                 $('#admi_nm').text('전국');
                 $('#upjong_nm').text('');
+                $('#setDateInfo3').text('POS데이터 : 나이스지니데이타');
                 setAreaList(1);
                 setMenuList(1);
                 setDateList(1);
@@ -659,6 +664,7 @@ class = "login_none" 제거 및 추가
                 // $('#dateType').append('<option name="5" value="5">주간 데이터</option>');
             }else if(dataTypeNum == 4){
                 console.log('생활 인구 데이터 선택');
+                $('#setDateInfo3').text('생활인구데이터(통신) : 통신사');
                 setAreaList(1);
                 setUpjongList(2);
                 setDateList(1);
@@ -682,6 +688,7 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 5){
                 console.log('주거 인구 데이터 선택');
+                $('#setDateInfo3').text('생활인구데이터(공공) : 행정안전부');
                 setAreaList(1);
                 setUpjongList(2);
                 setDateList(1);
@@ -704,6 +711,7 @@ class = "login_none" 제거 및 추가
 
             }else if(dataTypeNum == 7){
                 console.log('프렌차이즈 데이터 선택');
+                $('#setDateInfo3').text('프렌차이즈 데이터 : 나이스지니데이타');
                 setAreaList(1);
                 setUpjongList(2);
                 setDateList(1);
@@ -1516,6 +1524,7 @@ class = "login_none" 제거 및 추가
         $('#minYyyymm').text(year+'.'+month);
         $('#maxYyyymm').text(year+'.'+month);
         $('#setDateInfo2').text(year+'년 '+month+'월 데이터 기준');
+        $('#setDateInfo3').text('외식데이터 : 신용카드사');
         $('#calcAmt').text(calcAmt+'%');
         $('#calcAmt').parent().addClass(common.upAndDownClass(calcAmt));
         $('#calcDateType').text('전월')
@@ -1594,7 +1603,7 @@ class = "login_none" 제거 및 추가
         <tr>
             <th>업종</th>
             <th>전월대비<br>증감율</th>
-            <th>최근시점<br>시장규모<br><span>만 원/월</span></th>
+            <th>최근시점<br>시장규모<br><span>천만 원/월</span></th>
         </tr>
         {{#each this}}
         <tr>

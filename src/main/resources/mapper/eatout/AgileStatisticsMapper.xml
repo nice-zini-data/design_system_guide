@@ -790,7 +790,7 @@
         --getUpjongChgRate
         select
             upjong3_nm,upjong3_cd, ROUND(((sale_amt_to - sale_amt_be)/sale_amt_to *100),2) as calc_per
-             ,ROUND((sale_amt_to / 10000),0) as sale_amt
+             ,ROUND((sale_amt_to / 10000000),0) as sale_amt
         from(
                 select
                     a.yyyymm,a.upjong3_cd,a.upjong3_nm,a.sale_amt as sale_amt_be, b.sale_amt as sale_amt_to
