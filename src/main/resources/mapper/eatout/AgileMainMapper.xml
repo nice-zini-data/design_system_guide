@@ -201,6 +201,24 @@
         </if>
     </select>
     <select id="getMenuList" resultType="com.zinidata.eatout.vo.output.AgileMenuOutVO">
+        <![CDATA[
+        with tmp_date as(
+            select
+                year as year
+                , yyyymm as yyyymm
+                , week as week_num
+                , concat(year,case when date_part('QUARTER',to_date(yyyymm,'YYYYMM')::timestamp) <= 2 then 1 else 2 end) as half
+                , concat(year,date_part('QUARTER',to_date(yyyymm,'YYYYMM')::timestamp)) as quarter
+                , concat(yyyymm,week) as week
+                --	,concat(substring(a.yyyymm,1,4),'년',substring(a.yyyymm,5,6),'월') as date_nm
+            from
+                cmapap.tbagile_pos_date a
+            group by
+                1,2,3,4,5,6
+            order by
+                1
+        )
+        ]]>
         select
             <if test='menuType == "1"'>
                 a.menu1_cd as menu_cd,a.menu1_nm as menu_nm
@@ -212,6 +230,35 @@
                 c.menu3_cd as menu_cd, c.menu3_nm as menu_nm
             </if>
         from cmapap.tb_menu1 a, cmapap.tb_menu2 b, cmapap.tb_menu3 c
+        <if test='areaCd != null and dateStart != null'>
+            ,(
+                SELECT a.*
+                FROM cmapap.tbagile_pos_menu_list a,tmp_date b
+                where 1=1
+                <if test='dateStart != null and dateEnd != null'>
+                    <if test = 'dateType == "1"'>
+                        and b.year between #{dateStart} and #{dateEnd}
+                    </if>
+                    <if test = 'dateType == "2"'>
+                        and b.half between #{dateStart} and #{dateEnd}
+                    </if>
+                    <if test = 'dateType == "3"'>
+                        and b.quarter between #{dateStart} and #{dateEnd}
+                    </if>
+                    <if test = 'dateType == "4"'>
+                        and b.yyyymm between #{dateStart} and #{dateEnd}
+                    </if>
+                    <if test = 'dateType == "5"'>
+                        and b.week between #{dateStart} and #{dateEnd}
+                    </if>
+                    and a.sale_mm = b.yyyymm
+                    and a.week = b.week_num::numeric
+                </if>
+                <if test='areaCd != null'>
+                    and admi_cd like #{areaCd} || '%'
+                </if>
+            ) d
+        </if>
         where 1=1
             and a.menu1_cd = b.menu1_cd
             and b.menu2_cd = c.menu2_cd
@@ -220,6 +267,9 @@
             </if>
             <if test='menuType == "3"'>
             and b.menu2_cd = #{menuCd}
+            </if>
+            <if test='areaCd != null and dateStart != null'>
+            AND c.menu3_cd = d.menu3_cd
             </if>
         group by
             1,2
