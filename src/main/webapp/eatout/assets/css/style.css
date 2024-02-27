@@ -517,6 +517,16 @@ input[type="radio"] + label span img {margin-right:8px}
 .re_br1120 {margin-right:16px;}
 .re_br1120:last-child {margin-right:0 !important;}
 
+/*수정 0227*/
+.setDate_txt0227{font-size:15px;font-weight:500;margin-top:5px;color:var(--mono_g7)}
+#eatout_diff .cpTable td.up_p, #eatout_diff .cpTable td.down_p, #store_diff .cpTable td.up_p, #store_diff .cpTable td.down_p{position:relative;}
+#eatout_diff .cpTable td.up_p:after, #store_diff .cpTable td.up_p:after {content:'';display:inline-block;width:14px;height:14px;background:url('/eatout/assets/eatout/images/icon/up_arrow_red.svg') no-repeat center center / 14px 14px;position:absolute;top:50%;right:10px;transform:translateY(-50%);}
+#eatout_diff .cpTable td.down_p:after,  #store_diff .cpTable td.down_p:after {content:'';display:inline-block;width:14px;height:14px;background:url('/eatout/assets/eatout/images/icon/down_arrow_mt.svg') no-repeat center center / 14px 14px;position:absolute;top:50%;right:10px;transform:translateY(-50%);}
+
+
+
+
+
 @media screen and (max-width:1900px){
     .left_top_box {display:block;}
     .left_top_box .col-8.flex{margin-bottom:20px}

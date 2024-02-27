@@ -49,8 +49,8 @@ class = "login_none" 제거 및 추가
                                 <div class="row flex">
                                     <div id="setDateInfo"></div>
                                     <div id="setDateInfo2"></div>
-                                    (<div id="setDateInfo3"></div>)
                                 </div>
+                                <p id="setDateInfo3" class="setDate_txt0227"></p>
                             </div>
                         </div>
                         <div class="col-4 topRightTextBox reTop_com1120">
