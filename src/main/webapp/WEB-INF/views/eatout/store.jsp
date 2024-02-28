@@ -48,7 +48,7 @@ class = "login_none" 제거 및 추가
                                     <div id="setDateInfo"></div>
                                     <div id="setDateInfo2"></div>
                                 </div>
-                                <p id="setDateInfo3" class="setDate_txt0227">데이터 출처 : 부동산 전문기업</p>
+                                <p id="setDateInfo3" class="setDate_txt0227 data_text0228">데이터 출처 : 부동산 전문기업</p>
                             </div>
                         </div>
                         <div class="col-4 topRightTextBox">

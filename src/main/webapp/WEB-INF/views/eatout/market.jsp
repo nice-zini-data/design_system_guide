@@ -26,8 +26,8 @@
 		var month = response.data[0].yyyymm.substring(4,6);
 		$('#minYyyymm').text(year+'.'+month);
 		$('#maxYyyymm').text(year+'.'+month);
-		$('#setDateInfo2').text('(전국기준 / '+year+'.'+month+'월 기준');
-		$('#setDateInfo3').text('('+year+'.'+month+'월 기준');
+		$('#setDateInfo2').text('전국기준 / '+year+'.'+month+'월 기준');
+		$('#setDateInfo3').text(''+year+'.'+month+'월 기준');
 		//(전국기준 / 2024.01 기준)
 		$('#calcDateType').text('전월')
 	}
@@ -39,19 +39,15 @@
 		<div class="col-8 left_box">
 			<div class="left_slide">
 				<div class="col">
-					<div class="col-3">
-						<p class="com_titleT slide_titleText">
+					<div class="col-3 flex_0228 mb10"><!--slide_titleText-->
+						<p class="com_titleT mb0 ">
 							<img src="/eatout/assets/eatout/images/icon/icon_title_001.svg" alt=""/>
 							업종별 경기 변동
 						</p>
-					</div>
-					<div class="col-6"></div>
-					<div class="col-3">
-						<div>
-							<p class="setDate_txt0227">
-								<div id="setDateInfo2"></div>
-							</p>
-							<p align="left">데이터 출처 : 신용카드사</p></div>
+						<div class="setDate_txt0227 flex_0228">
+							<p id="setDateInfo2"></p>
+							<p class="data_text0228 mr_30">데이터 출처 : 신용카드사</p>
+						</div>
 					</div>
 				</div>
 				<div class="slideBox">
@@ -62,15 +58,13 @@
 			<div id="tableList" style="display:block;">
 				<div>
 					<div class="row">
-						<div class="col-3">
-							<p class="com_titleT">
+						<div class="col-3 flex_0228 mb10">
+							<p class="com_titleT mb0">
 								<img src="/eatout/assets/eatout/images/icon/icon_title_004.svg" alt=""/>
 								지역별 외식업 경기
 							</p>
-							<div>
-								<p class="setDate_txt0227">
-								<div id="setDateInfo3"></div>
-								</p>
+							<div class="setDate_txt0227 flex_0228">
+								<p id="setDateInfo3"></p>
 							</div>
 						</div>
 						<div class="col-9">

@@ -50,7 +50,7 @@ class = "login_none" 제거 및 추가
                                     <div id="setDateInfo"></div>
                                     <div id="setDateInfo2"></div>
                                 </div>
-                                <p id="setDateInfo3" class="setDate_txt0227"></p>
+                                <p id="setDateInfo3" class="setDate_txt0227 data_text0228"></p>
                             </div>
                         </div>
                         <div class="col-4 topRightTextBox reTop_com1120">
