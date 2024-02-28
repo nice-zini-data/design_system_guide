@@ -526,9 +526,9 @@ input[type="radio"] + label span img {margin-right:8px}
 .mb0 {margin-bottom:0 !important;}
 .mb10 {margin-bottom:10px !important;}
 .mb20 {margin-bottom:20px !important;}
-div.setDate_txt0227.flex_0228 {margin-left:20px;margin-top:0;width:calc(100% - 200px);justify-content: space-between}
+div.setDate_txt0227.flex_0228 {margin-left:20px;margin-top:0;width:calc(100% - 220px);justify-content: space-between}
 .data_text0228{color:var(--mono_wh);background:var(--pr_100);border-radius:4px;padding:4px 6px;display:inline-block;}
-.mr_30 {margin-right:-30px}
+.mr_50 {margin-right:-50px}
 #stat_center_title {font-size:14px;font-weight:400;color:var(--pr_120);padding-top:20px;}
 
 @media screen and (max-width:1900px){

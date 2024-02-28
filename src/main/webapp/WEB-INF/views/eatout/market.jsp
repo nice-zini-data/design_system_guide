@@ -46,7 +46,7 @@
 						</p>
 						<div class="setDate_txt0227 flex_0228">
 							<p id="setDateInfo2"></p>
-							<p class="data_text0228 mr_30">데이터 출처 : 신용카드사</p>
+							<p class="data_text0228 mr_50">데이터 출처 : 신용카드사</p>
 						</div>
 					</div>
 				</div>
@@ -58,7 +58,7 @@
 			<div id="tableList" style="display:block;">
 				<div>
 					<div class="row">
-						<div class="col-3 flex_0228 mb10">
+						<div class="col-3 flex_0228 mb20">
 							<p class="com_titleT mb0">
 								<img src="/eatout/assets/eatout/images/icon/icon_title_004.svg" alt=""/>
 								지역별 외식업 경기
