@@ -14,9 +14,23 @@
 <script type="text/javascript" src="/eatout/assets/eatout/js/swiper-bundle.min.js"></script>
 <script>
 	$(function(){
+		var param = {};
+		getAjax("getMainInfo", "/agile/main/getMainInfo",param, fn_mainInfo, fn_error,null,null,true);
 		$('.navList li:nth-child(2)').addClass('active');
 		$('.navList li:nth-child(2) img').attr({src:'/eatout/assets/eatout/images/icon/tab02_icon_on.svg'})
 	});
+
+	// 메인화면 최초 데이터 세팅
+	function fn_mainInfo(id, response, param){
+		var year = response.data[0].yyyymm.substring(0,4);
+		var month = response.data[0].yyyymm.substring(4,6);
+		$('#minYyyymm').text(year+'.'+month);
+		$('#maxYyyymm').text(year+'.'+month);
+		$('#setDateInfo2').text('(전국기준 / '+year+'.'+month+'월 기준');
+		$('#setDateInfo3').text('('+year+'.'+month+'월 기준');
+		//(전국기준 / 2024.01 기준)
+		$('#calcDateType').text('전월')
+	}
 </script>
 
 <div class="container com_gridInner market">
@@ -24,10 +38,22 @@
 	<div class="row">
 		<div class="col-8 left_box">
 			<div class="left_slide">
-				<p class="com_titleT slide_titleText">
-					<img src="/eatout/assets/eatout/images/icon/icon_title_001.svg" alt=""/>
-					업종별 경기 변동
-				</p>
+				<div class="col">
+					<div class="col-3">
+						<p class="com_titleT slide_titleText">
+							<img src="/eatout/assets/eatout/images/icon/icon_title_001.svg" alt=""/>
+							업종별 경기 변동
+						</p>
+					</div>
+					<div class="col-6"></div>
+					<div class="col-3">
+						<div>
+							<p class="setDate_txt0227">
+								<div id="setDateInfo2"></div>
+							</p>
+							<p align="left">데이터 출처 : 신용카드사</p></div>
+					</div>
+				</div>
 				<div class="slideBox">
 					<div id="upjongList" class="swiper mySwiper">
 					</div>
@@ -41,6 +67,11 @@
 								<img src="/eatout/assets/eatout/images/icon/icon_title_004.svg" alt=""/>
 								지역별 외식업 경기
 							</p>
+							<div>
+								<p class="setDate_txt0227">
+								<div id="setDateInfo3"></div>
+								</p>
+							</div>
 						</div>
 						<div class="col-9">
 							<div class="row flex">

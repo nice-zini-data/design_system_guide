@@ -288,6 +288,9 @@ class = "login_none" 제거 및 추가
                     </div>
                     <div class="row left_g_box bt0">
                         <!-- 하단 선택지 항목 -->
+                        <div class="col-12" style="text-align: center" id="stat_center_title">
+                            * 해당 데이터는 <span id="stat_center_val"></span> NICE에서 추정한 값이므로 참고용으로 활용하시기 바랍니다.
+                        </div>
                         <div class="col-1 clickBtn" id="setting_btn">위 설정조건 불러오기
                             <button ></button>
                         </div>
@@ -572,6 +575,7 @@ class = "login_none" 제거 및 추가
 
         $('#dateType_2').children('option').show();
         $('#dateType_2').children('option:last').hide();
+        $('#stat_center_val').text('신용카드사 데이터를 바탕으로 ');
 
         //초기 상단문구 세팅
         $("#type_nm").text($('#dataType option:selected').text())
@@ -596,6 +600,7 @@ class = "login_none" 제거 및 추가
                 $('#admi_nm').text('전국');
                 $('#upjong_nm').text('');
                 $('#setDateInfo3').text('외식데이터 : 신용카드사');
+                $('#stat_center_val').text('신용카드사 데이터를 바탕으로 ');
                 setAreaList(1);
                 setUpjongList(2);
                 setDateList(1);
@@ -620,6 +625,7 @@ class = "login_none" 제거 및 추가
                 $('#admi_nm').text('전국');
                 $('#upjong_nm').text('외식업');
                 $('#setDateInfo3').text('배달데이터 : 신용카드사');
+                $('#stat_center_val').text('신용카드사 데이터를 바탕으로 ');
                 setAreaList(1);
                 setUpjongList(2);
                 setDateList(1);
@@ -644,6 +650,7 @@ class = "login_none" 제거 및 추가
                 $('#admi_nm').text('전국');
                 $('#upjong_nm').text('');
                 $('#setDateInfo3').text('POS데이터 : 나이스지니데이타');
+                $('#stat_center_val').text('POS사 데이터를 바탕으로 ');
                 setAreaList(1);
                 setMenuList(1);
                 setDateList(1);
@@ -665,6 +672,7 @@ class = "login_none" 제거 및 추가
             }else if(dataTypeNum == 4){
                 console.log('생활 인구 데이터 선택');
                 $('#setDateInfo3').text('생활인구데이터(통신) : 통신사');
+                $('#stat_center_val').text('통신사 데이터를 바탕으로 ');
                 setAreaList(1);
                 setUpjongList(2);
                 setDateList(1);
@@ -689,6 +697,7 @@ class = "login_none" 제거 및 추가
             }else if(dataTypeNum == 5){
                 console.log('주거 인구 데이터 선택');
                 $('#setDateInfo3').text('생활인구데이터(공공) : 행정안전부');
+                $('#stat_center_val').text('행정안전부 데이터를 바탕으로 ');
                 setAreaList(1);
                 setUpjongList(2);
                 setDateList(1);
@@ -712,6 +721,7 @@ class = "login_none" 제거 및 추가
             }else if(dataTypeNum == 7){
                 console.log('프렌차이즈 데이터 선택');
                 $('#setDateInfo3').text('프렌차이즈 데이터 : 나이스지니데이타');
+                $('#stat_center_val').text('');
                 setAreaList(1);
                 setUpjongList(2);
                 setDateList(1);
