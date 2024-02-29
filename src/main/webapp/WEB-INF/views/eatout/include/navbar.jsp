@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<header>
+<%--<header>
     <div class="head">
         <img src="/eatout/assets/eatout/images/logo/logo.svg" alt="로고"/>
         <p class="logo_title">외식통계조회 시스템</p>
     </div>
-</header>
+</header>--%>
 <div class="topHeader">
     <div class="topHeaderInner">
         <!--로그인 전-->
