@@ -139,7 +139,7 @@
                  when upjong3_cd = 'Q08003' then 'Bar/카페'
                  else upjong3_nm end as upjong3_nm
             ,before_sale_amt, this_sale_amt
-            ,ROUND((this_sale_amt - before_sale_amt)/10000,0) as calc_sale_amt
+            ,ROUND((this_sale_amt - before_sale_amt)/10000000,0) as calc_sale_amt
             ,row_number() over(order by sale_per desc) as rnk
 		    ,sale_per
         from(

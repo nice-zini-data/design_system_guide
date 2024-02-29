@@ -570,10 +570,10 @@
 		<tbody>
 		{{#each this}}
 		<tr>
-			<td>{{rnk}}</td>
-			<td><button onclick="makeChart('{{upjong3Cd}}','{{upjong3Nm}}')">{{upjong3Nm}}</button></td>
-			<td class="{{checkUpDown salePer}}"><span>{{salePer}} %</span></td>
-			<td><span>{{addComma calcSaleAmt}} 만원</span></td>
+			<td style="width:5%;">{{rnk}}</td>
+			<td style="width:40%;"><button onclick="makeChart('{{upjong3Cd}}','{{upjong3Nm}}')">{{upjong3Nm}}</button></td>
+			<td style="width:20%;" class="{{checkUpDown salePer}}"><span>{{salePer}} %</span></td>
+			<td style="width:25%;"><span>{{addComma calcSaleAmt}} 만원</span></td>
 		</tr>
 		{{/each}}
 		</tbody>

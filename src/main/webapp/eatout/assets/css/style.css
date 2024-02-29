@@ -519,9 +519,9 @@ input[type="radio"] + label span img {margin-right:8px}
 
 /*수정 0227*/
 .setDate_txt0227{font-size:15px;font-weight:500;margin-top:5px;color:var(--mono_g7)}
-#eatout_diff .cpTable td.up_p, #eatout_diff .cpTable td.down_p, #store_diff .cpTable td.up_p, #store_diff .cpTable td.down_p{position:relative;}
-#eatout_diff .cpTable td.up_p:after, #store_diff .cpTable td.up_p:after {content:'';display:inline-block;width:14px;height:14px;background:url('/eatout/assets/eatout/images/icon/up_arrow_red.svg') no-repeat center center / 14px 14px;position:absolute;top:50%;right:10px;transform:translateY(-50%);}
-#eatout_diff .cpTable td.down_p:after,  #store_diff .cpTable td.down_p:after {content:'';display:inline-block;width:14px;height:14px;background:url('/eatout/assets/eatout/images/icon/down_arrow_mt.svg') no-repeat center center / 14px 14px;position:absolute;top:50%;right:10px;transform:translateY(-50%);}
+td.up_p, td.down_p{position:relative;}
+td.up_p:after{content:'';display:inline-block;width:14px;height:14px;background:url('/eatout/assets/eatout/images/icon/up_arrow_red.svg') no-repeat center center / 14px 14px;position:absolute;top:50%;right:10px;transform:translateY(-50%);}
+td.down_p:after {content:'';display:inline-block;width:14px;height:14px;background:url('/eatout/assets/eatout/images/icon/down_arrow_mt.svg') no-repeat center center / 14px 14px;position:absolute;top:50%;right:10px;transform:translateY(-50%);}
 .flex_0228 {display:flex;justify-content: start;align-items: center;}
 .mb0 {margin-bottom:0 !important;}
 .mb10 {margin-bottom:10px !important;}
