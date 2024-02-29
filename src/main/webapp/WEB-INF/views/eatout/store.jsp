@@ -48,6 +48,7 @@ class = "login_none" 제거 및 추가
                                     <div id="setDateInfo"></div>
                                     <div id="setDateInfo2"></div>
                                 </div>
+                                <p id="setDateInfo3" class="setDate_txt0227 data_text0228">데이터 출처 : 부동산 전문기업</p>
                             </div>
                         </div>
                         <div class="col-4 topRightTextBox">
@@ -158,6 +159,9 @@ class = "login_none" 제거 및 추가
                         </div>
                     </div>
                     <div class="row left_g_box bt0">
+                        <div class="col-12" style="text-align: center" id="stat_center_title">
+                            * 해당 데이터는 NICE에서 추정한 값이므로 참고용으로 활용하시기 바랍니다.
+                        </div>
                         <!-- 하단 선택지 항목 -->
                         <div class="col-1 clickBtn" id="setting_btn">위 설정조건 불러오기
                             <button ></button>
