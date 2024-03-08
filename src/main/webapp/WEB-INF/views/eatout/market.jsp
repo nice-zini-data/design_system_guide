@@ -513,7 +513,7 @@
 			<div>
 				<div class="slide_txt01">전월대비</div>
 				<div class="slide_flex {{checkUpDown salePer}}"> <!--slide_flex 위치에 클래스 추가 부탁드립니다. 상승 : up / 하락 : down-->
-					<div class="slide_txt02">{{addComma calcSaleAmt}}</div>
+					<div class="slide_txt02">{{addComma calcSaleAmt}}원</div>
 					<div class="slide_txt03">{{salePer}} %</div>
 				</div>
 			</div>

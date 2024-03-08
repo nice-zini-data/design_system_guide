@@ -10,12 +10,12 @@
         from(
                 select
                     yyyymm, a.upjong3_cd, b.upjong3_nm
-                     , case when yyyymm = (select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his) then sum(sale_amt) end as this_sale_amt
-                     , case when yyyymm != (select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his) then sum(sale_amt) end as before_sale_amt
-                from cmapap.tbss_ag_sum_sales_mega_his a, cmapap.tb_upjong3 b
+                     , case when yyyymm = (select max(yyyymm) from tbss_ag_sum_sales_mega_his) then sum(sale_amt) end as this_sale_amt
+                     , case when yyyymm != (select max(yyyymm) from tbss_ag_sum_sales_mega_his) then sum(sale_amt) end as before_sale_amt
+                from tbss_ag_sum_sales_mega_his a, tb_upjong3 b
                 where 1=1
                   and a.upjong3_cd = b.upjong3_cd
-                  and yyyymm between to_char(to_date((select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his),'YYYYMM') + interval '-1 month','YYYYMM') and (select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his)
+                  and yyyymm between to_char(to_date((select max(yyyymm) from tbss_ag_sum_sales_mega_his),'YYYYMM') + interval '-1 month','YYYYMM') and (select max(yyyymm) from tbss_ag_sum_sales_mega_his)
                   and b.upjong3_cd like 'Q%'
                 group by
                     1,2,3
@@ -35,7 +35,7 @@
                 cty_nm as area_nm,cty_cd as area_cd
             </if>
             from
-                cmapap.tb_agile_vacancyrate
+                tb_agile_vacancyrate
         ) as tmp
         where 1=1
         <if test='admGb == "2"'>
@@ -72,7 +72,7 @@
             select
                 year,quarter
             from
-                cmapap.tb_agile_vacancyrate
+                tb_agile_vacancyrate
         ) tmp
         where 1=1
 <!--        <if test='dateType != "1"'>-->
@@ -116,7 +116,7 @@
                                     as date_cd
                                         ,cty_nm, cty_cd,sum(deposit) as deposit
                                 from
-                                    cmapap.tb_agile_vacancyrate
+                                    tb_agile_vacancyrate
                                 where 1=1
                                 group by
                                     1,2,3
@@ -153,7 +153,7 @@
                         , case when quarter::numeric <= 2 then concat(year,1) else concat(year,2) end check_half
                     ]]>
                 from(
-                    select year,substring(quarter,2,1) as quarter from cmapap.tb_agile_vacancyrate where 1=1 group by 1,2
+                    select year,substring(quarter,2,1) as quarter from tb_agile_vacancyrate where 1=1 group by 1,2
                 ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
@@ -198,7 +198,7 @@
                 ,year|| case when quarter = 'Q1' or quarter = 'Q2' then '1'
                     when quarter = 'Q3' or quarter = 'Q4' then '2' end as half_cd
                 ,year || substring(quarter,2,1) as quarter_cd
-            from cmapap.tb_agile_vacancyrate
+            from tb_agile_vacancyrate
         ) a, tmp_date b
         where 1=1
         <if test='dateType == "1"'>

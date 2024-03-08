@@ -31,7 +31,7 @@
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
                 from(
-                    select to_date(yyyymm,'YYYYMM') as yyyymm from cmapap.tbss_ag_sum_sales_mega_his where 1=1 group by 1
+                    select to_date(yyyymm,'YYYYMM') as yyyymm from tbss_ag_sum_sales_mega_his where 1=1 group by 1
                 ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
@@ -91,13 +91,13 @@
             , ROUND(sum(cnt_mon)/cnt,0) as  mon , ROUND(sum(cnt_tue)/cnt,0) as  tue, ROUND(sum(cnt_wed)/cnt,0) as  wed, ROUND(sum(cnt_thu)/cnt,0) as  thu, ROUND(sum(cnt_fri)/cnt,0) as  fri, ROUND(sum(cnt_sat)/cnt,0) as  sat, ROUND(sum(cnt_sun)/cnt,0) as  sun
         from
         <if test='admGb == "1"'>
-            cmapap.tbss_ag_sum_sales_mega_his a, tmp_date b, cmapap.tb_upjong3 c
+            tbss_ag_sum_sales_mega_his a, tmp_date b, tb_upjong3 c
         </if>
         <if test='admGb == "2"'>
-            cmapap.tbss_ag_sum_sales_cty_his a, tmp_date b, cmapap.tb_upjong3 c
+            tbss_ag_sum_sales_cty_his a, tmp_date b, tb_upjong3 c
         </if>
         <if test='admGb == "3"'>
-            cmapap.tbss_ag_sum_sales_admi_his a, tmp_date b, cmapap.tb_upjong3 c
+            tbss_ag_sum_sales_admi_his a, tmp_date b, tb_upjong3 c
         </if>
         where 1=1
         <if test='dateType == "1"'>
@@ -174,7 +174,7 @@
                         , case when date_part('QUARTER',yyyymm::timestamp) <= 2 then concat(substring(yyyymm::varchar,1,4),1) else concat(substring(yyyymm::varchar,1,4),2) end check_half
                     ]]>
                 from(
-                    select to_date(yyyymm,'YYYYMM') as yyyymm from cmapap.tbkb_sum_sales_mega_his where 1=1 group by 1
+                    select to_date(yyyymm,'YYYYMM') as yyyymm from tbkb_sum_sales_mega_his where 1=1 group by 1
                 ) tmp
             ) tmp
             <if test='dateStart != null and dateEnd != null'>
@@ -233,10 +233,10 @@
             , ROUND(sum(cnt_mon)/cnt,0) as mon , ROUND(sum(cnt_tue)/cnt,0) as tue, ROUND(sum(cnt_wed)/cnt,0) as wed, ROUND(sum(cnt_thu)/cnt,0) as thu, ROUND(sum(cnt_fri)/cnt,0) as fri, ROUND(sum(cnt_sat)/cnt,0) as sat, ROUND(sum(cnt_sun)/cnt,0) as sun
         from
         <if test='admGb == "1"'>
-            cmapap.tbkb_sum_sales_mega_his a, tmp_date b, cmapap.tb_upjong3 c
+            tbkb_sum_sales_mega_his a, tmp_date b, tb_upjong3 c
         </if>
         <if test='admGb == "2"'>
-            cmapap.tbkb_sum_sales_cty_his a, tmp_date b, cmapap.tb_upjong3 c
+            tbkb_sum_sales_cty_his a, tmp_date b, tb_upjong3 c
         </if>
         where 1=1
             <if test='dateType == "1"'>
@@ -299,7 +299,7 @@
                     ,concat(year,half) as check_half
                     ,concat(year,quarter) as check_quarter
                     ,concat(yyyymm,week) as check_week
-                from cmapap.tbagile_pos_date
+                from tbagile_pos_date
             ) tmp
             where 1=1
                 <if test='dateStart != null and dateEnd != null'>
@@ -394,7 +394,7 @@
                     </if>
                 </if>
                 from
-                    cmapap.tbagile_pos_info a, tmp_date x
+                    tbagile_pos_info a, tmp_date x
                 where 1=1
                     and a.sale_mm = x.yyyymm
                 <if test='dateType == "5"'>
@@ -458,7 +458,7 @@
                         </if>
                             ,shop_cd
                         from
-                            cmapap.tbagile_pos_info a, tmp_date b
+                            tbagile_pos_info a, tmp_date b
                         where
                             a.sale_mm = b.yyyymm
                         <if test='dateType == "5"'>
@@ -547,13 +547,13 @@
                 from(
                     select to_date(yyyymm,'YYYYMM') as yyyymm
                     <if test='admGb == "1"'>
-                        from cmapap.tbpop_livi_mega_his
+                        from tbpop_livi_mega_his
                     </if>
                     <if test='admGb == "2"'>
-                        from cmapap.tbpop_livi_cty_his
+                        from tbpop_livi_cty_his
                     </if>
                     <if test='admGb == "3"'>
-                        from cmapap.tbpop_livi_admi_his
+                        from tbpop_livi_admi_his
                     </if>
                     where 1=1
                     <if test='admGb == "1"'>
@@ -627,13 +627,13 @@
             , ROUND(sum(pop_mon)/cnt,0) as pop_mon, ROUND(sum(pop_tue)/cnt,0) as pop_tue, ROUND(sum(pop_wed)/cnt,0) as pop_wed, ROUND(sum(pop_thu)/cnt,0) as pop_thu, ROUND(sum(pop_fri)/cnt,0) as pop_fri, ROUND(sum(pop_sat)/cnt,0) as pop_sat, ROUND(sum(pop_sun)/cnt,0) as pop_sun
         from
         <if test='admGb == "1"'>
-            cmapap.tbpop_livi_mega_his a, tmp_date b
+            tbpop_livi_mega_his a, tmp_date b
         </if>
         <if test='admGb == "2"'>
-            cmapap.tbpop_livi_cty_his a, tmp_date b
+            tbpop_livi_cty_his a, tmp_date b
         </if>
         <if test='admGb == "3"'>
-            cmapap.tbpop_livi_admi_his a, tmp_date b
+            tbpop_livi_admi_his a, tmp_date b
         </if>
         where 1=1
         <if test='dateType == "1"'>
@@ -684,13 +684,13 @@
                 from(
                     select to_date(yyyymm,'YYYYMM') as yyyymm
                     <if test='admGb == "1"'>
-                        from cmapap.tbpop_hous_mega_his
+                        from tbpop_hous_mega_his
                     </if>
                     <if test='admGb == "2"'>
-                        from cmapap.tbpop_hous_cty_his
+                        from tbpop_hous_cty_his
                     </if>
                     <if test='admGb == "3"'>
-                        from cmapap.tbpop_hous_admi_his
+                        from tbpop_hous_admi_his
                     </if>
                     where 1=1
                     <if test='areaCd != null'>
@@ -758,13 +758,13 @@
             , ROUND(sum(pop_w_60over)/max(b.half),0) as w_60_over
         from
         <if test='admGb == "1"'>
-            cmapap.tbpop_hous_mega_his a, tmp_date b
+            tbpop_hous_mega_his a, tmp_date b
         </if>
         <if test='admGb == "2"'>
-            cmapap.tbpop_hous_cty_his a, tmp_date b
+            tbpop_hous_cty_his a, tmp_date b
         </if>
         <if test='admGb == "3"'>
-            cmapap.tbpop_hous_admi_his a, tmp_date b
+            tbpop_hous_admi_his a, tmp_date b
         </if>
         where 1=1
         and substring(a.yyyymm,1,4) = b.year
@@ -798,10 +798,10 @@
                         select
                             yyyymm,b.upjong3_nm, a.upjong3_cd, sum(sale_amt) as sale_amt
                         from
-                            cmapap.tbss_ag_sum_sales_mega_his a, cmapap.tb_upjong3 b
+                            tbss_ag_sum_sales_mega_his a, tb_upjong3 b
                         where 1=1
                             and a.upjong3_cd = b.upjong3_cd
-                            and yyyymm = to_char(to_date((select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his),'YYYYMM') + interval '-1 month','YYYYMM')
+                            and yyyymm = to_char(to_date((select max(yyyymm) from tbss_ag_sum_sales_mega_his),'YYYYMM') + interval '-1 month','YYYYMM')
                             and a.upjong3_cd like 'Q%'
                             and b.svc_yn = 'Y'
                         group by
@@ -810,10 +810,11 @@
                         select
                             yyyymm,b.upjong3_nm, a.upjong3_cd, sum(sale_amt) as sale_amt
                         from
-                            cmapap.tbss_ag_sum_sales_mega_his a, cmapap.tb_upjong3 b
+                            tbss_ag_sum_sales_mega_his a, tb_upjong3 b
                         where 1=1
                             and a.upjong3_cd = b.upjong3_cd
-                            and yyyymm = (select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his)
+                            and yyyymm = (select max(yyyymm) from tbss_ag_sum_sales_mega_his)
+                            and b.upjong3_cd not in ('Q02004','Q08002','Q08004')
                             and a.upjong3_cd like 'Q%'
                             and b.svc_yn = 'Y'
                         group by
@@ -851,7 +852,7 @@
                     ,concat(year,quarter) as check_quarter
                     ]]>
                 from(
-                    select year,quarter from cmapap.tbagile_fran_info where 1=1 group by 1,2
+                    select year,quarter from tbagile_fran_info where 1=1 group by 1,2
                 ) tmp
             ) tmp
         <if test='dateStart != null and dateEnd != null'>
@@ -894,7 +895,7 @@
                 ,case when quarter <= '2' then '1' else '2' end as half
                 ]]>
             from
-                cmapap.tbagile_fran_info
+                tbagile_fran_info
             where 1=1
                 and upjong_cd not in ('Q02004','Q08002','Q08004')
             <if test='areaCd != null'>

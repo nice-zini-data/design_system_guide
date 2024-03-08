@@ -1497,10 +1497,9 @@ class = "login_none" 제거 및 추가
         })
         //-------------------------------------------- 설정 동기화 항목
     });
-    function upjongNmClick(upjongCd){
-
+    function upjongNmClick(val){
+        loadingBar2(true);
         searchType = 0;
-        var param = {};
         // if($("#colType"+dataTypeNum+"_2 option:selected").val() == 0){
         //     alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
         //     return;
@@ -1519,12 +1518,18 @@ class = "login_none" 제거 및 추가
         // searchBtnNum = 1;
         // main_search(dataTypeNum_sub,param);
         // console.log(upjongCd.substring(0,3));
-        $("#upjong2").val(upjongCd.substring(0,3)).trigger("change");
+        $("#upjong2").val(val.substring(0,3)).trigger("change");
         // $("#upjong3").val(upjongCd).trigger("change");
         // $('#upjong2').val(upjongCd.substring(0,3)).prop("selected",true);
+        upjongGbNum = 3;
+        upjongCd = val;
         setTimeout(function() {
             $('#upjong3').val(upjongCd).prop("selected", true);
-        },200)
+        },1500)
+        setTimeout(function() {
+            loadingBar2(false);
+        },2000)
+
     }
     // 메인화면 최초 데이터 세팅
     function fn_mainInfo(id, response, param){

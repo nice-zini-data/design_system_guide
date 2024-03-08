@@ -4,7 +4,7 @@
 
 
     <select id="getYyyymm" resultType="String">
-        select max(yyyymm) as yyyymm from cmapap.tbss_ag_sum_sales_mega_his
+        select max(yyyymm) as yyyymm from tbss_ag_sum_sales_mega_his
     </select>
 
     <select id="getAdmiList" resultType="com.zinidata.eatout.vo.output.AgileAdmiOutVO">
@@ -19,7 +19,7 @@
             c.admi_cd as area_cd, c.admi_nm as area_nm
         </if>
         from
-            cmapap.tbadm_mega a, cmapap.tbadm_cty b, cmapap.tbadm_admi c
+            tbadm_mega a, tbadm_cty b, tbadm_admi c
         where 1=1
             and a.mega_cd = b.mega_cd
             and b.cty_cd = c.cty_cd
@@ -61,7 +61,7 @@
                 else c.upjong3_nm end as upjong_nm
         </if>
         from
-            cmapap.tb_upjong1 a, cmapap.tb_upjong2 b, cmapap.tb_upjong3 c
+            tb_upjong1 a, tb_upjong2 b, tb_upjong3 c
         where 1=1
             and a.upjong1_cd = b.upjong1_cd
             and b.upjong2_cd = c.upjong2_cd
@@ -115,16 +115,16 @@
                     , to_char(yyyymm,'YYYYMM') as yyyymm
                 from
                     <if test='dataType == "1"'>
-                        generate_series(to_date(((select min(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his),'YYYYMM'),'1 month') yyyymm
+                        generate_series(to_date(((select min(yyyymm) from tbss_ag_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbss_ag_sum_sales_mega_his),'YYYYMM'),'1 month') yyyymm
                    </if>
                     <if test='dataType == "2"'>
-                        generate_series(to_date(((select min(yyyymm) from cmapap.tbkb_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbkb_sum_sales_mega_his),'YYYYMM'),'1 month') yyyymm
+                        generate_series(to_date(((select min(yyyymm) from tbkb_sum_sales_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbkb_sum_sales_mega_his),'YYYYMM'),'1 month') yyyymm
                     </if>
                     <if test='dataType == "4"'>
-                        generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_livi_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_livi_mega_his),'YYYYMM'),'1 month') yyyymm
+                        generate_series(to_date(((select min(yyyymm) from tbpop_livi_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbpop_livi_mega_his),'YYYYMM'),'1 month') yyyymm
                     </if>
                     <if test='dataType == "5"'>
-                        generate_series(to_date(((select min(yyyymm) from cmapap.tbpop_hous_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from cmapap.tbpop_hous_mega_his),'YYYYMM'),'1 month') yyyymm
+                        generate_series(to_date(((select min(yyyymm) from tbpop_hous_mega_his)),'YYYYMM'), to_date((select max(yyyymm) from tbpop_hous_mega_his),'YYYYMM'),'1 month') yyyymm
                     </if>
                 order by
                     yyyymm desc
@@ -169,7 +169,7 @@
                     ,concat(substring(a.yyyymm,1,4),'년 ',substring(a.yyyymm,5,2),'월 ', week,'주차') as date_nm
                 </if>
                 from
-                cmapap.tbagile_pos_date a
+                    tbagile_pos_date a
                 group by
                 1,2
                 order by
@@ -193,7 +193,7 @@
                 ,concat(year,'년',quarter,'분기') as date_nm
             </if>
             from
-                cmapap.tbagile_fran_info a
+                tbagile_fran_info a
             group by
                 1,2
             order by
@@ -212,7 +212,7 @@
                 , concat(yyyymm,week) as week
                 --	,concat(substring(a.yyyymm,1,4),'년',substring(a.yyyymm,5,6),'월') as date_nm
             from
-                cmapap.tbagile_pos_date a
+                tbagile_pos_date a
             group by
                 1,2,3,4,5,6
             order by
@@ -229,11 +229,11 @@
             <if test='menuType == "3"'>
                 c.menu3_cd as menu_cd, c.menu3_nm as menu_nm
             </if>
-        from cmapap.tb_menu1 a, cmapap.tb_menu2 b, cmapap.tb_menu3 c
+        from tb_menu1 a, tb_menu2 b, tb_menu3 c
         <if test='areaCd != null and dateStart != null'>
             ,(
                 SELECT a.*
-                FROM cmapap.tbagile_pos_menu_list a,tmp_date b
+                FROM tbagile_pos_menu_list a,tmp_date b
                 where 1=1
                 <if test='dateStart != null and dateEnd != null'>
                     <if test = 'dateType == "1"'>
@@ -309,7 +309,7 @@
                     row_number() over(order by year desc, quarter desc) as row, year, quarter
                     ,sum(a.sale_amt) as sale_amt
                 from
-                    cmapap.tbss_ag_sum_sales_mega_his a, tmp_date b
+                    tbss_ag_sum_sales_mega_his a, tmp_date b
                 where 1=1
                     and a.yyyymm = b.yyyymm
                 group by
