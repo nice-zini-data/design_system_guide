@@ -47,8 +47,8 @@ class = "login_none" 제거 및 추가
                                     </div>
                                 </div>
                                 <div class="row flex">
-                                    <div id="setDateInfo"></div>
                                     <div id="setDateInfo2"></div>
+                                    <div id="setDateInfo"></div>
                                 </div>
                                 <p id="setDateInfo3" class="setDate_txt0227 data_text0228"></p>
                             </div>
@@ -1564,7 +1564,7 @@ class = "login_none" 제거 및 추가
         var returnHtml = ''
         var returnHtml2 = '';
         var date = new Date();
-        returnHtml = date.getFullYear()+'. ' + date.getMonth()+'. '+ date.getDate();
+        returnHtml = '(업데이트 '+date.getFullYear()+'. ' + date.getMonth()+'. 27)';
         // returnHtml2 = date.getFullYear()+'년 ' + (date.getMonth() - 2) + '월 데이터 기준'
         $('#setDateInfo').text(returnHtml);
         // $('#setDateInfo2').text(returnHtml2);
