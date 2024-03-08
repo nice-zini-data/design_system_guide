@@ -522,6 +522,8 @@ function fn_makechart(id, response, param) {
     //     option:selected"
     //     //---------------------상단
         if(tmpColIdVal[0] == 'colType3' || tmpColIdVal[1] == 'colType3_2'){
+            console.log(tmpColIdVal[0]);
+            console.log(tmpColIdVal[1]);
             if(searchType == 0){
                 switch (tmpColSelVal[0]) {
                     case 'totSaleAmt':
