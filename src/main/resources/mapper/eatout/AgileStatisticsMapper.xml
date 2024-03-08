@@ -814,6 +814,7 @@
                         where 1=1
                             and a.upjong3_cd = b.upjong3_cd
                             and yyyymm = (select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his)
+                            and b.upjong3_cd not in ('Q02004','Q08002','Q08004')
                             and a.upjong3_cd like 'Q%'
                             and b.svc_yn = 'Y'
                         group by
