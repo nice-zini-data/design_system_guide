@@ -25,6 +25,7 @@
                   and yyyymm between to_char(to_date((select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his),'YYYYMM') + interval '-1 month','YYYYMM') and (select max(yyyymm) from cmapap.tbss_ag_sum_sales_mega_his)
                   and b.upjong3_cd like 'Q%'
                   and b.upjong3_cd not in ('Q02004')
+                  and b.svc_yn = 'Y'
                 group by
                     1,2,3
         ) tmp
