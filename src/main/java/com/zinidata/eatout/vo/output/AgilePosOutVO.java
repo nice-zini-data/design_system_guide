@@ -13,4 +13,5 @@ public class AgilePosOutVO {
     private double storeCnt;        //매장 수
     private double saleQty;         //점포당 매출
     private double saleAmt;         //판매단가
+    private double storeAmt;         //판매단가
 }

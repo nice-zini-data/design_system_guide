@@ -11,9 +11,9 @@
                  when upjong3_cd = 'Q08002' then '단란주점'
                  when upjong3_cd = 'Q08003' then 'Bar/카페'
                  else upjong3_nm end as upjong3_nm
-            , sum(before_sale_amt) as before_sale_amt, sum(this_sale_amt) as this_sale_amt,
-            (sum(this_sale_amt) - sum(before_sale_amt)) as calc_sale_amt,
-            round((sum(this_sale_amt) - sum(before_sale_amt) )/ sum(this_sale_amt) * 100,2) as sale_per
+            , sum(before_sale_amt) as before_sale_amt, sum(this_sale_amt) as this_sale_amt
+            , ROUND((sum(this_sale_amt) - sum(before_sale_amt)),0) as calc_sale_amt
+            , round((sum(this_sale_amt) - sum(before_sale_amt) )/ sum(this_sale_amt) * 100,2) as sale_per
         from(
                 select
                     yyyymm, a.upjong3_cd, b.upjong3_nm
