@@ -156,7 +156,7 @@
 						<div class="col-2">
 							<p class="com_titleT">
 								<img src="/eatout/assets/eatout/images/icon/icon_title_002.svg" alt=""/>
-								업종별 상승률
+								업종별 경기<br>변동 상승률
 							</p>
 						</div>
 						<div class="col-10 font12Radio">
@@ -573,7 +573,7 @@
 			<td style="width:5%;">{{rnk}}</td>
 			<td style="width:40%;"><button onclick="makeChart('{{upjong3Cd}}','{{upjong3Nm}}')">{{upjong3Nm}}</button></td>
 			<td style="width:20%;" class="{{checkUpDown salePer}}"><span>{{salePer}} %</span></td>
-			<td style="width:25%;"><span>{{addComma calcSaleAmt}} 만원</span></td>
+			<td style="width:25%;"><span>{{addComma calcSaleAmt}} 천만원</span></td>
 		</tr>
 		{{/each}}
 		</tbody>

@@ -220,6 +220,7 @@ class = "login_none" 제거 및 추가
                                         <option value="0">항목</option>
                                         <option value="totSaleAmt">총 매출</option>
                                         <option value="storeCnt">표본점포 수</option>
+                                        <option value="storeAmt">점포당 매출</option>
 <%--                                        <option value="saleQty">판매건수</option>--%>
 <%--                                        <option value="saleAmt">판매단가</option>--%>
                                     </select>
@@ -236,7 +237,7 @@ class = "login_none" 제거 및 추가
                                         <option value="w40">여성 40대</option>
                                         <option value="w50">여성 50대</option>
                                         <option value="w60Over">여성 60대 이상</option>
-                                        <option value="time2406">00~06시</option>
+                                        <option value="time0006">00~06시</option>
                                         <option value="time0609">06~09시</option>
                                         <option value="time0912">09~12시</option>
                                         <option value="time1215">12~15시</option>
@@ -428,6 +429,7 @@ class = "login_none" 제거 및 추가
                                         <option value="0">항목</option>
                                         <option value="totSaleAmt">총 매출</option>
                                         <option value="storeCnt">표본점포 수</option>
+                                        <option value="storeAmt">점포당 매출</option>
 <%--                                        <option value="saleQty">판매건수</option>--%>
 <%--                                        <option value="saleAmt">판매단가</option>--%>
                                     </select>
@@ -444,7 +446,7 @@ class = "login_none" 제거 및 추가
                                         <option value="w40">여성 40대</option>
                                         <option value="w50">여성 50대</option>
                                         <option value="w60Over">여성 60대 이상</option>
-                                        <option value="time2406">00~06시</option>
+                                        <option value="time0006">00~06시</option>
                                         <option value="time0609">06~09시</option>
                                         <option value="time0912">09~12시</option>
                                         <option value="time1215">12~15시</option>
@@ -1500,6 +1502,7 @@ class = "login_none" 제거 및 추가
     function upjongNmClick(val){
         loadingBar2(true);
         searchType = 0;
+        var param = {};
         // if($("#colType"+dataTypeNum+"_2 option:selected").val() == 0){
         //     alert('항목이 선택되지 않았습니다.\n항목을 선택후 검색해주시기 바랍니다.');
         //     return;
@@ -1617,7 +1620,7 @@ class = "login_none" 제거 및 추가
         </colgroup>
         <tr>
             <th>업종</th>
-            <th>전월대비<br>증감율</th>
+            <th>전월대비<br>증감율<br><span>(매출액 기준)</span></th>
             <th>최근시점<br>시장규모<br><span>천만 원/월</span></th>
         </tr>
         {{#each this}}
