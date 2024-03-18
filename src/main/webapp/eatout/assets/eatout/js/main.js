@@ -570,37 +570,37 @@ function fn_makechart(id, response, param) {
             if(searchType == 0){
                 switch (tmpColSelVal[0]) {
                     case 'saleAmt':
-                        $('#chartText1').text('[단위 : 만 원]');
+                        $('#chartText1').text('[단위 : 만 원(평균)]');
                         $('#maxText').text('만원');
                         $('#minText').text('만원');
                         break
                     case 'storeAmt':
-                        $('#chartText1').text('[단위 : 만 원]');
+                        $('#chartText1').text('[단위 : 만 원(평균)]');
                         $('#maxText').text('만원');
                         $('#minText').text('만원');
                         break
                     case 'storeCnt':
-                        $('#chartText1').text('[단위 : 개소]');
+                        $('#chartText1').text('[단위 : 개소(평균)]');
                         $('#maxText').text('개소')
                         $('#minText').text('개소')
                         break
                     case 'useCnt':
-                        $('#chartText1').text('[단위 : 개]');
+                        $('#chartText1').text('[단위 : 개(평균)]');
                         $('#maxText').text('개')
                         $('#minText').text('개')
                         break
                     case 'useAmt':
-                        $('#chartText1').text('[단위 : 원]');
+                        $('#chartText1').text('[단위 : 원(평균)]');
                         $('#maxText').text('원')
                         $('#minText').text('원')
                         break
                     case 'franPer':
-                        $('#chartText1').text('[단위 : %]');
+                        $('#chartText1').text('[단위 : %(평균)]');
                         $('#maxText').text('%')
                         $('#minText').text('%')
                         break
                     default:
-                        $('#chartText1').text('[단위 : 명]');
+                        $('#chartText1').text('[단위 : 명(평균)]');
                         $('#maxText').text('명')
                         $('#minText').text('명')
                         break;
@@ -608,25 +608,25 @@ function fn_makechart(id, response, param) {
             }else{
                 switch (tmpColSelVal[1]) {
                     case 'saleAmt':
-                        $('#chartText2').text('[단위 : 만 원]');
+                        $('#chartText2').text('[단위 : 만 원(평균)]');
                         break
                     case 'storeAmt':
-                        $('#chartText2').text('[단위 : 만 원]');
+                        $('#chartText2').text('[단위 : 만 원(평균)]');
                         break
                     case 'storeCnt':
-                        $('#chartText2').text('[단위 : 개소]');
+                        $('#chartText2').text('[단위 : 개소(평균)]');
                         break
                     case 'useCnt':
-                        $('#chartText2').text('[단위 : 개]');
+                        $('#chartText2').text('[단위 : 개(평균)]');
                         break
                     case 'useAmt':
-                        $('#chartText2').text('[단위 : 원]');
+                        $('#chartText2').text('[단위 : 원(평균)]');
                         break
                     case 'franPer':
-                        $('#chartText2').text('[단위 : %]');
+                        $('#chartText2').text('[단위 : %(평균)]');
                         break
                     default:
-                        $('#chartText2').text('[단위 : 명]');
+                        $('#chartText2').text('[단위 : 명(평균)]');
                         break;
                 };
             }
