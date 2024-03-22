@@ -94,7 +94,7 @@
                 </if>
                 <if test='dateType == "2"'>
                     half as date,
-                    case when half = 1 then concat(year,'년 하반기') else concat(year,'년 상반기') end as date_nm
+                    case when half = 1 then concat(year,'년 상반기') else concat(year,'년 하반기') end as date_nm
                 </if>
                 <if test='dateType == "3"'>
                     quarter as date,
