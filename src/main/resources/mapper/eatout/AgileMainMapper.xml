@@ -94,7 +94,7 @@
                 </if>
                 <if test='dateType == "2"'>
                     half as date,
-                    case when half = 1 then concat(year,'년 하반기') else concat(year,'년 상반기') end as date_nm
+                    case when half = 1 then concat(year,'년 상반기') else concat(year,'년 하반기') end as date_nm
                 </if>
                 <if test='dateType == "3"'>
                     quarter as date,
@@ -169,7 +169,7 @@
                     ,concat(substring(a.yyyymm,1,4),'년 ',substring(a.yyyymm,5,2),'월 ', week,'주차') as date_nm
                 </if>
                 from
-                tbagile_pos_date a
+                    tbagile_pos_date a
                 group by
                 1,2
                 order by
