@@ -558,6 +558,8 @@ class = "login_none" 제거 및 추가
 
 
     $(function() {
+        alert('본 서비스는 NICE지니데이터(주)와 함께 각종 데이터를 바탕으로 추정한 값을 제공하므로 참고용으로만 활용해 주시기 바랍니다.')
+
         var param = {};
         getAjax("getMainInfo", "/agile/main/getMainInfo",param, fn_mainInfo, fn_error,null,null,true);
         getAjax("getUpjongChgRate", "/agile/statistics/getUpjongChgRate",param, fn_eatoutDiff, fn_error,null,null,true);
