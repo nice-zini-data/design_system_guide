@@ -21,23 +21,23 @@ public class AgileMainController {
 
     @GetMapping("/")
     public String main(HttpServletRequest request, HttpServletResponse response){
-//        comLogService.setServiceLog(request, response, 0);
+        comLogService.setServiceLog(request, response, 0);
         return "eatout/statistics";
     }
     @GetMapping("/market")
     public String market(HttpServletRequest request, HttpServletResponse response){
-//        comLogService.setServiceLog(request, response, 0);
+        comLogService.setServiceLog(request, response, 0);
         return "eatout/market";
     }
     @GetMapping("/store")
     public String store(HttpServletRequest request, HttpServletResponse response){
-//        comLogService.setServiceLog(request, response, 0);
+        comLogService.setServiceLog(request, response, 0);
         return "eatout/store";
     }
 
     @GetMapping("/calculator")
     public String calculator(HttpServletRequest request, HttpServletResponse response){
-//        comLogService.setServiceLog(request, response, 0);
+        comLogService.setServiceLog(request, response, 0);
         return "eatout/calculator";
     }
 }
