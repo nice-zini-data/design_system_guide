@@ -67,6 +67,13 @@ public class ComLogService {
                 logVo.setIp(getClientIP(request));
                 int result = comLogMapper.setServiceLog(logVo);
             }else{
+                String url = String.valueOf(request.getRequestURL());
+                ComLogVO logVo = new ComLogVO();
+                logVo.setDetail(url);
+                logVo.setMemNo(memNo);
+                logVo.setPrjType("agile");
+                logVo.setIp(getClientIP(request));
+                int result = comLogMapper.setServiceLog(logVo);
                 Cookie cookie = new Cookie("token", null);
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
