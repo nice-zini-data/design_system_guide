@@ -1,5 +1,6 @@
 package com.zinidata.eatout.controller.api;
 
+import com.zinidata.common.service.ComLogService;
 import com.zinidata.eatout.service.AgileMarketService;
 import com.zinidata.eatout.service.AgileVacancyService;
 import com.zinidata.eatout.vo.AgileFileVO;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
@@ -23,6 +26,7 @@ import java.io.IOException;
 public class AgileVacancyControllerApi {
 
     private final AgileVacancyService agileVacancyService;
+    private final ComLogService comLogService;
 
     /***
      * 소비정보
@@ -72,8 +76,9 @@ public class AgileVacancyControllerApi {
     @ApiResponses(value = {
             @ApiResponse(code=200, message = "소비정보 가져오기")
     })
-    public String getDepositList(AgileVacancyVO agileVacancyVO) throws IOException {
+    public String getDepositList(HttpServletRequest request, HttpServletResponse response,AgileVacancyVO agileVacancyVO) throws IOException {
         System.err.println(agileVacancyVO);
+        comLogService.setServiceLog(request, response, 0);
         String result = agileVacancyService.getDepositList(agileVacancyVO);
         return result;
     }
@@ -90,8 +95,9 @@ public class AgileVacancyControllerApi {
     @ApiResponses(value = {
             @ApiResponse(code=200, message = "소비정보 가져오기")
     })
-    public String getVacancyList(AgileVacancyVO agileVacancyVO) throws IOException {
+    public String getVacancyList(HttpServletRequest request, HttpServletResponse response, AgileVacancyVO agileVacancyVO) throws IOException {
         System.err.println(agileVacancyVO);
+        comLogService.setServiceLog(request, response, 0);
         String result = agileVacancyService.getVacancyList(agileVacancyVO);
         return result;
     }

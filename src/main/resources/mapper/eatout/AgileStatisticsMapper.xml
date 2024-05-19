@@ -901,7 +901,7 @@
 
     <!--  생활인구데이터 정보 호출  -->
     <select id="getFranList" resultType="com.zinidata.eatout.vo.output.AgileFranOutVO">
-        --getFranList
+        --getLiviList
         with tmp_date as(
             select
             <if test='dateType == "1"'>
@@ -966,28 +966,33 @@
                 ,case when quarter <= '2' then '1' else '2' end as half
                 ]]>
             from
-                <if test='admGb == "1"'>
+                <if test='admGb != null'>
+                    <if test='admGb == "1"'>
+                        tbagile_fran_info_mega
+                    </if>
+                    <if test='admGb == "2"'>
+                        tbagile_fran_info_cty
+                    </if>
+                    <if test='admGb == "3"'>
+                        tbagile_fran_info_admi
+                    </if>
+                </if>
+                <if test='admGb == null'>
                     tbagile_fran_info_mega
-                </if>
-                <if test='admGb == "2"'>
-                    tbagile_fran_info_cty
-                </if>
-                <if test='admGb == "3"'>
-                    tbagile_fran_info_admi
                 </if>
             where 1=1
                 and upjong_cd not in ('Q02004','Q08002','Q08004')
-            <if test='areaCd != null'>
-                <if test='admGb == "1"'>
-                    and mega_cd = #{areaCd}
-                </if>
-                <if test='admGb == "2"'>
-                    and cty_cd = #{areaCd}
-                </if>
-                <if test='admGb == "3"'>
-                    and admi_cd = #{areaCd}
-                </if>
+        <if test='areaCd != null'>
+            <if test='admGb == "1"'>
+                and mega_cd = #{areaCd}
             </if>
+            <if test='admGb == "2"'>
+                and cty_cd = #{areaCd}
+            </if>
+            <if test='admGb == "3"'>
+                and admi_cd = #{areaCd}
+            </if>
+        </if>
             <if test='upjongCd != null'>
                 and upjong_cd like #{upjongCd}||'%'
             </if>

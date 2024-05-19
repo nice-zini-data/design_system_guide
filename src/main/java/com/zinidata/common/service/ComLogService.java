@@ -56,14 +56,13 @@ public class ComLogService {
                 }
             }
         }
-
         if(!ZiniUtil.isEmpty(token)) {
             if(memNo > 0){
                 String url = String.valueOf(request.getRequestURL());
                 ComLogVO logVo = new ComLogVO();
                 logVo.setDetail(url);
                 logVo.setMemNo(memNo);
-                logVo.setPrjType("eatout");
+                logVo.setPrjType("agile");
                 logVo.setIp(getClientIP(request));
                 int result = comLogMapper.setServiceLog(logVo);
             }else{
@@ -71,6 +70,14 @@ public class ComLogService {
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }
+        }else{
+            String url = String.valueOf(request.getRequestURL());
+            ComLogVO logVo = new ComLogVO();
+            logVo.setDetail(url);
+            logVo.setMemNo(memNo);
+            logVo.setPrjType("agile");
+            logVo.setIp(getClientIP(request));
+            int result = comLogMapper.setServiceLog(logVo);
         }
 
     }

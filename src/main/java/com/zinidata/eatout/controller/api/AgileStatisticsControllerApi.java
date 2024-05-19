@@ -1,6 +1,7 @@
 package com.zinidata.eatout.controller.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.zinidata.common.service.ComLogService;
 import com.zinidata.eatout.service.AgileStatisticsService;
 import com.zinidata.eatout.vo.AgileStatisticsVO;
 import io.swagger.annotations.*;
@@ -8,12 +9,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/agile/statistics")
 public class AgileStatisticsControllerApi {
 
     private final AgileStatisticsService agileStatisticsService;
+    private final ComLogService comLogService;
 
     /***
      * 지역, 업종, 기간, 정보 리스트
@@ -27,8 +32,9 @@ public class AgileStatisticsControllerApi {
     @ApiResponses(value = {
             @ApiResponse(code=200, message = "외식데이터 결과 리스트 호출")
     })
-    public String getOuteatList(AgileStatisticsVO agileStatisticsVO) throws Exception {
+    public String getOuteatList(HttpServletRequest request, HttpServletResponse response,AgileStatisticsVO agileStatisticsVO) throws Exception {
         System.out.println(agileStatisticsVO);
+        comLogService.setServiceLog(request, response, 0);
         String result = agileStatisticsService.getOuteatList(agileStatisticsVO);
         return result;
     }
@@ -45,8 +51,9 @@ public class AgileStatisticsControllerApi {
     @ApiResponses(value = {
             @ApiResponse(code=200, message = "외식데이터 결과 리스트 호출")
     })
-    public String getDeliveryList(AgileStatisticsVO agileStatisticsVO) throws Exception {
+    public String getDeliveryList(HttpServletRequest request, HttpServletResponse response,AgileStatisticsVO agileStatisticsVO) throws Exception {
         System.out.println(agileStatisticsVO);
+        comLogService.setServiceLog(request, response, 0);
         String result = agileStatisticsService.getDeliveryList(agileStatisticsVO);
         return result;
     }
@@ -63,8 +70,9 @@ public class AgileStatisticsControllerApi {
     @ApiResponses(value = {
             @ApiResponse(code=200, message = "Pos데이터 결과 리스트 호출")
     })
-    public String getPosList(AgileStatisticsVO agileStatisticsVO) throws Exception {
+    public String getPosList(HttpServletRequest request, HttpServletResponse response,AgileStatisticsVO agileStatisticsVO) throws Exception {
         System.out.println(agileStatisticsVO);
+        comLogService.setServiceLog(request, response, 0);
         String result = agileStatisticsService.getPosList(agileStatisticsVO);
         return result;
     }
@@ -81,8 +89,9 @@ public class AgileStatisticsControllerApi {
     @ApiResponses(value = {
             @ApiResponse(code=200, message = "외식데이터 결과 리스트 호출")
     })
-    public String getLiviList(AgileStatisticsVO agileStatisticsVO) throws Exception {
+    public String getLiviList(HttpServletRequest request, HttpServletResponse response,AgileStatisticsVO agileStatisticsVO) throws Exception {
         System.out.println(agileStatisticsVO);
+        comLogService.setServiceLog(request, response, 0);
         String result = agileStatisticsService.getLiviList(agileStatisticsVO);
         return result;
     }
@@ -99,8 +108,9 @@ public class AgileStatisticsControllerApi {
     @ApiResponses(value = {
             @ApiResponse(code=200, message = "외식데이터 결과 리스트 호출")
     })
-    public String getHousList(AgileStatisticsVO agileStatisticsVO) throws Exception {
+    public String getHousList(HttpServletRequest request, HttpServletResponse response,AgileStatisticsVO agileStatisticsVO) throws Exception {
         System.out.println(agileStatisticsVO);
+        comLogService.setServiceLog(request, response, 0);
         String result = agileStatisticsService.getHousList(agileStatisticsVO);
         return result;
     }
@@ -117,8 +127,9 @@ public class AgileStatisticsControllerApi {
     @ApiResponses(value = {
             @ApiResponse(code=200, message = "프랜차이즈 점유율 결과 리스트 호출")
     })
-    public String getFranList(AgileStatisticsVO agileStatisticsVO) throws Exception {
+    public String getFranList(HttpServletRequest request, HttpServletResponse response,AgileStatisticsVO agileStatisticsVO) throws Exception {
         System.out.println(agileStatisticsVO);
+        comLogService.setServiceLog(request, response, 0);
         String result = agileStatisticsService.getFranList(agileStatisticsVO);
         return result;
     }
