@@ -56,7 +56,8 @@ public class ComLogService {
                 }
             }
         }
-
+        System.err.println(token);
+        System.err.println(ZiniUtil.isEmpty(token));
         if(!ZiniUtil.isEmpty(token)) {
             if(memNo > 0){
                 String url = String.valueOf(request.getRequestURL());
