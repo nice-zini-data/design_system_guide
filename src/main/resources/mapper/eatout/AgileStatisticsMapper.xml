@@ -963,15 +963,15 @@
                 from (
                     select
                     <if test='dateType == "1"'>
-                        concat(a.year,'년') as yyyymm
+                        concat(a.year,'년') as yyyymm,
                     </if>
                     <if test='dateType == "2"'>
                         concat(b.year,'년 ',
                         case when b.half = '1' then '전반기' else '후반기' end
-                        ) as yyyymm
+                        ) as yyyymm,
                     </if>
                     <if test='dateType == "3"'>
-                        concat(b.year,'년 ',b.quarter,'분기') as yyyymm
+                        concat(b.year,'년 ',b.quarter,'분기') as yyyymm,
                     </if>
                         main_key,
                         name1,
@@ -988,9 +988,9 @@
                     ) a left join(
                         select
                             year,replace(quarter,'Q','') as quarter,
-                        <![CDATA[
-                            ,case when quarter <= '2' then '1' else '2' end as half
-                        ]]>
+                            <![CDATA[
+                            case when quarter <= '2' then '1' else '2' end as half,
+                            ]]>
                             main_key,
                             name1,
                             upjong3_cd,
@@ -1001,9 +1001,9 @@
                             fran_upjong3_cd,
                             fran_upjong3_nm,
                             rn
-                        from tbagile_fran
+                        from cmapap.tbagile_fran
                         where 1=1
-                            and upjong_cd not in ('Q02004','Q08002','Q08004')
+                            and upjong3_cd not in ('Q02004','Q08002','Q08004')
                     <if test='areaCd != null'>
                         <if test='admGb == "1"'>
                             and mega_cd = #{areaCd}
@@ -1016,7 +1016,7 @@
                         </if>
                     </if>
                         <if test='upjongCd != null'>
-                            and upjong_cd like #{upjongCd}||'%'
+                            and upjong3_cd like #{upjongCd}||'%'
                         </if>
                     ) b
                     on 1=1
