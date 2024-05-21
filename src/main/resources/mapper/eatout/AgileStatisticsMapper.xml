@@ -967,7 +967,7 @@
                     </if>
                     <if test='dateType == "2"'>
                         concat(b.year,'년 ',
-                        case when b.half = '1' then '전반기' else '후반기' end
+                            case when b.half = '1' then '전반기' else '후반기' end
                         ) as yyyymm,
                     </if>
                     <if test='dateType == "3"'>
