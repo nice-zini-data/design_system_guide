@@ -246,6 +246,7 @@ function fn_setArea_sub(id, response, param) {
     });
 
     if(tmpadmiVal == 1){
+        $('#area_mega_2').children('option:not(:first)').remove();
         $("#area_mega_2").append(html);
     }else if(tmpadmiVal == 2){
         $('#area_cty_2').children('option:not(:first)').remove();
