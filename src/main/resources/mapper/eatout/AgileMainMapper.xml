@@ -193,7 +193,7 @@
                 ,concat(year,'년',quarter,'분기') as date_nm
             </if>
             from
-                tbagile_fran_info a
+                tbagile_fran a
             group by
                 1,2
             order by
