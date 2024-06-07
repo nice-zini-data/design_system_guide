@@ -12,7 +12,7 @@
     </select>
 
     <insert id="setMember" parameterType="com.zinidata.common.vo.ComLoginVO">
-        insert into  tb_eatout_member(mem_no, login_id, pwd, mem_stat, mem_nm,vno, mobile_no, email_addr, mem_type, sms_yn ,email_yn ,alarm_yn ,subs_dt ,start_dt
+        insert into  tb_design_member(mem_no, login_id, pwd, mem_stat, mem_nm,vno, mobile_no, email_addr, mem_type, sms_yn ,email_yn ,alarm_yn ,subs_dt ,start_dt
                         ,end_dt,temp_pwd_yn,interest_areacd1,interest_areacd2,interest_areacd3,interest_upjong1,interest_upjong2,interest_upjong3
                         ,crt_dt,crt_id,joinsite_corp_cd,svc_yn)
             values(#{memNo}, #{loginId},#{pwd}, #{memStat}, #{memNm}, #{vno}, #{mobileNo}, #{emailAddr}, #{memType}, #{smsYn}, #{emailYn}, #{alarmYn}, to_char(now(),'yyyymmdd'), to_char(now(),'yyyymmddHH24MISS')
@@ -25,20 +25,20 @@
     </insert>
 
     <insert id="setElectionMemberInfo" parameterType="com.zinidata.common.vo.ComLoginVO">
-        insert into tb_eatout_member_info values (#{memNo}, #{eatoutArea}, (select eatout_gubun_cd from tb_eatout_info), #{gabeulGb}, #{authGubun})
+        insert into tb_design_member_info values (#{memNo}, #{designArea}, (select design_gubun_cd from tb_design_info), #{gabeulGb}, #{authGubun})
     </insert>
 
     <select id="loginIdDuplicated" resultType="integer">
-        select count(*) from tb_eatout_member where login_id = #{loginId}
+        select count(*) from tb_design_member where login_id = #{loginId}
     </select>
 
     <select id="memNoInfo" resultType="com.zinidata.common.vo.ComLoginVO">
         select a.*,b.*
-             , c.eatout_area , auth_gubun
-             , case when d.eatout_gubun_cd = '0' then '0'
+             , c.design_area , auth_gubun
+             , case when d.design_gubun_cd = '0' then '0'
                     else c.gabeul_gb end gabeul_gb
-             , d.eatout_gubun_cd, d.eatout_th
-        from tb_eatout_member a, cj_member b, tb_eatout_member_info c, tb_eatout_info d
+             , d.design_gubun_cd, d.design_th
+        from tb_design_member a, cj_member b, tb_design_member_info c, tb_design_info d
         where b.cj_code='ELEC'
           and a.mem_no = #{memNo}
           and a.mem_no = b.mem_no
@@ -47,9 +47,9 @@
 
     <select id="getMember" resultType="com.zinidata.common.vo.ComLoginVO">
         select *
-        from  tb_eatout_member a
+        from  tb_design_member a
    left join cj_member b on a.mem_no = b.mem_no and b.cj_code=#{cjCode}
-   left join tb_eatout_member_info c on a.mem_no = c.mem_no
+   left join tb_design_member_info c on a.mem_no = c.mem_no
         where login_id = #{loginId}
         and pwd = #{pwd}
     </select>
@@ -149,7 +149,7 @@
 
     <select id="getLoginId" resultType="com.zinidata.common.vo.ComLoginVO">
         select *
-        from tb_eatout_member a
+        from tb_design_member a
            , cj_member b
         where a.mem_no = b.mem_no
           and b.cj_code ='ELEC'
@@ -159,7 +159,7 @@
 
     <select id="getPasswordReset" resultType="com.zinidata.common.vo.ComLoginVO">
         select *
-        from tb_eatout_member a
+        from tb_design_member a
            , cj_member b
         where a.mem_no = b.mem_no
           and b.cj_code ='ELEC'
@@ -171,20 +171,20 @@
 
     <select id="passwordCheck" resultType="integer">
         select count(*)
-        from tb_eatout_member
+        from tb_design_member
         where mem_no=#{memNo}
           and pwd = #{pwdBefore}
     </select>
 
     <update id="updatePassword" parameterType="com.zinidata.common.vo.ComLoginVO">
-        update tb_eatout_member
+        update tb_design_member
         set pwd = #{pwd}
         , temp_pwd_yn = #{tempPwdYn}
         where mem_no = #{memNo}
     </update>
 
     <update id="setMemberInfoUpdate" parameterType="com.zinidata.common.vo.ComLoginVO">
-        update tb_eatout_member
+        update tb_design_member
         set mem_nm =#{memNm}
           , email_addr =#{emailAddr}
           , upd_dt = now()
@@ -203,60 +203,60 @@
 
     <!-- 선거구 정보 -->
     <update id="setMemberInfoUpdate3" parameterType="com.zinidata.common.vo.ComLoginVO">
-        update tb_eatout_member_info
-        set eatout_area = #{eatoutArea}
+        update tb_design_member_info
+        set design_area = #{designArea}
           , gabeul_gb = #{gabeulGb}
           , auth_gubun = #{authGubun}
         where mem_no = #{memNo}
     </update>
 
     <update id="setMemberToken">
-        update tb_eatout_member
+        update tb_design_member
         set token = #{token}
         where mem_no = #{memNo}
     </update>
 
     <select id="getMemNotice" resultType="com.zinidata.common.vo.ComLoginVO">
         -- getMemNotice
-        select a.eatout_gubun as eatout_gubun, a.eatout_dday
+        select a.design_gubun as design_gubun, a.design_dday
             , b.title, b.d_day, b.d_day_time, b.id, to_char(start_dt, 'YYYY-MM-DD') as start_dt
         from (
-            select eatout_gubun, eatout_gubun_cd
-                        , to_date(eatout_date, 'yyyymmdd') as eatout_date
-                        , to_char(to_date(eatout_date, 'yyyymmdd') - now(), 'dd') as eatout_dday
+            select design_gubun, design_gubun_cd
+                        , to_date(design_date, 'yyyymmdd') as design_date
+                        , to_char(to_date(design_date, 'yyyymmdd') - now(), 'dd') as design_dday
                 from (
-                         select eatout_gubun
-                              , eatout_gubun_cd
-                              , min(eatout_date) as eatout_date
-                         from tb_eatout_data
-                         where eatout_gubun_cd = '0'
-                           and to_date(eatout_date, 'yyyymmdd') > now()
+                         select design_gubun
+                              , design_gubun_cd
+                              , min(design_date) as design_date
+                         from tb_design_data
+                         where design_gubun_cd = '0'
+                           and to_date(design_date, 'yyyymmdd') > now()
                          group by 1,2
                          union all
-                         select eatout_gubun
-                              , eatout_gubun_cd
-                              , min(eatout_date) as eatout_date
-                         from tb_eatout_data
-                         where eatout_gubun_cd = '1'
-                           and to_date(eatout_date, 'yyyymmdd') > now()
+                         select design_gubun
+                              , design_gubun_cd
+                              , min(design_date) as design_date
+                         from tb_design_data
+                         where design_gubun_cd = '1'
+                           and to_date(design_date, 'yyyymmdd') > now()
                          group by 1,2
                          union all
-                         select eatout_gubun
-                              , eatout_gubun_cd
-                              , min(eatout_date) as eatout_date
-                         from tb_eatout_data
-                         where eatout_gubun_cd = '2'
-                           and to_date(eatout_date, 'yyyymmdd') > now()
+                         select design_gubun
+                              , design_gubun_cd
+                              , min(design_date) as design_date
+                         from tb_design_data
+                         where design_gubun_cd = '2'
+                           and to_date(design_date, 'yyyymmdd') > now()
                          group by 1,2
                      ) a
-                order by eatout_dday desc
+                order by design_dday desc
                 limit 1
         ) a, (
             select *
                  , to_char(start_dt - CURRENT_DATE,'DD')::numeric as d_day
                  , to_char(start_dt - now(), 'HH24:MI:SS') as d_day_time
-                 , (select distinct eatout_gubun from tb_eatout_data where eatout_gubun_cd = eatout_target) as eatout_target_nm
-            from tb_eatout_schedule
+                 , (select distinct design_gubun from tb_design_data where design_gubun_cd = design_target) as design_target_nm
+            from tb_design_schedule
             where mem_no = #{memNo}::varchar
               and start_dt >= CURRENT_DATE
               and end_dt <![CDATA[<]]>  now() + interval '15 days'

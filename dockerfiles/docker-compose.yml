@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  agile_outeat:
-    container_name: agile_outeat
+  Design_outeat:
+    container_name: Design_outeat
     build: .
     restart: always
     extra_hosts:

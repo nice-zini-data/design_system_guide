@@ -55,14 +55,14 @@ public class ComLoginVO {
 
     private String pwdBefore;
 
-    private String eatoutArea;
+    private String designArea;
     private String authGubun;
-    private String eatoutGubunCd;
+    private String designGubunCd;
     private String gabeulGb;
     private String token;
 
-    private String eatoutGubun;
-    private String eatoutDday;
+    private String designGubun;
+    private String designDday;
     private String title;
     private String dDay;
     private String dDayTime;

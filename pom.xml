@@ -12,8 +12,8 @@
     <artifactId>zinidata</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>agile_outeat</name>
-    <description>agile_outeat</description>
+    <name>Design_outeat</name>
+    <description>Design_outeat</description>
     <properties>
         <java.version>1.8</java.version>
         <spring-boot-version>2.5.4</spring-boot-version>

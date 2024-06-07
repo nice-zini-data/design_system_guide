@@ -62,7 +62,7 @@ public class ComLogService {
                 ComLogVO logVo = new ComLogVO();
                 logVo.setDetail(url);
                 logVo.setMemNo(memNo);
-                logVo.setPrjType("agile");
+                logVo.setPrjType("Design");
                 logVo.setIp(getClientIP(request));
                 int result = comLogMapper.setServiceLog(logVo);
             }else{
@@ -75,7 +75,7 @@ public class ComLogService {
             ComLogVO logVo = new ComLogVO();
             logVo.setDetail(url);
             logVo.setMemNo(memNo);
-            logVo.setPrjType("agile");
+            logVo.setPrjType("Design");
             logVo.setIp(getClientIP(request));
             int result = comLogMapper.setServiceLog(logVo);
         }
