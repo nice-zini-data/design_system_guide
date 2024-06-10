@@ -1251,5 +1251,16 @@ body::-webkit-scrollbar-thumb{background:#dfdfdf;border-radius:999px;width:4px;}
 
 /*### tit ###*/
 .tit_xl_b{font-size:36px;font-weight:700;line-height:134%;letter-spacing: -0.18px;}
+.tit_l_b{font-size:28px;font-weight:700;line-height:142%;letter-spacing: -0.14px;}
+.tit_l_sb{font-size:28px;font-weight:600;line-height:142%;letter-spacing: -0.14px;}
+.tit_m_b{font-size:24px;font-weight:700;line-height:148%;letter-spacing: -0.192px;}
+.tit_m_sb{font-size:24px;font-weight:600;line-height:148%;letter-spacing: -0.192px;}
+.tit_s_b{font-size:20px;font-weight:700;line-height:158%;letter-spacing: -0.2px;}
+.tit_s_sb{font-size:20px;font-weight:600;line-height:158%;letter-spacing: -0.2px;}
+.tit_s_m{font-size:20px;font-weight:500;line-height:158%;letter-spacing: -0.2px;}
+.tit_xs_b{font-size:18px;font-weight:700;line-height:168%;letter-spacing: -0.36px;}
+.tit_xs_sb{font-size:18px;font-weight:600;line-height:168%;letter-spacing: -0.36px;}
+.tit_xs_m{font-size:18px;font-weight:500;line-height:168%;letter-spacing: -0.36px;}
+
 /*### txt ###*/
 /*### lab ###*/
