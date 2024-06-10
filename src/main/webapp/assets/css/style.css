@@ -1,0 +1,7 @@
+/*design system guide 레이아웃 ST - 다른 프로젝트에선 삭제하기*/
+@import url('/assets/css/designSystemGuide.css');
+/*design system guide 레이아웃 ED*/
+
+/*공통 css [design system guide]*/
+.wrap {position:relative;clear:both;}
+
