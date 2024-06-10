@@ -28,3 +28,4 @@ nav li {height:100%;display:flex;justify-content: start;align-items: center;curs
 .typo_table td:nth-child(2) p:last-child{margin-right:0;}
 .typo_table td:nth-child(2) p:after {content:'/';display:inline-block;font-size:14px;color:var(--gray_400);position:absolute;top:50%;right:-9px;transform:translateY(-50%);}
 .typo_table td:nth-child(2) p:last-child:after{display:none;}
+.typo_table >

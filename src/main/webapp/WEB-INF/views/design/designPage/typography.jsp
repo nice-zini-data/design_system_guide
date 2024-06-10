@@ -15,6 +15,8 @@
     </div>
     
     <div class="typo_table mt40">
+        <div class="Bg"><p>PC</p></div>
+        <div class="Bg"><p>MOBILE (480~)</p></div>
         <table>
             <colgroup>
                 <col width="20%"/>

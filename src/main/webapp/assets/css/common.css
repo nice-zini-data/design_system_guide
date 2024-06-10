@@ -1264,3 +1264,17 @@ body::-webkit-scrollbar-thumb{background:#dfdfdf;border-radius:999px;width:4px;}
 
 /*### txt ###*/
 /*### lab ###*/
+
+/*모바일 폰트 사이즈 변경*/
+@media screen and (max-width: 480px) {
+    /*### tit ###*/
+    .tit_xl_b{font-size:28px;line-height:142%;letter-spacing: -0.5px;}
+    .tit_l_b{font-size:24px;line-height:148%;letter-spacing: -0.8px;}
+    .tit_l_sb{font-size:24px;line-height:148%;letter-spacing: -0.8px;}
+    .tit_m_b{font-size:20px;line-height:158%;letter-spacing: -1px;}
+    .tit_m_sb{font-size:20px;line-height:158%;letter-spacing: -1px;}
+    .tit_s_b{font-size:18px;line-height:158%;letter-spacing: -1px;}
+    .tit_s_sb{font-size:18px;line-height:158%;letter-spacing: -1px;}
+    .tit_s_m{font-size:18px;line-height:158%;letter-spacing: -1px;}
+
+}
