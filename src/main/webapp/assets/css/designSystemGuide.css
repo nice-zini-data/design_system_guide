@@ -1,5 +1,5 @@
 /*header*/
-nav {position:fixed;top:0;left:241px;width:100%;background:var(--mono_wh)}
+nav {position:fixed;top:0;left:241px;width:100%;background:var(--mono_wh);z-index:999}
 .nav {height:72px;width:100%;border-bottom:1px solid var(--gray_50);}
 nav ul {display:flex;justify-content: start;align-items: center;height:100%;overflow:hidden;}
 nav li {height:100%;display:flex;justify-content: start;align-items: center;cursor:pointer;}
@@ -20,12 +20,19 @@ nav li {height:100%;display:flex;justify-content: start;align-items: center;curs
 .subCommonTitle {font-size:36px;font-weight:700;line-height:134%;letter-spacing: -0.18px;margin-bottom:16px;}
 .subCommonText {font-size:16px;font-weight:400;line-height:160%;color:var(--gray_600)}
 
-.typo_table {text-align:center;}
+.typo_table {text-align:center;position:relative;}
 .typo_table tr{clear:both;border-bottom:1px solid var(--gray_50)}
 .typo_table tr th {font-size:14px;font-weight:500;line-height:168%;letter-spacing: -0.28px;color:var(--gray_800);padding:16px 0;background:var(--gray_100)}
 .typo_table td {font-size:18px;font-weight:600;line-height:168%;letter-spacing: -0.36px;padding:36px 0}
-.typo_table td:nth-child(2) p{float:left;position:relative;margin-right:13px;}
+.typo_table td:nth-child(2){display:ruby-text}
+.typo_table td:nth-child(2) p{position:relative;margin-right:13px;}
 .typo_table td:nth-child(2) p:last-child{margin-right:0;}
 .typo_table td:nth-child(2) p:after {content:'/';display:inline-block;font-size:14px;color:var(--gray_400);position:absolute;top:50%;right:-9px;transform:translateY(-50%);}
 .typo_table td:nth-child(2) p:last-child:after{display:none;}
-.typo_table >
+.typo_table table p {cursor:pointer;}
+.typo_table table p:hover {color:var(--pri_500);}
+.typo_tableBg {width:29%;position:absolute;top:-60px;right:0;z-index:-1;background:rgba(18,18,18,0.04);border-radius: 16px;height:calc(100% + 60px)}
+.typo_tableBg:first-child{right:30%;}
+.typo_tableBg p {font-size:18px;font-weight:600;line-height: 158%;letter-spacing: -0.18px;color:var(--gray_600);padding:16px 0}
+.typo_mo_h{height:calc(100% - 45px)}
+.typo_mo_h02 {height:calc(100% - 146px)}
