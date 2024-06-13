@@ -36,3 +36,9 @@ nav li {height:100%;display:flex;justify-content: start;align-items: center;curs
 .typo_tableBg p {font-size:18px;font-weight:600;line-height: 158%;letter-spacing: -0.18px;color:var(--gray_600);padding:16px 0}
 .typo_mo_h{height:calc(100% - 45px)}
 .typo_mo_h02 {height:calc(100% - 146px)}
+
+/*레이아웃*/
+.layoutBg {border:1px solid var(--gray_100);border-radius:8px;margin-bottom:20px;padding:16px;}
+.layoutBg > div {margin:8px 0;background:var(--gray_30);border-radius:8px;padding:8px;clear:both;border-top-right-radius:0;}
+.layoutCopyBtn {float:right;background:var(--gray_30);padding:6px;color:var(--gray_800);border-top-left-radius:8px;border-top-right-radius:8px;border-top:1px solid var(--gray_100);border-left:1px solid var(--gray_100);border-right:1px solid var(--gray_100);border-bottom:0;}
+.layoutCopyBtn:hover {color:var(--pri_500)}

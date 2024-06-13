@@ -1325,3 +1325,9 @@ body::-webkit-scrollbar-thumb{background:#dfdfdf;border-radius:999px;width:4px;}
     .txt_m_r{font-size:13px;}
 
 }
+
+/*layout*/
+.layout_l {display:flex;align-items: center;justify-content: start;}
+.layout_c {display:flex;align-items: center;justify-content: center;}
+.layout_r {display:flex;align-items: center;justify-content: end;}
+.layout_lcr {display:flex;align-items: center;justify-content: space-between;}
