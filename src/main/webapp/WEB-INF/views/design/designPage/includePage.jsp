@@ -12,26 +12,14 @@
     </div>
 </nav>
 
-<!--div class="sideTabTitleBox">
-    <p class="sideTabTitle">Drawer</p>
-    <span class="sideTabTxt">타이틀바의 햄버거 버튼을 클릭하면 나타나는 메뉴로, 항상 타이틀바와 함께 사용됩니다.<br/>
-        화면 최상단 우측 혹은 좌측의 햄버거 버튼이 위치한 방향에서 반대방향으로 스와이프되며 등장합니다.</span>
-</div>
-<div class="subTabChangeTab">
-    <ul>
-        <li>sub cont</li>
-        <li>sub cont</li>
-        <li>sub cont</li>
-    </ul>
-</div-->
 <div class="includeContent">
-
-
     <section class="subTabChangeCont">
         <!--폰트-->
         <!--%@ include file="/WEB-INF/views/design/designPage/typography.jsp" %-->
         <!--레이아웃-->
-        <%@ include file="/WEB-INF/views/design/designPage/layoutPage.jsp" %>
+        <!--%@ include file="/WEB-INF/views/design/designPage/layoutPage.jsp" %-->
+        <!--색상-->
+        <%@ include file="/WEB-INF/views/design/designPage/colorPage.jsp" %>
     </section>
     <section class="subTabChangeCont">
 
