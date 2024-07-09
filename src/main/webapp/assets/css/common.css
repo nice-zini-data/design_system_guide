@@ -103,7 +103,7 @@
     --blue_200:#A7CFF0;
     --blue_300:#6CB0E6;
     --blue_400:#3592DC;
-    --blue_500:#0175D1;
+    --blue_500:#295CF5;
     --blue_600:#015DA7;
     --blue_700:#01447A;
     --blue_800:#00335C;
@@ -229,7 +229,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 input:autofill, input:autofill:hover, input:autofill:focus, input:autofill:active {-webkit-text-fill-color: #000;-webkit-box-shadow: 0 0 0px 1000px #fff inset;box-shadow: 0 0 0px 1000px #fff inset;transition: background-color 5000s ease-in-out 0s;}
 
 /*사파리 버튼 초기화*/
-input[type="text"], input[type="password"], input[type="button"], input[type="submit"], textarea { -webkit-appearance: none; -webkit-border-radius: 0; }
+/*input[type="text"], input[type="password"], input[type="button"], input[type="submit"], textarea { -webkit-appearance: none; -webkit-border-radius: 0; }*/
 
 /*placeholder*/
 input::-ms-input-placeholder { font-weight: 400; color: #a2a2a2;}
@@ -1331,3 +1331,62 @@ body::-webkit-scrollbar-thumb{background:#dfdfdf;border-radius:999px;width:4px;}
 .layout_c {display:flex !important;align-items: center !important;justify-content: center !important;}
 .layout_r {display:flex !important;align-items: center !important;justify-content: end !important;}
 .layout_lcr {display:flex !important;align-items: center !important;justify-content: space-between !important;}
+
+/*top 버튼*/
+.topBtn {width:48px;height:48px;border-radius:50%;position:fixed;bottom:20px;right:20px;cursor:pointer;}
+.topBtn:hover {opacity: .7}
+.topBtn:after {content:'▲';display:inline-block;font-size:10px;color:var(--mono_wh);position:absolute;top:calc(50% - 10px);left:50%;transform:translate(-50%,-50%)}
+.topBtn:before {content:'TOP';display:inline-block;font-size:14px;color:var(--mono_wh);position:absolute;top:calc(50% + 8px);left:50%;transform:translate(-50%,-50%);}
+
+/*img*/
+.imgBox{position:relative;}
+.size01{width:1px;height:1px;}
+.size02{width:2px;height:2px;}
+.size03{width:3px;height:3px;}
+.size04{width:4px;height:4px;}
+.size05{width:5px;height:5px;}
+.size06{width:6px;height:6px;}
+.size07{width:7px;height:7px;}
+.size08{width:8px;height:8px;}
+.size09{width:9px;height:9px;}
+.size10{width:10px;height:10px;}
+.size11{width:11px;height:11px;}
+.size12{width:12px;height:12px;}
+.size13{width:13px;height:13px;}
+.size14{width:14px;height:14px;}
+.size15{width:15px;height:15px;}
+.size16{width:16px;height:16px;}
+.size17{width:17px;height:17px;}
+.size18{width:18px;height:18px;}
+.size19{width:19px;height:19px;}
+.size20{width:20px;height:20px;}
+.size22{width:22px;height:22px;}
+.size24{width:24px;height:24px;}
+.size28{width:28px;height:28px;}
+.size32{width:32px;height:32px;}
+.size48{width:48px;height:48px;}
+.size52{width:52px;height:52px;}
+.size62{width:62px;height:62px;}
+.imgBox img{width:100%;height:100%;}
+.imgBox.iconBg {background-size:cover;background-repeat: no-repeat;}
+
+.icon_home {background:url('/assets/images/icons/home.svg');}
+.icon_search {background:url('/assets/images/icons/search.svg');}
+.icon_clip {background:url('/assets/images/icons/clip.svg');}
+.icon_document {background:url('/assets/images/icons/document.svg');}
+.icon_headphone {background:url('/assets/images/icons/headphone.svg');}
+.icon_image {background:url('/assets/images/icons/image.svg');}
+.icon_ruler {background:url('/assets/images/icons/ruler.svg');}
+.icon_search {background:url('/assets/images/icons/search.svg');}
+.icon_three_points {background:url('/assets/images/icons/three_points.svg');}
+.icon_up_down_arrow_bk {background:url('/assets/images/icons/up_down_arrow_bk.svg');}
+
+.active .icon_home {background:url('/assets/images/icons/home_blue.svg');}
+.active .icon_clip {background:url('/assets/images/icons/clip_blue.svg');}
+.active .icon_document {background:url('/assets/images/icons/document_blue.svg');}
+.active .icon_headphone {background:url('/assets/images/icons/headphone_blue.svg');}
+.active .icon_image {background:url('/assets/images/icons/image_blue.svg');}
+.active .icon_ruler {background:url('/assets/images/icons/ruler_blue.svg');}
+.active .icon_search {background:url('/assets/images/icons/search_blue.svg');}
+.active .icon_three_points {background:url('/assets/images/icons/three_points_blue.svg');}
+.active .icon_up_down_arrow_bk {background:url('/assets/images/icons/up_down_arrow_bk_blue.svg');}

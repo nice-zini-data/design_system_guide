@@ -17,9 +17,9 @@
         <!--폰트-->
         <!--%@ include file="/WEB-INF/views/design/designPage/typography.jsp" %-->
         <!--레이아웃-->
-        <!--%@ include file="/WEB-INF/views/design/designPage/layoutPage.jsp" %-->
+        <%@ include file="/WEB-INF/views/design/designPage/layoutPage.jsp" %>
         <!--색상-->
-        <%@ include file="/WEB-INF/views/design/designPage/colorPage.jsp" %>
+        <!--%@ include file="/WEB-INF/views/design/designPage/colorPage.jsp" %-->
     </section>
     <section class="subTabChangeCont">
 

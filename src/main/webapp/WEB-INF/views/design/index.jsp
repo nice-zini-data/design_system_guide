@@ -20,4 +20,15 @@
     </div>
     <!--상세 내용 영역 ED-->
 
+    <div class="topBtn gray_bg_300"></div>
 </div>
+<script>
+    $(function(){
+        //top 버튼 이벤트
+        $('.topBtn').click(function(){
+            $('body, html').animate({
+                scrollTop: 0
+            }, 400);
+        });
+    });
+</script>

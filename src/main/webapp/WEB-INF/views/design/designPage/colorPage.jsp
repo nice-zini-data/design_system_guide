@@ -1318,61 +1318,61 @@
             <p class="color_txt mb40">그래프, 배너, 그래픽 요소 등의 콘텐츠에 사용되는 컬러입니다. 규정된 색상을 사용하는 것을 권장하며, 다른 색상이 필요할 경우 Rainbow Color 내에서 추출해 사용합니다.</p>
             <ul class="color_box mt30 mb30 color_w10_box">
                 <li>
-                    <div class="contents1">
+                    <div class="pri_bg_500">
                         <p class="mono_wh">Contents1</p>
                     </div>
                     <span class="">#3366FF</span>
                 </li>
                 <li>
-                    <div class="contents2">
+                    <div class="pri_bg_700">
                         <p class="mono_wh">Contents 2</p>
                     </div>
                     <span class="">#1E3C97</span>
                 </li>
                 <li>
-                    <div class="contents3">
+                    <div class="green_bg_300">
                         <p class="">Contents 3</p>
                     </div>
                     <span class="">#01D281</span>
                 </li>
                 <li>
-                    <div class="contents4">
+                    <div class="cyan_bg_200">
                         <p class="">Contents4</p>
                     </div>
-                    <span class="">#0BC9D7</span>
+                    <span class="">#00DFEF</span>
                 </li>
                 <li>
-                    <div class="contents5">
+                    <div class="sec_bg_300">
                         <p class="">Contents5</p>
                     </div>
                     <span class="">#2EB7E5</span>
                 </li>
                 <li>
-                    <div class="contents6">
+                    <div class="blue_bg_400">
                         <p class="">Contents6</p>
                     </div>
                     <span class="">#3592DC</span>
                 </li>
                 <li>
-                    <div class="contents7">
+                    <div class="purple_bg_300">
                         <p class="">Contents7</p>
                     </div>
                     <span class="">#B39AFF</span>
                 </li>
                 <li>
-                    <div class="contents8">
+                    <div class="pink_bg_300">
                         <p class="">Contents8</p>
                     </div>
                     <span class="">#FF82A3</span>
                 </li>
                 <li>
-                    <div class="contents9">
+                    <div class="yellow_bg_200">
                         <p class="">Contents9</p>
                     </div>
                     <span class="">#FFCC33</span>
                 </li>
                 <li>
-                    <div class="contents10">
+                    <div class="lime_bg_200">
                         <p class="">Contents10</p>
                     </div>
                     <span class="">#B7D75B</span>
@@ -1402,7 +1402,7 @@
                 <br/>이를 위해 Ultramarine blue를 기본으로 사용하면서 Family Service에서 추가/변경하여 사용할 수 있는 Theme Color를 제공합니다.`);
 
             }else if(tabLi.eq(1).hasClass('active')){
-                $('.sideTabTitleBox .sideTabTitle').text('RAINBOW COLORS');
+                $('.sideTabTitleBox .sideTabTitle').text('Rainbow Colors');
                 $('.sideTabTitleBox .subCommonText').html(`레인보우 컬러는 LEONARDOCOLOR.IO의 COLOR SCALES 를 참조하며, 필요할 경우에는 색상을 조정해 사용하되 되도록 수정하지 않는 것을 권장합니다.
                  <br/>각 색상별 대비는 문서 하단의 색상 대비표를 참고하여 설정합니다.`);
 
