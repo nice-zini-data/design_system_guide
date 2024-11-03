@@ -3,28 +3,43 @@ $(function(){
 });
 
 const sideListSearch = () => {
-    const sideSearch = document.getElementById('#sideSearch');
-    const sideListArr = document.querySelectorAll('.sideListSub li');
-    console.log(sideListArr);
-    const sideList = {}
+    $('.sideListSearchShow').hide();
 
-    $('#sideSearch').on("keyup", function(){
-        const listSearch = $('#sideSearch').value;
+    $('#sideSearch').keyup(function(){
 
-        sideListArr.forEach(function(e){
-            if(!listSearch && listSearch === ''){
-                return console.log('hide')
+        var searchValue = $(this).val().toLowerCase();
+        var matchedItems = [];
+
+        $('.sideListSub li').each(function() {
+            var listItem = $(this);
+            var dataName = listItem.data('name').toLowerCase();
+
+            if (dataName.includes(searchValue)) {
+                listItem.show();
+                matchedItems.push(listItem.data('name'));
+                $('.sideListSearchShow').show();
+            }else {
+                listItem.hide();
             }
 
-            const dataList = e.dataset.name;
-            console.log(dataList)
-            if(listSearch.charAt(0) === dataList.charAt(0)){
-                console.log('on')
-
-            }else{
-                console.log('hide')
-            }
         });
 
+        // Update the preview list
+        var previewList = $('.sideListSearchShow');
+        previewList.empty();
+
+        var searchInput = $('#sideSearch').val();
+        matchedItems.forEach(function(item) {
+            previewList.append('<li>' + item + '</li>')
+
+            if(searchInput == 0 || searchInput == ''){
+                $('.sideListSearchShow').hide();
+            }
+
+        });
     });
+}
+
+const sideSearchEnter = () => {
+
 }
