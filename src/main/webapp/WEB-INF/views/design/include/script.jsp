@@ -9,3 +9,4 @@
 <script type="text/javascript" src="/assets/js/common.js"></script>
 <script type="text/javascript" src="/assets/project/js/chart/chartCommon.js"></script>
 <script type="text/javascript" src="/assets/project/js/side.js"></script>
+<script type="text/javascript" src="/assets/js/echarts.min.js"></script>

@@ -18,10 +18,7 @@
                 <p>Chart</p>
             </div>
             <ul class="sideListSub">
-                <li data-name="">eChart 환경 설정</li>
-                <li data-name="">Bar</li>
-                <li data-name="">Pie</li>
-                <li data-name="">Line</li>
+                <li data-name="">eChart</li>
             </ul>
         </div>
         <div class="sideListBox tabActive">
@@ -33,7 +30,7 @@
                 <li data-name="">공통 테이블</li>
             </ul>
         </div>
-        <div class="sideListBox tabActive">
+        <!--div class="sideListBox tabActive">
             <div class="sideListTit tabTit">
                 <div class="size20 imgBox mr8 iconBg icon_document"></div>
                 <p></p>
@@ -41,7 +38,7 @@
             <ul class="sideListSub">
                 <li data-name=""></li>
             </ul>
-        </div>
+        </div-->
 
     </div>
 
