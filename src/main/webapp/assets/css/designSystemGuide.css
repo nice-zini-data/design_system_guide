@@ -47,15 +47,15 @@ nav li {height:100%;display:flex;justify-content: start;align-items: center;curs
 .sideBottom:hover p {color:var(--pri_500)}
 
 /*상세내용*/
-.contInner {width:calc(100% - 320px);float: right;margin-top:72px;}
+.contInner {width:calc(100% - 320px);float: right;margin-top:72px;padding:16px;}
 .sideTabTitleBox {}
 .sideTabTitle {font-size:36px;font-weight:700;line-height:134%;letter-spacing: -0.18px;margin-bottom:16px;}
 .sideTabTxt {font-size:18px;font-weight:500;line-height:158%;letter-spacing: -0.18px;color:var(--gray_600)}
-.subTabChangeTab {border-bottom:1px solid var(--gray_50);padding:40px 180px 0 180px;}
+.subTabChangeTab {border-bottom:1px solid var(--gray_50);padding:40px 100px 0 100px;}
 .subTabChangeTab ul{height:auto;overflow:hidden;display:flex;justify-content: start;align-items: center;}
 .subTabChangeTab li {font-size:14px;font-weight:500;line-height:168%;letter-spacing: -0.28px;color:var(--gray_800);padding:4px 9px;text-align:center;}
 .subTabChangeTab li.active{border-bottom:2px solid var(--pri_500);color:var(--pri_500)}
-.subPage {padding:40px 180px 180px 180px;}
+.subPage {padding:0 100px 180px 100px;}
 .subCommonTitle {font-size:36px;font-weight:700;line-height:134%;letter-spacing: -0.18px;margin-bottom:16px;}
 .subCommonText {font-size:16px;font-weight:400;line-height:160%;color:var(--gray_600)}
 .subPageChange {display:none;}
@@ -128,5 +128,7 @@ nav li {height:100%;display:flex;justify-content: start;align-items: center;curs
 
 #onlyBody {width:calc(100% - 32px);margin:0 auto;}
 .subContInnerBox {background:var(--cool_gray_50);padding:24px;border-radius:16px;margin-top:24px;}
-.downloadText:hover{color:var(--blue_500)}
+.downloadText p{color:var(--blue_500)}
+.downloadText:hover p{color:var(--blue_600)}
 .chartSize {width:100%;height:400px;}
+.copyBtn{display:inline-block}

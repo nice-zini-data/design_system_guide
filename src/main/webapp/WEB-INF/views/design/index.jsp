@@ -14,7 +14,7 @@
     <div class="contInner">
 
         <div id="onlyBody">
-            <%@ include file="/WEB-INF/views/design/designPage/includePage.jsp" %>
+
         </div>
 
     </div>
@@ -32,3 +32,4 @@
         });
     });
 </script>
+<%@ include file="/WEB-INF/views/design/include/footer.jsp" %>

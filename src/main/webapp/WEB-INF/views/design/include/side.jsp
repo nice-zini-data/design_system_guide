@@ -7,43 +7,27 @@
 
     <div class="sideList">
         <div class="sideListBox tabActive">
-            <div class="sideListTit tabTit toggleNone">
-                <div class="size20 imgBox mr8 iconBg icon_home"></div>
-                <p>퍼블리싱 가이드</p>
-            </div>
-        </div>
-        <div class="sideListBox tabActive">
             <div class="sideListTit tabTit">
                 <div class="size20 imgBox mr8 iconBg icon_document"></div>
                 <p>Chart</p>
             </div>
             <ul class="sideListSub">
-                <li data-name="">eChart</li>
+                <li onclick="location.href='/design/designPage/eChartOption'">eChart</li>
             </ul>
         </div>
         <div class="sideListBox tabActive">
             <div class="sideListTit tabTit">
                 <div class="size20 imgBox mr8 iconBg icon_document"></div>
-                <p>Table</p>
+                <p>Tag</p>
             </div>
             <ul class="sideListSub">
-                <li data-name="">공통 테이블</li>
+                <li onclick="location.href='/design/designPage/table'">Table</li>
+                <li onclick="location.href='/design/designPage/colorPage'">Color</li>
+                <li onclick="location.href='/design/designPage/layoutPage'">Layout</li>
+                <li onclick="location.href='/design/designPage/typography'">Typography</li>
+                <li onclick="location.href='/design/designPage/button'">Button</li>
             </ul>
         </div>
-        <!--div class="sideListBox tabActive">
-            <div class="sideListTit tabTit">
-                <div class="size20 imgBox mr8 iconBg icon_document"></div>
-                <p></p>
-            </div>
-            <ul class="sideListSub">
-                <li data-name=""></li>
-            </ul>
-        </div-->
-
     </div>
 
-    <div class="sideBottom">
-        <div class="size20 imgBox mr8 iconBg icon_headphone"></div>
-        <p>추가 요청</p>
-    </div>
 </div>

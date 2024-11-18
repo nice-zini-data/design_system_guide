@@ -21,4 +21,34 @@ public class DesignMainController {
 //        comLogService.setServiceLog(request, response, 0);
         return "design/index";
     }
+
+    @GetMapping("/design/designPage/eChartOption")
+    public String eChartOption(HttpServletRequest request, HttpServletResponse response){
+        return "design/designPage/eChartOption";
+    }
+
+    @GetMapping("/design/designPage/table")
+    public String table(HttpServletRequest request, HttpServletResponse response){
+        return "design/designPage/table";
+    }
+
+    @GetMapping("/design/designPage/colorPage")
+    public String colorPage(HttpServletRequest request, HttpServletResponse response){
+        return "design/designPage/colorPage";
+    }
+
+    @GetMapping("/design/designPage/layoutPage")
+    public String layoutPage(HttpServletRequest request, HttpServletResponse response){
+        return "design/designPage/layoutPage";
+    }
+
+    @GetMapping("/design/designPage/typography")
+    public String typography(HttpServletRequest request, HttpServletResponse response){
+        return "design/designPage/typography";
+    }
+
+    @GetMapping("/design/designPage/button")
+    public String button(HttpServletRequest request, HttpServletResponse response){
+        return "design/designPage/button";
+    }
 }

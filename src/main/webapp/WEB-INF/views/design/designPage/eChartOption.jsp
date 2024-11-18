@@ -1,46 +1,79 @@
+<!-- main => index -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<div class="includeContent">
-    <section class="subTabChangeCont">
-        <div class="subContInner">
-            <p class="txt_xl_sb">EChart 환경 설정 및 Option</p>
-            <div class="subContInnerBox">
-                <a href="/assets/js/echarts.min.js" class="downloadText" download="echarts.min.js"><p class="">echart.min.js 파일 다운받기</p></a>
+<!--공통 header-->
+<%@ include file="/WEB-INF/views/design/include/head.jsp" %>
+<%@ include file="/WEB-INF/views/design/include/script.jsp" %>
 
-                <p class="txt_m_m mt16">js 파일 다운로드 후 상단 &lt;head&gt; &lt;/head&gt;에 추가</p>
+<div class="wrap">
 
-            </div>
-            <div class="subContInnerBox mt16">
-                <p class="txt_m_m mb16">Bar Chart</p>
-                <div class="whBox">
-                    <div class="chartSize" id="barChart"></div>
+    <!--좌측 사이드 바-->
+    <%@ include file="/WEB-INF/views/design/include/side.jsp" %>
+
+<div class="contInner">
+    <div class="subPage">
+        <section class="subTabChangeCont">
+        <div class="includeContent">
+            <section class="subTabChangeCont">
+                <div class="subContInner">
+                    <p class="txt_xl_sb">EChart 환경 설정 및 Option</p>
+                    <div class="txt_m_m subContInnerBox">
+                        <a href="/assets/js/echarts.min.js" class="downloadText" download="echarts.min.js"><p class="">echart.min.js 파일 다운받기</p></a>
+
+                        <p class="txt_m_m mt16">js 파일 다운로드 후 상단 &lt;head&gt; &lt;/head&gt;에 추가</p>
+                        <p class="txt_m_m">차트 영역 잡기 <span class="blue_500">.chartSize</span> class 추가</p>
+                        <p class="txt_m_m">옵션 스크립트에 추가</p>
+
+                    </div>
+                    <div class="subContInnerBox mt16">
+                        <div class="layout_lcr">
+                            <p class="txt_m_m mb16">Bar Chart</p>
+                            <button class="whBtn txt_m_m pA6 radius_8 mb16 copyBtnBar ">Chart 코드 복사</button>
+                        </div>
+                        <div class="whBox">
+                            <div class="chartSize" id="barChart"></div>
+                        </div>
+
+                        <div class="layout_lcr">
+                            <p class="txt_m_m mb16 pt32">Line Chart</p>
+                            <button class="whBtn txt_m_m pA6 radius_8 mb16 copyBtnLine ">Chart 코드 복사</button>
+                        </div>
+                        <div class="whBox">
+                            <div class="chartSize" id="lineChart"></div>
+                        </div>
+
+                        <div class="layout_lcr">
+                            <p class="txt_m_m mb16 pt32">Bar Line Chart</p>
+                            <button class="whBtn txt_m_m pA6 radius_8 mb16 copyBtnBarLine ">Chart 코드 복사</button>
+                        </div>
+                        <div class="whBox">
+                            <div class="chartSize" id="barLineChart"></div>
+                        </div>
+
+                        <div class="layout_lcr">
+                            <p class="txt_m_m mb16 pt32">pie Chart</p>
+                            <button class="whBtn txt_m_m pA6 radius_8 mb16 copyBtnPie ">Chart 코드 복사</button>
+                        </div>
+                        <div class="whBox">
+                            <div class="chartSize" id="pieChart"></div>
+                        </div>
+
+                        <div class="layout_lcr">
+                            <p class="txt_m_m mb16 pt32">line min max Chart</p>
+                            <button class="whBtn txt_m_m pA6 radius_8 mb16 copyBtnLineMinMax ">Chart 코드 복사</button>
+                        </div>
+                        <div class="whBox">
+                            <div class="chartSize" id="lineMinMaxChart"></div>
+                        </div>
+
+
+                    </div>
+
                 </div>
-
-                <p class="txt_m_m mb16 pt32">Line Chart</p>
-                <div class="whBox">
-                    <div class="chartSize" id="lineChart"></div>
-                </div>
-
-                <p class="txt_m_m mb16 pt32">Bar Line Chart</p>
-                <div class="whBox">
-                    <div class="chartSize" id="barLineChart"></div>
-                </div>
-
-                <p class="txt_m_m mb16 pt32">pie Chart</p>
-                <div class="whBox">
-                    <div class="chartSize" id="pieChart"></div>
-                </div>
-
-                <p class="txt_m_m mb16 pt32">pie Chart</p>
-                <div class="whBox">
-                    <div class="chartSize" id="lineMinMaxChart"></div>
-                </div>
-
-
-            </div>
-
+            </section>
         </div>
     </section>
+    </div>
 </div>
 
 <script>
@@ -51,16 +84,63 @@
         barLineChart();
         pieChart();
         lineMinMaxChart();
+
+        $('.copyBtnBar').click(function(){
+            var copyTable = barChart.toString();
+
+            window.navigator.clipboard.writeText(copyTable).then(() => {
+                alert(copyTable + ' 차트 스크립트 복사 성공');
+            });
+        });
+
+        $('.copyBtnLine').click(function(){
+            var copyTable = lineChart.toString();
+
+            window.navigator.clipboard.writeText(copyTable).then(() => {
+                alert(copyTable + ' 차트 스크립트 복사 성공');
+            });
+        });
+
+        $('.copyBtnBarLine').click(function(){
+            var copyTable = barLineChart.toString();
+
+            window.navigator.clipboard.writeText(copyTable).then(() => {
+                alert(copyTable + ' 차트 스크립트 복사 성공');
+            });
+        });
+
+        $('.copyBtnPie').click(function(){
+            var copyTable = pieChart.toString();
+
+            window.navigator.clipboard.writeText(copyTable).then(() => {
+                alert(copyTable + ' 차트 스크립트 복사 성공');
+            });
+        });
+
+        $('.copyBtnLineMinMax').click(function(){
+            var copyTable = lineMinMaxChart.toString();
+
+            window.navigator.clipboard.writeText(copyTable).then(() => {
+                alert(copyTable + ' 차트 스크립트 복사 성공');
+            });
+        });
+
     });
 
     const barChart = () => {
+        //옆으로 누운 바 차트
         var option;
 
         var barChart = document.getElementById('barChart');
         var myChart_barChart = echarts.init(barChart);
 
-        //옆으로 누운 차트
         option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
             legend: {
                 show: false,
             },
@@ -156,12 +236,11 @@
     }
 
     const lineChart = () => {
+        //라인 차트
         var option;
 
         var lineChart = document.getElementById('lineChart');
         var myChart_lineChart = echarts.init(lineChart);
-
-        //라인 차트
 
         option = {
             tooltip: {
@@ -274,12 +353,11 @@
     }
 
     const barLineChart = () => {
+        //바 + 라인 차트
         var option;
 
         var barLineChart = document.getElementById('barLineChart');
         var myChart_barLineChart = echarts.init(barLineChart);
-
-        //라인 차트
 
         option = {
             tooltip: {
@@ -392,12 +470,12 @@
     }
 
     const pieChart = () => {
+        //파이차트 + hover
+
         var option;
 
         var pieChart = document.getElementById('pieChart');
         var myChart_pieChart = echarts.init(pieChart);
-
-        //파이차트 + hover
 
         option = {
             legend: {
@@ -537,6 +615,7 @@
     }
 
     const lineMinMaxChart = () => {
+        //라인 최소 최대값 차트
         var option;
 
         var lineMinMaxChart = document.getElementById('lineMinMaxChart');
@@ -710,3 +789,5 @@
     }
 
 </script>
+
+<%@ include file="/WEB-INF/views/design/include/footer.jsp" %>
