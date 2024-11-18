@@ -1,6 +1,4 @@
 
-# yangpyeong
+# design_system_guide
 
-양평균 대중교통 서비스
-
-jsp, js, javascript, jquery, mybatis, postgresql, handlebars
+NICE 지니데이타 디자인 시스템 가이드
