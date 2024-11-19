@@ -42,7 +42,6 @@ public class ComAdminService {
         return outVo;
     }
 
-
     public String registProc(HttpServletRequest request, HttpServletResponse response, ComLoginVO comLoginVO) throws NoSuchAlgorithmException {
         String result = "";
 
@@ -137,6 +136,7 @@ public class ComAdminService {
         if(outVo < 1){
             result = gsonUtil.toJson(new JsonOutputVo(Status.성공));
         }else{
+            // 로그인 실패 (아이디 없음)
             result = gsonUtil.toJson(new JsonOutputVo(Status.실패));
         }
 

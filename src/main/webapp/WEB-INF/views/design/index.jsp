@@ -5,35 +5,31 @@
 <%@ include file="/WEB-INF/views/design/include/head.jsp" %>
 <%@ include file="/WEB-INF/views/design/include/script.jsp" %>
 
-<div class="wrap main">
-<%--    <%@ include file="/WEB-INF/views/design/include/side.jsp" %>--%>
-    <%@ include file="/WEB-INF/views/design/include/navbar.jsp" %>
-    <script>
-        $(function(){
-        });
-    </script>
-<!--
-*공통*
-로그인 전 / 후 구분
-class = "login_none" 제거 및 추가
--->
-    <div class="com_gridInner">
-        <div class="container text-center">
-            <div class="row flex at_T">
-                test
-            </div>
+<div class="wrap">
+
+    <!--좌측 사이드 바-->
+    <%@ include file="/WEB-INF/views/design/include/side.jsp" %>
+
+    <!--상세 내용 영역 ST-->
+    <div class="contInner">
+
+        <div id="onlyBody">
+
         </div>
+
     </div>
+    <!--상세 내용 영역 ED-->
+
+    <div class="topBtn gray_bg_300"></div>
 </div>
-
-
-<!--공통 footer-->
-<%--<%@ include file="/WEB-INF/views/design/include/footer.jsp" %>--%>
-
-<script type="text/javascript">
-
-
-    $(function() {
-        console.log('index.jsp')
+<script>
+    $(function(){
+        //top 버튼 이벤트
+        $('.topBtn').click(function(){
+            $('body, html').animate({
+                scrollTop: 0
+            }, 400);
+        });
     });
 </script>
+<%@ include file="/WEB-INF/views/design/include/footer.jsp" %>
