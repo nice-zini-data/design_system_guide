@@ -15,40 +15,45 @@ import javax.servlet.http.HttpServletResponse;
 @RequiredArgsConstructor
 @RequestMapping("/")
 public class DesignMainController {
-
-    @GetMapping("/")
-    public String main(HttpServletRequest request, HttpServletResponse response){
-//        comLogService.setServiceLog(request, response, 0);
-        return "design/index";
+    //페이지 URL
+    
+    @GetMapping("")
+    public String mainPage(HttpServletRequest request, HttpServletResponse response){
+        return "index";
     }
 
-    @GetMapping("/design/designPage/eChartOption")
-    public String eChartOption(HttpServletRequest request, HttpServletResponse response){
-        return "design/designPage/eChartOption";
+    @GetMapping("/echart/eChart")
+    public String eChart(HttpServletRequest request, HttpServletResponse response){
+        return "echart/eChart";
     }
 
-    @GetMapping("/design/designPage/table")
+    @GetMapping("/echart/barChart")
+    public String barChart(HttpServletRequest request, HttpServletResponse response){
+        return "echart/barChart";
+    }
+
+    @GetMapping("/tag/table")
     public String table(HttpServletRequest request, HttpServletResponse response){
-        return "design/designPage/table";
+        return "tag/table";
     }
 
-    @GetMapping("/design/designPage/colorPage")
+    @GetMapping("/tag/colorPage")
     public String colorPage(HttpServletRequest request, HttpServletResponse response){
-        return "design/designPage/colorPage";
+        return "tag/colorPage";
     }
 
-    @GetMapping("/design/designPage/layoutPage")
+    @GetMapping("/tag/layoutPage")
     public String layoutPage(HttpServletRequest request, HttpServletResponse response){
-        return "design/designPage/layoutPage";
+        return "tag/layoutPage";
     }
 
-    @GetMapping("/design/designPage/typography")
+    @GetMapping("/tag/typography")
     public String typography(HttpServletRequest request, HttpServletResponse response){
-        return "design/designPage/typography";
+        return "tag/typography";
     }
 
-    @GetMapping("/design/designPage/button")
+    @GetMapping("/tag/button")
     public String button(HttpServletRequest request, HttpServletResponse response){
-        return "design/designPage/button";
+        return "tag/button";
     }
 }

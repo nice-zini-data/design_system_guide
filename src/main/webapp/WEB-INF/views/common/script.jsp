@@ -7,6 +7,6 @@
 <script type="text/javascript" src="/assets/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="/assets/js/jquery-ui.js"></script>
 <script type="text/javascript" src="/assets/js/common.js"></script>
-<script type="text/javascript" src="/assets/project/js/chart/chartCommon.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
 <script type="text/javascript" src="/assets/project/js/side.js"></script>
 <script type="text/javascript" src="/assets/js/echarts.min.js"></script>

@@ -9,10 +9,11 @@
         <div class="sideListBox tabActive">
             <div class="sideListTit tabTit">
                 <div class="size20 imgBox mr8 iconBg icon_document"></div>
-                <p>Chart</p>
+                <p>eChart</p>
             </div>
             <ul class="sideListSub">
-                <li onclick="location.href='/design/designPage/eChartOption'">eChart</li>
+                <li onclick=menuMove("/echart/eChart")>eChart</li>
+                <li onclick=menuMove("/echart/barChart")>barChart</li>
             </ul>
         </div>
         <div class="sideListBox tabActive">
@@ -21,11 +22,11 @@
                 <p>Tag</p>
             </div>
             <ul class="sideListSub">
-                <li onclick="location.href='/design/designPage/table'">Table</li>
-                <li onclick="location.href='/design/designPage/colorPage'">Color</li>
-                <li onclick="location.href='/design/designPage/layoutPage'">Layout</li>
-                <li onclick="location.href='/design/designPage/typography'">Typography</li>
-                <li onclick="location.href='/design/designPage/button'">Button</li>
+                <li onclick=menuMove("/tag/table")>Table</li>
+                <li onclick=menuMove("/tag/colorPage")>Color</li>
+                <li onclick=menuMove("/tag/layoutPage")>Layout</li>
+                <li onclick=menuMove("/tag/typography")>Typography</li>
+                <li onclick=menuMove("/tag/button")>Button</li>
             </ul>
         </div>
     </div>
