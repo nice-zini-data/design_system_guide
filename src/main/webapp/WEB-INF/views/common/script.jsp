@@ -8,5 +8,6 @@
 <script type="text/javascript" src="/assets/js/jquery-ui.js"></script>
 <script type="text/javascript" src="/assets/js/common.js"></script>
 <script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/eChart/barChart.js"></script>
 <script type="text/javascript" src="/assets/project/js/side.js"></script>
 <script type="text/javascript" src="/assets/js/echarts.min.js"></script>
