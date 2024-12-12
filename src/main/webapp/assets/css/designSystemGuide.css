@@ -130,5 +130,5 @@ nav li {height:100%;display:flex;justify-content: start;align-items: center;curs
 .subContInnerBox {background:var(--cool_gray_50);padding:24px;border-radius:16px;margin-top:24px;}
 .downloadText p{color:var(--blue_500)}
 .downloadText:hover p{color:var(--blue_600)}
-.chartSize {width:100%;height:400px;}
+.chartSize {width:100%;height:800px;}
 .copyBtn{display:inline-block}
