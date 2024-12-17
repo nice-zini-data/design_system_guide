@@ -1,3 +1,116 @@
+const chartData1 = [
+    {
+        name: '메뉴1',
+        data: [150, 80, 70, 110, 130,50],
+        type: 'bar',
+        itemStyle: {
+            color: 'rgba(255, 114, 104, 0.80)',
+            barBorderRadius: [4, 4, 4, 4]
+        },
+        barWidth: '24px',
+        label:{
+            show:true,
+            position: 'insideLeft',
+            fontSize: 12,
+            fontWeight: '500',
+            fontFamily: 'Pretendard'
+        }
+    }
+]
+
+//차트 2개
+const chartData2 = [
+    {
+        name: '메뉴1',
+        data: [150, 80, 70, 110, 130,50],
+        type: 'bar',
+        itemStyle: {
+            color: 'rgba(255, 114, 104, 0.80)',
+            barBorderRadius: [4, 4, 4, 4]
+        },
+        barWidth: '24px',
+        label:{
+            show:true,
+            position: 'insideLeft',
+            fontSize: 12,
+            fontWeight: '500',
+            fontFamily: 'Pretendard'
+        }
+    },
+    {
+        name: '메뉴2',
+        data: [130, 60, 50, 90, 110,30],
+        type: 'bar',
+        itemStyle: {
+            color: 'rgba(255, 114, 104, 0.80)',
+            barBorderRadius: [4, 4, 4, 4]
+        },
+        barWidth: '24px',
+        label:{
+            show:true,
+            position: 'insideLeft',
+            fontSize: 12,
+            fontWeight: '500',
+            fontFamily: 'Pretendard'
+        }
+    }
+]
+
+//차트 3개
+const chartData3 = [
+    {
+        name: '메뉴1',
+        data: [150, 80, 70, 110, 130,50],
+        type: 'bar',
+        itemStyle: {
+            color: 'rgba(255, 114, 104, 0.80)',
+            barBorderRadius: [4, 4, 4, 4]
+        },
+        barWidth: '24px',
+        label:{
+            show:true,
+            position: 'insideLeft',
+            fontSize: 12,
+            fontWeight: '500',
+            fontFamily: 'Pretendard'
+        }
+    },
+    {
+        name: '메뉴2',
+        data: [130, 60, 50, 90, 110,30],
+        type: 'bar',
+        itemStyle: {
+            color: 'rgba(255, 114, 104, 0.80)',
+            barBorderRadius: [4, 4, 4, 4]
+        },
+        barWidth: '24px',
+        label:{
+            show:true,
+            position: 'insideLeft',
+            fontSize: 12,
+            fontWeight: '500',
+            fontFamily: 'Pretendard'
+        }
+    },
+    {
+        name: '메뉴3',
+        data: [170, 100, 90, 130, 150, 70],
+        type: 'bar',
+        itemStyle: {
+            color: 'rgba(255, 114, 104, 0.80)',
+            barBorderRadius: [4, 4, 4, 4]
+        },
+        barWidth: '24px',
+        label:{
+            show:true,
+            position: 'insideLeft',
+            fontSize: 12,
+            fontWeight: '500',
+            fontFamily: 'Pretendard'
+        }
+    }
+]
+
 let chartHorizontalOption = {
     tooltip: {
         trigger: 'axis',
@@ -73,60 +186,9 @@ let chartHorizontalOption = {
         }
     },
 
-    series: [
-        {
-            name: '메뉴1',
-            data: [150, 80, 70, 110, 130,50],
-            type: 'bar',
-            // itemStyle: {
-            //     color: 'rgba(255, 114, 104, 0.80)',
-            //     barBorderRadius: [4, 4, 4, 4]
-            // },
-            barWidth: '24px',
-            label:{
-                show:true,
-                position: 'insideLeft',
-                fontSize: 12,
-                fontWeight: '500',
-                fontFamily: 'Pretendard'
-            }
-        },
-        {
-            name: '메뉴2',
-            data: [130, 60, 50, 90, 110,30],
-            type: 'bar',
-            // itemStyle: {
-            //     color: 'rgba(255, 114, 104, 0.80)',
-            //     barBorderRadius: [4, 4, 4, 4]
-            // },
-            barWidth: '24px',
-            label:{
-                show:true,
-                position: 'insideLeft',
-                fontSize: 12,
-                fontWeight: '500',
-                fontFamily: 'Pretendard'
-            }
-        },
-        {
-            name: '메뉴3',
-            data: [170, 100, 9, 130, 150,70],
-            type: 'bar',
-            // itemStyle: {
-            //     color: 'rgba(255, 114, 104, 0.80)',
-            //     barBorderRadius: [4, 4, 4, 4]
-            // },
-            barWidth: '24px',
-            label:{
-                show:true,
-                position: 'insideLeft',
-                fontSize: 12,
-                fontWeight: '500',
-                fontFamily: 'Pretendard'
-            }
-        }
-    ]
+    series: chartData1
 };
+
 
 //코드 생성 함수
 const generateCode = () => {
@@ -156,8 +218,8 @@ const setDefaultChartOption = (chartOption) => {
     $("#grid_right").val(chartOption.grid.right);
     $("#grid_bottom").val(chartOption.grid.bottom);
 
-    // //범례 옵션
-    // $("#legend_top").val(chartOption.legend.top);
+    //바 넓이
+    $("#barWidth").val(chartOption.series[0].barWidth);
     // $("#legend_left").val(chartOption.legend.left);
     // $("#legend_right").val(chartOption.legend.right);
     // $("#legend_bottom").val(chartOption.legend.bottom);
@@ -170,7 +232,7 @@ const generateChart = (chartOption) => {
     let barChart = document.getElementById('barChart');
 
     //설정한 옵션값으로 barChart 생성
-    let myChart_barChart = echarts.init(barChart).setOption(option);
+    let myChart_barChart = echarts.init(barChart).setOption(option, { notMerge: true });
 
     //barChart 동적 랜더링
     if(myChart_barChart){
@@ -354,7 +416,7 @@ const setXaxisOption = (e) => {
             }
             break;
         case "axisXsplitLineColor" :
-            chartHorizontalOption.xAxis.axisLine.lineStyle.color = e.target.value;
+            chartHorizontalOption.xAxis.splitLine.lineStyle.color = e.target.value;
             break;
         case "axisXsplitLineType" :
             chartHorizontalOption.xAxis.splitLine.lineStyle.type = e.target.value;
@@ -424,7 +486,7 @@ const setYaxisOption = (e) => {
             }
             break;
         case "axisYsplitLineColor" :
-            chartHorizontalOption.yAxis.axisLine.lineStyle.color = e.target.value;
+            chartHorizontalOption.yAxis.splitLine.lineStyle.color = e.target.value;
             break;
         case "axisYsplitLineType" :
             chartHorizontalOption.yAxis.splitLine.lineStyle.type = e.target.value;
@@ -435,5 +497,90 @@ const setYaxisOption = (e) => {
     }
 
     console.log("chartOption - y축");
+    console.log(chartHorizontalOption);
+}
+
+//y축 설정
+const setDataSeriesOption = (e) => {
+    switch(e.target.id) {
+        //바 차트 개수
+        case "barCnt" :
+            if(e.target.value === "1"){
+                chartHorizontalOption.series = chartData1;
+            }
+
+            if(e.target.value === "2"){
+                chartHorizontalOption.series = chartData2;
+            }
+
+            if(e.target.value === "3"){
+                chartHorizontalOption.series = chartData3;
+            }
+
+            for(const option of chartHorizontalOption.series) {
+                option.barWidth = $("#bar_width").val();
+            }
+            break;
+        case "barWidth" :
+            if(e.target.value){
+                for(const option of chartHorizontalOption.series) {
+                    option.barWidth = e.target.value;
+                }
+            }
+            break;
+        case "barLabel" :
+            for(const option of chartHorizontalOption.series) {
+                if(e.target.value === "0"){
+                    option.label.show = true;
+                }
+
+                if(e.target.value === "1"){
+                    option.label.show = false;
+                }
+            }
+            break;
+        case "barLabelPosition" :
+            for(const option of chartHorizontalOption.series) {
+                option.label.position = e.target.value;
+            }
+            break;
+        case "barLabelFontSize" :
+            for(const option of chartHorizontalOption.series) {
+                option.label.fontSize = e.target.value;
+            }
+            break;
+        case "barLabelFontWeight" :
+            for(const option of chartHorizontalOption.series) {
+                option.label.fontSize = e.target.value;
+            }
+            break;
+        case "barLabelFontFamily" :
+            for(const option of chartHorizontalOption.series) {
+                option.label.fontFamily = e.target.value;
+            }
+            break;
+        case "barColor" :
+            for(const option of chartHorizontalOption.series) {
+                option.itemStyle.color = e.target.value;
+            }
+            break;
+        case "barBackground" :
+            for(const option of chartHorizontalOption.series) {
+                if(e.target.value === "0"){
+                    option.showBackground = true;
+                    option.backgroundStyle = {
+                        color : "#000000"
+                    };
+                }
+
+                if(e.target.value === "1"){
+                    option.showBackground = false;
+                    delete option.backgroundStyle
+                }
+            }
+            break;
+    }
+
+    console.log("chartOption - 바랑 데이터");
     console.log(chartHorizontalOption);
 }

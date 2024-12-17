@@ -27,6 +27,19 @@
                                 1. 축눈금(표출여부)<br/>
                                 2. 축선(표출여부, 색상, 타입, 두께)<br/>
                                 3. 축선(색상, 사이즈, 두께, 종류)<br/>
+                                4. 라벨(색상, 사이즈, 두께, 종류)<br/>
+                                5. 보조선(색상, 두께, 종류)<br/>
+                                - y축 설정(자주 사용하는 "색상, 폰트(사이즈, 두깨, 종류)" 리스트로 정리하면 콤보박스에 등록 가능(?))<br/>
+                                1. 축눈금(표출여부)<br/>
+                                2. 축선(표출여부, 색상, 타입, 두께)<br/>
+                                3. 축선(색상, 사이즈, 두께, 종류)<br/>
+                                4. 라벨(색상, 사이즈, 두께, 종류)<br/>
+                                5. 보조선(색상, 두께, 종류)<br/>
+                                - 바 설정<br/>
+                                1. 바 개수<br/>
+                                2. 바 넓이<br/>
+                                3. 바 라벨<br/>
+                                4. 바 색깔<br/>
                             </p>
                         </div>
                         <div class="subContInnerBox mt16">
@@ -100,6 +113,7 @@
                                 <label for="axisXlineColor">축선 색상</label>
                                 <select id="axisXlineColor" onChange="setXaxisOption(event)">
                                     <option value="#F1F1F3">#F1F1F3</option>
+                                    <option value="#000000">#000000</option>
                                 </select>
                                 <label for="axisXlineType">축선 타입</label>
                                 <select id="axisXlineType" onChange="setXaxisOption(event)">
@@ -120,9 +134,10 @@
                                     <option value="9">9</option>
                                 </select>
                                 <p>-----X축 라벨 설정-----</p>
-                                <label for="axisXlabelColor">축선 색상</label>
+                                <label for="axisXlabelColor">라벨 색상</label>
                                 <select id="axisXlabelColor" onChange="setXaxisOption(event)">
                                     <option value="#8C8C8C">#8C8C8C</option>
+                                    <option value="#000000">#000000</option>
                                 </select>
                                 <label for="axisXlabelFontSize">폰트 사이즈</label>
                                 <select id="axisXlabelFontSize" onChange="setXaxisOption(event)">
@@ -147,7 +162,7 @@
                                 <label for="axisXlabelFontFamily">폰트 종류</label>
                                 <select id="axisXlabelFontFamily" onChange="setXaxisOption(event)">
                                     <option value="Pretendard" selected>Pretendard</option>
-                                    <option value="fantasy" selected>fantasy</option>
+                                    <option value="fantasy">fantasy</option>
                                 </select>
                                 <p>-----X축 보조선 설정-----</p>
                                 <label for="axisXsplitLine">보조선 표출여부</label>
@@ -158,6 +173,7 @@
                                 <label for="axisXsplitLineColor">보조선 색상</label>
                                 <select id="axisXsplitLineColor" onChange="setXaxisOption(event)">
                                     <option value="#F1F1F3">#F1F1F3</option>
+                                    <option value="#000000">#000000</option>
                                 </select>
                                 <label for="axisXsplitLineType">보조선 타입</label>
                                 <select id="axisXsplitLineType" onChange="setXaxisOption(event)">
@@ -178,7 +194,6 @@
                                     <option value="9">9</option>
                                 </select>
                             </div>
-                            <div>
                             <div id="yAxis">
                                 <p>---------------Y축 관련 설정--------------------</p>
                                 <p>-----Y축 눈금 설정-----</p>
@@ -196,6 +211,7 @@
                                 <label for="axisYlineColor">축선 색상</label>
                                 <select id="axisYlineColor" onChange="setYaxisOption(event)">
                                     <option value="#F1F1F3">#F1F1F3</option>
+                                    <option value="#000000">#000000</option>
                                 </select>
                                 <label for="axisYlineType">축선 타입</label>
                                 <select id="axisYlineType" onChange="setYaxisOption(event)">
@@ -216,9 +232,10 @@
                                     <option value="9">9</option>
                                 </select>
                                 <p>-----Y축 라벨 설정-----</p>
-                                <label for="axisYlabelColor">축선 색상</label>
+                                <label for="axisYlabelColor">라벨 색상</label>
                                 <select id="axisYlabelColor" onChange="setYaxisOption(event)">
                                     <option value="#8C8C8C">#8C8C8C</option>
+                                    <option value="#000000">#000000</option>
                                 </select>
                                 <label for="axisYlabelFontSize">폰트 사이즈</label>
                                 <select id="axisYlabelFontSize" onChange="setYaxisOption(event)">
@@ -245,7 +262,7 @@
                                     <option value="Pretendard" selected>Pretendard</option>
                                     <option value="Fantasy" selected>Fantasy</option>
                                 </select>
-                                <p>-----X축 보조선 설정-----</p>
+                                <p>-----Y축 보조선 설정-----</p>
                                 <label for="axisYsplitLine">보조선 표출여부</label>
                                 <select id="axisYsplitLine" onChange="setYaxisOption(event)">
                                     <option value="0" selected>표출</option>
@@ -254,6 +271,7 @@
                                 <label for="axisYsplitLineColor">보조선 색상</label>
                                 <select id="axisYsplitLineColor" onChange="setYaxisOption(event)">
                                     <option value="#F1F1F3">#F1F1F3</option>
+                                    <option value="#000000">#000000</option>
                                 </select>
                                 <label for="axisYsplitLineType">보조선 타입</label>
                                 <select id="axisYsplitLineType" onChange="setYaxisOption(event)">
@@ -274,18 +292,79 @@
                                     <option value="9">9</option>
                                 </select>
                             </div>
+                            <div id="dataSeries">
+                                <p>---------------바, 데이터 관련 설정--------------------</p>
+                                <p>-----바 갯수 선택-----</p>
+                                <label for="barCnt">bar 개수</label>
+                                <select id="barCnt" onChange="setDataSeriesOption(event)">
+                                    <option value="1" selected>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                                <p>-----바 넓이 선택-----</p>
+                                <p><label for='barWidth'>바 넓이</label><input id='barWidth' onChange="setDataSeriesOption(event)"/></p>
+                                <p>-----바 라벨 옵션-----</p>
+                                <label for="barLabel">바 라벨</label>
+                                <select id="barLabel" onChange="setDataSeriesOption(event)">
+                                    <option value="0">미표출</option>
+                                    <option value="1" selected>표출</option>
+                                </select>
+                                <label for="barLabelPosition">바 라벨 위치</label>
+                                <select id="barLabelPosition" onChange="setDataSeriesOption(event)">
+                                    <option value="right">right</option>
+                                    <option value="insideLeft" selected>insideLeft</option>
+                                    <option value="insideRight">insideRight</option>
+                                </select>
+                                <label for="barLabelFontSize">폰트 사이즈</label>
+                                <select id="barLabelFontSize" onChange="setDataSeriesOption(event)">
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12" selected>12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                </select>
+                                <label for="barLabelFontWeight">폰트 두께</label>
+                                <select id="barLabelFontWeight" onChange="setDataSeriesOption(event)">
+                                    <option value="400" selected>400</option>
+                                </select>
+                                <label for="barLabelFontFamily">폰트 종류</label>
+                                <select id="barLabelFontFamily" onChange="setDataSeriesOption(event)">
+                                    <option value="Pretendard" selected>Pretendard</option>
+                                    <option value="fantasy">fantasy</option>
+                                </select>
+                                <p>-----바 스타일 옵션-----</p>
+                                <label for="barColor">바 색깔</label>
+                                <select id="barColor" onChange="setDataSeriesOption(event)">
+                                    <option value="#FF7268">#FF7268</option>
+                                    <option value="#000000">#000000</option>
+                                </select>
+<%--                                <p>-----바 백라운드-----</p>--%>
+<%--                                <label for="barBackground">바 백라운드</label>--%>
+<%--                                <select id="barBackground" onChange="setDataSeriesOption(event)">--%>
+<%--                                    <option value="0" selected>표출</option>--%>
+<%--                                    <option value="1">미표출</option>--%>
+<%--                                </select>--%>
+                            </div>
                             <div>
                                 <button class="whBtn txt_m_m pA6 radius_8 mb16 generateBtnBar">Chart 생성</button>
                             </div>
-                        </div>
 
-                        <div class="subContInnerBox mt16">
-                            <div class="layout_lcr">
-                                <p class="txt_m_m mb16">Bar Chart</p>
-                                <button class="whBtn txt_m_m pA6 radius_8 mb16 copyBtnBar ">Chart 코드 복사</button>
-                            </div>
-                            <div class="whBox">
-                                <div class="chartSize" id="barChart"></div>
+                            <div class="subContInnerBox mt16">
+                                <div class="layout_lcr">
+                                    <p class="txt_m_m mb16">Bar Chart</p>
+                                    <button class="whBtn txt_m_m pA6 radius_8 mb16 copyBtnBar ">Chart 코드 복사</button>
+                                </div>
+                                <div class="whBox">
+                                    <div class="chartSize" id="barChart"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
